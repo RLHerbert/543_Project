@@ -1,8 +1,15 @@
 package Project543;
 
+import javafx.application.*;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+
+/*
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+ */
 
 public class Main extends Application {
 
@@ -33,5 +40,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+        Languages lang = Languages.ADA;
+        System.out.println(lang);
     }
 }
