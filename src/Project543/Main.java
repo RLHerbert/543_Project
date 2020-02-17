@@ -3,6 +3,15 @@ package Project543;
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 
@@ -44,5 +53,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+        Languages lang = Languages.ADA;
+        System.out.println(lang);
     }
 }
