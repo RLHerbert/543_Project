@@ -31,8 +31,8 @@ public class UI {
         menuBar.getMenus().addAll(File, Edit, Preferences, Metrics);
 
         VBox vBox = new VBox(menuBar);
-        Scene scene = new Scene(vBox, 960, 600);
 
+        Scene scene = new Scene(vBox, 960, 600);
         mainWindow.setScene(scene);
 
         mainWindow.show();
