@@ -4,20 +4,11 @@ import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-
-/*
-import javafx.application.Application;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-<<<<<<< HEAD
- */
-=======
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
->>>>>>> 8971a7cbd10936a6e6cac37d56ef31c8b5354ee8
 
 public class Main extends Application {
 
