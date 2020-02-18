@@ -1,12 +1,11 @@
 package Project543;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+
+
 
 public class UI {
     private Stage mainWindow, langSelectWindow;
@@ -51,10 +50,37 @@ public class UI {
         Scene scene = new Scene(vBox, 960, 600);
         mainWindow.setScene(scene);
         mainWindow.show();
+
+        openLangSelectWindow(); //uncomment for testing
     }
 
     void openLangSelectWindow()
     {
         /* Language Selection Window initialization */
+        langSelectWindow = new Stage();
+        langSelectWindow.setTitle("Language Selection");
+        /* after creating set size function, use instead of code below */
+        langSelectWindow.setHeight(775/2);
+        langSelectWindow.setWidth(800/4);
+        langSelectWindow.setX(800/2-100);
+        langSelectWindow.setY(0); //set window sizing
+
+        /* Language Radio Buttons initialization*/ //should it be checkboxes like the example in the vision doc?
+        RadioButton languageRadios[] = new RadioButton[13];
+        ToggleGroup languageRadiosGroup = new ToggleGroup();
+        VBox vbox = new VBox(10, new Label("Select one language"));
+        int i =0;
+        for (Languages lang: Languages.values())
+        {
+            RadioButton radio = new RadioButton(lang.toString());
+            languageRadios[i] = radio;
+            i++;
+            radio.setToggleGroup(languageRadiosGroup);
+            vbox.getChildren().add(radio);
+        }
+
+        Scene scene1 = new Scene(vbox, 775/2, 800/4);
+        langSelectWindow.setScene(scene1);
+        langSelectWindow.show();
     }
 }
