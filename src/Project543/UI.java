@@ -12,7 +12,7 @@ public class UI {
     private Stage mainWindow, langSelectWindow;
 
     UI() {
-        /* main window initialization */
+        /* Main Window initialization */
         mainWindow = new Stage();
         mainWindow.setTitle("CECS 543 Project");
         /* create set size function, instead of code below */
@@ -51,5 +51,10 @@ public class UI {
         Scene scene = new Scene(vBox, 960, 600);
         mainWindow.setScene(scene);
         mainWindow.show();
+    }
+
+    void openLangSelectWindow()
+    {
+        /* Language Selection Window initialization */
     }
 }
