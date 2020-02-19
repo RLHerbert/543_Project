@@ -1,6 +1,6 @@
 package Project543;
 
-//A Class which holds an Information Domain Value (IDV) and relevant methods
+//A class which holds an Information Domain Value (IDV) and relevant methods
 public class InfoDomVal {
 
     //Enum for complexity
@@ -11,12 +11,12 @@ public class InfoDomVal {
     //Member Variables
     public static int NUMWEIGHTS = 3;
 
-    private Complexity selectedComplexity; //The user selected complexity for the information domain value
-    private int[] complexWeightFactors; //Complexity weight factors
-    private int numOfDomVal, sumOfDomVal; //Number of IDV, weighted sum of IDV
+    private Complexity selectedComplexity;  //The user selected complexity for the information domain value
+    private int[] complexWeightFactors;     //Complexity weight factors
+    private int numOfDomVal, sumOfDomVal;   //Number of IDV, weighted sum of IDV
 
     public InfoDomVal(){
-        this.selectedComplexity = Complexity.AVERGAGE; //Defaults to average complexity
+        this.selectedComplexity = Complexity.AVERGAGE;  //Defaults to average complexity
         this.complexWeightFactors = new int[NUMWEIGHTS];
         this.complexWeightFactors[0] = 3;
         this.complexWeightFactors[1] = 4;
