@@ -13,10 +13,10 @@ public class InfoDomVal {
 
     private Complexity selectedComplexity; //The user selected complexity for the information domain value
     private int[] complexWeightFactors; //Complexity weight factors
-    private int numOfDomVal, sumOfDomVal;
+    private int numOfDomVal, sumOfDomVal; //Number of IDV, weighted sum of IDV
 
     public InfoDomVal(){
-        this.selectedComplexity = Complexity.AVERGAGE;
+        this.selectedComplexity = Complexity.AVERGAGE; //Defaults to average complexity
         this.complexWeightFactors = new int[NUMWEIGHTS];
         this.complexWeightFactors[0] = 3;
         this.complexWeightFactors[1] = 4;
@@ -35,6 +35,10 @@ public class InfoDomVal {
     //Getters
     public int getSumOfDomVal(){
         return this.sumOfDomVal;
+    }
+
+    public int[] getComplexWeightFactors(){
+        return this.complexWeightFactors;
     }
 
     //Setters
