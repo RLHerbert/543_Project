@@ -38,14 +38,14 @@ public class Controller {
     }
 
     //Getters
-    int getTotalCount(){
+    public int getTotalCount(){
         return this.totalCount;
     }
 
     //Setters
 
     //Misc. Methods
-    void updateTotalCount() {
+    public void updateTotalCount() {
         totalCount =
                 this.exInputs.getSumOfDomVal()      +
                 this.exOutputs.getSumOfDomVal()     +
