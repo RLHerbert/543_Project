@@ -2,23 +2,22 @@ package Project543;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 
 
 
 public class UI {
-    private Stage mainWindow, langSelectWindow;
 
+    //Member Variables
+    private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
+
+    //Member Methods
+    //Constructors
     UI() {
         /* Main Window initialization */
-        mainWindow = new Stage();
+        mainWindow = new ProjectStage();
         mainWindow.setTitle("CECS 543 Project");
-        /* create set size function, instead of code below */
-        mainWindow.setHeight(775);
-        mainWindow.setWidth(800);
-        mainWindow.setX(0);
-        mainWindow.setY(0); //set window sizing
+        mainWindow.setStageSizePos(775, 800, 0, 0);
         mainWindow.show();
 
         /* Menu Bar initialization */
@@ -54,16 +53,25 @@ public class UI {
         openLangSelectWindow(); //uncomment for testing
     }
 
+    //Getters
+
+    //Setters
+
+    //Misc. Methods
     void openLangSelectWindow()
     {
         /* Language Selection Window initialization */
-        langSelectWindow = new Stage();
+        langSelectWindow = new ProjectStage();
         langSelectWindow.setTitle("Language Selection");
         /* after creating set size function, use instead of code below */
+        /*
         langSelectWindow.setHeight(775/2);
         langSelectWindow.setWidth(800/4);
         langSelectWindow.setX(800/2-100);
         langSelectWindow.setY(0); //set window sizing
+         */
+
+        langSelectWindow.setStageSizePos(775/2, 800/4, 800/2-100, 100);
 
         /* Language Radio Buttons initialization*/ //should it be checkboxes like the example in the vision doc?
         RadioButton languageRadios[] = new RadioButton[13];
