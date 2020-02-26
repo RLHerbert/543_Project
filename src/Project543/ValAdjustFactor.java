@@ -4,5 +4,20 @@ package Project543;
 public class ValAdjustFactor {
     //Quick and dirty, public until otherwise necessary
     public int factor;
-    public String descriptionText;
+    private String descriptionText;
+
+    ValAdjustFactor(String text)
+    {
+        this.setDescriptionText(text);
+    }
+
+    void setDescriptionText(String text)
+    {
+        this.descriptionText = text;
+    }
+
+    String getDescriptionText()
+    {
+        return this.descriptionText;
+    }
 }
