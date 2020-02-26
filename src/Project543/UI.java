@@ -48,10 +48,11 @@ public class UI {
         mainWindow.setScene(scene);
         mainWindow.show();
 
-        openLangSelectWindow(); //uncomment for testing
+        Language.setOnAction(event -> {openLangSelectWindow();}); //uncomment for testing
     }
 
     //Getters
+
 
     //Setters
 
