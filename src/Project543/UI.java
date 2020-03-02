@@ -3,6 +3,7 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class UI {
     //Member Variables
@@ -16,7 +17,7 @@ public class UI {
         /* Main Window initialization */
         mainWindow = new ProjectStage();
         mainWindow.setTitle("CECS 543 Project543.Project");
-        mainWindow.setStageSizePos(775, 800, 0, 0);
+        //mainWindow.setStageSizePos(775, 800, 0, 0);
         mainWindow.show();
 
         /* Menu Bar initialization */
@@ -56,9 +57,12 @@ public class UI {
 
 
     //Setters
+    public void setMainWindow(ProjectStage stage){
+        this.mainWindow = stage;
+    }
 
     //Misc. Methods
-    void openLangSelectWindow()
+    public void openLangSelectWindow()
     {
         /* Language Selection Window initialization */
         langSelectWindow = new ProjectStage();
@@ -90,5 +94,9 @@ public class UI {
         Scene scene1 = new Scene(vbox, 775/2, 800/4);
         langSelectWindow.setScene(scene1);
         langSelectWindow.show();
+    }
+
+    public void showMainWindow(){
+        mainWindow.show();
     }
 }

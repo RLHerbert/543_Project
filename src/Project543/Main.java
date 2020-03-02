@@ -47,7 +47,8 @@ public class Main extends Application {
 //        Scene scene = new Scene(vBox, 960, 600);
 //
 //        primaryStage.setScene(scene);
-        UI mainUI = new UI();
+        //UI mainUI = new UI();
+        Controller projectController = new Controller();
         System.out.println("TEST");
     }
 

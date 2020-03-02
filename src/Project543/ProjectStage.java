@@ -28,12 +28,12 @@ public class ProjectStage extends Stage {
     {
         this.setStageSizePos(DEF_WINDOW_HEIGHT, DEF_WINDOW_WIDTH, DEF_X_POS, DEF_Y_POS);
         this.setTitle("Untitled Window");
-//        this.setMenuList();
-        this.setMenuBar();
+//      this.setMenuList();
+//      this.setMenuBar();
 
-        VBox vBox = new VBox(menuBar);
-        Scene scene = new Scene(vBox, 960, 600);
-        this.setScene(scene);
+//        VBox vBox = new VBox(menuBar);
+//        Scene scene = new Scene(vBox, 960, 600);
+//        this.setScene(scene);
     }
 
     ProjectStage(String title)  //parameterized constructor will open window with the menu and a title
@@ -75,11 +75,13 @@ public class ProjectStage extends Stage {
 
     void setMenuBar()
     {
+        /*
         MenuBar menuBarTemp = new MenuBar();
         for (ProjectMenu item : this.menuList)
             menuBarTemp.getMenus().add(item);
 
         this.menuBar = menuBarTemp;
+         */
     }
 
     //Misc. Methods

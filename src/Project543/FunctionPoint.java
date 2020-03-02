@@ -2,6 +2,8 @@ package Project543;
 
 public class FunctionPoint {
     //Member Variables
+    public static final int NUM_VAF_VALS = 14;
+
     final private int[][] weightFactors = {
             {3,4,6},    //External Inputs
             {4,5,7},    //External Outputs
@@ -19,8 +21,7 @@ public class FunctionPoint {
             exInterfaceFiles;   //External Interface files
 
     private ValAdjustFactor [] VAF_array;
-    private static int NUM_VAF_VALS = 14;
-
+    private Languages currentLang;
 
     //Member Methods
     //Constructors
@@ -66,7 +67,9 @@ public class FunctionPoint {
 
         for (int i = 0; i < NUM_VAF_VALS; i++)
         {
-            VAF_array[i].setDescriptionText(VAF_strings[i]);
+            //System.out.println(i);
+            //this.VAF_array[i].setDescriptionText(VAF_strings[i]);
+            this.VAF_array[i] = new ValAdjustFactor(VAF_strings[i]);
         }
     }
 

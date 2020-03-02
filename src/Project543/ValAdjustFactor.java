@@ -6,18 +6,29 @@ public class ValAdjustFactor {
     public int factor;
     private String descriptionText;
 
-    ValAdjustFactor(String text)
-    {
+    //Member methods
+    //Constructor(s)
+    public ValAdjustFactor() {
+        this.factor = 0;
+        this.descriptionText = "";
+    }
+
+    public ValAdjustFactor(String text) {
+        factor = 0;
         this.setDescriptionText(text);
     }
 
-    void setDescriptionText(String text)
+    //Getters
+
+    public String getDescriptionText()
+    {
+        return this.descriptionText;
+    }
+    //Setters
+    public void setDescriptionText(String text)
     {
         this.descriptionText = text;
     }
 
-    String getDescriptionText()
-    {
-        return this.descriptionText;
-    }
+    //Misc. Member Methods
 }
