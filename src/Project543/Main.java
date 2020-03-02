@@ -52,9 +52,13 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        /*
         launch(args);
 
         Languages lang = Languages.ADA;
         System.out.println(lang);
+         */
+
+        Controller project_controller = new Controller();
     }
 }

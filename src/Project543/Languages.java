@@ -53,4 +53,42 @@ public enum Languages {
 
         return progLang;
     }
+
+    public int[] locPerFP(){
+        int[] locPerFP;
+
+        switch(this){
+            case VISUALBASIC:
+                break;
+            case JAVASCRIPT:
+                break;
+            case VBSCRIPT:
+                break;
+            case FORTRAN:
+                break;
+            case CSHARP:
+                break;
+            case C:
+                break;
+            case COBOL:
+                break;
+            case JAVA:
+                break;
+            case HTML:
+                break;
+            case CPP:
+                break;
+            case ADA:
+                break;
+            case ASSEMBLER:
+                break;
+            default:
+                break;
+        }
+
+        System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
+        locPerFP = new int[]{-1,-1,-1};
+        return locPerFP;
+
+    }
 }
