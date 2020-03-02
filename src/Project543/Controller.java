@@ -5,8 +5,9 @@ import java.time.temporal.ValueRange;
 
 public class Controller {
     //Member Variables
-    public UI user_interface;
-    public FunctionPoint function_point;
+    public UI userInterface;
+    public FunctionPoint currentFP;
+    public Project currentProject;
 
     //Member Functions
     //Constructors
@@ -14,8 +15,9 @@ public class Controller {
     {
         //start UI with default settings
         //just the blank window with menus
-        user_interface = new UI();
-        function_point = new FunctionPoint();
+        currentFP = new FunctionPoint();
+        currentProject = new Project();
+        userInterface = new UI();
     }
 
     Controller(ProjectStage stage)

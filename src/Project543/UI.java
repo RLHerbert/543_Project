@@ -13,7 +13,7 @@ public class UI {
     UI() {
         /* Main Window initialization */
         mainWindow = new ProjectStage();
-        mainWindow.setTitle("CECS 543 Project");
+        mainWindow.setTitle("CECS 543 Project543.Project");
         mainWindow.setStageSizePos(775, 800, 0, 0);
         mainWindow.show();
 

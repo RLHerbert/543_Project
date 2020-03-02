@@ -7,7 +7,7 @@ public enum Languages {
     public String toString() {
         //return super.toString();
 
-        String progLang = "";
+        String progLang = "ERROR";
 
         switch(this){
             case ASSEMBLER:
@@ -47,48 +47,64 @@ public enum Languages {
                 progLang = "Visual Basic";
                 break;
             default:
-                progLang = "ERROR";
+                //progLang = "ERROR";
+                System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
                 break;
         }
 
+        System.out.println("Languages.toString returned: " + progLang);
         return progLang;
     }
 
-    public int[] locPerFP(){
-        int[] locPerFP;
+    public int locPerFP(){
+        //Returns average lines of code per FP for a given language
 
-        switch(this){
+        //int[] locPerFP = new int[] {-1,-1,-1};
+        int locPerFP = -1;
+        switch(this) {
             case VISUALBASIC:
+                locPerFP = 50;
                 break;
             case JAVASCRIPT:
+                locPerFP = 54;
                 break;
             case VBSCRIPT:
+                locPerFP = 38;
                 break;
             case FORTRAN:
+                locPerFP = 90;
                 break;
             case CSHARP:
+                locPerFP = 58;
                 break;
             case C:
+                locPerFP = 148;
                 break;
             case COBOL:
+                locPerFP = 80;
                 break;
             case JAVA:
+                locPerFP = 55;
                 break;
             case HTML:
+                locPerFP = 43;
                 break;
             case CPP:
+                locPerFP = 59;
                 break;
             case ADA:
+                locPerFP = 154;
                 break;
             case ASSEMBLER:
+                locPerFP = 209;
                 break;
             default:
+                System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
+                //locPerFP = new int[]{-1,-1,-1};
                 break;
+
         }
-
-        System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
-        locPerFP = new int[]{-1,-1,-1};
+        System.out.println("LOC per FP for " + this + ": " + locPerFP);
         return locPerFP;
-
     }
 }

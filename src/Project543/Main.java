@@ -19,14 +19,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 //        /*
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("CECS 543 Project");
+//        primaryStage.setTitle("CECS 543 Project543.Project");
 //        primaryStage.setScene(new Scene(root, 800, 775));
 //        primaryStage.setX(50);
 //        primaryStage.setY(50);
 //        primaryStage.show();
 //         */
 //
-//        primaryStage.setTitle("CECS 543 Project");
+//        primaryStage.setTitle("CECS 543 Project543.Project");
 //        primaryStage.setHeight(775); primaryStage.setWidth(800); primaryStage.setX(0); primaryStage.setY(0);
 //        primaryStage.show();
 //
@@ -48,17 +48,18 @@ public class Main extends Application {
 //
 //        primaryStage.setScene(scene);
         UI mainUI = new UI();
+        System.out.println("TEST");
     }
 
 
     public static void main(String[] args) {
-        /*
         launch(args);
 
+        /*
         Languages lang = Languages.ADA;
         System.out.println(lang);
          */
 
-        Controller project_controller = new Controller();
+        //Controller project_controller = new Controller();
     }
 }
