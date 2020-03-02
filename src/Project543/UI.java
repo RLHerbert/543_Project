@@ -7,6 +7,8 @@ import javafx.scene.layout.VBox;
 public class UI {
     //Member Variables
     private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
+    private ProjectStage window;
+    private Scene windowScene;
 
     //Member Methods
     //Constructors
@@ -18,36 +20,36 @@ public class UI {
         mainWindow.show();
 
         /* Menu Bar initialization */
-        MenuBar menuBar = new MenuBar();
-        Menu File = new Menu("File");
-        Menu Edit = new Menu("Edit");
-        Menu Preferences = new Menu("Preferences");
-        Menu Metrics = new Menu("Metrics");
-        Menu Help = new Menu("Help");
+//        MenuBar menuBar = new MenuBar();
+//        Menu File = new Menu("File");
+//        Menu Edit = new Menu("Edit");
+//        Menu Preferences = new Menu("Preferences");
+//        Menu Metrics = new Menu("Metrics");
+//        Menu Help = new Menu("Help");
+//
+//        menuBar.getMenus().addAll(File, Edit, Preferences, Metrics, Help);
+//        VBox vBox = new VBox(menuBar);
+//
+//        MenuItem New = new MenuItem("New");
+//        MenuItem Open = new MenuItem("Open");
+//        MenuItem Save = new MenuItem("Save");
+//        MenuItem Exit = new MenuItem("Exit");
+//        File.getItems().addAll(New, Open, Save, Exit);
+//
+//        MenuItem Language = new MenuItem("Language");
+//        Preferences.getItems().add(Language);
+//
+//        Menu FP_menu = new Menu("Function Points");
+//        MenuItem EnterFPData_menu = new MenuItem("Enter FP Data");
+//        FP_menu.getItems().add(EnterFPData_menu);
+//        Metrics.getItems().add(FP_menu);
 
-        menuBar.getMenus().addAll(File, Edit, Preferences, Metrics, Help);
-        VBox vBox = new VBox(menuBar);
 
-        MenuItem New = new MenuItem("New");
-        MenuItem Open = new MenuItem("Open");
-        MenuItem Save = new MenuItem("Save");
-        MenuItem Exit = new MenuItem("Exit");
-        File.getItems().addAll(New, Open, Save, Exit);
-
-        MenuItem Language = new MenuItem("Language");
-        Preferences.getItems().add(Language);
-
-        Menu FP_menu = new Menu("Function Points");
-        MenuItem EnterFPData_menu = new MenuItem("Enter FP Data");
-        FP_menu.getItems().add(EnterFPData_menu);
-        Metrics.getItems().add(FP_menu);
-
-
-        Scene scene = new Scene(vBox, 960, 600);
-        mainWindow.setScene(scene);
+//        Scene scene = new Scene(vBox, 960, 600);
+//        mainWindow.setScene(scene);
         mainWindow.show();
 
-        Language.setOnAction(event -> {openLangSelectWindow();}); //uncomment for testing
+//        Language.setOnAction(event -> {openLangSelectWindow();}); //uncomment for testing
     }
 
     //Getters
