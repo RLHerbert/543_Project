@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class UI {
-
     //Member Variables
     private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
 
