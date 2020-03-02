@@ -79,6 +79,8 @@ public class Controller {
 
         Menu FP_menu = new Menu("Function Points");
         MenuItem EnterFPData_menu = new MenuItem("Enter FP Data");
+        //PAR EXAMPLE:
+        //EnterFPData_menu.setOnAction(actionEvent -> System.out.println(currentFP.getTotalCount()));
         FP_menu.getItems().add(EnterFPData_menu);
         Metrics.getItems().add(FP_menu);
 
