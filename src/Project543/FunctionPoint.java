@@ -4,7 +4,6 @@ import java.lang.Math;
 
 public class FunctionPoint {
     //Member Variables
-    //public static final int NUM_VAF_VALS = 14;
 
     private static final int[][] weightFactors = {
             {3,4,6},    //External Inputs
@@ -78,11 +77,11 @@ public class FunctionPoint {
     public void updateTotalCount() {
         //Updates totalCount
         totalCount =
-                this.exInputs.getSumOfDomVal()      +
-                this.exOutputs.getSumOfDomVal()     +
-                this.exInquiries.getSumOfDomVal()   +
-                this.inLogicFiles.getSumOfDomVal()  +
-                this.exInterfaceFiles.getSumOfDomVal();
+                this.exInputs.getSumInputs()      +
+                this.exOutputs.getSumInputs()     +
+                this.exInquiries.getSumInputs()   +
+                this.inLogicFiles.getSumInputs()  +
+                this.exInterfaceFiles.getSumInputs();
     }
 
     public void updateTotalFunctionPoints(){
@@ -92,5 +91,15 @@ public class FunctionPoint {
         );
     }
 
-    //TODO: Implement @Override public String toString(){String outString = ""; return outString //To allow simple saving
+    @Override public String toString(){
+        //To allow simple saving
+        String outString =
+                        "EX_INP: " + exInputs       + "\n" +
+                        "EX_OUT: " + exOutputs      + "\n" +
+                        "EX_INQ: " + exInquiries    + "\n" +
+                        "IN_LOG: " + inLogicFiles   + "\n" +
+                        "EX_INF: " + exInterfaceFiles; //CALLER ALWAYS ADDS "\n"
+
+        return outString;
+    }
 }

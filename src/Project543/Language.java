@@ -1,8 +1,13 @@
 package Project543;
 
-public enum Languages {
-    ASSEMBLER, ADA, C, CPP, CSHARP, COBOL, FORTRAN, HTML, JAVA, JAVASCRIPT, VBSCRIPT, VISUALBASIC;
+public enum Language {
+    NONE, ASSEMBLER, ADA, C, CPP, CSHARP, COBOL, FORTRAN, HTML, JAVA, JAVASCRIPT, VBSCRIPT, VISUALBASIC;
 
+    //Member Methods
+    //Constructor(s)
+    //TODO: Implement public Language(SAVEDFILE){}
+
+    //Misc. Member Methods
     @Override
     public String toString() {
         //return super.toString();
@@ -10,6 +15,9 @@ public enum Languages {
         String progLang = "ERROR";
 
         switch(this){
+            case NONE:
+                progLang = "None";
+                break;
             case ASSEMBLER:
                 progLang = "Assembler";
                 break;
@@ -62,6 +70,9 @@ public enum Languages {
         //int[] locPerFP = new int[] {-1,-1,-1};
         int locPerFP = -1;
         switch(this) {
+            case NONE:
+                locPerFP = 0;
+                break;
             case VISUALBASIC:
                 locPerFP = 50;
                 break;
@@ -106,5 +117,14 @@ public enum Languages {
         }
         System.out.println("LOC per FP for " + this + ": " + locPerFP);
         return locPerFP;
+    }
+
+    public boolean isNone(){
+        //Returns true if the selected languages is None
+        if (this == NONE){
+            return true;
+        }
+
+        return false;
     }
 }

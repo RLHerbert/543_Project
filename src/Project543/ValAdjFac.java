@@ -58,10 +58,24 @@ public class ValAdjFac {
         //Sets the value of the specified VAF to a new value
         //PRECONDITIONS: 0 <= valToSet < NUM_VAF, 0 <= newVal <= 5
 
-        currentVals[valToSet] = newVal;
+        if ((0 <= newVal) && (newVal <= 5)) {
+            currentVals[valToSet] = newVal;
+        }
+        else {System.err.println("ERROR: INVALID_VAF_VALUE");}
 
         //POSTCONDITIONS: The value of the specified VAF is updated to the new value
     }
 
     //Misc. Member Methods
+    @Override
+    public String toString(){
+        //To allow easy saving
+        String outString = "";
+
+        for (int i = 0; i < NUM_VAF; i++){
+            outString += "VAF_" + i + ":" + currentVals[i] + "\n";
+        }
+
+        return outString;
+    }
 }

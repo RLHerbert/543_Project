@@ -3,7 +3,6 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class UI {
     //TODO: Cleanup and rethink UI
@@ -83,7 +82,7 @@ public class UI {
         ToggleGroup languageRadiosGroup = new ToggleGroup();
         VBox vbox = new VBox(10, new Label("Select one language"));
         int i =0;
-        for (Languages lang: Languages.values())
+        for (Language lang: Language.values())
         {
             RadioButton radio = new RadioButton(lang.toString());
             languageRadios[i] = radio;
