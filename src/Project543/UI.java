@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UI {
+    //TODO: Cleanup and rethink UI
     //Member Variables
     private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
     private ProjectStage window;

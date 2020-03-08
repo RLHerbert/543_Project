@@ -1,22 +1,22 @@
 package Project543;
 
-import java.awt.event.WindowFocusListener;
-import java.time.temporal.ValueRange;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 public class Controller {
     //Member Variables
     public UI userInterface;
     public FunctionPoint currentFP;
-    public Project currentProject;
+    public ProjectMetaData currentProject;
+    //TODO: Refactor to allow for multiple projects to be open at he same time
+    //TODO: Make projects savable
 
     //Member Functions
-    //Constructors
+    //Constructor(s)
     Controller()
     {
+        //TODO: Cleanup
         //start UI with default settings
         //just the blank window with menus
 
@@ -31,7 +31,7 @@ public class Controller {
         //ProjectMenu projMenu = new ProjectMenu()
 
         currentFP = new FunctionPoint();
-        currentProject = new Project();
+        currentProject = new ProjectMetaData();
         userInterface = new UI(/*projMenu*/);
 
         setMainWindowContents();
@@ -43,8 +43,7 @@ public class Controller {
     }
 
     //Getters
-    //mostly getting user input or values calculated using function point methods
-
+    //mostly getting user input or values calculated using function point method
 
     //Setters
     //mostly setting things like different stage, UI changes (based on user input), and
@@ -91,4 +90,9 @@ public class Controller {
         userInterface.setMainWindow(stageToSet);
         userInterface.showMainWindow();
     }
+
+    //Misc. Member Methods
+    /*
+    TODO: Create methods which create buttons which are passed to UI with the relevant methods attached AND proper projects pointed to
+     */
 }

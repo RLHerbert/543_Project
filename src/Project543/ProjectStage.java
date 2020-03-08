@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 public class ProjectStage extends Stage {
+    //TODO: Cleanup and rethink this approach
 //    public enum MenuText {
 //        File, Edit, Preferences, Metrics, Help;
 //    } //change to class vars
