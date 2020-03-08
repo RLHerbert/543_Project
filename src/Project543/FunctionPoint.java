@@ -4,7 +4,6 @@ import java.lang.Math;
 
 public class FunctionPoint {
     //Member Variables
-
     private static final int[][] weightFactors = {
             {3,4,6},    //External Inputs
             {4,5,7},    //External Outputs
@@ -21,9 +20,7 @@ public class FunctionPoint {
             inLogicFiles,       //Internal Logic Files
             exInterfaceFiles;   //External Interface files
 
-    //private ValAdjustFactor [] VAF_array; //TODO: Refactor entirely
     private ValAdjFac vaf; //To hold the VAFs for the FP
-    //private Languages currentLang;
 
     //Member Methods
     //Constructors

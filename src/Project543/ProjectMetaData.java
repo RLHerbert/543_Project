@@ -3,7 +3,7 @@ package Project543;
 public class ProjectMetaData {
     //Member Variables
     public static final String FILE_EXT = ".ms";
-    private String fileName, projectName, productName, creatorName, projectComments; //TODO: Make private and implement corresponding methods
+    private String fileName, projectName, productName, creatorName, projectComments;
     private Language projectLanguage;
 
     //Member Methods
