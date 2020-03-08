@@ -1,3 +1,4 @@
+//DEPRECATED
 package Project543;
 
 //A class to hold the value adjustment factors
