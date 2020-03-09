@@ -3,14 +3,52 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
+import java.util.Scanner;
 
 import java.util.ArrayList;
 
 public class Controller {
+    //Member Variables
+    private ArrayList<ProjectData> openProjects;
 
-}
+    //Member Methods
+    //Constructor(s)
+    public Controller(){
+        openProjects = new ArrayList<ProjectData>();
+    }
 
+    //Getters
 
+    //Setters
+
+    //Misc. Member Methods
+    public boolean projectIsOpen(String fileName) {
+        for (ProjectData projectData : openProjects) {
+            if (projectData.getFileName().equals(fileName)) return true;
+        }
+
+        return false;
+    }
+
+    public void createProject(){
+        //Handles the actual creation of and addition to the ProjectData for openProjects
+    }
+
+    public void createProject(Scanner inputFile){
+
+    }
+
+    public void saveProject(ProjectData project){
+
+    }
+
+    public void openProject(String fileName){
+
+    }
+
+    public void newProject(){
+        //Handles the creation of new files
+    }
 
 //    //Member Variables
 //    public UI userInterface;                //
