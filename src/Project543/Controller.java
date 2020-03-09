@@ -15,7 +15,7 @@ public class Controller {
 
     //Member Methods
     //Constructor(s)
-    public Controller(){
+    public Controller() {
         openProjects = new ArrayList<ProjectData>();
     }
 
@@ -32,21 +32,20 @@ public class Controller {
         return false;
     }
 
-    public void createProject(){
+    public void createProject() {
         //Handles the actual creation of and addition to the ProjectData for openProjects
     }
 
-    public void createProject(Scanner inputFile){
+    public void createProject(Scanner inputFile) {
 
     }
 
-    public static void saveProject(ProjectData project){
+    public static void saveProject(ProjectData project) {
         //FileWriter fileWriter = new FileWriter();
         File outFile = new File(project.getFileName());
-        if (outFile.exists()){
+        if (outFile.exists()) {
             System.err.println("ERROR: FILE_ALREADY_EXISTS");
-        }
-        else {
+        } else {
             try {
                 outFile.createNewFile();
                 FileWriter fileWriter = new FileWriter(outFile);
@@ -59,13 +58,14 @@ public class Controller {
         }
     }
 
-    public void openProject(String fileName){
+    public void openProject(String fileName) {
 
     }
 
-    public void newProject(){
+    public void newProject() {
         //Handles the creation of new files
     }
+}
 
 //    //Member Variables
 //    public UI userInterface;                //
