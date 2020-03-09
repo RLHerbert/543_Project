@@ -3,11 +3,31 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import javax.swing.text.html.ImageView;
+import java.util.*;
+
 //TODO: make menu buttons work
 
 public class UI {
-    void createNewPr
+    void openNewWindow() //used on open app and file>new project
+    {
+        new ProjectStage();
+    }
 
+    void createNewProject()
+    {
+        openNewWindow();
+        newProjectDialog();
+    }
+
+    void newProjectDialog()
+    {
+//        Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
+
+    }
+
+    UI()
+    {this.newProjectDialog();}
 }
 
 //Member Variables
