@@ -1,7 +1,7 @@
 package Project543;
 
 //A class to handle the Value Adjustment Factors (VAF)
-public class ValAdjFac {
+public class ValueAdjustmentFactor {
     //Member Variables
     public static final int NUM_VAF = 14; //The 14 value adjustment factors
     public static final String descriptionText[] = {
@@ -26,7 +26,7 @@ public class ValAdjFac {
 
     //Member Methods
     //Constructor(s)
-    public ValAdjFac(){
+    public ValueAdjustmentFactor(){
         currentVals = new int[NUM_VAF];
         for (int i=0; i < NUM_VAF; i++){
             currentVals[i] = 0;
