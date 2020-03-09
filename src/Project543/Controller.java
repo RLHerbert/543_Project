@@ -9,7 +9,7 @@ public class Controller {
     public UI userInterface;
     public FunctionPoint currentFP;
     public ProjectMetaData currentProject;
-    //TODO: Refactor to allow for multiple projects to be open at he same time
+    //TODO: Refactor to allow for multiple projects to be open at the same time
     //TODO: Make projects savable
 
     //Member Functions

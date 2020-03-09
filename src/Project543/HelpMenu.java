@@ -9,7 +9,7 @@ public class HelpMenu extends ProjectMenu
     //Constructors
     HelpMenu()
     {
-        this.menu = new Menu("Help");
+        super("Help", 0);
     }
 
     //Getters

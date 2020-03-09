@@ -9,7 +9,7 @@ public class EditMenu extends ProjectMenu
     //Constructors
     EditMenu()
     {
-        this.menu = new Menu("Edit");
+        super("Edit", 0);
     }
 
     //Getters
