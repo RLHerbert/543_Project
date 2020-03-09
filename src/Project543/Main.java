@@ -26,9 +26,6 @@ public class Main extends Application {
 //        primaryStage.show();
 //         */
 //
-//        primaryStage.setTitle("CECS 543 Project543.Project");
-//        primaryStage.setHeight(775); primaryStage.setWidth(800); primaryStage.setX(0); primaryStage.setY(0);
-//        primaryStage.show();
 //
 //        Stage popupStage = new Stage();
 //        popupStage.setTitle("Popup");
@@ -39,12 +36,6 @@ public class Main extends Application {
 //        popupStage.showAndWait();
 //
 //
-//        /* Menu Bar initialization */
-//        Menu mainMenu = new Menu("Main Menu");
-//        MenuBar menuBar = new MenuBar();
-//        menuBar.getMenus().add(mainMenu);
-//        VBox vBox = new VBox(menuBar);
-//        Scene scene = new Scene(vBox, 960, 600);
 //
 //        primaryStage.setScene(scene);
         UI mainUI = new UI();

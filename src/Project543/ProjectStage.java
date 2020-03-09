@@ -25,7 +25,8 @@ public class ProjectStage extends Stage {
 
     //Member Methods
     //Constructors
-    ProjectStage() //default constructor, used on application open and for new projects
+    ProjectStage() //default constructor, used on application open
+    // and for new projects?
     {
         this.setProjectStageSizePos(WINDOW_HEIGHT, WINDOW_WIDTH, X_POS, Y_POS);
         this.setTitle("CECS 543 Metrics Suite");

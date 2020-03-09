@@ -2,21 +2,49 @@ package Project543;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+
+//TODO: make menu buttons work
 
 public class UI {
-    //TODO: Cleanup and rethink UI
-    //Member Variables
-    private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
-    private ProjectStage window;
-    private Scene windowScene;
+    void createNewPr
 
-    //Member Methods
-    //Constructors
-    UI() {
-        //TODO: open a new window (stage)
-        mainWindow = new ProjectStage();
-        mainWindow.show();
+}
+
+//Member Variables
+//    //TODO: variables for number of windows, current window, number of panels, current panel
+//    ProjectStage currentWindow;
+//    int numPanes;
+//    TabPane currentPane;
+//
+//    //Member Methods
+//    //Constructors
+//    UI()
+//    {
+//        this.setCurrentWindow(new ProjectStage());
+//    }
+//
+//    //Setters
+//    void setCurrentWindow(ProjectStage stage)
+//    {
+//        this.currentWindow = stage;
+//    }
+//
+//    //Other Methods
+
+
+//    //TODO: Cleanup and rethink UI
+//    //Member Variables
+//    private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
+//    private ProjectStage window;
+//    private Scene windowScene;
+//
+//    //Member Methods
+//    //Constructors
+//    UI() {
+//        //TODO: open a new window (stage)
+//        mainWindow = new ProjectStage();
+//        mainWindow.show();
+//    }
 //
 //
 //
@@ -106,5 +134,4 @@ public class UI {
 //    public void showMainWindow(){
 //        mainWindow.show();
 //    }
-    }
-}
+

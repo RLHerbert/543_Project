@@ -37,8 +37,8 @@ public class FileMenu extends ProjectMenu
     {
         fileSubmenuList[0].setOnAction(event -> {
             System.out.println("NEW WAS CLICKED");
-            ProjectStage newStage = new ProjectStage();
-            newStage.show();
+//            ProjectStage newStage = new ProjectStage();
+//            newStage.show();
         });
     }
 }
