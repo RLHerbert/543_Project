@@ -47,7 +47,10 @@ public class InformationDomainValue {
             inputComplexity = Complexity.AVERGAGE;
         }
 
-        //TODO: toString();
+        @Override
+        public String toString() {
+            return "INPUTS: " + numberInputs + " " + inputComplexity;
+        }
     }
 
     //Member Variables
@@ -214,7 +217,13 @@ public class InformationDomainValue {
     public String toString() {
         //To allow easy saving
         //TODO: Refactor
-        String outString = "INPUTS: " /*+ numInputs + " " + selectedComplexity*/; //CALLER ALWAYS ADDS "\n"
+        String outString =
+                "EXTERNAL_INPUTS: "             + externalInputs        + "\n" +
+                "EXTERNAL_OUTPUTS: "            + externalOutputs       + "\n" +
+                "EXTERNAL_INQUIRIES: "          + externalInquiries     + "\n" +
+                "INTERNAL_LOGIC_FILES: "        + internalLogicFiles    + "\n" +
+                "EXTERNAL_INTERFACE_FILES: "    + externalInterfaceFiles //CALLER ALWAYS ADDS "\n"
+                ;
 
         return outString;
     }

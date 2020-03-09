@@ -73,7 +73,8 @@ public class ValueAdjustmentFactor {
         String outString = "";
 
         for (int i = 0; i < NUM_VAF; i++){
-            outString += "VAF_" + i + ":" + currentVals[i] + "\n";
+            outString += "VAF_" + i + ": " + currentVals[i];
+            if (i < NUM_VAF-1) {outString += "\n";}
         }
 
         return outString;

@@ -54,14 +54,15 @@ public class FunctionPoint extends InformationDomainValue {
     //TODO: Fix
     @Override public String toString(){
         //To allow simple saving
-        String outString = ""
-                /*
-                        "EX_INP: " + exInputs           + "\n" +
-                        "EX_OUT: " + exOutputs          + "\n" +
-                        "EX_INQ: " + exInquiries        + "\n" +
-                        "IN_LOG: " + inLogicFiles       + "\n" +
-                        "EX_INF: " + exInterfaceFiles   + "\n" +
-                                valueAdjustmentFactors*/; //CALLER ALWAYS ADDS "\n"
+        String outString = super.toString() + "\n" + valueAdjustmentFactors;
+//                "EXTERNAL_INPUTS: "             + externalInputs        + "\n" +
+//                "EXTERNAL_OUTPUTS: "            + externalOutputs       + "\n" +
+//                "EXTERNAL_INQUIRIES: "          + externalInquiries     + "\n" +
+//                "INTERNAL_LOGIC_FILES: "        + internalLogicFiles    + "\n" +
+//                "EXTERNAL_INTERFACE_FILES: "    + externalInterfaceFiles+ "\n" +
+//                valueAdjustmentFactors;
+
+        //outString += "";
 
         return outString;
     }
