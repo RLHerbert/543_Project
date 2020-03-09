@@ -38,11 +38,12 @@ public class InformationDomainValue {
 
     //Nested class to handle inputs
     protected class Input{
-        public int numberInputs;
+        public int numberInputs/*, weightedSumOfInputs*/;
         public Complexity inputComplexity;
 
         public Input(){
             numberInputs = 0;
+            //weightedSumOfInputs = 0;
             inputComplexity = Complexity.AVERGAGE;
         }
 
@@ -65,7 +66,7 @@ public class InformationDomainValue {
             internalLogicFiles,
             externalInterfaceFiles;
 
-    protected int sumOfInputs; //Weighted sum of the Inputs
+    protected int sumOfInputs; //Weighted sum of the Inputs (AKA totalCount)
 
     //Member Methods
     //Constructor(s)
@@ -109,17 +110,92 @@ public class InformationDomainValue {
         return inputComplexity;
     }
 
-    //Setters
-    //TODO: Setters for new Input
-
-    //Misc. Methods
-    public void updateSumOfInputs(){
+    public int[] getSumsOfInputs(){
         int[] currentNumberOfInputs = this.getNumberOfInputs();
         Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
+        int[] sumsOfInputs = new int[5];
+        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal(); i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal(); i++){
+            sumsOfInputs[i] = (currentNumberOfInputs[i] * (weightFactors[i][currentComplexityOfInputs[i].ordinal()]));
+        }
+        return sumsOfInputs;
+    }
+
+    public int getNumberOfExternalInputs(){
+        return externalInputs.numberInputs;
+    }
+
+    public int getNumberOfExternalOutputs(){
+        return externalOutputs.numberInputs;
+    }
+
+    public int getNumberOfExternalInquiries(){
+        return externalInquiries.numberInputs;
+    }
+
+    public int getNumberOfInternalLogicFiles(){
+        return internalLogicFiles.numberInputs;
+    }
+
+    public int getNumberOfExternalInterfaceFiles(){
+        return externalInterfaceFiles.numberInputs;
+    }
+
+    //Setters
+    //TODO: Setters for new Input
+    public void setNumberOfExternalInputs(int numberOfInputs){
+        this.externalInputs.numberInputs = numberOfInputs;
+    }
+
+    public void setNumberOfExternalOutputs(int numberOfInputs){
+        this.externalOutputs.numberInputs = numberOfInputs;
+    }
+
+    public void setNumberOfExternalInquiries(int numberOfInputs){
+        this.externalInquiries.numberInputs = numberOfInputs;
+    }
+
+    public void setNumberOfInternalLogicFiles(int numberOfInputs){
+        this.internalLogicFiles.numberInputs = numberOfInputs;
+    }
+
+    public void setNumberOfExternalInterfaceFiles(int numberOfInputs){
+        this.externalInterfaceFiles.numberInputs = numberOfInputs;
+    }
+
+    public void setComplexityOfExternalInputs(Complexity inputComplexity){
+        this.externalInputs.inputComplexity = inputComplexity;
+    }
+
+    public void setComplexityOfExternalOutputs(Complexity inputComplexity){
+        this.externalOutputs.inputComplexity = inputComplexity;
+    }
+
+    public void setComplexityOfExternalInquiries(Complexity inputComplexity){
+        this.externalInquiries.inputComplexity = inputComplexity;
+    }
+
+    public void setComplexityOfInternalLogicFiles(Complexity inputComplexity){
+        this.internalLogicFiles.inputComplexity = inputComplexity;
+    }
+
+    public void setComplexityOfExternalInterfaceFiles(Complexity inputComplexity){
+        this.externalInterfaceFiles.inputComplexity = inputComplexity;
+    }
+
+    //Misc. Methods
+    public void updateSumsOfInputs(){
+        //NOT YET IMPLEMENTED
+        //Updates the individual sums of the IDVs
+    }
+
+    public void updateSumOfInputs(){
+        //Updates the total weighted sum of the IDVs
+        int[] currentSumsOfInputs = this.getSumsOfInputs();
+        //Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
         sumOfInputs = 0;
 
-        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal(); i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal(); i++){
-            sumOfInputs += (currentNumberOfInputs[i] * (weightFactors[i][currentComplexityOfInputs[i].ordinal()]));
+        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal() /*0*/; i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal() /*4*/; i++){
+            sumOfInputs += currentSumsOfInputs[i];
         }
     }
 
