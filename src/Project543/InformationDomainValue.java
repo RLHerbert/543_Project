@@ -2,11 +2,12 @@ package Project543;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
 public class InformationDomainValue {
-    //Enum for complexity
+    //Enum for information domains
     public enum InformationDomain{
         EXTERNAL_INPUTS, EXTERNAL_OUTPUTS, EXTERNAL_INQUIRIES, INTERNAL_LOGIC_FILES, EXTERNAL_INTERFACE_FILES;
     }
 
+    //Enum for complexity
     public enum Complexity{
         SIMPLE, AVERGAGE, COMPLEX;
 
@@ -35,6 +36,7 @@ public class InformationDomainValue {
         }
     }
 
+    //Nested class to handle inputs
     protected class Input{
         public int numberInputs;
         public Complexity inputComplexity;
@@ -48,8 +50,6 @@ public class InformationDomainValue {
     }
 
     //Member Variables
-    //public static final int NUM_WEIGHTS = 3;
-
     public static final int[][] weightFactors = {
             {3,4,6},    //External Inputs
             {4,5,7},    //External Outputs
@@ -58,25 +58,18 @@ public class InformationDomainValue {
             {5,7,10}    //External Interface Files
     };
 
-    //TODO: Refactor (make following disappear)
-//    private Complexity selectedComplexity;  //The user selected complexity for the information domain value
-//    private int[] complexWeightFactors;     //Complexity weight factors
-//    private int numInputs, sumInputs;   //Number of IDV inputs, weighted sum of IDV inputs
+    protected Input
+            externalInputs,
+            externalOutputs,
+            externalInquiries,
+            internalLogicFiles,
+            externalInterfaceFiles;
 
-    protected Input externalInputs, externalOutputs, externalInquiries, internalLogicFiles, externalInterfaceFiles;
     protected int sumOfInputs; //Weighted sum of the Inputs
 
-
+    //Member Methods
+    //Constructor(s)
     public InformationDomainValue(){
-        //TODO: Refactor BABY
-//        this.selectedComplexity = Complexity.AVERGAGE;  //Defaults to average complexity
-//        this.complexWeightFactors = new int[NUM_WEIGHTS];
-//        this.complexWeightFactors[0] = 3;
-//        this.complexWeightFactors[1] = 4;
-//        this.complexWeightFactors[2] = 6;
-//        numInputs = 0;
-//        this.setSumOfDomVal();
-
         this.externalInputs = new Input();
         this.externalOutputs = new Input();
         this.externalInquiries = new Input();
@@ -87,26 +80,11 @@ public class InformationDomainValue {
     }
 
     public InformationDomainValue(int[] complexWeightFactors){
-//        this.selectedComplexity = Complexity.AVERGAGE;
-//        this.complexWeightFactors = complexWeightFactors;
-//        numInputs = 0;
-//        this.setSumOfDomVal();
+
     }
 
     //Getters
-//    public int getNumInputs(){
-//        return numInputs;
-//    }
-//
-//    public int getSumInputs(){
-//        return this.sumInputs;
-//    }
-//
-//    public int[] getComplexWeightFactors(){
-//        return this.complexWeightFactors;
-//    }
-
-    //TODO: Getters for new Input
+    //TODO: More getters for new Input
     public int[] getNumberOfInputs(){
         //Returns an array where each value corresponds to the number of inputs for that IDV
         int[] inputNumbers = {
@@ -132,19 +110,7 @@ public class InformationDomainValue {
     }
 
     //Setters
-//    public void setSumOfDomVal() {
-//        this.sumInputs = (this.numInputs) * (complexWeightFactors[this.selectedComplexity.ordinal()]);
-//    }
-//
-//    public void setNumInputs(int numInputs){
-//        this.numInputs = numInputs;
-//        setSumOfDomVal();
-//    }
-//
-//    public void setComplexity(Complexity selectedComplexity){
-//        this.selectedComplexity = selectedComplexity;
-//        setSumOfDomVal();
-//    }
+    //TODO: Setters for new Input
 
     //Misc. Methods
     public void updateSumOfInputs(){
