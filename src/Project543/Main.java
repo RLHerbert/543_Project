@@ -13,7 +13,9 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
+
 public class Main extends Application {
+    public static final String DEFAULT_WINDOW_TITLE = "CECS 543 Metrics Suite";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
