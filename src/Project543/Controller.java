@@ -59,7 +59,22 @@ public class Controller {
     }
 
     public void openProject(String fileName) {
+        if (this.projectIsOpen(fileName)){
+            System.err.println("ERROR: FILE_ALREADY_OPEN");
+        }
+        else {
+            File inputFile;
 
+            try {
+                inputFile = new File(fileName);
+                Scanner fileScanner  = new Scanner(inputFile);
+                this.createProject(fileScanner);
+                fileScanner.close();
+            } catch (IOException e) {
+                System.err.println("ERROR: UNKNOWN_FILE_ERROR");
+                e.printStackTrace();
+            }
+        }
     }
 
     public void newProject() {
