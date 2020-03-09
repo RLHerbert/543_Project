@@ -19,29 +19,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-//        /*
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("CECS 543 Project543.Project");
-//        primaryStage.setScene(new Scene(root, 800, 775));
-//        primaryStage.setX(50);
-//        primaryStage.setY(50);
-//        primaryStage.show();
-//         */
-//
-//
-//        Stage popupStage = new Stage();
-//        popupStage.setTitle("Popup");
-//        popupStage.setX(50); popupStage.setY(50);
-//        popupStage.initModality(Modality.WINDOW_MODAL);
-//        popupStage.initOwner(primaryStage);
-//        //popupStage.initStyle(StageStyle.UNDECORATED);
-//        popupStage.showAndWait();
-//
-//
-//
-//        primaryStage.setScene(scene);
         UI mainUI = new UI();
-//        Controller projectController = new Controller();
+//      Controller projectController = new Controller();
         System.out.println("TEST");
     }
 
@@ -49,7 +28,10 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-//        ProjectData testProject = new ProjectData();
+        ProjectData testProject = new ProjectData();
+//        testProject.setFileName("TEST");
+//        Controller.saveProject(testProject);
+//        System.out.println(testProject);
 //        ProjectMetaData testMD = new ProjectMetaData();
 //
 //        testProject.setFileName("TEST");

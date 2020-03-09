@@ -4,8 +4,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import java.util.Scanner;
-
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Controller {
     //Member Variables
@@ -38,8 +40,22 @@ public class Controller {
 
     }
 
-    public void saveProject(ProjectData project) {
-
+    public static void saveProject(ProjectData project) {
+        //FileWriter fileWriter = new FileWriter();
+        File outFile = new File(project.getFileName());
+        if (outFile.exists()) {
+            System.err.println("ERROR: FILE_ALREADY_EXISTS");
+        } else {
+            try {
+                outFile.createNewFile();
+                FileWriter fileWriter = new FileWriter(outFile);
+                fileWriter.write(project.toString());
+                fileWriter.close();
+            } catch (IOException e) {
+                System.err.println("ERROR: UNKNOWN_FILE_ERROR");
+                e.printStackTrace();
+            }
+        }
     }
 
     public void openProject(String fileName) {
@@ -50,6 +66,7 @@ public class Controller {
         //Handles the creation of new files
     }
 }
+
 //    //Member Variables
 //    public UI userInterface;                //
 //    public FunctionPoint currentFP;         //TODO: Replace with ArrayList

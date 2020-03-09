@@ -28,7 +28,7 @@ public class ProjectData extends ProjectMetaData {
     //TODO: Fix
     @Override
     public String toString() {
-        //return metaData + "\n" + functionPointMetric;
-        return "";
+        String outString = super.toString() + "\n" + functionPointMetric;
+        return outString;
     }
 }
