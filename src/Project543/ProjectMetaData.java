@@ -3,16 +3,17 @@ package Project543;
 public class ProjectMetaData {
     //Member Variables
     public static final String FILE_EXT = ".ms";
-    private String fileName, projectName, productName, creatorName, projectComments;
-    private Language projectLanguage;
+    protected String fileName, projectName, productName, creatorName, projectComments;
+    protected Language projectLanguage;
 
     //Member Methods
     //Constructor(s)
     public ProjectMetaData(){
-        projectName = "";
-        productName = "";
-        creatorName = "";
-        projectComments = "";
+        this.projectName = "";
+        this.productName = "";
+        this.creatorName = "";
+        this.projectComments = "";
+        this.setFileName();
 
         //currentLanguage not set by default;
     }
@@ -83,6 +84,7 @@ public class ProjectMetaData {
     }
 
     //Misc. Member Methods
+    //TODO: Fix
     @Override
     public String toString() {
         //To allow simple saving

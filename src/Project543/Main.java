@@ -56,11 +56,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        /*
-        Languages lang = Languages.ADA;
-        System.out.println(lang);
-         */
-
-        //Controller project_controller = new Controller();
+//        ProjectData testProject = new ProjectData();
+//        ProjectMetaData testMD = new ProjectMetaData();
+//
+//        testProject.setFileName("TEST");
+//
+//        System.out.println(testProject.getFileName());
+//        System.out.println(testProject.functionPointMetric.sumOfInputs);
     }
 }

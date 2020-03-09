@@ -144,42 +144,52 @@ public class InformationDomainValue {
     //TODO: Setters for new Input
     public void setNumberOfExternalInputs(int numberOfInputs){
         this.externalInputs.numberInputs = numberOfInputs;
+        this.updateSumOfInputs();
     }
 
     public void setNumberOfExternalOutputs(int numberOfInputs){
         this.externalOutputs.numberInputs = numberOfInputs;
+        this.updateSumOfInputs();
     }
 
     public void setNumberOfExternalInquiries(int numberOfInputs){
         this.externalInquiries.numberInputs = numberOfInputs;
+        this.updateSumOfInputs();
     }
 
     public void setNumberOfInternalLogicFiles(int numberOfInputs){
         this.internalLogicFiles.numberInputs = numberOfInputs;
+        this.updateSumOfInputs();
     }
 
     public void setNumberOfExternalInterfaceFiles(int numberOfInputs){
         this.externalInterfaceFiles.numberInputs = numberOfInputs;
+        this.updateSumOfInputs();
     }
 
     public void setComplexityOfExternalInputs(Complexity inputComplexity){
         this.externalInputs.inputComplexity = inputComplexity;
+        this.updateSumOfInputs();
     }
 
     public void setComplexityOfExternalOutputs(Complexity inputComplexity){
         this.externalOutputs.inputComplexity = inputComplexity;
+        this.updateSumOfInputs();
     }
 
     public void setComplexityOfExternalInquiries(Complexity inputComplexity){
         this.externalInquiries.inputComplexity = inputComplexity;
+        this.updateSumOfInputs();
     }
 
     public void setComplexityOfInternalLogicFiles(Complexity inputComplexity){
         this.internalLogicFiles.inputComplexity = inputComplexity;
+        this.updateSumOfInputs();
     }
 
     public void setComplexityOfExternalInterfaceFiles(Complexity inputComplexity){
         this.externalInterfaceFiles.inputComplexity = inputComplexity;
+        this.updateSumOfInputs();
     }
 
     //Misc. Methods
@@ -199,6 +209,7 @@ public class InformationDomainValue {
         }
     }
 
+    //TODO: Fix
     @Override
     public String toString() {
         //To allow easy saving
