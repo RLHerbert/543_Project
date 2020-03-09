@@ -12,15 +12,9 @@ public class UI {
         new ProjectStage();
     }
 
-    public static void createNewProject()
-    {
-        openNewWindow();
-//        newProjectDialog();
-    }
-
     public static void newProjectDialog(ProjectData project)
             //Preconditions: A ProjectData object must exist and be passed as a parameter.
-            //Post-conditions: Returns an ArrayList containing project meta data as strings
+            //Post-conditions: ProjectData object's meta data is updated.
     {
         Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
         dialog.setTitle("New Project");
@@ -51,6 +45,7 @@ public class UI {
 
         dialog.getDialogPane().setContent(grid);
 
+        //Converts OK button result into ArrayList of meta data text
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ButtonType.OK) {
                 ArrayList<String> dialogInfoEntered = new ArrayList<String>(4);
@@ -63,13 +58,18 @@ public class UI {
             return null;
         });
 
+        //Updates project meta data
         Optional<ArrayList<String>> result = dialog.showAndWait();
-        result.ifPresent(dialogInfoEntered -> System.out.println("Your name: " + dialogInfoEntered.get(2)));
+        result.ifPresent(dialogInfoEntered ->
+                {
+                    project.projectName = dialogInfoEntered.get(0);
+                    project.productName = dialogInfoEntered.get(1);
+                    project.creatorName = dialogInfoEntered.get(2);
+                    project.projectComments = dialogInfoEntered.get(3);
+                }
+        );
 
     }
-
-    UI()
-    {}
 }
 
 //Member Variables

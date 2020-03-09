@@ -13,7 +13,7 @@ public class Controller {
 
     //Member Methods
     //Constructor(s)
-    public Controller(){
+    public Controller() {
         openProjects = new ArrayList<ProjectData>();
     }
 
@@ -30,26 +30,26 @@ public class Controller {
         return false;
     }
 
-    public void createProject(){
+    public void createProject() {
         //Handles the actual creation of and addition to the ProjectData for openProjects
     }
 
-    public void createProject(Scanner inputFile){
+    public void createProject(Scanner inputFile) {
 
     }
 
-    public void saveProject(ProjectData project){
+    public void saveProject(ProjectData project) {
 
     }
 
-    public void openProject(String fileName){
+    public void openProject(String fileName) {
 
     }
 
-    public void newProject(){
+    public void newProject() {
         //Handles the creation of new files
     }
-
+}
 //    //Member Variables
 //    public UI userInterface;                //
 //    public FunctionPoint currentFP;         //TODO: Replace with ArrayList
