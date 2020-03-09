@@ -1,13 +1,75 @@
 package Project543;
 
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import java.util.*;
 
 //TODO: make menu buttons work
 
 public class UI {
-    void createNewPr
+    public static void openNewWindow() //used on open app and file>new project
+    {
+        new ProjectStage();
+    }
 
+    public static void createNewProject()
+    {
+        openNewWindow();
+//        newProjectDialog();
+    }
+
+    public static void newProjectDialog(ProjectData project)
+            //Preconditions: A ProjectData object must exist and be passed as a parameter.
+            //Post-conditions: Returns an ArrayList containing project meta data as strings
+    {
+        Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
+        dialog.setTitle("New Project");
+        dialog.setHeaderText("Enter project information.");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField projectTitle = new TextField(project.projectName);
+        projectTitle.setPromptText("Project Title");
+        TextField productName = new TextField(project.productName);
+        productName.setPromptText("Product Name");
+        TextField author = new TextField(project.creatorName);
+        author.setPromptText("Author");
+        TextField comments = new TextField(project.projectComments);
+        comments.setPromptText("Comments");
+
+        grid.add(new Label("Project Title:"), 0, 0);
+        grid.add(projectTitle, 1, 0);
+        grid.add(new Label("Product Name:"), 0, 1);
+        grid.add(productName, 1, 1);
+        grid.add(new Label("Author:"), 0, 2);
+        grid.add(author, 1, 2);
+        grid.add(new Label("Comments:"), 0, 3);
+        grid.add(comments, 1, 3);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                ArrayList<String> dialogInfoEntered = new ArrayList<String>(4);
+                dialogInfoEntered.add(projectTitle.getText());
+                dialogInfoEntered.add(productName.getText());
+                dialogInfoEntered.add(author.getText());
+                dialogInfoEntered.add(comments.getText());
+                return dialogInfoEntered;
+            }
+            return null;
+        });
+
+        Optional<ArrayList<String>> result = dialog.showAndWait();
+        result.ifPresent(dialogInfoEntered -> System.out.println("Your name: " + dialogInfoEntered.get(2)));
+
+    }
+
+    UI()
+    {}
 }
 
 //Member Variables
