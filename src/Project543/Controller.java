@@ -4,12 +4,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 
+import java.util.ArrayList;
+
 public class Controller {
     //Member Variables
-    public UI userInterface;
-    public FunctionPoint currentFP;
-    public ProjectMetaData currentProject;
-    //TODO: Refactor to allow for multiple projects to be open at the same time
+    public UI userInterface;                //
+    public FunctionPoint currentFP;         //TODO: Replace with ArrayList
+    public ProjectMetaData currentProject;  //TODO: Replace with ArrayList
+
+    private ArrayList<ProjectData> openProjects; //The currently open projects
+
+    //TODO: Refactor to allow for multiple projects to be open at he same time
     //TODO: Make projects savable
 
     //Member Functions
