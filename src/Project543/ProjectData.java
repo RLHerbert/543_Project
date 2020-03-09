@@ -2,33 +2,17 @@ package Project543;
 
 public class ProjectData extends ProjectMetaData {
     //Member Variables
-    //public ProjectMetaData metaData;
     public FunctionPoint functionPointMetric;
 
     //Member Methods
     //Constructor(s)
     public ProjectData(){
-        //this.metaData = new ProjectMetaData();
         this.functionPointMetric = new FunctionPoint();
     }
 
     //TODO: Implement public ProjectData(SAVEDFILE){}
 
     //Getters
-    public String getFileName(){
-        return "";
-    }
-
-    public String getProjectName(){
-        return "";
-    }
-
-    //metadata
-    //product name
-    //creator name
-    //project comments
-    //project language
-
     //function point
     //totalCount
     //totalFunctionPoints
@@ -41,7 +25,7 @@ public class ProjectData extends ProjectMetaData {
     //Setters
 
     //Misc. Member Methods
-
+    //TODO: Fix
     @Override
     public String toString() {
         //return metaData + "\n" + functionPointMetric;
