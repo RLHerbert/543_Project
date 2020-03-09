@@ -1,5 +1,7 @@
 package Project543;
 
+import java.util.Scanner;
+
 public class ProjectMetaData {
     //Member Variables
     public static final String FILE_EXT = ".ms";
@@ -19,6 +21,9 @@ public class ProjectMetaData {
     }
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
+    public ProjectMetaData(Scanner savedFile){
+
+    }
 
     //Getters
     public String getFileName() {

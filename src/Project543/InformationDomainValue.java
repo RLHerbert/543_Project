@@ -1,5 +1,7 @@
 package Project543;
 
+import java.util.Scanner;
+
 //A class which holds an Information Domain Value (IDV) and relevant methods
 public class InformationDomainValue {
     //Enum for information domains
@@ -81,6 +83,10 @@ public class InformationDomainValue {
         this.externalInterfaceFiles = new Input();
 
         updateSumOfInputs();
+    }
+
+    public InformationDomainValue(Scanner savedFile){
+
     }
 
     public InformationDomainValue(int[] complexWeightFactors){

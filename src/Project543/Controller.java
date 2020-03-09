@@ -36,12 +36,13 @@ public class Controller {
         //Handles the actual creation of and addition to the ProjectData for openProjects
     }
 
-    public void createProject(Scanner inputFile) {
+    public void createProject(Scanner savedFile) {
 
     }
 
+    //TODO: COMPLETELY REFACTOR SAVED FILE TO MORE ROBUST SYSTEM
     public static void saveProject(ProjectData project) {
-        //FileWriter fileWriter = new FileWriter();
+        //Attempts to save a project
         File outFile = new File(project.getFileName());
         if (outFile.exists()) {
             System.err.println("ERROR: FILE_ALREADY_EXISTS");
@@ -58,11 +59,14 @@ public class Controller {
         }
     }
 
-    public void openProject(String fileName) {
+    public void openProject(File file) {
+        String fileName = file.getName();
+        //Attempts to open a
         if (this.projectIsOpen(fileName)){
             System.err.println("ERROR: FILE_ALREADY_OPEN");
         }
         else {
+            //TODO: Refactor to use file parameter
             File inputFile;
 
             try {

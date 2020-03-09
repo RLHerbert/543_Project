@@ -1,5 +1,7 @@
 package Project543;
 
+import java.util.Scanner;
+
 //A class to handle the Value Adjustment Factors (VAF)
 public class ValueAdjustmentFactor {
     //Member Variables
@@ -31,6 +33,10 @@ public class ValueAdjustmentFactor {
         for (int i=0; i < NUM_VAF; i++){
             currentVals[i] = 0;
         }
+    }
+
+    public ValueAdjustmentFactor(Scanner savedFile){
+
     }
 
     //TODO: Implement ValAdjFac(SAVEDFILE){}
