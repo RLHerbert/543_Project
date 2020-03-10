@@ -17,7 +17,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
 //        ApplicationController test = new ApplicationController();
 //        Controller testController = new Controller();
 //        testController.openProject("TEST.ms");

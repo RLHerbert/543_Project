@@ -60,8 +60,11 @@ public class Controller {
         });
         //Metrics>Function Point>Enter FP Data action
         currentWindow.getFPMenuButton().setOnAction(event -> {
-            if (openProjects.isEmpty())
-                FPButtons = UI.openFunctionPane(currentWindow, new ProjectData());
+            if (openProjects.isEmpty()) {
+//                FPButtons = UI.openFunctionPane(currentWindow, new ProjectData());
+                createProject();
+                FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+            }
             else {
                 System.out.println(UI.openProjectStages.indexOf(currentWindow));
                 FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
