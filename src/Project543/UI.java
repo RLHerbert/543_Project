@@ -246,6 +246,12 @@ public class UI {
         });
 
         computeCodeSizeButton.setOnAction(e -> {
+            if (project.getProjectLanguage() == Language.NONE)
+            {
+                Language lang = openLangSelectWindow();
+                project.setProjectLanguage(lang);
+                languageOutput.setText(project.getProjectLanguage().toString());
+            }
             codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
         });
 

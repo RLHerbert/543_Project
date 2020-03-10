@@ -124,10 +124,10 @@ public class ProjectMetaData {
         //To allow simple saving
         String outString =
                         "PROJECT_NAME: " + projectName + "\n"        +
-                        "PRODUCT_NAME: " + projectName + "\n"        +
-                        "CREATOR_NAME: " + projectName + "\n"        +
-                        "PROJECT_COMMENTS: " + projectName + "\n"    +
-                        "PROJECT_LANGUAGE: " + projectName; //CALLER ALWAYS ADDS "\n"
+                        "PRODUCT_NAME: " + productName + "\n"        +
+                        "CREATOR_NAME: " + creatorName + "\n"        +
+                        "PROJECT_COMMENTS: " + projectComments + "\n"    +
+                        "PROJECT_LANGUAGE: " + projectLanguage; //CALLER ALWAYS ADDS "\n"
         return outString;
     }
 
