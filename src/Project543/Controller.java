@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Controller {
     //Member Variables
-    private ArrayList<ProjectData> openProjects;
+    public ArrayList<ProjectData> openProjects; //Public to make accessible if needed, TEMPORARY
 
     //Member Methods
     //Constructor(s)
@@ -35,6 +35,9 @@ public class Controller {
 
     public void createProject() {
         //Handles the actual creation of and addition to the ProjectData for openProjects
+        ProjectData projectToAdd = new ProjectData();
+        openProjects.add(projectToAdd);
+        //TODO: Pass new ProjectData to UI, somehow
     }
 
     public void createProject(File savedFile) {
@@ -44,7 +47,7 @@ public class Controller {
             //Call ProjectData constructor to create project, add to openProjects
             ProjectData projectToAdd = new ProjectData(fileScanner, savedFile.getName());
             openProjects.add(projectToAdd);
-            //Pass new ProjectData to UI
+            //TODO: Pass new ProjectData to UI, somehow
             fileScanner.close();
         } catch (IOException e){
             System.err.println("ERROR: UNKNOWN_FILE_ERROR");
@@ -94,7 +97,8 @@ public class Controller {
     }
 
     public void newProject() {
-        //Handles the creation of new files
+        //Handles the creation of new projects
+        //NOT YET IMPLEMENTED
     }
 
     public void printAllProjectNames(){
@@ -104,7 +108,7 @@ public class Controller {
     }
 
     public void testPassFunction(){
-        Stage testStage;
+        Stage testStage; //NOT IMPLEMENTED
     }
 }
 
