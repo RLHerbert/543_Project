@@ -33,7 +33,7 @@ public class UserInterface {
         primaryStage.setX(0); primaryStage.setX(0); primaryStage.setWidth(800); primaryStage.setHeight(775);
         //Scene primaryScene = new Scene(primaryStage, 800, 775);
 
-        //Create the Menu Bar for the main menu
+        //Create the Menu Bar for the main menu //TODO: convert to method
         MenuBar menuBar = new MenuBar();
         Menu fileMenu = new Menu("File");
         Menu editMenu = new Menu("Edit");
@@ -41,14 +41,14 @@ public class UserInterface {
         Menu metricsMenu = new Menu("Metrics");
         menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu);
 
-        //Fill "File"
+        //Fill "File" //TODO: Convert to method
         MenuItem[] fileMenuList = new MenuItem[4];
         fileMenuList[0] = new MenuItem("New");
         fileMenuList[1] = new MenuItem("Open");
         fileMenuList[2] = new MenuItem("Save");
         fileMenuList[3] = new MenuItem("Exit");
 
-        //Set fileMenuList actions
+        //Set fileMenuList actions //TODO: Convert to method
     }
 
     public static void openProjectPane(ProjectData project){

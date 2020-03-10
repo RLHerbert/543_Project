@@ -41,6 +41,7 @@ public class FunctionPoint extends InformationDomainValue {
     }
 
     public int getFunctionPoints(){
+        this.updateTotalFunctionPoints();
         return totalFunctionPoints;
     }
 

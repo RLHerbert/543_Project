@@ -127,6 +127,7 @@ public class InformationDomainValue {
     //Getters
     //TODO: More getters for new Input
     public int getTotalCount(){
+        this.updateTotalCount();
         return totalCount;
     }
 
