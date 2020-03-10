@@ -1,5 +1,6 @@
 package Project543;
 
+import javafx.event.Event;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -10,12 +11,19 @@ import java.util.*;
 //TODO: make menu buttons work
 
 public class UI {
+    ArrayList<ProjectStage> openProjectStages; //TODO: idk if this will work
+
     public static void openNewWindow() //used on open app and file>new project
     {
-        ProjectStage stage = new ProjectStage();
+        ProjectStage stage = new ProjectStage("Hello");
 //        openNewProjectDialog(new ProjectData());
         openFunctionPane(stage, new ProjectData());
     }
+
+//    public static ProjectStage getCurrentWindow(Event e)
+//    {
+//        return e.getSource();
+//    }
 
     public static void openNewProjectDialog(ProjectData project)
             //Preconditions: A ProjectData object must exist and be passed as a parameter.

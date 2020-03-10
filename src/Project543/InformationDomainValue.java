@@ -11,7 +11,7 @@ public class InformationDomainValue {
 
     //Enum for complexity
     public enum Complexity{
-        SIMPLE, AVERGAGE, COMPLEX;
+        SIMPLE, AVERAGE, COMPLEX;
 
 
         @Override
@@ -22,7 +22,7 @@ public class InformationDomainValue {
                 case SIMPLE:
                     outString += "SIMPLE";
                     break;
-                case AVERGAGE:
+                case AVERAGE:
                     outString += "AVERAGE";
                     break;
                 case COMPLEX:
@@ -46,7 +46,7 @@ public class InformationDomainValue {
         public Input(){
             numberInputs = 0;
             //weightedSumOfInputs = 0;
-            inputComplexity = Complexity.AVERGAGE;
+            inputComplexity = Complexity.AVERAGE;
         }
 
         public Input(Scanner savedFileLine){
@@ -62,7 +62,7 @@ public class InformationDomainValue {
                     inputComplexity = Complexity.SIMPLE;
                     break;
                 case "AVERAGE":
-                    inputComplexity = Complexity.AVERGAGE;
+                    inputComplexity = Complexity.AVERAGE;
                     break;
                 case "COMPLEX":
                     inputComplexity = Complexity.COMPLEX;

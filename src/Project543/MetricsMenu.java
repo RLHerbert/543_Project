@@ -26,8 +26,3 @@ public class MetricsMenu extends ProjectMenu
         this.metricsSubmenu = submenu;
     }
 }
-
-////    Menu FP_menu = new Menu("Function Points");
-////    MenuItem EnterFPData_menu = new MenuItem("Enter FP Data");
-////        FP_menu.getItems().add(EnterFPData_menu);
-////        Metrics.getItems().add(FP_menu);

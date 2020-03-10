@@ -1,8 +1,6 @@
 package Project543;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -18,11 +16,20 @@ public class Controller {
     //Constructor(s)
     public Controller() {
         openProjects = new ArrayList<ProjectData>();
+
+        UI.openNewWindow();
     }
 
     //Getters
 
     //Setters
+//    stage.getNewButton();
+//    getOpenButton();
+//    getSaveButton();
+//    getExitButton();
+//    getLanguageMenuButton();
+//    getFPMenuButton();
+
 
     //Misc. Member Methods
     public boolean projectIsOpen(File fileName) {
@@ -38,6 +45,7 @@ public class Controller {
         ProjectData projectToAdd = new ProjectData();
         openProjects.add(projectToAdd);
         //TODO: Pass new ProjectData to UI, somehow
+
     }
 
     public void createProject(File savedFile) {
@@ -48,6 +56,9 @@ public class Controller {
             ProjectData projectToAdd = new ProjectData(fileScanner, savedFile.getName());
             openProjects.add(projectToAdd);
             //TODO: Pass new ProjectData to UI, somehow
+            ProjectStage projectToAddStage = new ProjectStage();
+//            openProjectStages.add(projectToAddStage);
+
             fileScanner.close();
         } catch (IOException e){
             System.err.println("ERROR: UNKNOWN_FILE_ERROR");
