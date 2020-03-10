@@ -59,7 +59,7 @@ public enum Language {
                 break;
         }
 
-        System.out.println("Languages.toString returned: " + progLang);
+//        System.out.println("Languages.toString returned: " + progLang);
         return progLang;
     }
 

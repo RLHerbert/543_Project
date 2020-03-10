@@ -5,6 +5,9 @@ import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import java.util.*;
 
@@ -187,7 +190,7 @@ public class UI {
         return FPButtons;
     }
 
-    public static ProjectStage updateUI(ProjectStage stage, ProjectData data)
+    public static ProjectStage updateWindowTitle(ProjectStage stage, ProjectData data)
     {
         if (stage.getTitle().equals(stage.DEFAULT_WINDOW_TITLE))
             stage.setTitle("CECS 543 Metrics Suite - " + data.projectName);
@@ -195,6 +198,61 @@ public class UI {
             stage = openNewWindow("CECS 543 Metrics Suite - " + data.projectName);
         }
         return stage;
+    }
+
+    public static Language openLangSelectWindow()
+    {
+        /* Language Selection Window initialization */
+//        Stage langSelectWindow = new Stage();
+        Dialog<Language> langSelectWindow = new Dialog<Language>();
+        langSelectWindow.setTitle("Language Selection");
+        langSelectWindow.setHeaderText("Select one language.");
+        langSelectWindow.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        /* after creating set size function, use instead of code below */
+//        langSelectWindow.setHeight(600);
+//        langSelectWindow.setWidth(960/4);
+//        langSelectWindow.setX(960/3);
+//        langSelectWindow.setY(0); //set window sizing
+
+        /* Language Radio Buttons initialization*/ //should it be checkboxes like the example in the vision doc?
+        RadioButton languageRadios[] = new RadioButton[13];
+        ToggleGroup languageRadiosGroup = new ToggleGroup();
+        VBox vbox = new VBox(10);//, new Label("Select one language"));
+        int i =0;
+        for (Language lang: Language.values())
+        {
+            RadioButton radio = new RadioButton(lang.toString());
+            languageRadios[i] = radio;
+            i++;
+            radio.setToggleGroup(languageRadiosGroup);
+            vbox.getChildren().add(radio);
+        }
+
+//        vbox.getChildren().addAll(okButton, cancelButton);
+
+//        Scene scene1 = new Scene(vbox, 775/2, 800/4);
+//        langSelectWindow.setScene(scene1);
+        langSelectWindow.getDialogPane().setContent(vbox);
+//      Optional<Language> result =
+        langSelectWindow.showAndWait();
+//        result.ifPresent(r ->
+//                {
+//                    System.out.println(r);
+//                }
+//        );
+
+        RadioButton selected = (RadioButton) languageRadiosGroup.getSelectedToggle();
+        if (selected == null) {
+            System.out.println(Language.NONE);
+            return Language.NONE;
+        }
+        else {
+            String lang = selected.getText().toUpperCase().replaceAll("\\s+", "");;
+            Language selectedLang = Language.valueOf(lang);
+            System.out.println(selectedLang);
+            return selectedLang;
+        }
+//        return Language.NONE;
     }
 }
 

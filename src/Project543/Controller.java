@@ -16,6 +16,8 @@ public class Controller {
     //Member Variables
     public ArrayList<ProjectData> openProjects; //Public to make accessible if needed, TEMPORARY
     ProjectStage currentWindow;
+    ArrayList<Button> FPButtons = new ArrayList<Button>();
+
 
     //Member Methods
     //Constructor(s)
@@ -23,35 +25,51 @@ public class Controller {
         openProjects = new ArrayList<ProjectData>();
 
         currentWindow = UI.openNewWindow();
-        setButtons();
+        setMenuButtons();
     }
 
     //Getters
 
     //Setters
     //TODO: finish button actions!!!!
-    void setButtons() {
-        final ArrayList<Button>[] FPButtons = new ArrayList[]{new ArrayList<Button>()}; //IDE made me do it this way bc it's set in an anon fxn
-
+    void setMenuButtons() {
         //TODO: complete the menu actions below
-        //Menu Item "Buttons"
-        currentWindow.getNewButton().setOnAction(event -> {createProject();});
-        currentWindow.getOpenButton().setOnAction(event -> {/*get user input, then openProject();*/});
-        currentWindow.getSaveButton().setOnAction(event -> {saveProject(openProjects.get(UI.openProjectStages.indexOf(currentWindow)));});
-        currentWindow.getExitButton().setOnAction(event -> {Platform.exit();/*TODO: add a diaglog asking if you want to save*/});
-        currentWindow.getLanguageMenuButton().setOnAction(event -> {});
+        //File>New action
+        currentWindow.getNewButton().setOnAction(event -> {
+            createProject();
+        });
+        //File>Open action
+        currentWindow.getOpenButton().setOnAction(event -> {
+            /*get user input, then openProject();*/
+        });
+        //File>Save action
+        currentWindow.getSaveButton().setOnAction(event -> {
+            saveProject(openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+        });
+        //File>Exit action
+        currentWindow.getExitButton().setOnAction(event -> {
+            Platform.exit();/*TODO: add a diaglog asking if you want to save*/
+        });
+        //Preferences>Language action
+        currentWindow.getLanguageMenuButton().setOnAction(event -> {
+            UI.openLangSelectWindow();
+        });
+        //Metrics>Function Point>Enter FP Data action
         currentWindow.getFPMenuButton().setOnAction(event -> {
             if (openProjects.isEmpty())
-                FPButtons[0] = UI.openFunctionPane(currentWindow, new ProjectData());
-            FPButtons[0] = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+                FPButtons = UI.openFunctionPane(currentWindow, new ProjectData());
+            FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+            setFPButtons();
         });
+    }
 
+    void setFPButtons() {
         //TODO: complete the FP actions below; fix too, since FPButtons is empty at beginning, these go out of bounds
         //FP Pane Buttons
-        FPButtons[0].get(0).setOnAction(event -> {/*updates FP values including IDV sums or w/e*/}); //event action for compute FP
-        FPButtons[0].get(1).setOnAction(event -> {/*opens VAF window*/}); //event action for VAF button
-        FPButtons[0].get(2).setOnAction(event -> {/*updates code size output*/}); //event action for compute code size
-        FPButtons[0].get(3).setOnAction(event -> {/*opens language panel*/}); //event action for change language
+        FPButtons.get(0).setOnAction(event -> {/*updates FP values including IDV sums or w/e*/}); //event action for compute FP
+        FPButtons.get(1).setOnAction(event -> {/*opens VAF window*/}); //event action for VAF button
+        FPButtons.get(2).setOnAction(event -> {/*updates code size output*/}); //event action for compute code size
+        FPButtons.get(3).setOnAction(event -> {/*opens language panel*/}); //event action for change language
     }
 
 
@@ -70,7 +88,7 @@ public class Controller {
         openProjects.add(projectToAdd);
         //TODO: Pass new ProjectData to UI, somehow
         UI.openNewProjectDialog(projectToAdd);
-        currentWindow = UI.updateUI(currentWindow, projectToAdd);
+        currentWindow = UI.updateWindowTitle(currentWindow, projectToAdd);
     }
 
     public void createProject(File savedFile) {
