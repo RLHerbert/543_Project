@@ -5,12 +5,15 @@ import java.util.Scanner;
 
 public class FunctionPoint extends InformationDomainValue {
     //Member Variables
-    private int /*totalCount,*/ totalFunctionPoints;     //To hold the total count value for the FP, and FP value itself respectively
+    //
+    private int  totalFunctionPoints;     //To hold the total count value for the FP, and FP value itself respectively
 
     private ValueAdjustmentFactor valueAdjustmentFactors; //To hold the VAFs for the FP
 
     //Member Methods
+    //
     //Constructors
+    //
     public FunctionPoint(){
         //Create the Value Adjustment Factor
         this.valueAdjustmentFactors = new ValueAdjustmentFactor();
@@ -19,11 +22,12 @@ public class FunctionPoint extends InformationDomainValue {
         updateTotalFunctionPoints();
     }
 
-    //TODO: Implement FunctionPoint(SAVEDFILE){};
     public FunctionPoint(Scanner savedFile){
+        //Constructor for saved files
         super(savedFile);
         this.valueAdjustmentFactors = new ValueAdjustmentFactor(savedFile);
 
+        //Update total function points
         updateTotalFunctionPoints();
     }
 
@@ -41,12 +45,14 @@ public class FunctionPoint extends InformationDomainValue {
     }
 
     public int getFunctionPoints(){
+        //Returns the total function points for the project
         this.updateTotalFunctionPoints();
         return totalFunctionPoints;
     }
 
     //Setters
     public void setValAdjFac(int valToSet, int newVal){
+        //Sets the specified value adjustment factor's value
         this.valueAdjustmentFactors.setVal(valToSet, newVal);
     }
     //TODO: Setters for each IDV
@@ -54,8 +60,9 @@ public class FunctionPoint extends InformationDomainValue {
     //Misc. Methods
     public void updateTotalFunctionPoints(){
         //Updates totalFunctionPoints
+        this.updateTotalCount(); //Ensures totalCount is up to date
         this.totalFunctionPoints = (int) Math.ceil(
-                totalCount * (0.65 + (0.01 * getSumOfValAdjFac()))
+                totalCount * (0.65 + (0.01 * getSumOfValAdjFac())) //The formula for calculating FPs
         );
     }
 

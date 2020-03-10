@@ -12,6 +12,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have imediate access to the values they are supposed to represent
+
 public class UserInterface {
     //Member Variables
     //
@@ -27,7 +29,8 @@ public class UserInterface {
     //Constructor(s)
     //
     public UserInterface(ApplicationController controller){
-        mainMenuBox = mainMenuBox(controller);
+        //mainMenuBox = setMainMenuBox(controller);
+        setMainMenuBox(controller);
 
         this.openProjectWindow(controller);
     }
@@ -37,7 +40,7 @@ public class UserInterface {
 
     //Setters
     //
-    public VBox mainMenuBox(ApplicationController controller){
+    public void setMainMenuBox(ApplicationController controller){
         VBox mainMenuBox;
 
         //Create the Menu Bar for the main menu //TODO: convert to method
@@ -48,7 +51,7 @@ public class UserInterface {
         Menu metricsMenu = new Menu("Metrics");
         menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu);
 
-        //Fill "File" //TODO: Convert to method
+        //Fill "File" submenu //TODO: Convert to method
         MenuItem[] fileMenuList = new MenuItem[4];
         fileMenuList[0] = new MenuItem("New");
         fileMenuList[1] = new MenuItem("Open");
@@ -63,13 +66,17 @@ public class UserInterface {
         //Display everything
         mainMenuBox = new VBox(menuBar);
 
-        return mainMenuBox;
+        this.mainMenuBox = mainMenuBox;
+        //return mainMenuBox;
     }
 
     //Misc. Member Methods
     //
     public void openProjectWindow(ApplicationController controller){
+        //Create a new stage
         Stage projectStage = new Stage();
+
+        //Stage setup
         projectStage.setTitle(PROJECT_TITLE);
         projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
         //Scene primaryScene = new Scene(primaryStage, 800, 775);
@@ -81,11 +88,13 @@ public class UserInterface {
     }
 
     public void openProjectWindow(ProjectData project){
+        //Create a new stage
         Stage projectStage = new Stage();
         //TODO: Handle new project dialog
+
+        //Stage setup
         projectStage.setTitle(PROJECT_TITLE + " - " + project.getProjectName());
         projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
-
         VBox localMenuBox = new VBox(mainMenuBox);
 
         Scene projectMenuScene = new Scene(localMenuBox);

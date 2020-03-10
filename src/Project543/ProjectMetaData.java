@@ -4,13 +4,15 @@ import java.util.Scanner;
 
 public class ProjectMetaData {
     //Member Variables
-    public static final String FILE_EXT = ".ms";
-    protected String fileName, projectName, productName, creatorName, projectComments;
-    protected Language projectLanguage;
+    //
+    public static final String FILE_EXT = ".ms"; //Requirement: CECS 543 Metrics Suite deals with .ms files
+    protected String fileName, projectName, productName, creatorName, projectComments; //Project metadata
+    protected Language projectLanguage; //The project language
 
     //Member Methods
     //Constructor(s)
     public ProjectMetaData(){
+        //Default constructor
         this.projectName = "";
         this.productName = "";
         this.creatorName = "";
@@ -22,6 +24,7 @@ public class ProjectMetaData {
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
     public ProjectMetaData(Scanner savedFile, String fileName){
+        //Save file constructor
         this.setFileName(fileName);
 
         String fileData = savedFile.nextLine();
@@ -42,6 +45,8 @@ public class ProjectMetaData {
     }
 
     //Getters
+    //
+    //Getters for member variables
     public String getFileName() {
         return this.fileName;
     }
@@ -67,6 +72,7 @@ public class ProjectMetaData {
     }
 
     public int getLanguageLOC(){
+        //Returns the lines of code per FP for the project's language
         if (projectLanguage != null) {
             return this.projectLanguage.locPerFP();
         }
@@ -76,6 +82,8 @@ public class ProjectMetaData {
     }
 
     //Setters
+    //
+    //Setters for the member variables
     public void setFileName(){
         this.fileName = projectName + FILE_EXT;
     }
@@ -124,6 +132,8 @@ public class ProjectMetaData {
     }
 
     public static Language parseLanguage(String language){
+        //Returns the language produced by the Language.toString() method
+        //TODO: Rethink and refactor this approach
         switch (language){
             case "None":
                 return Language.NONE;

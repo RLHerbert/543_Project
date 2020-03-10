@@ -77,11 +77,13 @@ public class InformationDomainValue {
         @Override
         public String toString() {
             return "INPUTS: " + numberInputs + " " + inputComplexity;
-        }
+        } //To allow simple saving
     }
 
     //Member Variables
+    //
     public static final int[][] weightFactors = {
+            //The weight factors for each IDV
             {3,4,6},    //External Inputs
             {4,5,7},    //External Outputs
             {3,4,6},    //External Inquiries
@@ -96,11 +98,14 @@ public class InformationDomainValue {
             internalLogicFiles,
             externalInterfaceFiles;
 
-    protected int totalCount; //Weighted sum of the Inputs (AKA totalCount)
+    protected int totalCount; //Weighted sum of the Inputs (AKA total count)
 
     //Member Methods
+    //
     //Constructor(s)
+    //
     public InformationDomainValue(){
+        //Set up the IDVs
         this.externalInputs = new Input();
         this.externalOutputs = new Input();
         this.externalInquiries = new Input();
@@ -111,6 +116,7 @@ public class InformationDomainValue {
     }
 
     public InformationDomainValue(Scanner savedFile){
+        //Save file constructor
         this.externalInputs = new Input(savedFile);
         this.externalOutputs =  new Input(savedFile);
         this.externalInquiries = new Input(savedFile);
@@ -121,12 +127,13 @@ public class InformationDomainValue {
     }
 
     public InformationDomainValue(int[] complexWeightFactors){
-
+        //Deprecated
     }
 
     //Getters
-    //TODO: More getters for new Input
+    //TODO: More getters for new Input(?)
     public int getTotalCount(){
+        //Returns the most recent total count value
         this.updateTotalCount();
         return totalCount;
     }
@@ -156,6 +163,7 @@ public class InformationDomainValue {
     }
 
     public int[] getSumsOfInputs(){
+        //Returns the array which is the weighted sums of each input
         int[] currentNumberOfInputs = this.getNumberOfInputs();
         Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
         int[] sumsOfInputs = new int[5];
@@ -165,6 +173,8 @@ public class InformationDomainValue {
         return sumsOfInputs;
     }
 
+
+    //Access numbers of inputs
     public int getNumberOfExternalInputs(){
         return externalInputs.numberInputs;
     }
@@ -186,7 +196,8 @@ public class InformationDomainValue {
     }
 
     //Setters
-    //TODO: Setters for new Input
+    //TODO: Setters for new Input(?)
+    //Individual setters for number of inputs for each IDV
     public void setNumberOfExternalInputs(int numberOfInputs){
         this.externalInputs.numberInputs = numberOfInputs;
         this.updateTotalCount();
@@ -212,6 +223,8 @@ public class InformationDomainValue {
         this.updateTotalCount();
     }
 
+    //Individual setters for complexity of inputs for each IDV
+    //
     public void setComplexityOfExternalInputs(Complexity inputComplexity){
         this.externalInputs.inputComplexity = inputComplexity;
         this.updateTotalCount();
@@ -239,12 +252,12 @@ public class InformationDomainValue {
 
     //Misc. Methods
     public void updateSumsOfInputs(){
-        //NOT YET IMPLEMENTED
+        //Unused
         //Updates the individual sums of the IDVs
     }
 
     public void updateTotalCount(){
-        //Updates the total weighted sum of the IDVs
+        //Updates the total weighted sum of the IDVs (totalCount)
         int[] currentSumsOfInputs = this.getSumsOfInputs();
         //Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
         totalCount = 0;
