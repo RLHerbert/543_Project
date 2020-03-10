@@ -1,8 +1,10 @@
 package Project543;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.cell.ChoiceBoxListCell;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -190,6 +192,13 @@ public class UI {
 
         grid.add(computeCodeSizeButton, 0, 14);
         //TODO: add an hbox to hold current lang label and current language output box
+        HBox languageBox = new HBox();
+        TextField languageOutput = new TextField();
+        languageOutput.setEditable(false);
+        languageOutput.setText(project.getProjectLanguage().toString());
+        languageBox.getChildren().add(new Label("Current Language"));
+        languageBox.getChildren().add(languageOutput);
+        grid.add(languageBox, 2, 14);
         //TODO: also create current lang label and current lang output box
         TextField codeSizeOutput = new TextField();
         codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
@@ -232,11 +241,67 @@ public class UI {
         });
 
         VAFButton.setOnAction(e -> {
-
+            openVAFWindow(project);
             VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
         });
 
+        computeCodeSizeButton.setOnAction(e -> {
+            codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
+        });
+
+        changeLanguageButton.setOnAction(e -> {
+            Language lang = openLangSelectWindow();
+            project.setProjectLanguage(lang);
+            languageOutput.setText(project.getProjectLanguage().toString());
+        });
+
         return FPButtons;
+    }
+
+    public static void openVAFWindow(ProjectData project)
+    {
+        Dialog<ArrayList<Integer>> dialog = new Dialog<ArrayList<Integer>>();
+        dialog.setTitle("Value Adjustments Factors");
+        dialog.setHeaderText("Pick values from 0 to 5");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        int j = 0;
+        for (String vaf: ValueAdjustmentFactor.descriptionText) {
+            ChoiceBox vafChoices = new ChoiceBox();
+            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
+            grid.add(new Label(vaf), 0, j);
+            grid.add(vafChoices, 1, j);
+            vafChoices.setValue(Integer.toString(project.functionPointMetric.getValAdjFac(j)));
+            j++;
+        }
+
+        dialog.getDialogPane().setContent(grid);
+
+        //Converts OK button result into ArrayList of VAF values (as integers)
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
+                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+                {
+                    dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
+                }
+                return dialogInfoEntered;
+            }
+            return null;
+        });
+
+        //Updates project meta data
+        Optional<ArrayList<Integer>> result = dialog.showAndWait();
+        result.ifPresent(dialogInfoEntered ->
+            {
+                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+                    project.functionPointMetric.setValAdjFac(i, dialogInfoEntered.get(i));
+            }
+        );
     }
 
     public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
