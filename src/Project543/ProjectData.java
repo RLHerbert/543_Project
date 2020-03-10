@@ -19,6 +19,10 @@ public class ProjectData extends ProjectMetaData {
     }
 
     //Getters
+    public int getCodeSize(){
+        return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
+    }
+
     //function point
     //totalCount
     //totalFunctionPoints

@@ -17,7 +17,7 @@ public class ProjectMetaData {
         this.projectComments = "";
         this.setFileName();
 
-        //currentLanguage not set by default;
+        this.projectLanguage = Language.NONE;
     }
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
@@ -36,7 +36,9 @@ public class ProjectMetaData {
         fileData = savedFile.nextLine();
         this.projectComments = fileData.substring(fileData.indexOf(":")+2);
 
-        savedFile.nextLine(); //TEMPORARY UNTIL LANGUAGE IMPLEMENTED
+        //savedFile.nextLine(); //TEMPORARY UNTIL LANGUAGE IMPLEMENTED
+        fileData = savedFile.nextLine();
+        this.projectLanguage = parseLanguage(fileData.substring(fileData.indexOf(":")+2));
     }
 
     //Getters
@@ -121,7 +123,37 @@ public class ProjectMetaData {
         return outString;
     }
 
-    public static Language parseLanguage(){
+    public static Language parseLanguage(String language){
+        switch (language){
+            case "None":
+                return Language.NONE;
+            case "Assembler":
+                return Language.ASSEMBLER;
+            case "Ada 95":
+                return Language.ADA;
+            case "C":
+                return Language.C;
+            case "C++":
+                return Language.CPP;
+            case "HTML":
+                return Language.HTML;
+            case "Java":
+                return Language.JAVA;
+            case "C#":
+                return Language.CSHARP;
+            case "FORTRAN":
+                return Language.FORTRAN;
+            case "VBScript":
+                return Language.VBSCRIPT;
+            case "JavaScript":
+                return Language.JAVASCRIPT;
+            case "VisualBasic":
+                return Language.VISUALBASIC;
+            default:
+                System.err.println("ERROR: NO_PROGRAMMING_LANGUAGE_FOUND");
+                System.err.println("Defaulting to Language.NONE");
+                break;
+        }
         return Language.NONE;
     }
 }
