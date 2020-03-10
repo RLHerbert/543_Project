@@ -202,22 +202,16 @@ public class UI {
 
     public static Language openLangSelectWindow()
     {
-        /* Language Selection Window initialization */
-//        Stage langSelectWindow = new Stage();
+        /* Language Selection Dialog Window initialization */
         Dialog<Language> langSelectWindow = new Dialog<Language>();
         langSelectWindow.setTitle("Language Selection");
         langSelectWindow.setHeaderText("Select one language.");
         langSelectWindow.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        /* after creating set size function, use instead of code below */
-//        langSelectWindow.setHeight(600);
-//        langSelectWindow.setWidth(960/4);
-//        langSelectWindow.setX(960/3);
-//        langSelectWindow.setY(0); //set window sizing
 
-        /* Language Radio Buttons initialization*/ //should it be checkboxes like the example in the vision doc?
+        /* Language Radio Buttons initialization*/
         RadioButton languageRadios[] = new RadioButton[13];
         ToggleGroup languageRadiosGroup = new ToggleGroup();
-        VBox vbox = new VBox(10);//, new Label("Select one language"));
+        VBox vbox = new VBox(10);
         int i =0;
         for (Language lang: Language.values())
         {
@@ -228,18 +222,8 @@ public class UI {
             vbox.getChildren().add(radio);
         }
 
-//        vbox.getChildren().addAll(okButton, cancelButton);
-
-//        Scene scene1 = new Scene(vbox, 775/2, 800/4);
-//        langSelectWindow.setScene(scene1);
         langSelectWindow.getDialogPane().setContent(vbox);
-//      Optional<Language> result =
         langSelectWindow.showAndWait();
-//        result.ifPresent(r ->
-//                {
-//                    System.out.println(r);
-//                }
-//        );
 
         RadioButton selected = (RadioButton) languageRadiosGroup.getSelectedToggle();
         if (selected == null) {
@@ -252,7 +236,6 @@ public class UI {
             System.out.println(selectedLang);
             return selectedLang;
         }
-//        return Language.NONE;
     }
 }
 
