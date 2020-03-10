@@ -1,7 +1,11 @@
 package Project543;
 
+import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -11,24 +15,44 @@ import java.io.IOException;
 public class Controller {
     //Member Variables
     public ArrayList<ProjectData> openProjects; //Public to make accessible if needed, TEMPORARY
+    ProjectStage currentWindow;
 
     //Member Methods
     //Constructor(s)
     public Controller() {
         openProjects = new ArrayList<ProjectData>();
 
-        UI.openNewWindow();
+        currentWindow = UI.openNewWindow();
+        setButtons();
     }
 
     //Getters
 
     //Setters
-//    stage.getNewButton();
-//    getOpenButton();
-//    getSaveButton();
-//    getExitButton();
-//    getLanguageMenuButton();
-//    getFPMenuButton();
+    //TODO: finish button actions!!!!
+    void setButtons() {
+        final ArrayList<Button>[] FPButtons = new ArrayList[]{new ArrayList<Button>()}; //IDE made me do it this way bc it's set in an anon fxn
+
+        //TODO: complete the menu actions below
+        //Menu Item "Buttons"
+        currentWindow.getNewButton().setOnAction(event -> {createProject();});
+        currentWindow.getOpenButton().setOnAction(event -> {/*get user input, then openProject();*/});
+        currentWindow.getSaveButton().setOnAction(event -> {saveProject(openProjects.get(UI.openProjectStages.indexOf(currentWindow)));});
+        currentWindow.getExitButton().setOnAction(event -> {Platform.exit();/*TODO: add a diaglog asking if you want to save*/});
+        currentWindow.getLanguageMenuButton().setOnAction(event -> {});
+        currentWindow.getFPMenuButton().setOnAction(event -> {
+            if (openProjects.isEmpty())
+                FPButtons[0] = UI.openFunctionPane(currentWindow, new ProjectData());
+            FPButtons[0] = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+        });
+
+        //TODO: complete the FP actions below; fix too, since FPButtons is empty at beginning, these go out of bounds
+        //FP Pane Buttons
+        FPButtons[0].get(0).setOnAction(event -> {/*updates FP values including IDV sums or w/e*/}); //event action for compute FP
+        FPButtons[0].get(1).setOnAction(event -> {/*opens VAF window*/}); //event action for VAF button
+        FPButtons[0].get(2).setOnAction(event -> {/*updates code size output*/}); //event action for compute code size
+        FPButtons[0].get(3).setOnAction(event -> {/*opens language panel*/}); //event action for change language
+    }
 
 
     //Misc. Member Methods
@@ -45,7 +69,8 @@ public class Controller {
         ProjectData projectToAdd = new ProjectData();
         openProjects.add(projectToAdd);
         //TODO: Pass new ProjectData to UI, somehow
-
+        UI.openNewProjectDialog(projectToAdd);
+        currentWindow = UI.updateUI(currentWindow, projectToAdd);
     }
 
     public void createProject(File savedFile) {
@@ -74,6 +99,7 @@ public class Controller {
             System.err.println("ERROR: FILE_ALREADY_EXISTS");
         } else {
             try {
+                //TODO: make sure filename is saved
                 outFile.createNewFile();
                 FileWriter fileWriter = new FileWriter(outFile);
                 fileWriter.write(project.toString());

@@ -52,6 +52,7 @@ public class ProjectStage extends Stage {
 
     ProjectStage(String title)
     {
+        this();
         this.setTitle(title);
     }
 

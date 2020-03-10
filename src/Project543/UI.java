@@ -11,19 +11,23 @@ import java.util.*;
 //TODO: make menu buttons work
 
 public class UI {
-    ArrayList<ProjectStage> openProjectStages; //TODO: idk if this will work
+    public static ArrayList<ProjectStage> openProjectStages = new ArrayList<ProjectStage>(); //TODO: idk if this will work
 
-    public static void openNewWindow() //used on open app and file>new project
+    public static ProjectStage openNewWindow() //used on open app and file>new project
     {
-        ProjectStage stage = new ProjectStage("Hello");
+        ProjectStage stage = new ProjectStage();
+        openProjectStages.add(stage);
 //        openNewProjectDialog(new ProjectData());
-        openFunctionPane(stage, new ProjectData());
+//        openFunctionPane(stage, new ProjectData());
+        return stage;
     }
 
-//    public static ProjectStage getCurrentWindow(Event e)
-//    {
-//        return e.getSource();
-//    }
+    public static ProjectStage openNewWindow(String title)
+    {
+        ProjectStage stage = new ProjectStage(title);
+        openProjectStages.add(stage);
+        return stage;
+    }
 
     public static void openNewProjectDialog(ProjectData project)
             //Preconditions: A ProjectData object must exist and be passed as a parameter.
@@ -85,7 +89,7 @@ public class UI {
 
     }
 
-    public static void openFunctionPane(ProjectStage stage, ProjectData project) //TODO: refactor!! too long
+    public static ArrayList<Button> openFunctionPane(ProjectStage stage, ProjectData project) //TODO: refactor!! too long
             //Preconditions: A ProjectStage object must exist and be passed as a parameter.
             //Post-conditions: A FunctionPoint tab is added to the project stage.
     {
@@ -175,11 +179,22 @@ public class UI {
 
 
         //button event stuff
-        computeFPButton.setOnAction(e ->  {
-
-        });
+        ArrayList<Button> FPButtons = new ArrayList<Button>();
+        FPButtons.add(computeFPButton);
+        FPButtons.add(VAFButton);
+        FPButtons.add(computeCodeSizeButton);
+        FPButtons.add(changeLanguageButton);
+        return FPButtons;
     }
 
-    UI(){openNewWindow();}
+    public static ProjectStage updateUI(ProjectStage stage, ProjectData data)
+    {
+        if (stage.getTitle().equals(stage.DEFAULT_WINDOW_TITLE))
+            stage.setTitle("CECS 543 Metrics Suite - " + data.projectName);
+        else {
+            stage = openNewWindow("CECS 543 Metrics Suite - " + data.projectName);
+        }
+        return stage;
+    }
 }
 
