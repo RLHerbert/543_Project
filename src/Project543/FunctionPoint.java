@@ -54,7 +54,7 @@ public class FunctionPoint extends InformationDomainValue {
     public void updateTotalFunctionPoints(){
         //Updates totalFunctionPoints
         this.totalFunctionPoints = (int) Math.ceil(
-                sumOfInputs * (0.65 * (0.01 * getSumOfValAdjFac()))
+                totalCount * (0.65 * (0.01 * getSumOfValAdjFac()))
         );
     }
 

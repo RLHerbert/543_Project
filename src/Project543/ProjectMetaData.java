@@ -25,18 +25,18 @@ public class ProjectMetaData {
         this.setFileName(fileName);
 
         String fileData = savedFile.nextLine();
-        this.projectName = fileData.substring(fileData.indexOf(":")+1);
+        this.projectName = fileData.substring(fileData.indexOf(":")+2);
 
         fileData = savedFile.nextLine();
-        this.productName = fileData.substring(fileData.indexOf(":")+1);
+        this.productName = fileData.substring(fileData.indexOf(":")+2);
 
         fileData = savedFile.nextLine();
-        this.creatorName = fileData.substring(fileData.indexOf(":")+1);
+        this.creatorName = fileData.substring(fileData.indexOf(":")+2);
 
         fileData = savedFile.nextLine();
-        this.projectComments = fileData.substring(fileData.indexOf(":")+1);
+        this.projectComments = fileData.substring(fileData.indexOf(":")+2);
 
-        savedFile.nextLine();
+        savedFile.nextLine(); //TEMPORARY UNTIL LANGUAGE IMPLEMENTED
     }
 
     //Getters
@@ -113,11 +113,15 @@ public class ProjectMetaData {
     public String toString() {
         //To allow simple saving
         String outString =
-                        "PROJECT_NAME:" + projectName + "\n"        +
-                        "PRODUCT_NAME:" + projectName + "\n"        +
-                        "CREATOR_NAME:" + projectName + "\n"        +
-                        "PROJECT_COMMENTS:" + projectName + "\n"    +
-                        "PROJECT_LANGUAGE:" + projectName; //CALLER ALWAYS ADDS "\n"
+                        "PROJECT_NAME: " + projectName + "\n"        +
+                        "PRODUCT_NAME: " + projectName + "\n"        +
+                        "CREATOR_NAME: " + projectName + "\n"        +
+                        "PROJECT_COMMENTS: " + projectName + "\n"    +
+                        "PROJECT_LANGUAGE: " + projectName; //CALLER ALWAYS ADDS "\n"
         return outString;
+    }
+
+    public static Language parseLanguage(){
+        return Language.NONE;
     }
 }

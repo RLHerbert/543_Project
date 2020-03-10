@@ -96,7 +96,7 @@ public class InformationDomainValue {
             internalLogicFiles,
             externalInterfaceFiles;
 
-    protected int sumOfInputs; //Weighted sum of the Inputs (AKA totalCount)
+    protected int totalCount; //Weighted sum of the Inputs (AKA totalCount)
 
     //Member Methods
     //Constructor(s)
@@ -107,7 +107,7 @@ public class InformationDomainValue {
         this.internalLogicFiles = new Input();
         this.externalInterfaceFiles = new Input();
 
-        updateSumOfInputs();
+        updateTotalCount();
     }
 
     public InformationDomainValue(Scanner savedFile){
@@ -117,7 +117,7 @@ public class InformationDomainValue {
         this.internalLogicFiles = new Input(savedFile);
         this.externalInterfaceFiles = new Input(savedFile);
 
-        updateSumOfInputs();
+        updateTotalCount();
     }
 
     public InformationDomainValue(int[] complexWeightFactors){
@@ -126,6 +126,10 @@ public class InformationDomainValue {
 
     //Getters
     //TODO: More getters for new Input
+    public int getTotalCount(){
+        return totalCount;
+    }
+
     public int[] getNumberOfInputs(){
         //Returns an array where each value corresponds to the number of inputs for that IDV
         int[] inputNumbers = {
@@ -184,52 +188,52 @@ public class InformationDomainValue {
     //TODO: Setters for new Input
     public void setNumberOfExternalInputs(int numberOfInputs){
         this.externalInputs.numberInputs = numberOfInputs;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setNumberOfExternalOutputs(int numberOfInputs){
         this.externalOutputs.numberInputs = numberOfInputs;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setNumberOfExternalInquiries(int numberOfInputs){
         this.externalInquiries.numberInputs = numberOfInputs;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setNumberOfInternalLogicFiles(int numberOfInputs){
         this.internalLogicFiles.numberInputs = numberOfInputs;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setNumberOfExternalInterfaceFiles(int numberOfInputs){
         this.externalInterfaceFiles.numberInputs = numberOfInputs;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setComplexityOfExternalInputs(Complexity inputComplexity){
         this.externalInputs.inputComplexity = inputComplexity;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setComplexityOfExternalOutputs(Complexity inputComplexity){
         this.externalOutputs.inputComplexity = inputComplexity;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setComplexityOfExternalInquiries(Complexity inputComplexity){
         this.externalInquiries.inputComplexity = inputComplexity;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setComplexityOfInternalLogicFiles(Complexity inputComplexity){
         this.internalLogicFiles.inputComplexity = inputComplexity;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     public void setComplexityOfExternalInterfaceFiles(Complexity inputComplexity){
         this.externalInterfaceFiles.inputComplexity = inputComplexity;
-        this.updateSumOfInputs();
+        this.updateTotalCount();
     }
 
     //Misc. Methods
@@ -238,14 +242,14 @@ public class InformationDomainValue {
         //Updates the individual sums of the IDVs
     }
 
-    public void updateSumOfInputs(){
+    public void updateTotalCount(){
         //Updates the total weighted sum of the IDVs
         int[] currentSumsOfInputs = this.getSumsOfInputs();
         //Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
-        sumOfInputs = 0;
+        totalCount = 0;
 
         for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal() /*0*/; i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal() /*4*/; i++){
-            sumOfInputs += currentSumsOfInputs[i];
+            totalCount += currentSumsOfInputs[i];
         }
     }
 
