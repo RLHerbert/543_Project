@@ -53,7 +53,7 @@ public class ProjectStage extends Stage {
     ProjectStage(String title)
     {
         this();
-        this.setTitle(title);
+        this.setTitle("CECS 543 Metrics Suite - " + title);
     }
 
     //Getters

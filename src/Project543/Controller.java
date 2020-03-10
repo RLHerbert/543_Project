@@ -3,6 +3,7 @@ package Project543;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
@@ -40,6 +41,9 @@ public class Controller {
         });
         //File>Open action
         currentWindow.getOpenButton().setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            File selectedFile = fileChooser.showOpenDialog(currentWindow);
+            openProject(selectedFile);
             /*get user input, then openProject();*/
         });
         //File>Save action
@@ -59,6 +63,7 @@ public class Controller {
             if (openProjects.isEmpty())
                 FPButtons = UI.openFunctionPane(currentWindow, new ProjectData());
             else {
+                System.out.println(UI.openProjectStages.indexOf(currentWindow));
                 FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
             }
 //            setFPButtons();
@@ -110,7 +115,8 @@ public class Controller {
             ProjectData projectToAdd = new ProjectData(fileScanner, savedFile.getName());
             openProjects.add(projectToAdd);
             //TODO: Pass new ProjectData to UI, somehow
-            ProjectStage projectToAddStage = new ProjectStage();
+            currentWindow = UI.openNewWindow(projectToAdd);
+            setMenuButtons();
 //            openProjectStages.add(projectToAddStage);
 
             fileScanner.close();
