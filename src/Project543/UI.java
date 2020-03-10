@@ -1,6 +1,7 @@
 package Project543;
 
 import javafx.event.Event;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
@@ -30,6 +31,17 @@ public class UI {
     {
         ProjectStage stage = new ProjectStage(title);
         openProjectStages.add(stage);
+        return stage;
+    }
+
+    public static ProjectStage openNewWindow(ProjectData project)
+    {
+        ProjectStage stage = new ProjectStage(project.getProjectName());
+        openProjectStages.add(stage);
+        if (project.functionPointMetric.getFunctionPoints() != 0) {
+
+            openFunctionPane(stage, project);
+        }
         return stage;
     }
 
@@ -88,6 +100,7 @@ public class UI {
                     project.productName = dialogInfoEntered.get(1);
                     project.creatorName = dialogInfoEntered.get(2);
                     project.projectComments = dialogInfoEntered.get(3);
+                    project.setFileName();
                 }
         );
 
@@ -105,11 +118,14 @@ public class UI {
         HBox complexityBox = new HBox(20, new Label("Simple"), new Label("Average"), new Label("Complex"));
 
         GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
 
         //TODO: format grid stuff
-        grid.add(new Text("Weighting Factors"), 2, 0);
+        Text fpPaneTitle = new Text("Weighting Factors");
+        fpPaneTitle.setStyle("-fx-font: 24 arial;");
+        grid.add(fpPaneTitle, 2, 0);
         grid.add(complexityBox, 2, 1);
 
 
@@ -123,8 +139,15 @@ public class UI {
 
             ToggleGroup tempRadioSet = new ToggleGroup();
             HBox hBox = new HBox(40);
+            String [] complexities = {"SIMPLE", "AVERAGE", "COMPLEX"};
             for (int j = 0; j < 3; j++) {
                 RadioButton tempRadio = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i-2][j]));
+                String IDVcomplexity = project.functionPointMetric.getComplexityOfInputs()[i-2].toString().substring(12);
+                System.out.println(tempRadio.getText());
+                if (complexities[j].equals(IDVcomplexity))
+                {
+                    tempRadio.setSelected(true);
+                }
                 tempRadio.setToggleGroup(tempRadioSet);
                 hBox.getChildren().add(tempRadio);
             }
@@ -143,42 +166,43 @@ public class UI {
         totalCount.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         totalCount.setEditable(false);
         totalCount.setText(Integer.toString(project.functionPointMetric.getTotalCount()));
-        grid.add(new Label("Total Count"),0,7);
-        grid.add(totalCount, 3, 7);
+        grid.add(new Label("Total Count"),0,8);
+        grid.add(totalCount, 3, 8);
 
         Button computeFPButton = new Button("Compute FP");
         Button VAFButton = new Button("Value Adjustments");
         Button computeCodeSizeButton = new Button("Compute Code Size");
         Button changeLanguageButton = new Button("Change Language");
 
-        grid.add(computeFPButton, 0, 8);
+        grid.add(computeFPButton, 0, 10);
         TextField FPOutput = new TextField();
         FPOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         FPOutput.setEditable(false);
         FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
-        grid.add(FPOutput,3,8);
+        grid.add(FPOutput,3,10);
 
-        grid.add(VAFButton, 0, 9);
+        grid.add(VAFButton, 0, 12);
         TextField VAFOutput = new TextField();
         VAFOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         VAFOutput.setEditable(false);
         VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
-        grid.add(VAFOutput,3,9);
+        grid.add(VAFOutput,3,12);
 
-        grid.add(computeCodeSizeButton, 0, 10);
+        grid.add(computeCodeSizeButton, 0, 14);
         //TODO: add an hbox to hold current lang label and current language output box
         //TODO: also create current lang label and current lang output box
         TextField codeSizeOutput = new TextField();
         codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         codeSizeOutput.setEditable(false);
         codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
-        grid.add(codeSizeOutput,3,10);
+        grid.add(codeSizeOutput,3,14);
 
-        grid.add(changeLanguageButton, 0, 11);
+        grid.add(changeLanguageButton, 0, 16);
 
         FPtab.setContent(grid);
         tabs.getTabs().add(FPtab);
         stage.projectStageLayout.getChildren().add(tabs);
+
         stage.show();
 
 
@@ -189,12 +213,27 @@ public class UI {
         FPButtons.add(computeCodeSizeButton);
         FPButtons.add(changeLanguageButton);
 
-        computeFPButton.setOnAction(e-> {
+        computeFPButton.setOnAction(e -> {
+            //Update project data
             project.functionPointMetric.setNumberOfExternalInputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
-            System.out.println(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
-            System.out.println(project.functionPointMetric.getNumberOfExternalInputs());
-            System.out.println(project.functionPointMetric.getFunctionPoints());
+            project.functionPointMetric.setNumberOfExternalOutputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 3)).getText()));
+            project.functionPointMetric.setNumberOfExternalInquiries(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 4)).getText()));
+            project.functionPointMetric.setNumberOfInternalLogicFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 5)).getText()));
+            project.functionPointMetric.setNumberOfExternalInterfaceFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 6)).getText()));
+
+            //Update FP pane
+            int outputVals [] = project.functionPointMetric.getSumsOfInputs();
+            for (int i = 2; i < 7; i++) {
+                ((TextField) getNodeFromGridPane(grid, 3, i)).setText(Integer.toString(outputVals[i-2]));
+            }
+
+            totalCount.setText(Integer.toString(project.functionPointMetric.getTotalCount()));
             FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
+        });
+
+        VAFButton.setOnAction(e -> {
+
+            VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
         });
 
         return FPButtons;

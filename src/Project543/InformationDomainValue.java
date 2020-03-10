@@ -159,7 +159,7 @@ public class InformationDomainValue {
         int[] currentNumberOfInputs = this.getNumberOfInputs();
         Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
         int[] sumsOfInputs = new int[5];
-        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal(); i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal(); i++){
+        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal(); i <= InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal(); i++){
             sumsOfInputs[i] = (currentNumberOfInputs[i] * (weightFactors[i][currentComplexityOfInputs[i].ordinal()]));
         }
         return sumsOfInputs;
@@ -249,7 +249,7 @@ public class InformationDomainValue {
         //Complexity[] currentComplexityOfInputs = this.getComplexityOfInputs();
         totalCount = 0;
 
-        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal() /*0*/; i < InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal() /*4*/; i++){
+        for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal() /*0*/; i <= InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal() /*4*/; i++){
             totalCount += currentSumsOfInputs[i];
         }
     }
