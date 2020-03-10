@@ -24,9 +24,9 @@ public class Controller {
     //Setters
 
     //Misc. Member Methods
-    public boolean projectIsOpen(String fileName) {
+    public boolean projectIsOpen(File fileName) {
         for (ProjectData projectData : openProjects) {
-            if (projectData.getFileName().equals(fileName)) return true;
+            if (projectData.getFileName().equals(fileName.getName())) return true;
         }
 
         return false;
@@ -36,12 +36,24 @@ public class Controller {
         //Handles the actual creation of and addition to the ProjectData for openProjects
     }
 
-    public void createProject(Scanner inputFile) {
-
+    public void createProject(File savedFile) {
+        Scanner fileScanner;
+        try {
+            fileScanner = new Scanner(savedFile);
+            //Call ProjectData constructor to create project, add to openProjects
+            ProjectData projectToAdd = new ProjectData(fileScanner, savedFile.getName());
+            openProjects.add(projectToAdd);
+            //Pass new ProjectData to UI
+            fileScanner.close();
+        } catch (IOException e){
+            System.err.println("ERROR: UNKNOWN_FILE_ERROR");
+            e.printStackTrace();
+        }
     }
 
+    //TODO: COMPLETELY REFACTOR SAVED FILE TO MORE ROBUST SYSTEM
     public static void saveProject(ProjectData project) {
-        //FileWriter fileWriter = new FileWriter();
+        //Attempts to save a project
         File outFile = new File(project.getFileName());
         if (outFile.exists()) {
             System.err.println("ERROR: FILE_ALREADY_EXISTS");
@@ -51,6 +63,7 @@ public class Controller {
                 FileWriter fileWriter = new FileWriter(outFile);
                 fileWriter.write(project.toString());
                 fileWriter.close();
+                System.out.println(outFile.getName() + " Saved.");
             } catch (IOException e) {
                 System.err.println("ERROR: UNKNOWN_FILE_ERROR");
                 e.printStackTrace();
@@ -58,12 +71,35 @@ public class Controller {
         }
     }
 
-    public void openProject(String fileName) {
+    public void openProject(File file) {
+        //String fileName = file.getName();
+        //Attempts to open a
+        if (this.projectIsOpen(file)){
+            System.err.println("ERROR: FILE_ALREADY_OPEN");
+        }
+        else {
+            this.createProject(file);
+        }
+    }
 
+    public void openProject(String fileName){
+        File file = new File(fileName);
+        if (file.exists()){
+            this.openProject(file);
+        }
+        else {
+            System.err.println("ERROR: FILE_DOES_NOT_EXIST");
+        }
     }
 
     public void newProject() {
         //Handles the creation of new files
+    }
+
+    public void printAllProjectNames(){
+        for (ProjectData projectData : openProjects){
+            System.out.println(projectData.getProjectName());
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package Project543;
 
 import java.lang.Math;
+import java.util.Scanner;
 
 public class FunctionPoint extends InformationDomainValue {
     //Member Variables
@@ -19,6 +20,12 @@ public class FunctionPoint extends InformationDomainValue {
     }
 
     //TODO: Implement FunctionPoint(SAVEDFILE){};
+    public FunctionPoint(Scanner savedFile){
+        super(savedFile);
+        this.valueAdjustmentFactors = new ValueAdjustmentFactor(savedFile);
+
+        updateTotalFunctionPoints();
+    }
 
     //Getters
     public int getValAdjFac(int valToGet){

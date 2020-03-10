@@ -1,5 +1,7 @@
 package Project543;
 
+import java.util.Scanner;
+
 public class ProjectMetaData {
     //Member Variables
     public static final String FILE_EXT = ".ms";
@@ -19,6 +21,23 @@ public class ProjectMetaData {
     }
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
+    public ProjectMetaData(Scanner savedFile, String fileName){
+        this.setFileName(fileName);
+
+        String fileData = savedFile.nextLine();
+        this.projectName = fileData.substring(fileData.indexOf(":")+1);
+
+        fileData = savedFile.nextLine();
+        this.productName = fileData.substring(fileData.indexOf(":")+1);
+
+        fileData = savedFile.nextLine();
+        this.creatorName = fileData.substring(fileData.indexOf(":")+1);
+
+        fileData = savedFile.nextLine();
+        this.projectComments = fileData.substring(fileData.indexOf(":")+1);
+
+        savedFile.nextLine();
+    }
 
     //Getters
     public String getFileName() {
@@ -60,7 +79,12 @@ public class ProjectMetaData {
     }
 
     public void setFileName(String fileName){
-        this.fileName = fileName + FILE_EXT;
+        if (fileName.indexOf(".ms") < 0){
+            this.fileName = fileName + FILE_EXT;
+        }
+        else {
+            this.fileName = fileName;
+        }
     }
 
     public void setProjectName(String projectName){

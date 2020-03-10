@@ -26,9 +26,13 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+//        launch(args);
 
-        ProjectData testProject = new ProjectData();
+        Controller testController = new Controller();
+        testController.openProject("TEST.ms");
+        testController.printAllProjectNames();
+
+//        ProjectData testProject = new ProjectData();
 //        testProject.setFileName("TEST");
 //        Controller.saveProject(testProject);
 //        System.out.println(testProject);
