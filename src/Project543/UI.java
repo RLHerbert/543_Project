@@ -103,6 +103,7 @@ public class UI {
         for (int i = 2; i < 7; i++) { //row
             grid.add(new Label(InformationDomainValue.InformationDomain.values()[i-2].toString()), 0, i);
 
+            //TODO: don't allow decimals
             TextField numberField = new TextField();
             numberField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
             grid.add(numberField, 1, i);
@@ -119,6 +120,7 @@ public class UI {
             TextField outputField = new TextField();
             outputField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
             outputField.setEditable(false);
+            outputField.setText(Integer.toString(project.functionPointMetric.getSumsOfInputs()[i-2]));
             grid.add(outputField, 3, i);
         }
 
