@@ -4,34 +4,41 @@
 
 package Project543;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UserInterface {
     //Member Variables
     //
+    //Static Member Variables
+    //
+    public static final String PROJECT_TITLE = "CECS 543 Metrics Suite";
+
+    //Non-static Member Variables
+    VBox mainMenuBox;
 
     //Member Methods
     //
     //Constructor(s)
     //
+    public UserInterface(ApplicationController controller){
+        mainMenuBox = mainMenuBox(controller);
+
+        this.openProjectWindow(controller);
+    }
 
     //Getters
     //
 
     //Setters
     //
-
-    //Misc. Member Methods
-    //
-    public static void openMainWindow(Controller controller){
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("CECS 543 Metrics Suite");
-        primaryStage.setX(0); primaryStage.setX(0); primaryStage.setWidth(800); primaryStage.setHeight(775);
-        //Scene primaryScene = new Scene(primaryStage, 800, 775);
+    public VBox mainMenuBox(ApplicationController controller){
+        VBox mainMenuBox;
 
         //Create the Menu Bar for the main menu //TODO: convert to method
         MenuBar menuBar = new MenuBar();
@@ -47,8 +54,52 @@ public class UserInterface {
         fileMenuList[1] = new MenuItem("Open");
         fileMenuList[2] = new MenuItem("Save");
         fileMenuList[3] = new MenuItem("Exit");
+        fileMenu.getItems().addAll(fileMenuList);
 
         //Set fileMenuList actions //TODO: Convert to method
+        fileMenuList[0].setOnAction(actionEvent -> controller.createProject());
+        fileMenuList[3].setOnAction(actionEvent -> Platform.exit());
+
+        //Display everything
+        mainMenuBox = new VBox(menuBar);
+
+        return mainMenuBox;
+    }
+
+    //Misc. Member Methods
+    //
+    public void openProjectWindow(ApplicationController controller){
+        Stage projectStage = new Stage();
+        projectStage.setTitle(PROJECT_TITLE);
+        projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
+        //Scene primaryScene = new Scene(primaryStage, 800, 775);
+
+        Scene projectMenuScene = mainMenu(controller);
+        projectStage.setScene(projectMenuScene);
+
+        projectStage.show();
+    }
+
+    public void openProjectWindow(ProjectData project){
+        Stage projectStage = new Stage();
+        //TODO: Handle new project dialog
+        projectStage.setTitle(PROJECT_TITLE + " - " + project.getProjectName());
+        projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
+
+        VBox localMenuBox = new VBox(mainMenuBox);
+
+        Scene projectMenuScene = new Scene(localMenuBox);
+        projectStage.setScene(projectMenuScene);
+
+        projectStage.show();
+    }
+
+    private Scene mainMenu(ApplicationController controller){
+        Scene mainMenu;
+
+        mainMenu = new Scene(mainMenuBox);
+
+        return mainMenu;
     }
 
     public static void openProjectPane(ProjectData project){
