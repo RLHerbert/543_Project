@@ -23,6 +23,8 @@ public class FunctionPoint extends InformationDomainValue {
     public FunctionPoint(Scanner savedFile){
         super(savedFile);
         this.valueAdjustmentFactors = new ValueAdjustmentFactor(savedFile);
+
+        updateTotalFunctionPoints();
     }
 
     //Getters

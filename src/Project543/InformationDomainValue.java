@@ -49,6 +49,31 @@ public class InformationDomainValue {
             inputComplexity = Complexity.AVERGAGE;
         }
 
+        public Input(Scanner savedFileLine){
+            String fileLine = savedFileLine.nextLine();
+            //System.out.println(fileLine);
+            String number = fileLine.substring(fileLine.indexOf(" INPUTS: ") + 9, fileLine.indexOf(" C"));
+            //System.out.println(number);
+            numberInputs = Integer.parseInt(number);
+            String complexity = fileLine.substring(fileLine.lastIndexOf(":")+2);
+            //System.out.println(complexity);
+            switch (complexity){
+                case "SIMPLE":
+                    inputComplexity = Complexity.SIMPLE;
+                    break;
+                case "AVERAGE":
+                    inputComplexity = Complexity.AVERGAGE;
+                    break;
+                case "COMPLEX":
+                    inputComplexity = Complexity.COMPLEX;
+                    break;
+                default:
+                    System.err.println("ERROR: ERROR_READING_COMPLEXITY");
+                    break;
+            }
+            //numberInputs = savedFileLine.nextInt();
+        }
+
         @Override
         public String toString() {
             return "INPUTS: " + numberInputs + " " + inputComplexity;
@@ -86,7 +111,13 @@ public class InformationDomainValue {
     }
 
     public InformationDomainValue(Scanner savedFile){
+        this.externalInputs = new Input(savedFile);
+        this.externalOutputs =  new Input(savedFile);
+        this.externalInquiries = new Input(savedFile);
+        this.internalLogicFiles = new Input(savedFile);
+        this.externalInterfaceFiles = new Input(savedFile);
 
+        updateSumOfInputs();
     }
 
     public InformationDomainValue(int[] complexWeightFactors){

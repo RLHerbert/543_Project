@@ -13,8 +13,8 @@ public class ProjectData extends ProjectMetaData {
     }
 
     //TODO: Implement public ProjectData(SAVEDFILE){}
-    public ProjectData(Scanner savedFile){
-        super(savedFile);
+    public ProjectData(Scanner savedFile, String fileName){
+        super(savedFile, fileName);
         this.functionPointMetric = new FunctionPoint(savedFile);
     }
 

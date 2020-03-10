@@ -36,7 +36,17 @@ public class ValueAdjustmentFactor {
     }
 
     public ValueAdjustmentFactor(Scanner savedFile){
+        currentVals = new int[NUM_VAF];
 
+        //savedFile.nextLine();
+        String fileLine = "";
+
+        for (int i = 0; i < NUM_VAF; i++){
+            //this.currentVals[i] = savedFile.nextInt();
+            fileLine = savedFile.nextLine();
+            fileLine = fileLine.substring(fileLine.lastIndexOf(":")+2);
+            this.currentVals[i] = Integer.parseInt(fileLine);
+        }
     }
 
     //TODO: Implement ValAdjFac(SAVEDFILE){}
