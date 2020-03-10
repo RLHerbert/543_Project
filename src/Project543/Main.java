@@ -8,14 +8,17 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        UI mainUI = new UI();
-        Controller projectController = new Controller();
+        //UI mainUI = new UI();
+        //Controller projectController = new Controller();
+
+        ApplicationController test = new ApplicationController();
     }
 
 
     public static void main(String[] args) {
         launch(args);
 
+//        ApplicationController test = new ApplicationController();
 //        Controller testController = new Controller();
 //        testController.openProject("TEST.ms");
 //        testController.printAllProjectNames();
