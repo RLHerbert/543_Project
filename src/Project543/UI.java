@@ -1,13 +1,10 @@
 package Project543;
 
-import javafx.scene.layout.HBox;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.converter.NumberStringConverter;
-
-import javax.swing.*;
 import java.util.*;
 
 //TODO: make menu buttons work
@@ -80,7 +77,7 @@ public class UI {
 
     }
 
-    public static void openFunctionPane(ProjectStage stage, ProjectData project)
+    public static void openFunctionPane(ProjectStage stage, ProjectData project) //TODO: refactor!! too long
             //Preconditions: A ProjectStage object must exist and be passed as a parameter.
             //Post-conditions: A FunctionPoint tab is added to the project stage.
     {
@@ -97,7 +94,7 @@ public class UI {
 
         //TODO: format grid stuff
         grid.add(new Text("Weighting Factors"), 2, 0);
-        grid.add(complexityBox, 2, 1); //add simple,avg,complex box
+        grid.add(complexityBox, 2, 1);
 
 
         for (int i = 2; i < 7; i++) { //row
@@ -120,141 +117,61 @@ public class UI {
             TextField outputField = new TextField();
             outputField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
             outputField.setEditable(false);
+            //TODO: update outputs any time an input value is changed
             outputField.setText(Integer.toString(project.functionPointMetric.getSumsOfInputs()[i-2]));
             grid.add(outputField, 3, i);
         }
 
+        //TODO: make a numeric output field that extends TextField
+        TextField totalCount = new TextField();
+        totalCount.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        totalCount.setEditable(false);
+        totalCount.setText(Integer.toString(project.functionPointMetric.getTotalCount()));
+        grid.add(new Label("Total Count"),0,7);
+        grid.add(totalCount, 3, 7);
+
+        Button computeFPButton = new Button("Compute FP");
+        Button VAFButton = new Button("Value Adjustments");
+        Button computeCodeSizeButton = new Button("Compute Code Size");
+        Button changeLanguageButton = new Button("Change Language");
+
+        grid.add(computeFPButton, 0, 8);
+        TextField FPOutput = new TextField();
+        FPOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        FPOutput.setEditable(false);
+        FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
+        grid.add(FPOutput,3,8);
+
+        grid.add(VAFButton, 0, 9);
+        TextField VAFOutput = new TextField();
+        VAFOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        VAFOutput.setEditable(false);
+        VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
+        grid.add(VAFOutput,3,9);
+
+        grid.add(computeCodeSizeButton, 0, 10);
+        //TODO: add an hbox to hold current lang label and current language output box
+        //TODO: also create current lang label and current lang output box
+        TextField codeSizeOutput = new TextField();
+        codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        codeSizeOutput.setEditable(false);
+        codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
+        grid.add(codeSizeOutput,3,10);
+
+        grid.add(changeLanguageButton, 0, 11);
 
         FPtab.setContent(grid);
         tabs.getTabs().add(FPtab);
         stage.projectStageLayout.getChildren().add(tabs);
+        stage.show();
+
+
+        //button event stuff
+        computeFPButton.setOnAction(e ->  {
+
+        });
     }
 
     UI(){openNewWindow();}
 }
-
-//Member Variables
-//    //TODO: variables for number of windows, current window, number of panels, current panel
-//    ProjectStage currentWindow;
-//    int numPanes;
-//    TabPane currentPane;
-//
-//    //Member Methods
-//    //Constructors
-//    UI()
-//    {
-//        this.setCurrentWindow(new ProjectStage());
-//    }
-//
-//    //Setters
-//    void setCurrentWindow(ProjectStage stage)
-//    {
-//        this.currentWindow = stage;
-//    }
-//
-//    //Other Methods
-
-
-//    //TODO: Cleanup and rethink UI
-//    //Member Variables
-//    private ProjectStage mainWindow, langSelectWindow, valAdjFactWindow;
-//    private ProjectStage window;
-//    private Scene windowScene;
-//
-//    //Member Methods
-//    //Constructors
-//    UI() {
-//        //TODO: open a new window (stage)
-//        mainWindow = new ProjectStage();
-//        mainWindow.show();
-//    }
-//
-//
-//
-//
-//        /* Main Window initialization */
-//        mainWindow = new ProjectStage();
-//        mainWindow.setTitle("CECS 543 Project543.Project");
-//        //mainWindow.setStageSizePos(775, 800, 0, 0);
-//        mainWindow.show();
-//
-//        /* Menu Bar initialization */
-////        MenuBar menuBar = new MenuBar();
-////        Menu File = new Menu("File");
-////        Menu Edit = new Menu("Edit");
-////        Menu Preferences = new Menu("Preferences");
-////        Menu Metrics = new Menu("Metrics");
-////        Menu Help = new Menu("Help");
-////
-////        menuBar.getMenus().addAll(File, Edit, Preferences, Metrics, Help);
-////        VBox vBox = new VBox(menuBar);
-////
-////        MenuItem New = new MenuItem("New");
-////        MenuItem Open = new MenuItem("Open");
-////        MenuItem Save = new MenuItem("Save");
-////        MenuItem Exit = new MenuItem("Exit");
-////        File.getItems().addAll(New, Open, Save, Exit);
-////
-////        MenuItem Language = new MenuItem("Language");
-////        Preferences.getItems().add(Language);
-////
-////        Menu FP_menu = new Menu("Function Points");
-////        MenuItem EnterFPData_menu = new MenuItem("Enter FP Data");
-////        FP_menu.getItems().add(EnterFPData_menu);
-////        Metrics.getItems().add(FP_menu);
-//
-//
-////        Scene scene = new Scene(vBox, 960, 600);
-////        mainWindow.setScene(scene);
-//        mainWindow.show();
-//
-////        Language.setOnAction(event -> {openLangSelectWindow();}); //uncomment for testing
-//    }
-//
-//    //Getters
-//
-//
-//    //Setters
-//    public void setMainWindow(ProjectStage stage){
-//        this.mainWindow = stage;
-//    }
-//
-//    //Misc. Methods
-//    public void openLangSelectWindow()
-//    {
-//        /* Language Selection Window initialization */
-//        langSelectWindow = new ProjectStage();
-//        langSelectWindow.setTitle("Language Selection");
-//        /* after creating set size function, use instead of code below */
-//        /*
-//        langSelectWindow.setHeight(775/2);
-//        langSelectWindow.setWidth(800/4);
-//        langSelectWindow.setX(800/2-100);
-//        langSelectWindow.setY(0); //set window sizing
-//         */
-//
-//        langSelectWindow.setStageSizePos(775/2, 800/4, 800/2-100, 100);
-//
-//        /* Language Radio Buttons initialization*/ //should it be checkboxes like the example in the vision doc?
-//        RadioButton languageRadios[] = new RadioButton[13];
-//        ToggleGroup languageRadiosGroup = new ToggleGroup();
-//        VBox vbox = new VBox(10, new Label("Select one language"));
-//        int i =0;
-//        for (Language lang: Language.values())
-//        {
-//            RadioButton radio = new RadioButton(lang.toString());
-//            languageRadios[i] = radio;
-//            i++;
-//            radio.setToggleGroup(languageRadiosGroup);
-//            vbox.getChildren().add(radio);
-//        }
-//
-//        Scene scene1 = new Scene(vbox, 775/2, 800/4);
-//        langSelectWindow.setScene(scene1);
-//        langSelectWindow.show();
-//    }
-//
-//    public void showMainWindow(){
-//        mainWindow.show();
-//    }
 
