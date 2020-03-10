@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //UI mainUI = new UI();
-        //Controller projectController = new Controller();
+        UI mainUI = new UI();
+        Controller projectController = new Controller();
 
-        ApplicationController test = new ApplicationController();
+        //ApplicationController test = new ApplicationController();
     }
 
 
