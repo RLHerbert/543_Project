@@ -1,7 +1,13 @@
 package Project543;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.util.converter.NumberStringConverter;
+
+import javax.swing.*;
 import java.util.*;
 
 //TODO: make menu buttons work
@@ -9,10 +15,12 @@ import java.util.*;
 public class UI {
     public static void openNewWindow() //used on open app and file>new project
     {
-        new ProjectStage();
+        ProjectStage stage = new ProjectStage();
+//        openNewProjectDialog(new ProjectData());
+        openFunctionPane(stage, new ProjectData());
     }
 
-    public static void newProjectDialog(ProjectData project)
+    public static void openNewProjectDialog(ProjectData project)
             //Preconditions: A ProjectData object must exist and be passed as a parameter.
             //Post-conditions: ProjectData object's meta data is updated.
     {
@@ -22,6 +30,7 @@ public class UI {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
+        //TODO: make sizing based on constants
         grid.setHgap(10);
         grid.setVgap(10);
 
@@ -31,7 +40,7 @@ public class UI {
         productName.setPromptText("Product Name");
         TextField author = new TextField(project.creatorName);
         author.setPromptText("Author");
-        TextField comments = new TextField(project.projectComments);
+        TextArea comments = new TextArea(project.projectComments);
         comments.setPromptText("Comments");
 
         grid.add(new Label("Project Title:"), 0, 0);
@@ -70,6 +79,56 @@ public class UI {
         );
 
     }
+
+    public static void openFunctionPane(ProjectStage stage, ProjectData project)
+            //Preconditions: A ProjectStage object must exist and be passed as a parameter.
+            //Post-conditions: A FunctionPoint tab is added to the project stage.
+    {
+        //TODO: add tab pane to project stage class so don't have to pass it
+        TabPane tabs = new TabPane();
+        Tab FPtab = new Tab("Function Points");
+
+        //TODO: adjust sizes to be (at least based on) constants
+        HBox complexityBox = new HBox(20, new Label("Simple"), new Label("Average"), new Label("Complex"));
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        //TODO: format grid stuff
+        grid.add(new Text("Weighting Factors"), 2, 0);
+        grid.add(complexityBox, 2, 1); //add simple,avg,complex box
+
+
+        for (int i = 2; i < 7; i++) { //row
+            grid.add(new Label(InformationDomainValue.InformationDomain.values()[i-2].toString()), 0, i);
+
+            TextField numberField = new TextField();
+            numberField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+            grid.add(numberField, 1, i);
+
+            ToggleGroup tempRadioSet = new ToggleGroup();
+            HBox hBox = new HBox(40);
+            for (int j = 0; j < 3; j++) {
+                RadioButton tempRadio = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i-2][j]));
+                tempRadio.setToggleGroup(tempRadioSet);
+                hBox.getChildren().add(tempRadio);
+            }
+            grid.add(hBox, 2, i);
+
+            TextField outputField = new TextField();
+            outputField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+            outputField.setEditable(false);
+            grid.add(outputField, 3, i);
+        }
+
+
+        FPtab.setContent(grid);
+        tabs.getTabs().add(FPtab);
+        stage.projectStageLayout.getChildren().add(tabs);
+    }
+
+    UI(){openNewWindow();}
 }
 
 //Member Variables
