@@ -1,6 +1,7 @@
 package Project543;
 
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -187,7 +188,25 @@ public class UI {
         FPButtons.add(VAFButton);
         FPButtons.add(computeCodeSizeButton);
         FPButtons.add(changeLanguageButton);
+
+        computeFPButton.setOnAction(e-> {
+            project.functionPointMetric.setNumberOfExternalInputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
+            System.out.println(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
+            System.out.println(project.functionPointMetric.getNumberOfExternalInputs());
+            System.out.println(project.functionPointMetric.getFunctionPoints());
+            FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
+        });
+
         return FPButtons;
+    }
+
+    public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
     }
 
     public static ProjectStage updateWindowTitle(ProjectStage stage, ProjectData data)

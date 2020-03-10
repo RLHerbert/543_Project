@@ -48,7 +48,7 @@ public class Controller {
         });
         //File>Exit action
         currentWindow.getExitButton().setOnAction(event -> {
-            Platform.exit();/*TODO: add a diaglog asking if you want to save*/
+            Platform.exit();/*TODO: add a dialog asking if you want to save*/
         });
         //Preferences>Language action
         currentWindow.getLanguageMenuButton().setOnAction(event -> {
@@ -58,19 +58,30 @@ public class Controller {
         currentWindow.getFPMenuButton().setOnAction(event -> {
             if (openProjects.isEmpty())
                 FPButtons = UI.openFunctionPane(currentWindow, new ProjectData());
-            FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
-            setFPButtons();
+            else {
+                FPButtons = UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+            }
+//            setFPButtons();
         });
     }
 
-    void setFPButtons() {
-        //TODO: complete the FP actions below; fix too, since FPButtons is empty at beginning, these go out of bounds
-        //FP Pane Buttons
-        FPButtons.get(0).setOnAction(event -> {/*updates FP values including IDV sums or w/e*/}); //event action for compute FP
-        FPButtons.get(1).setOnAction(event -> {/*opens VAF window*/}); //event action for VAF button
-        FPButtons.get(2).setOnAction(event -> {/*updates code size output*/}); //event action for compute code size
-        FPButtons.get(3).setOnAction(event -> {/*opens language panel*/}); //event action for change language
-    }
+//    void setFPButtons() {
+//        //TODO: complete the FP actions below; fix too, since FPButtons is empty at beginning, these go out of bounds
+//        //FP Pane Buttons
+//        //event action for compute FP
+//        FPButtons.get(0).setOnAction(event -> {
+//            /*updates FP values including IDV sums or w/e*/
+//            UI.openFunctionPane(currentWindow, openProjects.get(UI.openProjectStages.indexOf(currentWindow)));
+////            openProjects.get(UI.openProjectStages.indexOf(currentWindow)).functionPointMetric.getTotalCount();
+////            openProjects.get(UI.openProjectStages.indexOf(currentWindow)).functionPointMetric.getFunctionPoints();
+//        });
+//        //event action for VAF button
+//        FPButtons.get(1).setOnAction(event -> {/*opens VAF window*/});
+//        //event action for compute code size
+//        FPButtons.get(2).setOnAction(event -> {/*updates code size output*/});
+//        //event action for change language
+//        FPButtons.get(3).setOnAction(event -> {/*opens language panel*/});
+//    }
 
 
     //Misc. Member Methods
