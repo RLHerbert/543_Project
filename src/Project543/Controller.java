@@ -3,6 +3,7 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -100,6 +101,10 @@ public class Controller {
         for (ProjectData projectData : openProjects){
             System.out.println(projectData.getProjectName());
         }
+    }
+
+    public void testPassFunction(){
+        Stage testStage;
     }
 }
 
