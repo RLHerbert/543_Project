@@ -3,7 +3,7 @@ package Project543;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
+//TODO: For second phase, more function prototypes, resolve all current TODOs (finish off first phase), then work on actual phase two requirements
 
 public class Main extends Application {
     @Override

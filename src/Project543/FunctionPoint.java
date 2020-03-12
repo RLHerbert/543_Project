@@ -1,14 +1,17 @@
 package Project543;
 
+import javafx.scene.control.TabPane;
+
 import java.lang.Math;
 import java.util.Scanner;
 
 public class FunctionPoint extends InformationDomainValue {
+    //TODO: Create functions which return FP panes with all of the correct hookups
     //Member Variables
     //
     private int  totalFunctionPoints;     //To hold the total count value for the FP, and FP value itself respectively
-
     private ValueAdjustmentFactor valueAdjustmentFactors; //To hold the VAFs for the FP
+    //TODO: private Language functionPointLanguage;
 
     //Member Methods
     //
@@ -20,6 +23,8 @@ public class FunctionPoint extends InformationDomainValue {
 
         //Initialize totalCount and totalFunctionPoints
         updateTotalFunctionPoints();
+
+        //TODO: Set functionPointLanguage in constructors
     }
 
     public FunctionPoint(Scanner savedFile){
@@ -80,5 +85,10 @@ public class FunctionPoint extends InformationDomainValue {
         //outString += "";
 
         return outString;
+    }
+
+    public TabPane toTabPane(){
+        //TODO: Implement
+        return new TabPane();
     }
 }

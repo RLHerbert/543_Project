@@ -1,17 +1,12 @@
 package Project543;
 
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.cell.ChoiceBoxListCell;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import java.util.*;
 
@@ -195,7 +190,7 @@ public class UI {
         HBox languageBox = new HBox();
         TextField languageOutput = new TextField();
         languageOutput.setEditable(false);
-        languageOutput.setText(project.getProjectLanguage().toString());
+        languageOutput.setText(project.getDefaultProjectLanguage().toString());
         languageBox.getChildren().add(new Label("Current Language"));
         languageBox.getChildren().add(languageOutput);
         grid.add(languageBox, 2, 14);
@@ -246,19 +241,19 @@ public class UI {
         });
 
         computeCodeSizeButton.setOnAction(e -> {
-            if (project.getProjectLanguage() == Language.NONE)
+            if (project.getDefaultProjectLanguage() == Language.NONE)
             {
                 Language lang = openLangSelectWindow();
-                project.setProjectLanguage(lang);
-                languageOutput.setText(project.getProjectLanguage().toString());
+                project.setDefaultProjectLanguage(lang);
+                languageOutput.setText(project.getDefaultProjectLanguage().toString());
             }
             codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
         });
 
         changeLanguageButton.setOnAction(e -> {
             Language lang = openLangSelectWindow();
-            project.setProjectLanguage(lang);
-            languageOutput.setText(project.getProjectLanguage().toString());
+            project.setDefaultProjectLanguage(lang);
+            languageOutput.setText(project.getDefaultProjectLanguage().toString());
         });
 
         return FPButtons;

@@ -7,7 +7,7 @@ public class ProjectMetaData {
     //
     public static final String FILE_EXT = ".ms"; //Requirement: CECS 543 Metrics Suite deals with .ms files
     protected String fileName, projectName, productName, creatorName, projectComments; //Project metadata
-    protected Language projectLanguage; //The project language
+    protected Language defaultProjectLanguage; //The project's default language //TODO: Pass this to new FPs
 
     //Member Methods
     //Constructor(s)
@@ -19,7 +19,7 @@ public class ProjectMetaData {
         this.projectComments = "";
         this.setFileName();
 
-        this.projectLanguage = Language.NONE;
+        this.defaultProjectLanguage = Language.NONE;
     }
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
@@ -41,7 +41,7 @@ public class ProjectMetaData {
 
         //savedFile.nextLine(); //TEMPORARY UNTIL LANGUAGE IMPLEMENTED
         fileData = savedFile.nextLine();
-        this.projectLanguage = parseLanguage(fileData.substring(fileData.indexOf(":")+2));
+        this.defaultProjectLanguage = parseLanguage(fileData.substring(fileData.indexOf(":")+2));
     }
 
     //Getters
@@ -67,14 +67,14 @@ public class ProjectMetaData {
         return this.projectComments;
     }
 
-    public Language getProjectLanguage(){
-        return this.projectLanguage;
+    public Language getDefaultProjectLanguage(){
+        return this.defaultProjectLanguage;
     }
 
     public int getLanguageLOC(){
         //Returns the lines of code per FP for the project's language
-        if (projectLanguage != null) {
-            return this.projectLanguage.locPerFP();
+        if (defaultProjectLanguage != null) {
+            return this.defaultProjectLanguage.locPerFP();
         }
 
         System.err.println("ERROR: LANGUAGE_NOT_SET");
@@ -113,8 +113,8 @@ public class ProjectMetaData {
         this.projectComments = projectComments;
     }
 
-    public void setProjectLanguage(Language language){
-        this.projectLanguage = language;
+    public void setDefaultProjectLanguage(Language language){
+        this.defaultProjectLanguage = language;
     }
 
     //Misc. Member Methods
@@ -127,7 +127,7 @@ public class ProjectMetaData {
                         "PRODUCT_NAME: " + productName + "\n"        +
                         "CREATOR_NAME: " + creatorName + "\n"        +
                         "PROJECT_COMMENTS: " + projectComments + "\n"    +
-                        "PROJECT_LANGUAGE: " + projectLanguage; //CALLER ALWAYS ADDS "\n"
+                        "PROJECT_LANGUAGE: " + defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
         return outString;
     }
 
