@@ -6,6 +6,7 @@ package Project543;
 
 import java.util.ArrayList;
 
+//TODO: Refactor to new UI
 public class ApplicationController {
     //Member Variables
     //
