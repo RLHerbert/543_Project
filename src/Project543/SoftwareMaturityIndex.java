@@ -9,6 +9,7 @@ public class SoftwareMaturityIndex extends Metrics {
 
     //Static Member Variables
     //
+    public static final int METRIC_ID = ((int) ('S' + 'M' + 'I'));
 
     //Non-Static Member Variables
     //

@@ -30,7 +30,7 @@ public class ProjectData extends ProjectMetaData {
         //Call FunctionPoint default constructor
         //this.functionPointMetric = new FunctionPoint();
 
-        metricsTabs = new ArrayList<Tab>();
+        this.metricsTabs = new ArrayList<Tab>();
     }
 
     //TODO: Convert to better save file
@@ -39,6 +39,9 @@ public class ProjectData extends ProjectMetaData {
         //TODO: Convert to new UI form
         super(savedFile, fileName);
         //this.functionPointMetric = new FunctionPoint(savedFile);
+
+        this.metricsTabs = new ArrayList<Tab>();
+
         while (savedFile.hasNextLine()){
             metricsTabs.add(metricsTabFromSavedFile(savedFile.nextLine()));
         }
@@ -51,22 +54,33 @@ public class ProjectData extends ProjectMetaData {
         return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
     }
 
+    public Tab getNewFunctionPoint(){
+        //Creates a new FunctionPointTab, adds it to metricsTabs, and returns it
+        this.createNewFunctionPoint();
+        return this.metricsTabs.get(this.metricsTabs.size()-1);
+    }
+
     //Setters
     //
 
     //Misc. Member Methods
     //
+    public void createNewFunctionPoint(){
+        //Creates a new FunctionPointTab and adds it to metricsTabs,
+        this.metricsTabs.add(new FunctionPointTab());
+    }
+
     public Tab metricsTabFromSavedFile(String metricSaveData){
         //Tab metricTab;
         Scanner lineScanner = new Scanner(metricSaveData);
         int metricID = lineScanner.nextInt();
 
         if (metricID == FunctionPoint.METRIC_ID){
-            return new FunctionPointTab(/*metricSaveData*/);
+            return new FunctionPointTab(metricSaveData);
         }
         /*
         else if (metricID == SoftwareMaturityIndex.METRIC_ID){
-
+            //Not yet implemented
         }
          */
         else {
