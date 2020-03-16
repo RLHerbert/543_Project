@@ -13,13 +13,12 @@ public class FunctionPoint extends InformationDomainValue {
     //
     //Static Variables
     //
-    public static final int FP_SAVE_ID = 1;
-    //FP Save format: [FP_SAVE_ID, functionPointLanguage, IDV value-complexity pairs, VAFs]
+    public static final int METRIC_ID = ((int) ('F' + 'P'));
+    //FP Save format: [METRIC_ID, functionPointLanguage, IDV value-complexity pairs, ..., VAFs, ...]
 
-    private int  totalFunctionPoints;     //To hold the total count value for the FP, and FP value itself respectively
+    private int  totalFunctionPoints, codeSize;     //To hold the total count value for the FP, and FP value itself respectively
     private ValueAdjustmentFactor valueAdjustmentFactors; //To hold the VAFs for the FP
     private Language functionPointLanguage; //To hold the language for this Metric (on a per tab basis)
-    private int codeSize;
     //TODO: hook up functionPointLanguage to tab stuff or everything whatever;
 
     //Member Methods
@@ -76,7 +75,7 @@ public class FunctionPoint extends InformationDomainValue {
     {
         //Saves variable values to saveData
         ArrayList<Integer> tempSaveData = new ArrayList<Integer>();
-        tempSaveData.add(FP_SAVE_ID);
+        tempSaveData.add(METRIC_ID);
         tempSaveData.add(functionPointLanguage.ordinal());
 
         Input[] inputsToSave = {externalInputs, externalOutputs, externalInquiries, internalLogicFiles, externalInterfaceFiles};
@@ -117,7 +116,7 @@ public class FunctionPoint extends InformationDomainValue {
         this.updateCodeSize();
     }
 
-    public void setVariablesFromSaveData()
+    public void setFromSavedData()
     {
         //Sets variable values based on integers in saveData
         //Sets language
@@ -141,56 +140,11 @@ public class FunctionPoint extends InformationDomainValue {
         return outString;
     }
 
+    /*//RETHOUGHT
     public Tab toTab(){
         //TODO: Implement
         Tab FPTab = new Tab("Function Points");
         return FPTab;
     }
-
-    //tab with metric plus language in title
-    //GridPane
-    //HBox for complexity titles
-    //fxn per IDV type
-    //radio button group
-    public class FPTab extends Tab
-    {
-        public Text complexityTitlesLabel;
-        public HBox complexityTitlesBox;
-        public Label EILabel;
-        public Label EOLabel;
-        public Label EQLabel;
-        public Label ILFLabel;
-        public Label EIFLabel;
-        public TextField EIInputField;
-        public TextField EOInputField;
-        public TextField EQInputField;
-        public TextField ILFInputField;
-        public TextField EIFInputField;
-        public ToggleGroup EIToggleGroup;
-        public ToggleGroup EOToggleGroup;
-        public ToggleGroup EQToggleGroup;
-        public ToggleGroup ILFToggleGroup;
-        public ToggleGroup EIFToggleGroup;
-        public HBox EIHBox;
-        public HBox EOHBox;
-        public HBox EQHBox;
-        public HBox ILFHBox;
-        public HBox EIFHBox;
-        public TextField EIOutputField;
-        public TextField EOOutputField;
-        public TextField EQOutputField;
-        public TextField ILFOutputField;
-        public TextField EIFOutputField;
-        public Label totalCountLabel;
-        public TextField totalCount;
-        public Button computeFPButton;
-        public Button VAFButton;
-        public Button computeCodeSizeButton;
-        public Button changeLanguageButton;
-        public TextField FPOutputField;
-        public TextField VAFOutputField;
-
-
-
-    }
+     */
 }

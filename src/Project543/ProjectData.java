@@ -5,14 +5,17 @@ import javafx.scene.layout.VBox;
 
 import java.util.Scanner;
 
+//TODO: Convert to new UI system
 public class ProjectData extends ProjectMetaData {
     //TODO: Projects can have multiple Metrics (including FP), Metrics interface?
     //TODO: Implement a function which returns all the relevant data in a JavaFX Scene for UI to display
     //Member Variables
     public FunctionPoint functionPointMetric; //TODO: Create way to interface with multiple FPs in project
+    //TODO: public ArrayList<Tab> metricsTabs;
 
     //Member Methods
     //Constructor(s)
+    //
     public ProjectData(){
         //Default constructor
 

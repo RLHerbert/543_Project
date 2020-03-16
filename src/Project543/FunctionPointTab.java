@@ -6,12 +6,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class FunctionPointTab extends Tab {
+    //Member Variables
+    //
+    //Member Classes and Enums
+    //
+
+    //Static Variables
+    //
+
+    //Non-Static Variables
     FunctionPoint functionPoint;
     GridPane gridPane;
     TextField[] inputArray, outputArray;
     TextField totalCountOutput, functionPointOutput, valueAdjustmentOutput, codeSizeOutput, languageOutput;
     //TODO: Radio buttons
 
+    //Member Methods
+    //
+    //Constructor(s)
+    //
     public FunctionPointTab(){
         functionPoint = new FunctionPoint();
     }
@@ -20,9 +33,17 @@ public class FunctionPointTab extends Tab {
 
     }
 
+    //Getters
+    //
+
+    //Setters
+    //
+
+    //Misc. Member Methods
+    //
     //THE BASIS FOR GOING FORWARD
-    public Button computeFP(){
-        //returns a button which
+    public Button computeButton(){
+        //Returns the button labelled "Compute FP"
         Button computeFunctionPoint = new Button("Compute FP");
         computeFunctionPoint.setOnAction(e -> computeFunctionPointClick());
         return computeFunctionPoint;
