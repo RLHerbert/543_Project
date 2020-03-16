@@ -3,7 +3,7 @@ package Project543;
 import java.util.Scanner;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
-public class InformationDomainValue {
+public class InformationDomainValue extends Metrics {
     //Enum for information domains
     public enum InformationDomain{
         EXTERNAL_INPUTS, EXTERNAL_OUTPUTS, EXTERNAL_INQUIRIES, INTERNAL_LOGIC_FILES, EXTERNAL_INTERFACE_FILES;
@@ -14,6 +14,7 @@ public class InformationDomainValue {
         SIMPLE, AVERAGE, COMPLEX;
 
 
+        //TODO: do we even need?
         @Override
         public String toString() {
             String outString = "COMPLEXITY: ";

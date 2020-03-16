@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-//TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have imediate access to the values they are supposed to represent
+//TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
 
 public class UserInterface {
     //Member Variables
@@ -53,7 +53,8 @@ public class UserInterface {
         Menu editMenu = new Menu("Edit");
         Menu preferencesMenu = new Menu("Preferences");
         Menu metricsMenu = new Menu("Metrics");
-        menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu);
+        Menu helpMenu = new Menu("Help");
+        menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu, helpMenu);
 
         //Fill "File" submenu //TODO: Convert to method
         MenuItem[] fileMenuList = new MenuItem[4];

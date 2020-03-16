@@ -69,6 +69,11 @@ public class ValueAdjustmentFactor {
         return sumVals;
     }
 
+    public int[] getValArray()
+    {
+        return currentVals;
+    }
+
     //Setters
     public void setVal(int valToSet, int newVal){
         //Sets the value of the specified VAF to a new value

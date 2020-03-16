@@ -1,17 +1,26 @@
 package Project543;
 
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.lang.Math;
-import java.util.Scanner;
+import java.util.*;
 
 public class FunctionPoint extends InformationDomainValue {
     //TODO: Create functions which return FP panes with all of the correct hookups
     //Member Variables
     //
+    //Static Variables
+    //
+    public static final int FP_SAVE_ID = 1;
+    //FP Save format: [FP_SAVE_ID, functionPointLanguage, IDV value-complexity pairs, VAFs]
+
     private int  totalFunctionPoints;     //To hold the total count value for the FP, and FP value itself respectively
     private ValueAdjustmentFactor valueAdjustmentFactors; //To hold the VAFs for the FP
-    //TODO: private Language functionPointLanguage;
+    private Language functionPointLanguage; //To hold the language for this Metric (on a per tab basis)
+    private int codeSize;
+    //TODO: hook up functionPointLanguage to tab stuff or everything whatever;
 
     //Member Methods
     //
@@ -25,8 +34,10 @@ public class FunctionPoint extends InformationDomainValue {
         updateTotalFunctionPoints();
 
         //TODO: Set functionPointLanguage in constructors
+        this.functionPointLanguage = Language.NONE;
     }
 
+    //TODO: fix this (CHANGE COMPLETELY)
     public FunctionPoint(Scanner savedFile){
         //Constructor for saved files
         super(savedFile);
@@ -60,7 +71,26 @@ public class FunctionPoint extends InformationDomainValue {
         //Sets the specified value adjustment factor's value
         this.valueAdjustmentFactors.setVal(valToSet, newVal);
     }
-    //TODO: Setters for each IDV
+
+    public void setSaveData()
+    {
+        //Saves variable values to saveData
+        ArrayList<Integer> tempSaveData = new ArrayList<Integer>();
+        tempSaveData.add(FP_SAVE_ID);
+        tempSaveData.add(functionPointLanguage.ordinal());
+
+        Input[] inputsToSave = {externalInputs, externalOutputs, externalInquiries, internalLogicFiles, externalInterfaceFiles};
+
+        for (int i = 0; i < 5; i++) {
+            tempSaveData.add(inputsToSave[i].numberInputs);
+            tempSaveData.add(inputsToSave[i].inputComplexity.ordinal());
+        }
+
+        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+            tempSaveData.add(this.valueAdjustmentFactors.getValArray()[i]);
+
+        saveData = tempSaveData;
+    }
 
     //Misc. Methods
     public void updateTotalFunctionPoints(){
@@ -71,24 +101,96 @@ public class FunctionPoint extends InformationDomainValue {
         );
     }
 
+    public void updateCodeSize(){
+        //Updates codeSize
+        //Returns the lines of code (LOC) for the FP metric based on all entered data and the selected language
+        this.codeSize = (this.getFunctionPoints() * this.functionPointLanguage.locPerFP());
+    }
+
+    public void updateCalculations()
+    {
+        //Updates totalCount, totalFunctionPoints, and codeSize
+        this.updateTotalCount(); //Ensures totalCount is up to date
+        this.totalFunctionPoints = (int) Math.ceil(
+                totalCount * (0.65 + (0.01 * getSumOfValAdjFac())) //The formula for calculating FPs
+        );
+        this.updateCodeSize();
+    }
+
+    public void setVariablesFromSaveData()
+    {
+        //Sets variable values based on integers in saveData
+        //Sets language
+        this.functionPointLanguage = functionPointLanguage.values()[saveData.get(1)];
+        //Sets IDV values and complexities
+        this.externalInputs = new Input(); externalInputs.numberInputs = saveData.get(2); externalInputs.inputComplexity = Complexity.values()[saveData.get(3)];
+        this.externalOutputs = new Input(); externalOutputs.numberInputs = saveData.get(4); externalOutputs.inputComplexity = Complexity.values()[saveData.get(5)];
+        this.externalInquiries = new Input(); externalInquiries.numberInputs = saveData.get(6); externalInquiries.inputComplexity = Complexity.values()[saveData.get(7)];
+        this.internalLogicFiles = new Input(); internalLogicFiles.numberInputs = saveData.get(8); internalLogicFiles.inputComplexity = Complexity.values()[saveData.get(9)];
+        this.externalInterfaceFiles = new Input(); externalInterfaceFiles.numberInputs = saveData.get(10); externalInterfaceFiles.inputComplexity = Complexity.values()[saveData.get(11)];
+        //Sets VAF values
+        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+            valueAdjustmentFactors.setVal(i, saveData.get(i+12));
+    }
+
+
     //TODO: Fix
     @Override public String toString(){
         //To allow simple saving
         String outString = super.toString() + "\n" + valueAdjustmentFactors;
-//                "EXTERNAL_INPUTS: "             + externalInputs        + "\n" +
-//                "EXTERNAL_OUTPUTS: "            + externalOutputs       + "\n" +
-//                "EXTERNAL_INQUIRIES: "          + externalInquiries     + "\n" +
-//                "INTERNAL_LOGIC_FILES: "        + internalLogicFiles    + "\n" +
-//                "EXTERNAL_INTERFACE_FILES: "    + externalInterfaceFiles+ "\n" +
-//                valueAdjustmentFactors;
-
-        //outString += "";
-
         return outString;
     }
 
-    public TabPane toTabPane(){
+    public Tab toTab(){
         //TODO: Implement
-        return new TabPane();
+        Tab FPTab = new Tab("Function Points");
+        return FPTab;
+    }
+
+    //tab with metric plus language in title
+    //GridPane
+    //HBox for complexity titles
+    //fxn per IDV type
+    //radio button group
+    public class FPTab extends Tab
+    {
+        public Text complexityTitlesLabel;
+        public HBox complexityTitlesBox;
+        public Label EILabel;
+        public Label EOLabel;
+        public Label EQLabel;
+        public Label ILFLabel;
+        public Label EIFLabel;
+        public TextField EIInputField;
+        public TextField EOInputField;
+        public TextField EQInputField;
+        public TextField ILFInputField;
+        public TextField EIFInputField;
+        public ToggleGroup EIToggleGroup;
+        public ToggleGroup EOToggleGroup;
+        public ToggleGroup EQToggleGroup;
+        public ToggleGroup ILFToggleGroup;
+        public ToggleGroup EIFToggleGroup;
+        public HBox EIHBox;
+        public HBox EOHBox;
+        public HBox EQHBox;
+        public HBox ILFHBox;
+        public HBox EIFHBox;
+        public TextField EIOutputField;
+        public TextField EOOutputField;
+        public TextField EQOutputField;
+        public TextField ILFOutputField;
+        public TextField EIFOutputField;
+        public Label totalCountLabel;
+        public TextField totalCount;
+        public Button computeFPButton;
+        public Button VAFButton;
+        public Button computeCodeSizeButton;
+        public Button changeLanguageButton;
+        public TextField FPOutputField;
+        public TextField VAFOutputField;
+
+
+
     }
 }
