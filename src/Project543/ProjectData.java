@@ -38,11 +38,14 @@ public class ProjectData extends ProjectMetaData {
         //Save file constructor
         //TODO: Convert to new UI form
         super(savedFile, fileName);
-        this.functionPointMetric = new FunctionPoint(savedFile);
+        //this.functionPointMetric = new FunctionPoint(savedFile);
+        while (savedFile.hasNextLine()){
+            metricsTabs.add(metricsTabFromSavedFile(savedFile.nextLine()));
+        }
     }
 
     //Getters
-    //TODO: move into FP
+    //TODO: move into FP, PARTIALLY COMPLETED?
     public int getCodeSize(){
         //Returns the lines of code (LOC) for the project based on all entered data and the selected language
         return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
@@ -53,11 +56,32 @@ public class ProjectData extends ProjectMetaData {
 
     //Misc. Member Methods
     //
+    public Tab metricsTabFromSavedFile(String metricSaveData){
+        //Tab metricTab;
+        Scanner lineScanner = new Scanner(metricSaveData);
+        int metricID = lineScanner.nextInt();
+
+        if (metricID == FunctionPoint.METRIC_ID){
+            return new FunctionPointTab(/*metricSaveData*/);
+        }
+        /*
+        else if (metricID == SoftwareMaturityIndex.METRIC_ID){
+
+        }
+         */
+        else {
+            System.err.println("ERROR: METRIC_ID MISMATCH");
+            return new Tab();
+        }
+    }
+
+    /*
     @Override
     public String toString() {
         String outString = super.toString() + "\n" + functionPointMetric;
         return outString;
     }
+    */
 
     public Scene projectToScene(){
         //TODO: Implement this method

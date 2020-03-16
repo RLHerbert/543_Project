@@ -1,6 +1,7 @@
 package Project543;
 
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class ProjectMetaData {
     //Member Variables
@@ -27,21 +28,15 @@ public class ProjectMetaData {
         //Save file constructor
         this.setFileName(fileName);
 
-        String fileData = savedFile.nextLine();
-        this.projectName = fileData.substring(fileData.indexOf(":")+2);
+        String saveData = savedFile.nextLine();
 
-        fileData = savedFile.nextLine();
-        this.productName = fileData.substring(fileData.indexOf(":")+2);
+        StringTokenizer stringTokenizer = new StringTokenizer(saveData);
 
-        fileData = savedFile.nextLine();
-        this.creatorName = fileData.substring(fileData.indexOf(":")+2);
-
-        fileData = savedFile.nextLine();
-        this.projectComments = fileData.substring(fileData.indexOf(":")+2);
-
-        //savedFile.nextLine(); //TEMPORARY UNTIL LANGUAGE IMPLEMENTED
-        fileData = savedFile.nextLine();
-        this.defaultProjectLanguage = parseLanguage(fileData.substring(fileData.indexOf(":")+2));
+        this.projectName = stringTokenizer.nextToken(",");
+        this.productName = stringTokenizer.nextToken(",");
+        this.creatorName = stringTokenizer.nextToken(",");
+        this.projectComments = stringTokenizer.nextToken(",");
+        this.defaultProjectLanguage = parseLanguage(stringTokenizer.nextToken());
     }
 
     //Getters
@@ -121,14 +116,20 @@ public class ProjectMetaData {
     @Override
     public String toString() {
         //To allow simple saving
-        //TODO: Convert to CSV
-        String outString =
-                        "PROJECT_NAME: " + projectName + "\n"        +
-                        "PRODUCT_NAME: " + productName + "\n"        +
-                        "CREATOR_NAME: " + creatorName + "\n"        +
-                        "PROJECT_COMMENTS: " + projectComments + "\n"    +
-                        "PROJECT_LANGUAGE: " + defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
-        return outString;
+        String metaData =
+                projectName + "," +
+                productName + "," +
+                creatorName + "," +
+                projectComments + "," +
+                defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
+
+//        String outString =
+//                        "PROJECT_NAME: " + projectName + "\n"        +
+//                        "PRODUCT_NAME: " + productName + "\n"        +
+//                        "CREATOR_NAME: " + creatorName + "\n"        +
+//                        "PROJECT_COMMENTS: " + projectComments + "\n"    +
+//                        "PROJECT_LANGUAGE: " + defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
+        return metaData;
     }
 
     public static Language parseLanguage(String language){
