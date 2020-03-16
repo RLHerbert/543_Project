@@ -28,6 +28,7 @@ public class ProjectData extends ProjectMetaData {
     }
 
     //Getters
+    //TODO: move into FP
     public int getCodeSize(){
         //Returns the lines of code (LOC) for the project based on all entered data and the selected language
         return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
