@@ -51,6 +51,7 @@ public class InformationDomainValue extends Metrics {
         }
 
         public Input(Scanner savedFileLine){
+            //OLD save file constructor
             String fileLine = savedFileLine.nextLine();
             //System.out.println(fileLine);
             String number = fileLine.substring(fileLine.indexOf(" INPUTS: ") + 9, fileLine.indexOf(" C"));
@@ -73,6 +74,11 @@ public class InformationDomainValue extends Metrics {
                     break;
             }
             //numberInputs = savedFileLine.nextInt();
+        }
+
+        public Input(int numberInputs, int inputComplexity){
+            this.numberInputs = numberInputs;
+            this.inputComplexity = Complexity.values()[inputComplexity];
         }
 
         @Override
@@ -117,12 +123,23 @@ public class InformationDomainValue extends Metrics {
     }
 
     public InformationDomainValue(Scanner savedFile){
-        //Save file constructor
+        //OLD Save file constructor
         this.externalInputs = new Input(savedFile);
         this.externalOutputs =  new Input(savedFile);
         this.externalInquiries = new Input(savedFile);
         this.internalLogicFiles = new Input(savedFile);
         this.externalInterfaceFiles = new Input(savedFile);
+
+        updateTotalCount();
+    }
+
+    public InformationDomainValue(String saveDataString){
+        super(saveDataString);
+        this.externalInputs = new Input(this.saveData.get(2),this.saveData.get(3));
+        this.externalOutputs = new Input(this.saveData.get(4),this.saveData.get(5));
+        this.externalInquiries = new Input(this.saveData.get(6),this.saveData.get(7));
+        this.internalLogicFiles = new Input(this.saveData.get(8),this.saveData.get(9));
+        this.externalInterfaceFiles = new Input(this.saveData.get(10),this.saveData.get(11));
 
         updateTotalCount();
     }

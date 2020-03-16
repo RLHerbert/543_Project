@@ -28,11 +28,18 @@ public class FunctionPointTab extends Tab {
     public FunctionPointTab(){
         //Default Constructor
         functionPoint = new FunctionPoint();
-
+        this.setGridPane(); //Set all?
     }
 
     public FunctionPointTab(FunctionPoint functionPoint){
         //FunctionPoint constructor
+        this.functionPoint = functionPoint;
+        this.setGridPane(); //Set all?
+    }
+
+    public FunctionPointTab(String saveDataString){
+        functionPoint = new FunctionPoint(saveDataString);
+        this.setGridPane(); //Set all?
     }
 
     //Getters

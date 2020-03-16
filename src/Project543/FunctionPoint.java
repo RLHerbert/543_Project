@@ -38,12 +38,17 @@ public class FunctionPoint extends InformationDomainValue {
 
     //TODO: fix this (CHANGE COMPLETELY)
     public FunctionPoint(Scanner savedFile){
-        //Constructor for saved files
+        //OLD Constructor for saved files
         super(savedFile);
         this.valueAdjustmentFactors = new ValueAdjustmentFactor(savedFile);
 
         //Update total function points
         updateTotalFunctionPoints();
+    }
+
+    public FunctionPoint(String saveDataString){
+        super(saveDataString);
+        this.setFromSavedData();
     }
 
     //Getters
@@ -71,8 +76,7 @@ public class FunctionPoint extends InformationDomainValue {
         this.valueAdjustmentFactors.setVal(valToSet, newVal);
     }
 
-    public void setSaveData()
-    {
+    public void setSaveData() {
         //Saves variable values to saveData
         ArrayList<Integer> tempSaveData = new ArrayList<Integer>();
         tempSaveData.add(METRIC_ID);
@@ -106,8 +110,7 @@ public class FunctionPoint extends InformationDomainValue {
         this.codeSize = (this.getFunctionPoints() * this.functionPointLanguage.locPerFP());
     }
 
-    public void updateCalculations()
-    {
+    public void updateCalculations() {
         //Updates totalCount, totalFunctionPoints, and codeSize
         this.updateTotalCount(); //Ensures totalCount is up to date
         this.totalFunctionPoints = (int) Math.ceil(
@@ -116,8 +119,7 @@ public class FunctionPoint extends InformationDomainValue {
         this.updateCodeSize();
     }
 
-    public void setFromSavedData()
-    {
+    public void setFromSavedData() {
         //Sets variable values based on integers in saveData
         //Sets language
         this.functionPointLanguage = functionPointLanguage.values()[saveData.get(1)];

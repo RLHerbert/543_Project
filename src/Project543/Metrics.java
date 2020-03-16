@@ -14,15 +14,19 @@ public class Metrics {
 
     //Non-Static Variables
     //
-    public ArrayList<Integer> saveData;
+    protected ArrayList<Integer> saveData;
 
     //Member Methods
     //
     //Constructor(s)
     //
-    public Tab toTab()
-    {
-        return new Tab();
+    public Metrics(){
+        saveData = new ArrayList<Integer>();
+    }
+
+    public Metrics(String saveDataString){
+        this.saveData = new ArrayList<Integer>();
+        readData(saveDataString);
     }
 
     //Getters
@@ -39,8 +43,7 @@ public class Metrics {
         return saveData.toString();
     }
 
-    public void readData(String data)
-    {
+    public void readData(String data) {
         Scanner readInt = new Scanner(data);
         while (readInt.hasNextInt())
         {
@@ -48,5 +51,8 @@ public class Metrics {
         }
     }
 
-
+    public Tab toTab()
+    {
+        return new Tab();
+    } //Not implemented?
 }
