@@ -26,11 +26,13 @@ public class FunctionPointTab extends Tab {
     //Constructor(s)
     //
     public FunctionPointTab(){
+        //Default Constructor
         functionPoint = new FunctionPoint();
+
     }
 
     public FunctionPointTab(FunctionPoint functionPoint){
-
+        //FunctionPoint constructor
     }
 
     //Getters
@@ -38,6 +40,18 @@ public class FunctionPointTab extends Tab {
 
     //Setters
     //
+    public void setGridPane(){
+        //Sets gridPane
+        this.gridPane = new GridPane();
+    }
+
+    public void setInputArray(){
+        //Sets inputArrays
+    }
+
+    public void setOutputArray(){
+        //Sets outputArrays
+    }
 
     //Misc. Member Methods
     //
@@ -52,10 +66,6 @@ public class FunctionPointTab extends Tab {
     public void computeFunctionPointClick(){
         //does all the stuff Calculate FP button does
         //take inputsArray and move data into functionPoint,
-        setOutputs();
-    }
-
-    public void setOutputs(){
-
+        setOutputArray();
     }
 }
