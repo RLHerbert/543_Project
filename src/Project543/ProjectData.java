@@ -1,17 +1,25 @@
 package Project543;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //TODO: Convert to new UI system
 public class ProjectData extends ProjectMetaData {
-    //TODO: Projects can have multiple Metrics (including FP), Metrics interface?
-    //TODO: Implement a function which returns all the relevant data in a JavaFX Scene for UI to display
+    //Metrics interface?
     //Member Variables
+    //
+    //Member Classes and Enums
+    //
+
+    //Static Variables
+    //
+
+    //Non-Static Variables
     public FunctionPoint functionPointMetric; //TODO: Create way to interface with multiple FPs in project
-    //TODO: public ArrayList<Tab> metricsTabs;
+    public ArrayList<Tab> metricsTabs;
 
     //Member Methods
     //Constructor(s)
@@ -20,12 +28,15 @@ public class ProjectData extends ProjectMetaData {
         //Default constructor
 
         //Call FunctionPoint default constructor
-        this.functionPointMetric = new FunctionPoint();
+        //this.functionPointMetric = new FunctionPoint();
+
+        metricsTabs = new ArrayList<Tab>();
     }
 
     //TODO: Convert to better save file
     public ProjectData(Scanner savedFile, String fileName){
-        //Saved file constructor
+        //Save file constructor
+        //TODO: Convert to new UI form
         super(savedFile, fileName);
         this.functionPointMetric = new FunctionPoint(savedFile);
     }
@@ -36,15 +47,6 @@ public class ProjectData extends ProjectMetaData {
         //Returns the lines of code (LOC) for the project based on all entered data and the selected language
         return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
     }
-
-    //function point
-    //totalCount
-    //totalFunctionPoints
-    //exInputs
-    //exOutputs
-    //exInquiries
-    //inLogicFiles
-    //exInterfaceFiles
 
     //Setters
     //

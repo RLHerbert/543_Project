@@ -23,20 +23,31 @@ public class UserInterface {
     public static final String PROJECT_TITLE = "CECS 543 Metrics Suite";
 
     //Non-static Member Variables
-    VBox mainMenuBox; //The menu for every new window
+    VBox mainMenuBox; //The menu for every new window //TODO: Convert to MenuBar
     Language defaultLanguage; //The default language of all new Metrics
+    //public ProjectData project; //Maybe?
 
     //Member Methods
     //
     //Constructor(s)
     //
+    public UserInterface(){
+
+    }
+
     public UserInterface(ApplicationController controller){
+        //First constructor called, hooks up to controller
+        //TODO: Convert to default constructor, shouldn't need to know about the controller
         //mainMenuBox = setMainMenuBox(controller);
         setMainMenuBox(controller);
 
         defaultLanguage =  Language.NONE;
 
         this.openProjectWindow(controller);
+    }
+
+    public UserInterface(ProjectData projectData){
+
     }
 
     //Getters

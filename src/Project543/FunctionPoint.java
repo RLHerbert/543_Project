@@ -51,6 +51,13 @@ public class FunctionPoint extends InformationDomainValue {
         this.setFromSavedData();
     }
 
+    public FunctionPoint(Language defaultProjectLanguage){
+        //Constructor for when a default language is set in the project
+        super();
+        this.valueAdjustmentFactors = new ValueAdjustmentFactor();
+        this.functionPointLanguage = defaultProjectLanguage;
+    }
+
     //Getters
     public int getValAdjFac(int valToGet){
         //Returns the specified VAF by calling ValAdjFac's getVal

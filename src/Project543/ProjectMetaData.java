@@ -118,10 +118,10 @@ public class ProjectMetaData {
     }
 
     //Misc. Member Methods
-    //TODO: Fix
     @Override
     public String toString() {
         //To allow simple saving
+        //TODO: Convert to CSV
         String outString =
                         "PROJECT_NAME: " + projectName + "\n"        +
                         "PRODUCT_NAME: " + productName + "\n"        +
