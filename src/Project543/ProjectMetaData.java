@@ -24,11 +24,14 @@ public class ProjectMetaData {
     }
 
     public ProjectMetaData(String[] metaData){
+        //New save file constructor
         this.projectName = metaData[0];
         this.productName = metaData[1];
         this.creatorName = metaData[2];
-        this.productName = metaData[3];
+        this.projectComments = metaData[3];
         this.setFileName();
+
+        this.defaultProjectLanguage = Language.NONE;
     }
 
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
@@ -144,7 +147,7 @@ public class ProjectMetaData {
         //Returns the language produced by the Language.toString() method
         //TODO: Rethink and refactor this approach
         switch (language){
-            case "None":
+            case "":
                 return Language.NONE;
             case "Assembler":
                 return Language.ASSEMBLER;

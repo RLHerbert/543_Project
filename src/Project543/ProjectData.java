@@ -3,6 +3,10 @@ package Project543;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -110,7 +114,22 @@ public class ProjectData extends ProjectMetaData {
         return new Scene(new VBox());
     }
 
-    public void saveProject(){
+    public void saveProject() throws IOException {
         //Write all data to file
+        File projectFile = new File(this.getFileName());
+        this.saveProject(projectFile);
+    }
+
+    public void saveProject(File projectFile) throws IOException {
+        projectFile.delete();
+        projectFile.createNewFile();
+
+        FileWriter fileWriter = new FileWriter(projectFile);
+
+        fileWriter.write(super.toString());
+
+        //TODO: write the metrics
+
+        fileWriter.close();
     }
 }
