@@ -42,7 +42,11 @@ public class UserInterface {
 
     //Non-static Member Variables
     VBox mainMenuBox; //The menu for every new window //TODO: Convert to MenuBar
+    TabPane projectTabs;
+    Stage projectStage;
+    Scene projectScene;
     Language defaultLanguage; //The default language of all new Metrics
+    boolean hasProject;
     //public ProjectData project; //Maybe?
 
     //Member Methods
@@ -51,7 +55,9 @@ public class UserInterface {
     //
     public UserInterface(){
         //Create initial stage
-        newWindow();
+        projectTabs = new TabPane();
+        hasProject = false;
+        this.newWindow();
     }
 
     public UserInterface(ApplicationController controller){
@@ -66,12 +72,14 @@ public class UserInterface {
     }
 
     public UserInterface(ProjectData projectData){
-        //NO
+        projectTabs = new TabPane();
+        this.hasProject = true;
+        this.newWindow(projectData);
     }
 
     //Getters
     //
-    public static MenuBar getNewMenuBar(){
+    public MenuBar getNewMenuBar(){
         MenuBar menuBar = new MenuBar();
         Menu[] mainMenu = new Menu[5];
         setMainMenu(menuBar, mainMenu);
@@ -80,7 +88,7 @@ public class UserInterface {
         return menuBar;
     }
 
-    public static MenuBar getNewMenuBar(ProjectData projectData){
+    public MenuBar getNewMenuBar(ProjectData projectData){
         MenuBar menuBar = new MenuBar();
         Menu[] mainMenu = new Menu[5];
         setMainMenu(menuBar, mainMenu);
@@ -89,8 +97,18 @@ public class UserInterface {
         return menuBar;
     }
 
-    public static Scene getNewScene(){
-        VBox sceneContents = new VBox(getNewMenuBar());
+    public Scene getNewScene(){
+        VBox sceneContents = new VBox(getNewMenuBar(), projectTabs);
+
+        //sceneContents.
+
+        Scene scene = new Scene(sceneContents);
+
+        return scene;
+    }
+
+    public Scene getNewScene(ProjectData projectData){
+        VBox sceneContents = new VBox(getNewMenuBar(projectData), projectTabs);
 
         //sceneContents.
 
@@ -103,14 +121,15 @@ public class UserInterface {
 
     //Setters
     //
-    public static void setStageToDefault(Stage stageToSet){
+    public void setStageToDefault(Stage stageToSet, String stageName){
         //Sets up our default stage layout
+        stageToSet.setTitle(stageName);
         stageToSet.setHeight(MAX_HEIGHT);
         stageToSet.setWidth(MAX_WIDTH);
         stageToSet.initModality(Modality.NONE);
     }
 
-    public static void setMainMenu(MenuBar menuBar, Menu[] mainMenu){
+    public void setMainMenu(MenuBar menuBar, Menu[] mainMenu){
         //File
         mainMenu[0] = new Menu("File");
 
@@ -129,7 +148,7 @@ public class UserInterface {
         menuBar.getMenus().addAll(mainMenu);
     }
 
-    public static void setSubMenus(Menu[] mainMenu){
+    public void setSubMenus(Menu[] mainMenu){
         //File
         MenuItem[] fileOptions = new MenuItem[4];
         setFileMenu(fileOptions);
@@ -152,25 +171,35 @@ public class UserInterface {
     }
 
     //TODO
-    public static void setSubMenus(Menu[] mainMenu, ProjectData projectData){
+    public void setSubMenus(Menu[] mainMenu, ProjectData projectData){
         //File
+        MenuItem[] fileOptions = new MenuItem[4];
+        setFileMenu(fileOptions, projectData);
+        mainMenu[0].getItems().addAll(fileOptions);
 
         //Edit
+        //Not Yet Implemented
 
         //Preferences
+        //NYI
 
         //Metrics
+        Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
+        setMetricsMenu(metricsOptions, projectData);
+        mainMenu[3].getItems().addAll(metricsOptions);
+        //setMetricsMenu(metricsOptions);
 
         //Help
+        //NYI
     }
 
-    public static void setFileMenu(MenuItem[] fileOptions){
+    public void setFileMenu(MenuItem[] fileOptions){
         for (int i = 0; i < 4; i++){
             fileOptions[i] = new MenuItem(FILE_MENU[i]);
         }
 
         //File -> New
-        fileOptions[0].setOnAction(actionEvent -> System.out.println("TODO: Hookup New (Create Project in Same Window)"));
+        fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
         fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
@@ -182,13 +211,13 @@ public class UserInterface {
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
     }
 
-    public static void setFileMenu(MenuItem[] fileOptions, ProjectData projectData){
+    public void setFileMenu(MenuItem[] fileOptions, ProjectData projectData){
         for (int i = 0; i < 4; i++){
             fileOptions[i] = new MenuItem(FILE_MENU[i]);
         }
 
         //File -> New
-        fileOptions[0].setOnAction(actionEvent -> System.out.println("TODO: Hookup New (Create Project in New Window)"));
+        fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
         fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
@@ -200,7 +229,7 @@ public class UserInterface {
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
     }
     
-    public static void setMetricsMenu(Menu[] metricsOptions){
+    public void setMetricsMenu(Menu[] metricsOptions){
         for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
             metricsOptions[i] = new Menu(METRICS_MENU[i]);
         }
@@ -216,8 +245,20 @@ public class UserInterface {
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
     
-    public static void setMetricsMenu(Menu[] metricsOptions, ProjectData projectData){
+    public void setMetricsMenu(Menu[] metricsOptions, ProjectData projectData){
+        for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
+            metricsOptions[i] = new Menu(METRICS_MENU[i]);
+        }
 
+        //Function Point
+        MenuItem enterFunctionPointData = new MenuItem("Enter FP Data");
+        enterFunctionPointData.setOnAction(actionEvent -> this.enterFunctionPointClick(projectData));
+        metricsOptions[0].getItems().add(enterFunctionPointData);
+
+        //Software Maturity Index
+        MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
+        //Set actionEvent
+        metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
 
     public void setMainMenuBox(ApplicationController controller){
@@ -241,7 +282,7 @@ public class UserInterface {
         fileMenu.getItems().addAll(fileMenuList);
 
         //Set fileMenuList actions //TODO: Convert to method
-        fileMenuList[0].setOnAction(actionEvent -> controller.createProject());
+        //fileMenuList[0].setOnAction(actionEvent -> controller.createProject());
         fileMenuList[3].setOnAction(actionEvent -> Platform.exit());
 
         //Fill "Metrics" with submenu(s) //TODO: Convert to method
@@ -278,18 +319,6 @@ public class UserInterface {
         this.mainMenuBox = mainMenuBox;
         //return mainMenuBox;
     }
-
-    //TODO: move this method somewhere else
-//    public MenuItem createFPMenuItem(String name){
-//        MenuItem newMenuItem = new MenuItem(name);
-//        newMenuItem.setOnAction(e -> );
-//    }
-
-//    public void addFPTab(TabPane tabPane)
-//    {
-//        FunctionPointTab newFPTab = new FunctionPointTab();
-//        tabPane.getTabs().add()
-//    }
 
     //Misc. Member Methods
     //
@@ -347,27 +376,55 @@ public class UserInterface {
         //TODO: Move into FP tab
     }
 
-    public static void newWindow(){
-        //Set MenuBar
-        Stage newWindow = new Stage();
-        newWindow.setTitle(DEFAULT_STAGE_NAME);
-        setStageToDefault(newWindow);
+    public void newWindow(){
+        this.projectStage = new Stage();
+        setStageToDefault(projectStage, DEFAULT_STAGE_NAME);
 
-        newWindow.setScene(getNewScene());
+        this.projectScene = getNewScene();
 
-        newWindow.show();
+        projectStage.setScene(projectScene);
+
+        projectStage.show();
     }
 
-    public static void newWindow(ProjectData projectData){
-        //
-        Stage newWindow = new Stage();
-        newWindow.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
-        setStageToDefault(newWindow);
+    public void newWindow(ProjectData projectData){
+        projectStage = new Stage();
+        setStageToDefault(projectStage, DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
 
-        newWindow.show();
+        this.projectScene = getNewScene(projectData);
+
+        projectStage.setScene(projectScene);
+
+        projectStage.show();
     }
 
-    public static void openNewProjectDialog(){
+    public static String[] openNewProjectDialog(){
+        String[] newProjectMetaData = new String[4];
 
+        //Temporary
+        for (int i = 0; i < 4; i++){
+            newProjectMetaData[i] = "default";
+        }
+
+        //Open the dialog
+
+        return newProjectMetaData;
+    }
+
+    public void fileNewClick(){
+        if (this.hasProject == false){
+            hasProject = true;
+            ProjectData projectData = ApplicationController.createProject(openNewProjectDialog());
+            projectScene = getNewScene(projectData);
+            projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
+            projectStage.setScene(projectScene);
+        }
+        else {
+            UserInterface newProjectWindow = new UserInterface(ApplicationController.createProject(openNewProjectDialog()));
+        }
+    }
+
+    public void enterFunctionPointClick(ProjectData projectData){
+        this.projectTabs.getTabs().add(projectData.getNewFunctionPoint());
     }
 }

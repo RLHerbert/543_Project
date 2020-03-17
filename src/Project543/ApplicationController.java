@@ -33,8 +33,8 @@ public class ApplicationController {
     //Constructor(s)
     //
     public ApplicationController(){
-        userInterface = new UserInterface(this);
-        //userInterface = new UserInterface();
+        //userInterface = new UserInterface(this);
+        userInterface = new UserInterface();
         projectList = new ArrayList<ProjectData>();
     }
 
@@ -46,8 +46,8 @@ public class ApplicationController {
 
     //Misc. Member Methods
     //
-    public static ProjectData createProject(/*String[]*/){
-        ProjectData newProject = new ProjectData(/*String[]*/); //TODO: String[] constructor?
+    public static ProjectData createProject(String[] metaData){
+        ProjectData newProject = new ProjectData(metaData); //TODO: String[] constructor?
         projectList.add(newProject);
 
         return newProject;
