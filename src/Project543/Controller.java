@@ -56,7 +56,7 @@ public class Controller {
         });
         //Preferences>Language action
         currentWindow.getLanguageMenuButton().setOnAction(event -> {
-            UI.openLangSelectWindow();
+//            UI.openLangSelectWindow();
         });
         //Metrics>Function Point>Enter FP Data action
         currentWindow.getFPMenuButton().setOnAction(event -> {

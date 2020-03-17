@@ -243,16 +243,16 @@ public class UI {
         computeCodeSizeButton.setOnAction(e -> {
             if (project.getDefaultProjectLanguage() == Language.NONE)
             {
-                Language lang = openLangSelectWindow();
-                project.setDefaultProjectLanguage(lang);
+//                Language lang = openLangSelectWindow();
+//                project.setDefaultProjectLanguage(lang);
                 languageOutput.setText(project.getDefaultProjectLanguage().toString());
             }
             codeSizeOutput.setText(Integer.toString(project.getCodeSize()));
         });
 
         changeLanguageButton.setOnAction(e -> {
-            Language lang = openLangSelectWindow();
-            project.setDefaultProjectLanguage(lang);
+//            Language lang = openLangSelectWindow();
+//            project.setDefaultProjectLanguage(lang);
             languageOutput.setText(project.getDefaultProjectLanguage().toString());
         });
 
@@ -324,42 +324,42 @@ public class UI {
         return stage;
     }
 
-    public static Language openLangSelectWindow()
-    {
-        /* Language Selection Dialog Window initialization */
-        Dialog<Language> langSelectWindow = new Dialog<Language>();
-        langSelectWindow.setTitle("Language Selection");
-        langSelectWindow.setHeaderText("Select one language.");
-        langSelectWindow.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        /* Language Radio Buttons initialization*/
-        RadioButton languageRadios[] = new RadioButton[13];
-        ToggleGroup languageRadiosGroup = new ToggleGroup();
-        VBox vbox = new VBox(10);
-        int i =0;
-        for (Language lang: Language.values())
-        {
-            RadioButton radio = new RadioButton(lang.toString());
-            languageRadios[i] = radio;
-            i++;
-            radio.setToggleGroup(languageRadiosGroup);
-            vbox.getChildren().add(radio);
-        }
-
-        langSelectWindow.getDialogPane().setContent(vbox);
-        langSelectWindow.showAndWait();
-
-        RadioButton selected = (RadioButton) languageRadiosGroup.getSelectedToggle();
-        if (selected == null) {
-            System.out.println(Language.NONE);
-            return Language.NONE;
-        }
-        else {
-            String lang = selected.getText().toUpperCase().replaceAll("\\s+", "");;
-            Language selectedLang = Language.valueOf(lang);
-            System.out.println(selectedLang);
-            return selectedLang;
-        }
-    }
+//    public static Language openLangSelectWindow()
+//    {
+//        /* Language Selection Dialog Window initialization */
+//        Dialog<Language> langSelectWindow = new Dialog<Language>();
+//        langSelectWindow.setTitle("Language Selection");
+//        langSelectWindow.setHeaderText("Select one language.");
+//        langSelectWindow.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+//
+//        /* Language Radio Buttons initialization*/
+//        RadioButton languageRadios[] = new RadioButton[13];
+//        ToggleGroup languageRadiosGroup = new ToggleGroup();
+//        VBox vbox = new VBox(10);
+//        int i =0;
+//        for (Language lang: Language.values())
+//        {
+//            RadioButton radio = new RadioButton(lang.toString());
+//            languageRadios[i] = radio;
+//            i++;
+//            radio.setToggleGroup(languageRadiosGroup);
+//            vbox.getChildren().add(radio);
+//        }
+//
+//        langSelectWindow.getDialogPane().setContent(vbox);
+//        langSelectWindow.showAndWait();
+//
+//        RadioButton selected = (RadioButton) languageRadiosGroup.getSelectedToggle();
+//        if (selected == null) {
+//            System.out.println(Language.NONE);
+//            return Language.NONE;
+//        }
+//        else {
+//            String lang = selected.getText().toUpperCase().replaceAll("\\s+", "");;
+//            Language selectedLang = Language.valueOf(lang);
+//            System.out.println(selectedLang);
+//            return selectedLang;
+//        }
+//    }
 }
 

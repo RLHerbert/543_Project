@@ -1,5 +1,11 @@
 package Project543;
 
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
+
 public enum Language {
     NONE, ASSEMBLER, ADA, C, CPP, CSHARP, COBOL, FORTRAN, HTML, JAVA, JAVASCRIPT, VBSCRIPT, VISUALBASIC;
 
@@ -125,5 +131,42 @@ public enum Language {
         }
 
         return false;
+    }
+
+    public static Language openLangSelectWindow()
+    { //TODO: refactor?
+        /* Language Selection Dialog Window initialization */
+        Dialog<Language> langSelectWindow = new Dialog<Language>();
+        langSelectWindow.setTitle("Language Selection");
+        langSelectWindow.setHeaderText("Select one language.");
+        langSelectWindow.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        /* Language Radio Buttons initialization*/
+        RadioButton languageRadios[] = new RadioButton[13];
+        ToggleGroup languageRadiosGroup = new ToggleGroup();
+        VBox vbox = new VBox(10);
+
+        for (int i = 0; i < Language.values().length - 1; i++)
+        {
+            RadioButton radio = new RadioButton(Language.values()[i+1].toString());
+            languageRadios[i] = radio;
+            radio.setToggleGroup(languageRadiosGroup);
+            vbox.getChildren().add(radio);
+        }
+
+        langSelectWindow.getDialogPane().setContent(vbox);
+        langSelectWindow.showAndWait();
+
+        RadioButton selected = (RadioButton) languageRadiosGroup.getSelectedToggle();
+        if (selected == null) {
+            System.out.println(Language.NONE);
+            return Language.NONE;
+        }
+        else {
+            String lang = selected.getText().toUpperCase().replaceAll("\\s+", "");;
+            Language selectedLang = Language.valueOf(lang);
+            System.out.println(selectedLang);
+            return selectedLang;
+        }
     }
 }

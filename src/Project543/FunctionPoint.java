@@ -77,6 +77,17 @@ public class FunctionPoint extends InformationDomainValue {
         return totalFunctionPoints;
     }
 
+    public Language getFunctionPointLanguage(){
+        //Returns the language for the tab/metric
+        return functionPointLanguage;
+    }
+
+    public int getCodeSize(){
+        //Returns code size for current language
+        this.updateCodeSize();
+        return codeSize;
+    }
+
     //Setters
     public void setValAdjFac(int valToSet, int newVal){
         //Sets the specified value adjustment factor's value
@@ -100,6 +111,10 @@ public class FunctionPoint extends InformationDomainValue {
             tempSaveData.add(this.valueAdjustmentFactors.getValArray()[i]);
 
         saveData = tempSaveData;
+    }
+
+    public void setFunctionPointLanguage(Language lang){
+        this.functionPointLanguage = lang;
     }
 
     //Misc. Methods
