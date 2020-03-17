@@ -9,9 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 
 //TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
 
@@ -67,7 +69,7 @@ public class UserInterface {
         Menu helpMenu = new Menu("Help");
         menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu, helpMenu);
 
-        //Fill "File" submenu //TODO: Convert to method
+        //Fill "File" with submenus //TODO: Convert to method
         MenuItem[] fileMenuList = new MenuItem[4];
         fileMenuList[0] = new MenuItem("New");
         fileMenuList[1] = new MenuItem("Open");
@@ -79,11 +81,49 @@ public class UserInterface {
         fileMenuList[0].setOnAction(actionEvent -> controller.createProject());
         fileMenuList[3].setOnAction(actionEvent -> Platform.exit());
 
+        //Fill "Metrics" with submenu(s) //TODO: Convert to method
+        Menu functionPointsMenu = new Menu("Function Points");
+        Menu softwareMaturityIndexMenu = new Menu("Software Maturity Index");
+        metricsMenu.getItems().addAll(functionPointsMenu, softwareMaturityIndexMenu);
+
+        //Fill "Function Points" menu with submenu //TODO: Convert to method?
+        MenuItem enterFPData = new MenuItem("Enter FP Data");
+        functionPointsMenu.getItems().add(enterFPData);
+
+        //Set enterFPData action //TODO: Convert to method?
+        //TODO: IMPORTANT!!! change action below to check if project exists already
+        // if project exists, thisProject.getNewFunctionPoint() and add to tab pane
+        // also make tab title language specific? or like differentiate tab titles somehow
+        FunctionPointTab newFPTab;
+        enterFPData.setOnAction(e -> );
+
         //Display everything
         mainMenuBox = new VBox(menuBar);
 
+        //TODO: change stuff below; modularize into methods and stuff
+        //change so that it only creates tab pane on first tab opening
+        TabPane metricsTabPane = new TabPane();
+        metricsTabPane.getTabs().add()
+        mainMenuBox.getChildren().add(metricsTabPane);
+
+        FPtab.setContent(grid);
+        tabs.getTabs().add(FPtab);
+        stage.projectStageLayout.getChildren().add(tabs);
+
         this.mainMenuBox = mainMenuBox;
         //return mainMenuBox;
+    }
+
+    //TODO: move this method somewhere else
+    public MenuItem createFPMenuItem(String name){
+        MenuItem newMenuItem = new MenuItem(name);
+        newMenuItem.setOnAction(e -> );
+    }
+
+    public void addFPTab(TabPane tabPane)
+    {
+        FunctionPointTab newFPTab = new FunctionPointTab();
+        tabPane.getTabs().add()
     }
 
     //Misc. Member Methods

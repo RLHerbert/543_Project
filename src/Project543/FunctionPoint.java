@@ -16,7 +16,7 @@ public class FunctionPoint extends InformationDomainValue {
     public static final int METRIC_ID = ((int) ('F' + 'P'));
     //FP Save format: [METRIC_ID, functionPointLanguage, IDV value-complexity pairs, ..., VAFs, ...]
 
-    private int  totalFunctionPoints, codeSize;     //To hold the total count value for the FP, and FP value itself respectively
+    private int  totalFunctionPoints, codeSize;     //To hold the FP value, and code size (functions pts * LOC/fp)
     private ValueAdjustmentFactor valueAdjustmentFactors; //To hold the VAFs for the FP
     private Language functionPointLanguage; //To hold the language for this Metric (on a per tab basis)
     //TODO: hook up functionPointLanguage to tab stuff or everything whatever;

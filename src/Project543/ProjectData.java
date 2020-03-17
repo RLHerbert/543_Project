@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class ProjectData extends ProjectMetaData {
     //Metrics interface?
     //Member Variables
-    //
+    private static final String DEFAULT_TAB_TITLE = "New Tab";
+
     //Member Classes and Enums
     //
 
@@ -67,7 +68,8 @@ public class ProjectData extends ProjectMetaData {
     //
     public void createNewFunctionPoint(){
         //Creates a new FunctionPointTab and adds it to metricsTabs,
-        this.metricsTabs.add(new FunctionPointTab());
+        //TODO: do title stuff differently
+            this.metricsTabs.add(new FunctionPointTab(DEFAULT_TAB_TITLE));
     }
 
     public Tab metricsTabFromSavedFile(String metricSaveData){
