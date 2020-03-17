@@ -202,10 +202,11 @@ public class UserInterface {
         fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
-        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+        fileOptions[1].setOnAction(actionEvent -> fileOpenClick());
 
         //File -> Save
-        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+        fileOptions[2].setDisable(true);
+        //Cannot save a project which doesn't yet exist
 
         //File ->
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
@@ -220,10 +221,10 @@ public class UserInterface {
         fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
-        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+        fileOptions[1].setOnAction(actionEvent -> this.fileOpenClick());
 
         //File -> Save
-        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+        fileOptions[2].setOnAction(actionEvent -> this.fileSaveClick(projectData));
 
         //File ->
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
@@ -257,7 +258,7 @@ public class UserInterface {
 
         //Software Maturity Index
         MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
-        //Set actionEvent
+        enterSoftwareMaturityData.setOnAction(actionEvent -> this.enterSoftwareMaturityClick(projectData));
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
 
@@ -412,7 +413,9 @@ public class UserInterface {
     }
 
     public void fileNewClick(){
+        //Click action for File -> New
         if (this.hasProject == false){
+            //If there is not a project associated with window, make one and associate it
             hasProject = true;
             ProjectData projectData = ApplicationController.createProject(openNewProjectDialog());
             projectScene = getNewScene(projectData);
@@ -420,11 +423,28 @@ public class UserInterface {
             projectStage.setScene(projectScene);
         }
         else {
+            //Otherwise open a new windows
             UserInterface newProjectWindow = new UserInterface(ApplicationController.createProject(openNewProjectDialog()));
         }
     }
 
+    public void fileOpenClick(){
+        //On click action for File -> Open
+        System.out.println("Not yet implemented.");
+    }
+
+    public void fileSaveClick(ProjectData projectData){
+        //On click action for File -> Save
+        System.out.println("Not yet implemented.");
+    }
+
     public void enterFunctionPointClick(ProjectData projectData){
+        //Click action of the Metrics -> Function Point -> "Enter FP Data" button
         this.projectTabs.getTabs().add(projectData.getNewFunctionPoint());
+    }
+
+    public void enterSoftwareMaturityClick(ProjectData projectData){
+        //Click action of the Metrics -> Software Maturity Index -> "Enter SMI Data" button
+        System.out.println("Not yet implemented");
     }
 }

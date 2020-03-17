@@ -109,4 +109,8 @@ public class ProjectData extends ProjectMetaData {
         //TODO: Implement this method
         return new Scene(new VBox());
     }
+
+    public void saveProject(){
+        //Write all data to file
+    }
 }
