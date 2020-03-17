@@ -6,15 +6,18 @@ package Project543;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.desktop.AppForegroundListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 //TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
@@ -202,10 +205,11 @@ public class UserInterface {
         fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
-        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+        fileOptions[1].setOnAction(actionEvent -> fileOpenClick());
 
         //File -> Save
-        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+        fileOptions[2].setDisable(true);
+        //Cannot save a project which doesn't yet exist
 
         //File ->
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
@@ -220,10 +224,17 @@ public class UserInterface {
         fileOptions[0].setOnAction(actionEvent -> this.fileNewClick());
 
         //File -> Open
-        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+        fileOptions[1].setOnAction(actionEvent -> this.fileOpenClick());
 
         //File -> Save
-        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+        fileOptions[2].setOnAction(actionEvent -> {
+            try {
+                this.fileSaveClick(projectData);
+            } catch (IOException e){
+                System.err.println("ERROR: IOEXCEPTION");
+                e.printStackTrace();
+            }
+        });
 
         //File ->
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
@@ -257,7 +268,7 @@ public class UserInterface {
 
         //Software Maturity Index
         MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
-        //Set actionEvent
+        enterSoftwareMaturityData.setOnAction(actionEvent -> this.enterSoftwareMaturityClick(projectData));
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
 
@@ -399,12 +410,67 @@ public class UserInterface {
     }
 
     public static String[] openNewProjectDialog(){
+        //TODO: Cleanup and comments, refactor and allow for cancelling
         String[] newProjectMetaData = new String[4];
 
         //Temporary
         for (int i = 0; i < 4; i++){
-            newProjectMetaData[i] = "default";
+            newProjectMetaData[i] = "";
         }
+
+        Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
+        dialog.setTitle("New Project");
+        dialog.setHeaderText("Enter project information.");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        //TODO: make sizing based on constants
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField projectTitle = new TextField();
+        projectTitle.setPromptText("Project Title");
+        TextField productName = new TextField();
+        productName.setPromptText("Product Name");
+        TextField author = new TextField();
+        author.setPromptText("Author");
+        TextArea comments = new TextArea();
+        comments.setPromptText("Comments");
+
+        grid.add(new Label("Project Title:"), 0, 0);
+        grid.add(projectTitle, 1, 0);
+        grid.add(new Label("Product Name:"), 0, 1);
+        grid.add(productName, 1, 1);
+        grid.add(new Label("Author:"), 0, 2);
+        grid.add(author, 1, 2);
+        grid.add(new Label("Comments:"), 0, 3);
+        grid.add(comments, 1, 3);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                ArrayList<String> dialogInfoEntered = new ArrayList<String>(4);
+                dialogInfoEntered.add(projectTitle.getText());
+                dialogInfoEntered.add(productName.getText());
+                dialogInfoEntered.add(author.getText());
+                dialogInfoEntered.add(comments.getText());
+                return dialogInfoEntered;
+            }
+            return null;
+        });
+
+        //Updates project meta data
+        Optional<ArrayList<String>> result = dialog.showAndWait();
+        result.ifPresent(dialogInfoEntered ->
+                {
+                    newProjectMetaData[0] = dialogInfoEntered.get(0);
+                    newProjectMetaData[1] = dialogInfoEntered.get(1);
+                    newProjectMetaData[2] = dialogInfoEntered.get(2);
+                    newProjectMetaData[3] = dialogInfoEntered.get(3);
+                    //project.setFileName();
+                }
+        );
 
         //Open the dialog
 
@@ -412,7 +478,9 @@ public class UserInterface {
     }
 
     public void fileNewClick(){
+        //Click action for File -> New
         if (this.hasProject == false){
+            //If there is not a project associated with window, make one and associate it
             hasProject = true;
             ProjectData projectData = ApplicationController.createProject(openNewProjectDialog());
             projectScene = getNewScene(projectData);
@@ -420,11 +488,40 @@ public class UserInterface {
             projectStage.setScene(projectScene);
         }
         else {
+            //Otherwise open a new windows
             UserInterface newProjectWindow = new UserInterface(ApplicationController.createProject(openNewProjectDialog()));
         }
     }
 
+    public void fileOpenClick(){
+        //On click action for File -> Open
+        System.out.println("Not yet implemented.");
+
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(projectStage);
+
+        if (selectedFile != null){
+            if (ApplicationController.projectIsOpen(selectedFile.getName())){
+                System.err.println("ERROR: PROJECT_ALREADY_OPEN");
+            }
+            else {
+                //TODO: Actually open the project
+            }
+        }
+    }
+
+    public void fileSaveClick(ProjectData projectData) throws IOException {
+        //On click action for File -> Save
+        projectData.saveProject();
+    }
+
     public void enterFunctionPointClick(ProjectData projectData){
+        //Click action of the Metrics -> Function Point -> "Enter FP Data" button
         this.projectTabs.getTabs().add(projectData.getNewFunctionPoint());
+    }
+
+    public void enterSoftwareMaturityClick(ProjectData projectData){
+        //Click action of the Metrics -> Software Maturity Index -> "Enter SMI Data" button
+        System.out.println("Not yet implemented");
     }
 }

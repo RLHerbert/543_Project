@@ -6,7 +6,10 @@ package Project543;
 
 import javafx.scene.control.Tab;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //TODO: Refactor to new UI
 public class ApplicationController {
@@ -47,13 +50,22 @@ public class ApplicationController {
     //Misc. Member Methods
     //
     public static ProjectData createProject(String[] metaData){
-        ProjectData newProject = new ProjectData(metaData); //TODO: String[] constructor?
-        projectList.add(newProject);
+        ProjectData projectData = new ProjectData(metaData); //TODO: String[] constructor?
+        ApplicationController.projectList.add(projectData);
 
-        return newProject;
+        return projectData;
         //project.setProjectName("TEST");
 
         //userInterface.openProjectWindow(projectList.get(projectList.size()-1));
+    }
+
+    public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
+        Scanner projectScanner = new Scanner(projectToOpen);
+
+        ProjectData projectData = new ProjectData(projectScanner, projectToOpen.getName());
+        ApplicationController.projectList.add(projectData);
+
+        return projectData;
     }
 
     public static boolean projectIsOpen(String fileNameToCheck){
