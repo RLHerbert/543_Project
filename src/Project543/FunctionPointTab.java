@@ -10,6 +10,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.util.converter.NumberStringConverter;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 public class FunctionPointTab extends Tab {
     //Member Variables
     //
@@ -218,9 +221,6 @@ public class FunctionPointTab extends Tab {
         for (int i = 0; i < 5; i++){
             IDVInputArray[i].setText(Integer.toString(functionPoint.getNumberOfInputs()[i]));
         }
-
-//        numberField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-//        grid.add(numberField, 1, i);
     }
     public void setIDVOutputArray(){
         //Sets IDVOutputArray from functionPoint data
@@ -249,14 +249,22 @@ public class FunctionPointTab extends Tab {
         languageOutput.setText(functionPoint.getFunctionPointLanguage().toString());
     }
 
+    public void setLanguage(){
+        //opens language selection window, which returns selected language
+        //then sets the language of the tab/metric/functionPoint object using the selected language
+        functionPoint.setFunctionPointLanguage(Language.openLangSelectWindow());
+    }
+
     //Misc. Member Methods
     //
-    public void updateFunctionPointObj(){ //TODO: rename
+    public void updateFunctionPointObj(){ //TODO: rename?
         functionPoint.setNumberOfExternalInputs(getEIInput());
         functionPoint.setNumberOfExternalOutputs(getEOInput());
         functionPoint.setNumberOfExternalInquiries(getEQInput());
         functionPoint.setNumberOfInternalLogicFiles(getILFInput());
         functionPoint.setNumberOfExternalInterfaceFiles(getEIFInput());
+
+        //TODO: update complexities based on radio button selections
     }
 
     //THE BASIS FOR GOING FORWARD
@@ -265,11 +273,6 @@ public class FunctionPointTab extends Tab {
         Button totalCountButton = new Button("Total Count");
         totalCountButton.setOnAction(e -> totalCountClick());
         return totalCountButton;
-    }
-
-    public Language getLanguage(){
-        //opens language selection window and returns selected language
-        return Language.openLangSelectWindow();
     }
 
     public void totalCountClick(){
@@ -287,7 +290,6 @@ public class FunctionPointTab extends Tab {
     }
 
     public void computeFPClick(){
-        //TODO: very similar to totalCountClick...refactor somehow?
         updateFunctionPointObj();
         setIDVOutputArray();
         setTotalCountOutput();
@@ -302,12 +304,13 @@ public class FunctionPointTab extends Tab {
     }
 
     public void valueAdjustmentsClick(){
-        //TODO
-
-        //opens VAF window
-        //gets user inputs
-        //moves user inputs into functionPoint
+        //opens VAF window, gets user inputs, moves user inputs into functionPoint
+        this.functionPoint.setValAdjFacs(openVAFWindow()); //TODO: MAKE SURE VAF SUM UPDATES TOOOOOO???
+        updateFunctionPointObj();
         //sets valueAdjustmentOutput
+        setValueAdjustmentOutput();
+        setFunctionPointOutput();
+        setCodeSizeOutput();
     }
 
     public Button computeCodeSizeButton(){
@@ -318,8 +321,19 @@ public class FunctionPointTab extends Tab {
     }
 
     public void computeCodeSizeClick(){
-        //TODO
         //updates codeSizeOutput
+        if (this.languageOutput.getText().equals(Language.NONE.toString())) {
+            setLanguage();
+            setLanguageOutput();
+        }
+
+        updateFunctionPointObj();
+        //update output fields too
+        //TODO: output field updates are very similar to totalCountClick and computeFPClick...refactor somehow?
+        setIDVOutputArray();
+        setTotalCountOutput();
+        setFunctionPointOutput();
+        setCodeSizeOutput();
     }
 
     public Button changeLanguageButton(){
@@ -330,10 +344,79 @@ public class FunctionPointTab extends Tab {
     }
 
     public void changeLanguageClick(){
-        //TODO
         //changes language in functionPoint
-        functionPoint.setFunctionPointLanguage(getLanguage());
+        setLanguage();
         //updates languageOutput
         setLanguageOutput();
+    }
+
+    public int[] openVAFWindow(){
+        //TODO: refactor
+        Dialog dialog = new Dialog();
+        dialog.setTitle("Value Adjustments Factors");
+        dialog.setHeaderText("Pick values from 0 to 5");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        for (int i = 0; i < ValueAdjustmentFactor.descriptionText.length; i++) {
+            ChoiceBox vafChoices = new ChoiceBox();
+            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
+            grid.add(new Label(ValueAdjustmentFactor.descriptionText[i]), 0, i);
+            grid.add(vafChoices, 1, i);
+            vafChoices.setValue(Integer.toString(functionPoint.getValAdjFac(i)));
+        }
+
+        dialog.getDialogPane().setContent(grid);
+        dialog.showAndWait();
+
+//        ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
+//        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+//        {
+//            dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
+//        }
+//        return dialogInfoEntered;
+
+        int[] VAFValuesEntered = new int[ValueAdjustmentFactor.NUM_VAF];
+        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++) {
+            VAFValuesEntered[i] = Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue());
+        }
+        return VAFValuesEntered;
+
+
+//        //Converts OK button result into ArrayList of VAF values (as integers)
+//        dialog.setResultConverter(dialogButton -> {
+//            if (dialogButton == ButtonType.OK) {
+//                ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
+//                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+//                {
+//                    dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
+//                }
+//                return dialogInfoEntered;
+//            }
+//            return null;
+//        });
+//
+//        //Updates project meta data
+//        Optional<ArrayList<Integer>> result = dialog.showAndWait();
+//        result.ifPresent(dialogInfoEntered ->
+//                {
+//                    for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+//                        return dialogInfoEntered;
+//                        functionPoint.setValAdjFac(i, dialogInfoEntered.get(i));
+//                }
+//        );
+    }
+
+    public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
     }
 }

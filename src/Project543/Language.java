@@ -164,6 +164,12 @@ public enum Language {
         }
         else {
             String lang = selected.getText().toUpperCase().replaceAll("\\s+", "");;
+            if (lang.equals("C#"))
+                lang = "CSHARP";
+            else if (lang.equals("C++"))
+                lang = "CPP";
+            else if (lang.equals("ADA95"))
+                lang = "ADA";
             Language selectedLang = Language.valueOf(lang);
             System.out.println(selectedLang);
             return selectedLang;

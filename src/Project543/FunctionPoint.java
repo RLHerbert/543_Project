@@ -1,5 +1,6 @@
 package Project543;
 
+import com.sun.jdi.Value;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -66,15 +67,20 @@ public class FunctionPoint extends InformationDomainValue {
         return valueAdjustmentFactors.getVal(valToGet);
     }
 
+    public int[] getValAdjFacs(){
+        //Returns the valueAdjustmentFactors object
+        return this.valueAdjustmentFactors.getValArray();
+    }
+
     public int getSumOfValAdjFac(){
         //Returns the sum of the VAFs
-        return valueAdjustmentFactors.getSumOfVals();
+        return this.valueAdjustmentFactors.getSumOfVals();
     }
 
     public int getFunctionPoints(){
         //Returns the total function points for the project
         this.updateTotalFunctionPoints();
-        return totalFunctionPoints;
+        return this.totalFunctionPoints;
     }
 
     public Language getFunctionPointLanguage(){
@@ -92,6 +98,11 @@ public class FunctionPoint extends InformationDomainValue {
     public void setValAdjFac(int valToSet, int newVal){
         //Sets the specified value adjustment factor's value
         this.valueAdjustmentFactors.setVal(valToSet, newVal);
+    }
+
+    public void setValAdjFacs(int[] newVals){
+        //Sets the entire VAF array in the VAF object
+        this.valueAdjustmentFactors.setAllVals(newVals);
     }
 
     public void setSaveData() {

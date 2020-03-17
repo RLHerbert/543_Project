@@ -219,26 +219,26 @@ public class UI {
 
         computeFPButton.setOnAction(e -> {
             //Update project data
-            project.functionPointMetric.setNumberOfExternalInputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
-            project.functionPointMetric.setNumberOfExternalOutputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 3)).getText()));
-            project.functionPointMetric.setNumberOfExternalInquiries(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 4)).getText()));
-            project.functionPointMetric.setNumberOfInternalLogicFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 5)).getText()));
-            project.functionPointMetric.setNumberOfExternalInterfaceFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 6)).getText()));
+//            project.functionPointMetric.setNumberOfExternalInputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 2)).getText()));
+//            project.functionPointMetric.setNumberOfExternalOutputs(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 3)).getText()));
+//            project.functionPointMetric.setNumberOfExternalInquiries(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 4)).getText()));
+//            project.functionPointMetric.setNumberOfInternalLogicFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 5)).getText()));
+//            project.functionPointMetric.setNumberOfExternalInterfaceFiles(Integer.parseInt(((TextField) getNodeFromGridPane(grid, 1, 6)).getText()));
 
             //Update FP pane
             int outputVals [] = project.functionPointMetric.getSumsOfInputs();
             for (int i = 2; i < 7; i++) {
-                ((TextField) getNodeFromGridPane(grid, 3, i)).setText(Integer.toString(outputVals[i-2]));
+//                ((TextField) getNodeFromGridPane(grid, 3, i)).setText(Integer.toString(outputVals[i-2]));
             }
 
             totalCount.setText(Integer.toString(project.functionPointMetric.getTotalCount()));
             FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
         });
 
-        VAFButton.setOnAction(e -> {
-            openVAFWindow(project);
-            VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
-        });
+//        VAFButton.setOnAction(e -> {
+//            openVAFWindow(project);
+//            VAFOutput.setText(Integer.toString(project.functionPointMetric.getSumOfValAdjFac()));
+//        });
 
         computeCodeSizeButton.setOnAction(e -> {
             if (project.getDefaultProjectLanguage() == Language.NONE)
@@ -259,60 +259,60 @@ public class UI {
         return FPButtons;
     }
 
-    public static void openVAFWindow(ProjectData project)
-    {
-        Dialog<ArrayList<Integer>> dialog = new Dialog<ArrayList<Integer>>();
-        dialog.setTitle("Value Adjustments Factors");
-        dialog.setHeaderText("Pick values from 0 to 5");
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        int j = 0;
-        for (String vaf: ValueAdjustmentFactor.descriptionText) {
-            ChoiceBox vafChoices = new ChoiceBox();
-            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
-            grid.add(new Label(vaf), 0, j);
-            grid.add(vafChoices, 1, j);
-            vafChoices.setValue(Integer.toString(project.functionPointMetric.getValAdjFac(j)));
-            j++;
-        }
-
-        dialog.getDialogPane().setContent(grid);
-
-        //Converts OK button result into ArrayList of VAF values (as integers)
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
-                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
-                {
-                    dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
-                }
-                return dialogInfoEntered;
-            }
-            return null;
-        });
-
-        //Updates project meta data
-        Optional<ArrayList<Integer>> result = dialog.showAndWait();
-        result.ifPresent(dialogInfoEntered ->
-            {
-                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
-                    project.functionPointMetric.setValAdjFac(i, dialogInfoEntered.get(i));
-            }
-        );
-    }
-
-    public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
-            }
-        }
-        return null;
-    }
+//    public static void openVAFWindow(ProjectData project)
+//    {
+//        Dialog<ArrayList<Integer>> dialog = new Dialog<ArrayList<Integer>>();
+//        dialog.setTitle("Value Adjustments Factors");
+//        dialog.setHeaderText("Pick values from 0 to 5");
+//        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+//
+//        GridPane grid = new GridPane();
+//        grid.setAlignment(Pos.CENTER);
+//        grid.setHgap(10);
+//        grid.setVgap(10);
+//        int j = 0;
+//        for (String vaf: ValueAdjustmentFactor.descriptionText) {
+//            ChoiceBox vafChoices = new ChoiceBox();
+//            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
+//            grid.add(new Label(vaf), 0, j);
+//            grid.add(vafChoices, 1, j);
+//            vafChoices.setValue(Integer.toString(project.functionPointMetric.getValAdjFac(j)));
+//            j++;
+//        }
+//
+//        dialog.getDialogPane().setContent(grid);
+//
+//        //Converts OK button result into ArrayList of VAF values (as integers)
+//        dialog.setResultConverter(dialogButton -> {
+//            if (dialogButton == ButtonType.OK) {
+//                ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
+//                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+//                {
+//                    dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
+//                }
+//                return dialogInfoEntered;
+//            }
+//            return null;
+//        });
+//
+//        //Updates project meta data
+//        Optional<ArrayList<Integer>> result = dialog.showAndWait();
+//        result.ifPresent(dialogInfoEntered ->
+//            {
+//                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
+//                    project.functionPointMetric.setValAdjFac(i, dialogInfoEntered.get(i));
+//            }
+//        );
+//    }
+//
+//    public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+//        for (Node node : gridPane.getChildren()) {
+//            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+//                return node;
+//            }
+//        }
+//        return null;
+//    }
 
     public static ProjectStage updateWindowTitle(ProjectStage stage, ProjectData data)
     {

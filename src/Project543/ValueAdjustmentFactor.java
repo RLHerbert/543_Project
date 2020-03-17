@@ -87,6 +87,10 @@ public class ValueAdjustmentFactor {
         //POSTCONDITIONS: The value of the specified VAF is updated to the new value
     }
 
+    public void setAllVals(int[] newVals){
+        this.currentVals = newVals.clone();
+    }
+
     //Misc. Member Methods
     @Override
     public String toString(){
