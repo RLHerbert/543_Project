@@ -15,7 +15,7 @@ public enum Language {
 
         switch(this){
             case NONE:
-                progLang = "None";
+                progLang = "";
                 break;
             case ASSEMBLER:
                 progLang = "Assembler";

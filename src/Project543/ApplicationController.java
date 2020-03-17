@@ -4,14 +4,29 @@
 
 package Project543;
 
+import javafx.scene.control.Tab;
+
 import java.util.ArrayList;
 
 //TODO: Refactor to new UI
 public class ApplicationController {
     //Member Variables
     //
+    //Member Classes and Enums
+    //
+
+    //Static Member Variables
+    //
+    //Constants
+    //
+    public static final int TOTAL_METRICS = 2;
+
+    //Non-Constant
+    //
+    public static ArrayList<ProjectData> projectList; //TODO: Private
+
+    //Non-Static Member Variables
     UserInterface userInterface;
-    public ArrayList<ProjectData> projectList;
 
     //Member Methods
     //
@@ -19,6 +34,7 @@ public class ApplicationController {
     //
     public ApplicationController(){
         userInterface = new UserInterface(this);
+        //userInterface = new UserInterface();
         projectList = new ArrayList<ProjectData>();
     }
 
@@ -30,12 +46,27 @@ public class ApplicationController {
 
     //Misc. Member Methods
     //
-    public void createProject(){
-        ProjectData project = new ProjectData();
-        projectList.add(project);
+    public static ProjectData createProject(/*String[]*/){
+        ProjectData newProject = new ProjectData(/*String[]*/); //TODO: String[] constructor?
+        projectList.add(newProject);
 
-        project.setProjectName("TEST");
+        return newProject;
+        //project.setProjectName("TEST");
 
-        userInterface.openProjectWindow(projectList.get(projectList.size()-1));
+        //userInterface.openProjectWindow(projectList.get(projectList.size()-1));
     }
+
+    public static boolean projectIsOpen(String fileNameToCheck){
+        //Checks if a project with a given file name is already open
+
+        for (ProjectData projectData : projectList){
+            if (projectData.getFileName().equals(fileNameToCheck)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+//    public static
 }

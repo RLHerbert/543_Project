@@ -34,6 +34,12 @@ public class ProjectData extends ProjectMetaData {
         this.metricsTabs = new ArrayList<Tab>();
     }
 
+    public ProjectData(String[] metaData){
+        //Used when creating a new project
+        super(metaData);
+        this.metricsTabs = new ArrayList<Tab>();
+    }
+
     //TODO: Convert to better save file
     public ProjectData(Scanner savedFile, String fileName){
         //Save file constructor

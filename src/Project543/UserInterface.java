@@ -14,15 +14,31 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.desktop.AppForegroundListener;
+
 
 //TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
 
 public class UserInterface {
     //Member Variables
     //
+    //Member Classes and Enums
+    //
+    enum MenuOptions {FILE, EDIT, PREFERENCES, METRICS, HELP}
+
     //Static Member Variables
     //
-    public static final String PROJECT_TITLE = "CECS 543 Metrics Suite";
+    //Constants
+    //
+    public static final String DEFAULT_STAGE_NAME = "CECS 543 Metrics Suite";
+    public static final double MAX_HEIGHT = new Stage().getMaxHeight() - 25.0;
+    public static final double MAX_WIDTH = new Stage().getMaxWidth();
+    public static Language selectedLanguage = Language.NONE;
+    public static final String[] FILE_MENU = {"New", "Open", "Save", "Exit"};
+    //public static final String[] EDIT_MENU = {""};
+    //public static final String[] PREFERENCES_MENU = {""};
+    public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index"};
+    //public static final String[] HELP_MENU = {""};
 
     //Non-static Member Variables
     VBox mainMenuBox; //The menu for every new window //TODO: Convert to MenuBar
@@ -34,7 +50,8 @@ public class UserInterface {
     //Constructor(s)
     //
     public UserInterface(){
-
+        //Create initial stage
+        newWindow();
     }
 
     public UserInterface(ApplicationController controller){
@@ -49,14 +66,160 @@ public class UserInterface {
     }
 
     public UserInterface(ProjectData projectData){
-
+        //NO
     }
 
     //Getters
     //
+    public static MenuBar getNewMenuBar(){
+        MenuBar menuBar = new MenuBar();
+        Menu[] mainMenu = new Menu[5];
+        setMainMenu(menuBar, mainMenu);
+        setSubMenus(mainMenu);
+
+        return menuBar;
+    }
+
+    public static MenuBar getNewMenuBar(ProjectData projectData){
+        MenuBar menuBar = new MenuBar();
+        Menu[] mainMenu = new Menu[5];
+        setMainMenu(menuBar, mainMenu);
+        setSubMenus(mainMenu, projectData);
+
+        return menuBar;
+    }
+
+    public static Scene getNewScene(){
+        VBox sceneContents = new VBox(getNewMenuBar());
+
+        //sceneContents.
+
+        Scene scene = new Scene(sceneContents);
+
+        return scene;
+    }
+
+    //TODO: public static Scene getNewScene(ProjectData projectData){}
 
     //Setters
     //
+    public static void setStageToDefault(Stage stageToSet){
+        //Sets up our default stage layout
+        stageToSet.setHeight(MAX_HEIGHT);
+        stageToSet.setWidth(MAX_WIDTH);
+        stageToSet.initModality(Modality.NONE);
+    }
+
+    public static void setMainMenu(MenuBar menuBar, Menu[] mainMenu){
+        //File
+        mainMenu[0] = new Menu("File");
+
+        //Edit
+        mainMenu[1] = new Menu("Edit");
+
+        //Preferences
+        mainMenu[2] = new Menu("Preferences");
+
+        //Metrics
+        mainMenu[3] = new Menu("Metrics");
+
+        //Help
+        mainMenu[4] = new Menu("Help");
+
+        menuBar.getMenus().addAll(mainMenu);
+    }
+
+    public static void setSubMenus(Menu[] mainMenu){
+        //File
+        MenuItem[] fileOptions = new MenuItem[4];
+        setFileMenu(fileOptions);
+        mainMenu[0].getItems().addAll(fileOptions);
+
+        //Edit
+        //Not Yet Implemented
+
+        //Preferences
+        //NYI
+
+        //Metrics
+        Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
+        setMetricsMenu(metricsOptions);
+        mainMenu[3].getItems().addAll(metricsOptions);
+        //setMetricsMenu(metricsOptions);
+
+        //Help
+        //NYI
+    }
+
+    //TODO
+    public static void setSubMenus(Menu[] mainMenu, ProjectData projectData){
+        //File
+
+        //Edit
+
+        //Preferences
+
+        //Metrics
+
+        //Help
+    }
+
+    public static void setFileMenu(MenuItem[] fileOptions){
+        for (int i = 0; i < 4; i++){
+            fileOptions[i] = new MenuItem(FILE_MENU[i]);
+        }
+
+        //File -> New
+        fileOptions[0].setOnAction(actionEvent -> System.out.println("TODO: Hookup New (Create Project in Same Window)"));
+
+        //File -> Open
+        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+
+        //File -> Save
+        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+
+        //File ->
+        fileOptions[3].setOnAction(actionEvent -> System.exit(0));
+    }
+
+    public static void setFileMenu(MenuItem[] fileOptions, ProjectData projectData){
+        for (int i = 0; i < 4; i++){
+            fileOptions[i] = new MenuItem(FILE_MENU[i]);
+        }
+
+        //File -> New
+        fileOptions[0].setOnAction(actionEvent -> System.out.println("TODO: Hookup New (Create Project in New Window)"));
+
+        //File -> Open
+        fileOptions[1].setOnAction(actionEvent -> System.out.println("TODO: Hookup Open"));
+
+        //File -> Save
+        fileOptions[2].setOnAction(actionEvent -> System.out.println("TODO: Hookup Save"));
+
+        //File ->
+        fileOptions[3].setOnAction(actionEvent -> System.exit(0));
+    }
+    
+    public static void setMetricsMenu(Menu[] metricsOptions){
+        for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
+            metricsOptions[i] = new Menu(METRICS_MENU[i]);
+        }
+
+        //Function Point
+        MenuItem enterFunctionPointData = new MenuItem("Enter FP Data");
+        enterFunctionPointData.setDisable(true);
+        metricsOptions[0].getItems().add(enterFunctionPointData);
+
+        //Software Maturity Index
+        MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
+        enterSoftwareMaturityData.setDisable(true);
+        metricsOptions[1].getItems().add(enterSoftwareMaturityData);
+    }
+    
+    public static void setMetricsMenu(Menu[] metricsOptions, ProjectData projectData){
+
+    }
+
     public void setMainMenuBox(ApplicationController controller){
         VBox mainMenuBox;
 
@@ -135,7 +298,7 @@ public class UserInterface {
         Stage projectStage = new Stage();
 
         //Stage setup
-        projectStage.setTitle(PROJECT_TITLE);
+        projectStage.setTitle(DEFAULT_STAGE_NAME);
         projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
         //Scene primaryScene = new Scene(primaryStage, 800, 775);
 
@@ -151,7 +314,7 @@ public class UserInterface {
         //TODO: Handle new project dialog
 
         //Stage setup
-        projectStage.setTitle(PROJECT_TITLE + " - " + project.getProjectName());
+        projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + project.getProjectName());
         projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
         projectStage.initModality(Modality.NONE);
         VBox localMenuBox = new VBox(mainMenuBox);
@@ -181,6 +344,30 @@ public class UserInterface {
     }
 
     public static void openLanguageSelectionWindow(ProjectData project){
+        //TODO: Move into FP tab
+    }
+
+    public static void newWindow(){
+        //Set MenuBar
+        Stage newWindow = new Stage();
+        newWindow.setTitle(DEFAULT_STAGE_NAME);
+        setStageToDefault(newWindow);
+
+        newWindow.setScene(getNewScene());
+
+        newWindow.show();
+    }
+
+    public static void newWindow(ProjectData projectData){
+        //
+        Stage newWindow = new Stage();
+        newWindow.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
+        setStageToDefault(newWindow);
+
+        newWindow.show();
+    }
+
+    public static void openNewProjectDialog(){
 
     }
 }

@@ -23,6 +23,14 @@ public class ProjectMetaData {
         this.defaultProjectLanguage = Language.NONE;
     }
 
+    public ProjectMetaData(String[] metaData){
+        this.projectName = metaData[0];
+        this.productName = metaData[1];
+        this.creatorName = metaData[2];
+        this.productName = metaData[3];
+        this.setFileName();
+    }
+
     //TODO: implement: public ProjectMetaData(SAVEDFILE){}
     public ProjectMetaData(Scanner savedFile, String fileName){
         //Save file constructor
