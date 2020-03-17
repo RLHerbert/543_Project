@@ -95,36 +95,38 @@ public class UserInterface {
         // if project exists, thisProject.getNewFunctionPoint() and add to tab pane
         // also make tab title language specific? or like differentiate tab titles somehow
         FunctionPointTab newFPTab;
-        enterFPData.setOnAction(e -> );
+        TabPane metricsTabPane = new TabPane();
+        enterFPData.setOnAction(e ->
+                metricsTabPane.getTabs().add(new FunctionPointTab("New tab")));
 
         //Display everything
         mainMenuBox = new VBox(menuBar);
 
         //TODO: change stuff below; modularize into methods and stuff
         //change so that it only creates tab pane on first tab opening
-        TabPane metricsTabPane = new TabPane();
-        metricsTabPane.getTabs().add()
+
+
         mainMenuBox.getChildren().add(metricsTabPane);
 
-        FPtab.setContent(grid);
-        tabs.getTabs().add(FPtab);
-        stage.projectStageLayout.getChildren().add(tabs);
+//        FPtab.setContent(grid);
+//        tabs.getTabs().add(FPtab);
+//        stage.projectStageLayout.getChildren().add(tabs);
 
         this.mainMenuBox = mainMenuBox;
         //return mainMenuBox;
     }
 
     //TODO: move this method somewhere else
-    public MenuItem createFPMenuItem(String name){
-        MenuItem newMenuItem = new MenuItem(name);
-        newMenuItem.setOnAction(e -> );
-    }
+//    public MenuItem createFPMenuItem(String name){
+//        MenuItem newMenuItem = new MenuItem(name);
+//        newMenuItem.setOnAction(e -> );
+//    }
 
-    public void addFPTab(TabPane tabPane)
-    {
-        FunctionPointTab newFPTab = new FunctionPointTab();
-        tabPane.getTabs().add()
-    }
+//    public void addFPTab(TabPane tabPane)
+//    {
+//        FunctionPointTab newFPTab = new FunctionPointTab();
+//        tabPane.getTabs().add()
+//    }
 
     //Misc. Member Methods
     //

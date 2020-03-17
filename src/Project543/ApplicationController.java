@@ -18,9 +18,8 @@ public class ApplicationController {
     //Constructor(s)
     //
     public ApplicationController(){
-        projectList = new ArrayList<ProjectData>();
-
         userInterface = new UserInterface(this);
+        projectList = new ArrayList<ProjectData>();
     }
 
     //Getters

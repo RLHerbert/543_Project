@@ -59,7 +59,6 @@ public class FunctionPointTab extends Tab {
         this.gridPane.setHgap(10); //sets the horizontal gap between cells
         this.gridPane.setVgap(10);
 
-        //TODO: Is this correct approach?
         //Adding the unchanging cells of gridPane
         //Weighting Factors Text
         Text weightingFactorsText = new Text("Weighting Factors");
