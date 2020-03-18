@@ -505,7 +505,12 @@ public class UserInterface {
                 System.err.println("ERROR: PROJECT_ALREADY_OPEN");
             }
             else {
-                //TODO: Actually open the project
+                if (this.hasProject == false){
+
+                }
+                else {
+
+                }
             }
         }
     }
@@ -513,6 +518,10 @@ public class UserInterface {
     public void fileSaveClick(ProjectData projectData) throws IOException {
         //On click action for File -> Save
         projectData.saveProject();
+    }
+
+    public void preferencesLanguageClick(){
+        //TODO
     }
 
     public void enterFunctionPointClick(ProjectData projectData){
