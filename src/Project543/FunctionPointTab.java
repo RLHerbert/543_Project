@@ -1,5 +1,6 @@
 package Project543;
 
+import com.sun.source.tree.IfTree;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,7 +30,7 @@ public class FunctionPointTab extends MetricsTab {
     TextField[] IDVInputArray, IDVOutputArray;
     TextField totalCountOutput, functionPointOutput, valueAdjustmentOutput, codeSizeOutput, languageOutput;
     //TODO: Radio buttons; probably 2d array
-    RadioButton[][] complexities;
+    RadioButton[][] complexityRadios; //row# = IDV type, column# = complexity level (simple, avg, or complex, respectively)
 
     //Member Methods
     //
@@ -56,8 +57,8 @@ public class FunctionPointTab extends MetricsTab {
     public FunctionPointTab(String title, String saveDataString){
         super(title);
         functionPoint = new FunctionPoint(saveDataString);
-        setTabTitle();
         initializeMembers();
+        setTabTitle();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
@@ -71,6 +72,7 @@ public class FunctionPointTab extends MetricsTab {
         initializeValueAdjustmentOutput();
         initializeCodeSizeOutput();
         initializeLanguageOutput();
+        initializeComplexities();
     }
 
     private void initializeIDVInputArray(){
@@ -126,34 +128,74 @@ public class FunctionPointTab extends MetricsTab {
         this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
     }
     private void initializeComplexities(){
-        //TODO: check if toggle group/hbox should be initialized here too?
-        this.complexities = new RadioButton[5][3];
-        for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 3; j++)
-                this.complexities[i][j] = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i][j]));
+        //Initializes each radio button, (initializes and) sets a toggle group for each radio button so that only one per group can be selected
+        this.complexityRadios = new RadioButton[5][3];
+        for (int i = 0; i < 5; i++) {
+            ToggleGroup IDVComplexities = new ToggleGroup();
+            for (int j = 0; j < 3; j++) {
+                this.complexityRadios[i][j] = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i][j]));
+                this.complexityRadios[i][j].setToggleGroup(IDVComplexities);
+            }
+        }
     }
 
     //Getters
     //
     public int getEIInput(){
         //Returns the number of external inputs entered by the user
-        return Integer.parseInt(this.IDVInputArray[0].getText());
+        return Integer.parseInt(this.IDVInputArray[0].getText().replaceAll("[,.]", ""));
     }
     public int getEOInput(){
         //Returns the number of external outputs entered by the user
-        return Integer.parseInt(this.IDVInputArray[1].getText());
+        return Integer.parseInt(this.IDVInputArray[1].getText().replaceAll("[,.]", ""));
     }
     public int getEQInput(){
         //Returns the number of external inquiries entered by the user
-        return Integer.parseInt(this.IDVInputArray[2].getText());
+        return Integer.parseInt(this.IDVInputArray[2].getText().replaceAll("[,.]", ""));
     }
     public int getILFInput(){
         //Returns the number of internal logical files entered by the user
-        return Integer.parseInt(this.IDVInputArray[3].getText());
+        return Integer.parseInt(this.IDVInputArray[3].getText().replaceAll("[,.]", ""));
     }
     public int getEIFInput(){
         //Returns the number of external interface files entered by the user
-        return Integer.parseInt(this.IDVInputArray[4].getText());
+        return Integer.parseInt(this.IDVInputArray[4].getText().replaceAll("[,.]", ""));
+    }
+
+    public InformationDomainValue.Complexity getEIComplexity(){
+        for (int i = 0; i < 3; i++){
+            if (complexityRadios[0][i].isSelected())
+                return InformationDomainValue.Complexity.values()[i];
+        }
+        return InformationDomainValue.Complexity.AVERAGE; //default
+    }
+    public InformationDomainValue.Complexity getEOComplexity(){
+        for (int i = 0; i < 3; i++){
+            if (complexityRadios[1][i].isSelected())
+                return InformationDomainValue.Complexity.values()[i];
+        }
+        return InformationDomainValue.Complexity.AVERAGE; //default
+    }
+    public InformationDomainValue.Complexity getEQComplexity(){
+        for (int i = 0; i < 3; i++){
+            if (complexityRadios[2][i].isSelected())
+                return InformationDomainValue.Complexity.values()[i];
+        }
+        return InformationDomainValue.Complexity.AVERAGE; //default
+    }
+    public InformationDomainValue.Complexity getILFComplexity(){
+        for (int i = 0; i < 3; i++){
+            if (complexityRadios[3][i].isSelected())
+                return InformationDomainValue.Complexity.values()[i];
+        }
+        return InformationDomainValue.Complexity.AVERAGE; //default
+    }
+    public InformationDomainValue.Complexity getEIFComplexity(){
+        for (int i = 0; i < 3; i++){
+            if (complexityRadios[4][i].isSelected())
+                return InformationDomainValue.Complexity.values()[i];
+        }
+        return InformationDomainValue.Complexity.AVERAGE; //default
     }
 
     //Setters
@@ -169,7 +211,7 @@ public class FunctionPointTab extends MetricsTab {
         //Adding the unchanging cells of gridPane
         //Weighting Factors Text
         Text weightingFactorsText = new Text("Weighting Factors");
-        weightingFactorsText.setStyle("-fx-font: 24 arial;"); //makes text bigger
+        weightingFactorsText.setStyle("-fx-font: 24 arial; -fx-alignment: center"); //makes text bigger
         this.gridPane.add(weightingFactorsText, 2, 0);
 
         //Simple Average Complex Labels (within HBox)
@@ -196,7 +238,16 @@ public class FunctionPointTab extends MetricsTab {
             gridPane.add(IDVInputArray[i], 1, i+2);
 
         //Complexity Radio Button Stuff
-        //TODO: this^^
+        //TODO: REDO
+        setComplexityRadios();
+        for (int i = 0; i < 5; i++){
+            HBox complexitiesBox = new HBox(40); //TODO: spacing based on constants/screen size?
+            for (int j = 0; j < 3; j++){
+                complexitiesBox.getChildren().add(this.complexityRadios[i][j]);
+            }
+            complexitiesBox.setAlignment(Pos.CENTER);
+            gridPane.add(complexitiesBox, 2, i+2);
+        }
 
 
         //Non-User Input Cells
@@ -264,11 +315,9 @@ public class FunctionPointTab extends MetricsTab {
         //Sets languageOutput from functionPoint data
         languageOutput.setText(functionPoint.getFunctionPointLanguage().toString());
     }
-    public void setComplexities(){
-        //TODO
+    public void setComplexityRadios(){
         for (int i = 0; i < 5; i++){
-            String IDVComplexity = functionPoint.getComplexityOfInputs()[i].toString().substring(12);
-//            if (IDVComplexity.equals())
+            complexityRadios[i][functionPoint.getComplexityOfInputs()[i].ordinal()].setSelected(true);
         }
     }
 
@@ -303,6 +352,16 @@ public class FunctionPointTab extends MetricsTab {
         functionPoint.setNumberOfExternalInterfaceFiles(getEIFInput());
 
         //TODO: update complexities based on radio button selections
+        functionPoint.setComplexityOfExternalInputs(getEIComplexity());
+        functionPoint.setComplexityOfExternalOutputs(getEOComplexity());
+        functionPoint.setComplexityOfExternalInquiries(getEQComplexity());
+        functionPoint.setComplexityOfInternalLogicFiles(getILFComplexity());
+        functionPoint.setComplexityOfExternalInterfaceFiles(getEIFComplexity());
+    }
+
+    public RadioButton complexityOption(/*IDV, complexity level*/){ //TODO: IDK...delete?
+        //Returns a radio button for the specified IDV and complexity level with triggered actions as defined in complexityOptionClick(IDV, complexity level)
+        return new RadioButton();
     }
 
     public Button totalCountButton(){
