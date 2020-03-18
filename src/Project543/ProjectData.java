@@ -24,8 +24,8 @@ public class ProjectData extends ProjectMetaData {
 
     //Non-Static Variables
     public FunctionPoint functionPointMetric; //TODO: Create way to interface with multiple FPs in project
-    public ArrayList<Tab> metricsTabs;
-    public ArrayList<Metrics> metricsData;
+    public ArrayList<MetricsTab> metricsTabs;
+    //public ArrayList<Metrics> metricsData;
 
     //Member Methods
     //Constructor(s)
@@ -36,15 +36,15 @@ public class ProjectData extends ProjectMetaData {
         //Call FunctionPoint default constructor
         //this.functionPointMetric = new FunctionPoint();
 
-        this.metricsTabs = new ArrayList<Tab>();
-        this.metricsData = new ArrayList<Metrics>();
+        this.metricsTabs = new ArrayList<MetricsTab>();
+        //this.metricsData = new ArrayList<Metrics>();
     }
 
     public ProjectData(String[] metaData){
         //Used when creating a new project
         super(metaData);
-        this.metricsTabs = new ArrayList<Tab>();
-        this.metricsData = new ArrayList<Metrics>();
+        this.metricsTabs = new ArrayList<MetricsTab>();
+        //this.metricsData = new ArrayList<Metrics>();
     }
 
     //TODO: Convert to better save file
@@ -54,8 +54,8 @@ public class ProjectData extends ProjectMetaData {
         super(savedFile, fileName);
         //this.functionPointMetric = new FunctionPoint(savedFile);
 
-        this.metricsTabs = new ArrayList<Tab>();
-        this.metricsData = new ArrayList<Metrics>();
+        this.metricsTabs = new ArrayList<MetricsTab>();
+        //this.metricsData = new ArrayList<Metrics>();
 
         while (savedFile.hasNextLine()){
             //Tab metricTab = metricsTabFromSavedFile(savedFile.nextLine());
@@ -87,7 +87,7 @@ public class ProjectData extends ProjectMetaData {
             this.metricsTabs.add(new FunctionPointTab(DEFAULT_TAB_TITLE));
     }
 
-    public Tab metricsTabFromSavedFile(String metricSaveData){
+    public MetricsTab metricsTabFromSavedFile(String metricSaveData){
         //Tab metricTab;
         Scanner lineScanner = new Scanner(metricSaveData);
         int metricID = lineScanner.nextInt();
@@ -102,7 +102,7 @@ public class ProjectData extends ProjectMetaData {
          */
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");
-            return new Tab();
+            return new MetricsTab();
         }
     }
 
@@ -133,7 +133,11 @@ public class ProjectData extends ProjectMetaData {
 
         fileWriter.write(super.toString());
 
-        //TODO: write the metrics
+        for (MetricsTab metricsTab : this.metricsTabs){
+            metricsTab.setMetric();
+            metricsTab.metric.setSaveData();
+            fileWriter.write("\n" + metricsTab.metric.writeData());
+        }
 
         fileWriter.close();
     }
