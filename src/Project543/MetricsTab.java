@@ -29,6 +29,10 @@ public class MetricsTab extends Tab {
     //
     //Constructor(s)
     //
+    public MetricsTab(){
+        super();
+    }
+
     public MetricsTab(String title){
         super(title);
     }
