@@ -46,6 +46,10 @@ public class MetricsTab extends Tab {
         //Virtual
     }
 
+    public void setTabTitle() {
+        //Virtual
+    }
+
     //Misc. Member Methods
     //
 }

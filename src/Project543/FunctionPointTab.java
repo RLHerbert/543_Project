@@ -21,6 +21,7 @@ public class FunctionPointTab extends MetricsTab {
 
     //Static Variables
     //
+    public static final String TAB_TITLE = "Function Points";
 
     //Non-Static Variables
     FunctionPoint functionPoint;
@@ -35,8 +36,9 @@ public class FunctionPointTab extends MetricsTab {
     //
     public FunctionPointTab(String title){
         //Default Constructor
-        super(title);
+        super(TAB_TITLE);
         functionPoint = new FunctionPoint();
+        setTabTitle();
         initializeMembers();
         this.setGridPane(); //Set all?
     }
@@ -45,12 +47,14 @@ public class FunctionPointTab extends MetricsTab {
         //FunctionPoint constructor
         super(title);
         this.functionPoint = functionPoint;
+        setTabTitle();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
     public FunctionPointTab(String title, String saveDataString){
         super(title);
         functionPoint = new FunctionPoint(saveDataString);
+        setTabTitle();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
@@ -144,6 +148,7 @@ public class FunctionPointTab extends MetricsTab {
 
     //Setters
     //
+    //Member Variable Setters
     public void setGridPane(){
         //Sets gridPane
         this.gridPane = new GridPane();
@@ -249,14 +254,25 @@ public class FunctionPointTab extends MetricsTab {
         languageOutput.setText(functionPoint.getFunctionPointLanguage().toString());
     }
 
-    public void setLanguage(){
+    //Related Variable Setters
+    public void setFunctionPointLanguage(){
         //opens language selection window, which returns selected language
         //then sets the language of the tab/metric/functionPoint object using the selected language
         functionPoint.setFunctionPointLanguage(Language.openLangSelectWindow());
     }
 
+    //Setters from Parent Class (Defining Virtual Methods)
     public void setMetric(){
         this.metric = this.functionPoint;
+    }
+    public void setTabTitle(){
+        if (functionPoint.getFunctionPointLanguage() != Language.NONE) {
+            setLanguageOutput();
+            this.setText(TAB_TITLE + " - " + functionPoint.getFunctionPointLanguage());
+        }
+        else {
+            this.setText(TAB_TITLE);
+        }
     }
 
     //Misc. Member Methods
@@ -271,14 +287,12 @@ public class FunctionPointTab extends MetricsTab {
         //TODO: update complexities based on radio button selections
     }
 
-    //THE BASIS FOR GOING FORWARD
     public Button totalCountButton(){
         //Returns the button labelled "Total Count" with triggered actions as defined in totalCountClick()
         Button totalCountButton = new Button("Total Count");
         totalCountButton.setOnAction(e -> totalCountClick());
         return totalCountButton;
     }
-
     public void totalCountClick(){
         //updates functionPoint with user-entered IDVs then updates output fields accordingly
         updateFunctionPointObj();
@@ -292,7 +306,6 @@ public class FunctionPointTab extends MetricsTab {
         computeFP.setOnAction(e -> computeFPClick());
         return computeFP;
     }
-
     public void computeFPClick(){
         updateFunctionPointObj();
         setIDVOutputArray();
@@ -306,10 +319,9 @@ public class FunctionPointTab extends MetricsTab {
         valueAdjustments.setOnAction(e -> valueAdjustmentsClick());
         return valueAdjustments;
     }
-
     public void valueAdjustmentsClick(){
         //opens VAF window, gets user inputs, moves user inputs into functionPoint
-        this.functionPoint.setValAdjFacs(openVAFWindow()); //TODO: MAKE SURE VAF SUM UPDATES TOOOOOO???
+        this.functionPoint.setValAdjFacs(openVAFWindow()); //TODO: update IDV outputs and total count
         //sets valueAdjustmentOutput
         setValueAdjustmentOutput();
         setFunctionPointOutput();
@@ -322,12 +334,10 @@ public class FunctionPointTab extends MetricsTab {
         computeCodeSize.setOnAction(e -> computeCodeSizeClick());
         return computeCodeSize;
     }
-
     public void computeCodeSizeClick(){
         //updates codeSizeOutput
         if (this.languageOutput.getText().equals(Language.NONE.toString())) {
-            setLanguage();
-            setLanguageOutput();
+            changeLanguage();
         }
 
         updateFunctionPointObj();
@@ -345,14 +355,20 @@ public class FunctionPointTab extends MetricsTab {
         changeLanguage.setOnAction(e -> changeLanguageClick());
         return changeLanguage;
     }
-
     public void changeLanguageClick(){
-        //changes language in functionPoint
-        setLanguage();
-        //updates languageOutput
-        setLanguageOutput();
+        //Only one line in here...do I need this fxn?
+        changeLanguage();
     }
 
+    //Helper Functions
+    public void changeLanguage(){
+        //changes language in functionPoint
+        setFunctionPointLanguage();
+        //updates languageOutput
+        setLanguageOutput();
+        //updates tab title
+        setTabTitle();
+    }
     public int[] openVAFWindow(){
         //TODO: refactor
         Dialog dialog = new Dialog();
@@ -413,7 +429,6 @@ public class FunctionPointTab extends MetricsTab {
 //                }
 //        );
     }
-
     public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
@@ -422,6 +437,4 @@ public class FunctionPointTab extends MetricsTab {
         }
         return null;
     }
-
-    //TODO: make function public void setTabName() -> set tab title to function point or function point - lang depending on if there is a lang or not
 }
