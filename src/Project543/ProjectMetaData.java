@@ -39,15 +39,21 @@ public class ProjectMetaData {
         //Save file constructor
         this.setFileName(fileName);
 
-        String saveData = savedFile.nextLine();
+        //String saveData = savedFile.nextLine();
 
-        StringTokenizer stringTokenizer = new StringTokenizer(saveData);
+        //StringTokenizer stringTokenizer = new StringTokenizer(saveData, ",");
 
-        this.projectName = stringTokenizer.nextToken(",");
-        this.productName = stringTokenizer.nextToken(",");
-        this.creatorName = stringTokenizer.nextToken(",");
-        this.projectComments = stringTokenizer.nextToken(",");
-        this.defaultProjectLanguage = parseLanguage(stringTokenizer.nextToken());
+        //this.projectName = stringTokenizer.nextToken();
+        //this.productName = stringTokenizer.nextToken();
+        //this.creatorName = stringTokenizer.nextToken();
+        //this.projectComments = stringTokenizer.nextToken();
+        //this.defaultProjectLanguage = parseLanguage(stringTokenizer.nextToken());
+
+        this.projectName = savedFile.nextLine();
+        this.productName = savedFile.nextLine();
+        this.creatorName = savedFile.nextLine();
+        this.projectComments = savedFile.nextLine();
+        this.defaultProjectLanguage = parseLanguage(savedFile.nextLine());
     }
 
     //Getters
@@ -128,10 +134,10 @@ public class ProjectMetaData {
     public String toString() {
         //To allow simple saving
         String metaData =
-                projectName + "," +
-                productName + "," +
-                creatorName + "," +
-                projectComments + "," +
+                projectName + "\n" +
+                productName + "\n" +
+                creatorName + "\n" +
+                projectComments + "\n" +
                 defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
 
 //        String outString =

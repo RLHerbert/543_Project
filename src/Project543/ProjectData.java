@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 //TODO: Convert to new UI system
 public class ProjectData extends ProjectMetaData {
@@ -32,7 +33,7 @@ public class ProjectData extends ProjectMetaData {
     //
     public ProjectData(){
         //Default constructor
-
+        super();
         //Call FunctionPoint default constructor
         //this.functionPointMetric = new FunctionPoint();
 
@@ -61,6 +62,8 @@ public class ProjectData extends ProjectMetaData {
             //Tab metricTab = metricsTabFromSavedFile(savedFile.nextLine());
             metricsTabs.add(metricsTabFromSavedFile(savedFile.nextLine()));
         }
+
+        System.out.println("Finished reading from saved file");
     }
 
     //Getters
@@ -84,20 +87,25 @@ public class ProjectData extends ProjectMetaData {
     public void createNewFunctionPoint(){
         //Creates a new FunctionPointTab and adds it to metricsTabs,
         //TODO: do title stuff differently
-            this.metricsTabs.add(new FunctionPointTab(DEFAULT_TAB_TITLE));
+        FunctionPoint functionPoint = new FunctionPoint(this.defaultProjectLanguage);
+        //functionPoint.setFunctionPointLanguage();
+        FunctionPointTab functionPointTab = new FunctionPointTab("Function Point", functionPoint);
+
+        this.metricsTabs.add(functionPointTab);
     }
 
     public MetricsTab metricsTabFromSavedFile(String metricSaveData){
         //Tab metricTab;
-        Scanner lineScanner = new Scanner(metricSaveData);
-        int metricID = lineScanner.nextInt();
+        metricSaveData = metricSaveData.substring(1, metricSaveData.length()-1);
+        StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
+        int metricID = Integer.parseInt(lineTokenizer.nextToken());
 
         if (metricID == FunctionPoint.METRIC_ID){
-            return new FunctionPointTab(metricSaveData);
+            return new FunctionPointTab("Function Point", metricSaveData);
         }
         /*
         else if (metricID == SoftwareMaturityIndex.METRIC_ID){
-            //Not yet implemented
+            //Not yet implemented //TODO
         }
          */
         else {

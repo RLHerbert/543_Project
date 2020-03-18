@@ -48,8 +48,8 @@ public class FunctionPointTab extends MetricsTab {
     public FunctionPointTab(String title, FunctionPoint functionPoint){
         //FunctionPoint constructor
         super(title);
-        initializeMembers();
         this.functionPoint = functionPoint;
+        initializeMembers();
         setTabTitle();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
