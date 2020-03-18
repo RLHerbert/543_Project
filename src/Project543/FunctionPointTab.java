@@ -422,4 +422,6 @@ public class FunctionPointTab extends MetricsTab {
         }
         return null;
     }
+
+    //TODO: make function public void setTabName() -> set tab title to function point or function point - lang depending on if there is a lang or not
 }

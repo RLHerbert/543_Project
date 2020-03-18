@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ProjectData extends ProjectMetaData {
     //Metrics interface?
     //Member Variables
-    private static final String DEFAULT_TAB_TITLE = "New Tab";
+    private static final String DEFAULT_TAB_TITLE = "New Tab"; //TODO: name based on language
 
     //Member Classes and Enums
     //

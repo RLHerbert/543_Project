@@ -88,7 +88,8 @@ public class ValueAdjustmentFactor {
     }
 
     public void setAllVals(int[] newVals){
-        this.currentVals = newVals.clone();
+        for (int i = 0; i < currentVals.length; i++)
+            this.currentVals[i] = newVals[i];
     }
 
     //Misc. Member Methods
