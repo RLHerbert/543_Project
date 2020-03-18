@@ -1,3 +1,8 @@
+package Project543;
+
+import javafx.scene.control.Tab;
+
+public class MetricsTab extends Tab {
     //Member Fields
     //
     //Member Enums and Classes
@@ -18,6 +23,7 @@
 
     //Non-Constant Member Fields
     //
+    public Metrics metric;
 
     //Member Methods
     //
@@ -29,6 +35,10 @@
 
     //Setters
     //
+    public void setMetric(){
+        //Virtual
+    }
 
     //Misc. Member Methods
     //
+}
