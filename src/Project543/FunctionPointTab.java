@@ -13,7 +13,7 @@ import javafx.util.converter.NumberStringConverter;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class FunctionPointTab extends Tab {
+public class FunctionPointTab extends MetricsTab {
     //Member Variables
     //
     //Member Classes and Enums
@@ -255,6 +255,10 @@ public class FunctionPointTab extends Tab {
         functionPoint.setFunctionPointLanguage(Language.openLangSelectWindow());
     }
 
+    public void setMetric(){
+        this.metric = this.functionPoint;
+    }
+
     //Misc. Member Methods
     //
     public void updateFunctionPointObj(){ //TODO: rename?
@@ -306,7 +310,6 @@ public class FunctionPointTab extends Tab {
     public void valueAdjustmentsClick(){
         //opens VAF window, gets user inputs, moves user inputs into functionPoint
         this.functionPoint.setValAdjFacs(openVAFWindow()); //TODO: MAKE SURE VAF SUM UPDATES TOOOOOO???
-        updateFunctionPointObj();
         //sets valueAdjustmentOutput
         setValueAdjustmentOutput();
         setFunctionPointOutput();
