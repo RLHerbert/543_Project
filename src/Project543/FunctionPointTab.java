@@ -29,6 +29,7 @@ public class FunctionPointTab extends MetricsTab {
     TextField[] IDVInputArray, IDVOutputArray;
     TextField totalCountOutput, functionPointOutput, valueAdjustmentOutput, codeSizeOutput, languageOutput;
     //TODO: Radio buttons; probably 2d array
+    RadioButton[][] complexities;
 
     //Member Methods
     //
@@ -48,6 +49,7 @@ public class FunctionPointTab extends MetricsTab {
         super(title);
         this.functionPoint = functionPoint;
         setTabTitle();
+        initializeMembers();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
@@ -55,6 +57,7 @@ public class FunctionPointTab extends MetricsTab {
         super(title);
         functionPoint = new FunctionPoint(saveDataString);
         setTabTitle();
+        initializeMembers();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
@@ -121,6 +124,12 @@ public class FunctionPointTab extends MetricsTab {
         this.languageOutput.setEditable(false);
         this.languageOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
         this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+    }
+    private void initializeComplexities(){
+        this.complexities = new RadioButton[5][3];
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 3; j++)
+                this.complexities[i][j] = new RadioButton();
     }
 
     //Getters
