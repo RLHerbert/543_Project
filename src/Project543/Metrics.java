@@ -44,10 +44,20 @@ public class Metrics {
     }
 
     public void readData(String data) {
-        Scanner readInt = new Scanner(data);
-        while (readInt.hasNextInt())
+        //Scanner readInt = new Scanner(data);
+
+        StringTokenizer lineTokenizer = new StringTokenizer(data, ",");
+
+        while (lineTokenizer.hasMoreTokens())
         {
-            saveData.add(readInt.nextInt());
+            String dataToRead = lineTokenizer.nextToken();
+
+            if (dataToRead.charAt(0) == ' '){
+                dataToRead = dataToRead.substring(1, dataToRead.length());
+            }
+
+            int dataToAdd = Integer.parseInt(dataToRead);
+            saveData.add(dataToAdd);
         }
     }
 

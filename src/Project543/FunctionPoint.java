@@ -50,6 +50,8 @@ public class FunctionPoint extends InformationDomainValue {
     public FunctionPoint(String saveDataString){
         super(saveDataString);
         this.setFromSavedData();
+
+        System.out.println("Finished constructing FP from saved data");
     }
 
     public FunctionPoint(Language defaultProjectLanguage){
@@ -162,7 +164,10 @@ public class FunctionPoint extends InformationDomainValue {
         this.externalInquiries = new Input(); externalInquiries.numberInputs = saveData.get(6); externalInquiries.inputComplexity = Complexity.values()[saveData.get(7)];
         this.internalLogicFiles = new Input(); internalLogicFiles.numberInputs = saveData.get(8); internalLogicFiles.inputComplexity = Complexity.values()[saveData.get(9)];
         this.externalInterfaceFiles = new Input(); externalInterfaceFiles.numberInputs = saveData.get(10); externalInterfaceFiles.inputComplexity = Complexity.values()[saveData.get(11)];
+
         //Sets VAF values
+        this.valueAdjustmentFactors = new ValueAdjustmentFactor();
+
         for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
             valueAdjustmentFactors.setVal(i, saveData.get(i+12));
     }

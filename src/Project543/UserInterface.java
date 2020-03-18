@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.awt.desktop.AppForegroundListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -58,8 +59,12 @@ public class UserInterface {
     //
     public UserInterface(){
         //Create initial stage
+        //Initialize
         projectTabs = new TabPane();
         hasProject = false;
+        this.defaultLanguage = Language.NONE;
+
+        //Open the window
         this.newWindow();
     }
 
@@ -75,8 +80,11 @@ public class UserInterface {
     }
 
     public UserInterface(ProjectData projectData){
-        projectTabs = new TabPane();
+        //ProjectData constructor
+        //Initialize
         this.hasProject = true;
+        this.projectTabs = new TabPane();
+        this.defaultLanguage = Language.NONE;
 
         projectData.setDefaultProjectLanguage(this.defaultLanguage);
 
@@ -114,9 +122,8 @@ public class UserInterface {
     }
 
     public Scene getNewScene(ProjectData projectData){
+        this.projectTabs.getTabs().addAll(projectData.metricsTabs);
         VBox sceneContents = new VBox(getNewMenuBar(projectData), projectTabs);
-
-        //sceneContents.
 
         Scene scene = new Scene(sceneContents);
 
@@ -515,7 +522,6 @@ public class UserInterface {
 
     public void fileOpenClick(){
         //On click action for File -> Open
-        System.out.println("Not yet implemented.");
 
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(projectStage);
@@ -526,10 +532,30 @@ public class UserInterface {
             }
             else {
                 if (this.hasProject == false){
+                    try {
+                        //Open the project
+                        hasProject = true;
+                        ProjectData projectData = ApplicationController.openProject(selectedFile);
 
+                        //Set the new scene
+                        projectScene = getNewScene(projectData);
+
+                        //Set the stage up
+                        projectStage.setScene(projectScene);
+                        projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
+                        projectStage.show();
+                    } catch (FileNotFoundException f) {
+                        System.err.println("ERROR: FILE_NOT_FOUND");
+                        f.printStackTrace();
+                    }
                 }
                 else {
-
+                    try {
+                        UserInterface openNewProjectWindow = new UserInterface(ApplicationController.openProject(selectedFile));
+                    } catch (FileNotFoundException f){
+                        System.err.println("ERROR: FILE_NOT_FOUND");
+                        f.printStackTrace();
+                    }
                 }
             }
         }
