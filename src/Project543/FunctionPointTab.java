@@ -39,17 +39,17 @@ public class FunctionPointTab extends MetricsTab {
         //Default Constructor
         super(TAB_TITLE);
         functionPoint = new FunctionPoint();
-        setTabTitle();
         initializeMembers();
+        setTabTitle();
         this.setGridPane(); //Set all?
     }
 
     public FunctionPointTab(String title, FunctionPoint functionPoint){
         //FunctionPoint constructor
         super(title);
+        initializeMembers();
         this.functionPoint = functionPoint;
         setTabTitle();
-        initializeMembers();
         this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
     }
 
@@ -126,10 +126,11 @@ public class FunctionPointTab extends MetricsTab {
         this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
     }
     private void initializeComplexities(){
+        //TODO: check if toggle group/hbox should be initialized here too?
         this.complexities = new RadioButton[5][3];
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 3; j++)
-                this.complexities[i][j] = new RadioButton();
+                this.complexities[i][j] = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i][j]));
     }
 
     //Getters
@@ -197,6 +198,7 @@ public class FunctionPointTab extends MetricsTab {
         //Complexity Radio Button Stuff
         //TODO: this^^
 
+
         //Non-User Input Cells
         //IDV Output Fields
         setIDVOutputArray();
@@ -261,6 +263,13 @@ public class FunctionPointTab extends MetricsTab {
     public void setLanguageOutput(){
         //Sets languageOutput from functionPoint data
         languageOutput.setText(functionPoint.getFunctionPointLanguage().toString());
+    }
+    public void setComplexities(){
+        //TODO
+        for (int i = 0; i < 5; i++){
+            String IDVComplexity = functionPoint.getComplexityOfInputs()[i].toString().substring(12);
+            if (IDVComplexity.equals())
+        }
     }
 
     //Related Variable Setters
