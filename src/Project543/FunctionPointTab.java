@@ -268,7 +268,7 @@ public class FunctionPointTab extends MetricsTab {
         //TODO
         for (int i = 0; i < 5; i++){
             String IDVComplexity = functionPoint.getComplexityOfInputs()[i].toString().substring(12);
-            if (IDVComplexity.equals())
+//            if (IDVComplexity.equals())
         }
     }
 
