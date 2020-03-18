@@ -77,6 +77,9 @@ public class UserInterface {
     public UserInterface(ProjectData projectData){
         projectTabs = new TabPane();
         this.hasProject = true;
+
+        projectData.setDefaultProjectLanguage(this.defaultLanguage);
+
         this.newWindow(projectData);
     }
 
@@ -499,6 +502,7 @@ public class UserInterface {
             //If there is not a project associated with window, make one and associate it
             hasProject = true;
             ProjectData projectData = ApplicationController.createProject(openNewProjectDialog());
+            projectData.setDefaultProjectLanguage(this.defaultLanguage);
             projectScene = getNewScene(projectData);
             projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
             projectStage.setScene(projectScene);

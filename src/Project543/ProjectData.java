@@ -84,7 +84,11 @@ public class ProjectData extends ProjectMetaData {
     public void createNewFunctionPoint(){
         //Creates a new FunctionPointTab and adds it to metricsTabs,
         //TODO: do title stuff differently
-            this.metricsTabs.add(new FunctionPointTab(DEFAULT_TAB_TITLE));
+        FunctionPoint functionPoint = new FunctionPoint(this.defaultProjectLanguage);
+        //functionPoint.setFunctionPointLanguage();
+        FunctionPointTab functionPointTab = new FunctionPointTab("Function Point", functionPoint);
+
+        this.metricsTabs.add(functionPointTab);
     }
 
     public MetricsTab metricsTabFromSavedFile(String metricSaveData){
