@@ -359,11 +359,6 @@ public class FunctionPointTab extends MetricsTab {
         functionPoint.setComplexityOfExternalInterfaceFiles(getEIFComplexity());
     }
 
-    public RadioButton complexityOption(/*IDV, complexity level*/){ //TODO: IDK...delete?
-        //Returns a radio button for the specified IDV and complexity level with triggered actions as defined in complexityOptionClick(IDV, complexity level)
-        return new RadioButton();
-    }
-
     public Button totalCountButton(){
         //Returns the button labelled "Total Count" with triggered actions as defined in totalCountClick()
         Button totalCountButton = new Button("Total Count");
