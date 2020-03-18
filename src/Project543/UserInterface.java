@@ -161,13 +161,15 @@ public class UserInterface {
         //Not Yet Implemented
 
         //Preferences
-        //NYI
+        MenuItem[] preferencesOptions = new MenuItem[1];
+        setPreferencesMenu(preferencesOptions);
+        mainMenu[2].getItems().addAll(preferencesOptions);
+
 
         //Metrics
         Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
         setMetricsMenu(metricsOptions);
         mainMenu[3].getItems().addAll(metricsOptions);
-        //setMetricsMenu(metricsOptions);
 
         //Help
         //NYI
@@ -184,7 +186,9 @@ public class UserInterface {
         //Not Yet Implemented
 
         //Preferences
-        //NYI
+        MenuItem[] preferencesOptions = new MenuItem[1];
+        setPreferencesMenu(preferencesOptions, projectData);
+        mainMenu[MenuOptions.PREFERENCES.ordinal()].getItems().addAll(preferencesOptions);
 
         //Metrics
         Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
@@ -238,6 +242,18 @@ public class UserInterface {
 
         //File ->
         fileOptions[3].setOnAction(actionEvent -> System.exit(0));
+    }
+
+    public void setPreferencesMenu(MenuItem[] preferencesOptions){
+        preferencesOptions[0] = new MenuItem("Select Language");
+
+        preferencesOptions[0].setOnAction(actionEvent -> preferencesLanguageClick());
+    }
+
+    public void setPreferencesMenu(MenuItem[] preferencesOptions, ProjectData projectData){
+        preferencesOptions[0] = new MenuItem("Select Language");
+
+        preferencesOptions[0].setOnAction(actionEvent -> preferencesLanguageClick(projectData));
     }
     
     public void setMetricsMenu(Menu[] metricsOptions){
@@ -521,7 +537,12 @@ public class UserInterface {
     }
 
     public void preferencesLanguageClick(){
-        //TODO
+        this.defaultLanguage = Language.openLangSelectWindow();
+    }
+
+    public void preferencesLanguageClick(ProjectData projectData){
+        this.defaultLanguage = Language.openLangSelectWindow();
+        projectData.setDefaultProjectLanguage(this.defaultLanguage);
     }
 
     public void enterFunctionPointClick(ProjectData projectData){
