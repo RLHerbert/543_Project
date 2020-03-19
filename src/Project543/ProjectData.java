@@ -1,8 +1,6 @@
 package Project543;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,66 +9,72 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-//TODO: Convert to new UI system
 public class ProjectData extends ProjectMetaData {
-    //Metrics interface?
-    //Member Variables
-    private static final String DEFAULT_TAB_TITLE = "New Tab"; //TODO: name based on language
-
-    //Member Classes and Enums
+    //Member Fields
+    //
+    //Member Enums and Classes
     //
 
-    //Static Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
+    //
+    private static final String DEFAULT_TAB_TITLE = "Metric Tab";
+
+    //Non-Constant Static Fields
     //
 
-    //Non-Static Variables
-    public FunctionPoint functionPointMetric; //TODO: Create way to interface with multiple FPs in project
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
+    public FunctionPoint functionPointMetric; //TODO: Delete
     public ArrayList<MetricsTab> metricsTabs;
-    //public ArrayList<Metrics> metricsData;
 
     //Member Methods
+    //
     //Constructor(s)
     //
     public ProjectData(){
         //Default constructor
         super();
         //Call FunctionPoint default constructor
-        //this.functionPointMetric = new FunctionPoint();
 
         this.metricsTabs = new ArrayList<MetricsTab>();
         //this.metricsData = new ArrayList<Metrics>();
     }
 
     public ProjectData(String[] metaData){
-        //Used when creating a new project
+        //Metadata constructor, takes in a string and creates a new ProjectData with the relevant metadata
+        //Call super constructor
         super(metaData);
+
+        //Initialize member fields
         this.metricsTabs = new ArrayList<MetricsTab>();
-        //this.metricsData = new ArrayList<Metrics>();
     }
 
-    //TODO: Convert to better save file
     public ProjectData(Scanner savedFile, String fileName){
         //Save file constructor
-        //TODO: Convert to new UI form
+        //Call super constructor
         super(savedFile, fileName);
-        //this.functionPointMetric = new FunctionPoint(savedFile);
 
+        //Initialize member fields
         this.metricsTabs = new ArrayList<MetricsTab>();
-        //this.metricsData = new ArrayList<Metrics>();
 
+        //Populate metricsTabs
         while (savedFile.hasNextLine()){
-            //Tab metricTab = metricsTabFromSavedFile(savedFile.nextLine());
             metricsTabs.add(metricsTabFromSavedFile(savedFile.nextLine()));
         }
-
-        System.out.println("Finished reading from saved file");
     }
 
     //Getters
-    //TODO: move into FP, PARTIALLY COMPLETED?
+    //TODO: Delete, moved into FP
     public int getCodeSize(){
         //Returns the lines of code (LOC) for the project based on all entered data and the selected language
-        return (functionPointMetric.getFunctionPoints() * this.getLanguageLOC());
+        return (functionPointMetric.getTotalFunctionPoints() * this.getLanguageLinesOfCode());
     }
 
     public Tab getNewFunctionPoint(){
@@ -85,17 +89,15 @@ public class ProjectData extends ProjectMetaData {
     //Misc. Member Methods
     //
     public void createNewFunctionPoint(){
-        //Creates a new FunctionPointTab and adds it to metricsTabs,
-        //TODO: do title stuff differently
+        //Creates a new FunctionPointTab and adds it to metricsTabs
         FunctionPoint functionPoint = new FunctionPoint(this.defaultProjectLanguage);
-        //functionPoint.setFunctionPointLanguage();
         FunctionPointTab functionPointTab = new FunctionPointTab("Function Point", functionPoint);
 
         this.metricsTabs.add(functionPointTab);
     }
 
     public MetricsTab metricsTabFromSavedFile(String metricSaveData){
-        //Tab metricTab;
+        //Adds all the saved metrics and their tab forms to the project
         metricSaveData = metricSaveData.substring(1, metricSaveData.length()-1);
         StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
         int metricID = Integer.parseInt(lineTokenizer.nextToken());
@@ -114,19 +116,6 @@ public class ProjectData extends ProjectMetaData {
         }
     }
 
-    /*
-    @Override
-    public String toString() {
-        String outString = super.toString() + "\n" + functionPointMetric;
-        return outString;
-    }
-    */
-
-    public Scene projectToScene(){
-        //TODO: Implement this method
-        return new Scene(new VBox());
-    }
-
     public void saveProject() throws IOException {
         //Write all data to file
         File projectFile = new File(this.getFileName());
@@ -134,17 +123,20 @@ public class ProjectData extends ProjectMetaData {
     }
 
     public void saveProject(File projectFile) throws IOException {
+        //Write over the old file
         projectFile.delete();
         projectFile.createNewFile();
 
         FileWriter fileWriter = new FileWriter(projectFile);
 
+        //Write the metadata to the file
         fileWriter.write(super.toString());
 
+        //Write the metrics data to the file
         for (MetricsTab metricsTab : this.metricsTabs){
             metricsTab.setMetric();
             metricsTab.metric.setSaveData();
-            fileWriter.write("\n" + metricsTab.metric.writeData());
+            fileWriter.write("\n" + metricsTab.metric.writeSaveDataString());
         }
 
         fileWriter.close();

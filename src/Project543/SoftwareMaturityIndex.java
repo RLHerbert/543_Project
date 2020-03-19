@@ -2,20 +2,33 @@ package Project543;
 
 //TODO
 public class SoftwareMaturityIndex extends Metrics {
-    //Member Variables
+    //Member Fields
     //
     //Member Enums and Classes
     //
 
-    //Static Member Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
     //
     public static final int METRIC_ID = ((int) ('S' + 'M' + 'I'));
 
-    //Non-Static Member Variables
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
     //
 
     //Member Methods
     //
+    //Constructor(s)
+    //
+
     //Getters
     //
 

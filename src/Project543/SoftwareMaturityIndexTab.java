@@ -4,19 +4,32 @@ import javafx.scene.control.Tab;
 
 //TODO
 public class SoftwareMaturityIndexTab extends Tab {
-    //Member Variables
+    //Member Fields
     //
     //Member Enums and Classes
     //
 
-    //Static Member Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
     //
 
-    //Non-Static Member Variables
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
     //
 
     //Member Methods
     //
+    //Constructor(s)
+    //
+
     //Getters
     //
 

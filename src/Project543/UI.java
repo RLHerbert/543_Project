@@ -1,12 +1,10 @@
 package Project543;
 
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 import java.util.*;
 
@@ -35,7 +33,7 @@ public class UI {
     {
         ProjectStage stage = new ProjectStage(project.getProjectName());
         openProjectStages.add(stage);
-        if (project.functionPointMetric.getFunctionPoints() != 0) {
+        if (project.functionPointMetric.getTotalFunctionPoints() != 0) {
 
             openFunctionPane(stage, project);
         }
@@ -175,7 +173,7 @@ public class UI {
         TextField FPOutput = new TextField();
         FPOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         FPOutput.setEditable(false);
-        FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
+        FPOutput.setText(Integer.toString(project.functionPointMetric.getTotalFunctionPoints()));
         grid.add(FPOutput,3,10);
 
         grid.add(VAFButton, 0, 12);
@@ -232,7 +230,7 @@ public class UI {
             }
 
             totalCount.setText(Integer.toString(project.functionPointMetric.getTotalCount()));
-            FPOutput.setText(Integer.toString(project.functionPointMetric.getFunctionPoints()));
+            FPOutput.setText(Integer.toString(project.functionPointMetric.getTotalFunctionPoints()));
         });
 
 //        VAFButton.setOnAction(e -> {

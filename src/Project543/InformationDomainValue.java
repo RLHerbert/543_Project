@@ -4,17 +4,23 @@ import java.util.Scanner;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
 public class InformationDomainValue extends Metrics {
-    //Enum for information domains
+    //Member Fields
+    //
+    //Member Enums and Classes
+    //
     public enum InformationDomain{
+        //Enum for each IDV
+        //TODO: Use(?)
         EXTERNAL_INPUTS, EXTERNAL_OUTPUTS, EXTERNAL_INQUIRIES, INTERNAL_LOGIC_FILES, EXTERNAL_INTERFACE_FILES;
     }
 
     //Enum for complexity
     public enum Complexity{
+        //Enum to hold complexity for each IDV
         SIMPLE, AVERAGE, COMPLEX;
 
 
-        //TODO: do we even need?
+        //TODO: delete
         @Override
         public String toString() {
             String outString = "COMPLEXITY: ";
@@ -41,17 +47,16 @@ public class InformationDomainValue extends Metrics {
 
     //Nested class to handle inputs
     protected class Input{
-        public int numberInputs/*, weightedSumOfInputs*/;
+        public int numberInputs;
         public Complexity inputComplexity;
 
         public Input(){
             numberInputs = 0;
-            //weightedSumOfInputs = 0;
             inputComplexity = Complexity.AVERAGE;
         }
 
         public Input(Scanner savedFileLine){
-            //OLD save file constructor
+            //OLD save file constructor //TODO: Delete
             String fileLine = savedFileLine.nextLine();
             //System.out.println(fileLine);
             String number = fileLine.substring(fileLine.indexOf(" INPUTS: ") + 9, fileLine.indexOf(" C"));
@@ -77,17 +82,21 @@ public class InformationDomainValue extends Metrics {
         }
 
         public Input(int numberInputs, int inputComplexity){
+            //Parameterized constructor
             this.numberInputs = numberInputs;
             this.inputComplexity = Complexity.values()[inputComplexity];
         }
 
         @Override
         public String toString() {
+            //TODO: Delete
             return "INPUTS: " + numberInputs + " " + inputComplexity;
-        } //To allow simple saving
+        }
     }
 
-    //Member Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
     //
     public static final int[][] weightFactors = {
             //The weight factors for each IDV
@@ -98,6 +107,16 @@ public class InformationDomainValue extends Metrics {
             {5,7,10}    //External Interface Files
     };
 
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
     protected Input
             externalInputs,
             externalOutputs,
@@ -112,7 +131,9 @@ public class InformationDomainValue extends Metrics {
     //Constructor(s)
     //
     public InformationDomainValue(){
-        //Set up the IDVs
+        //Default constructor
+
+        //Initialize the IDV Inputs
         this.externalInputs = new Input();
         this.externalOutputs = new Input();
         this.externalInquiries = new Input();
@@ -123,6 +144,7 @@ public class InformationDomainValue extends Metrics {
     }
 
     public InformationDomainValue(Scanner savedFile){
+        //TODO: Delete
         //OLD Save file constructor
         this.externalInputs = new Input(savedFile);
         this.externalOutputs =  new Input(savedFile);
@@ -134,7 +156,11 @@ public class InformationDomainValue extends Metrics {
     }
 
     public InformationDomainValue(String saveDataString){
+        //Save data constructor
+        //Call super constructor
         super(saveDataString);
+
+        //Initialize member fields from saved data
         this.externalInputs = new Input(this.saveData.get(2),this.saveData.get(3));
         this.externalOutputs = new Input(this.saveData.get(4),this.saveData.get(5));
         this.externalInquiries = new Input(this.saveData.get(6),this.saveData.get(7));
@@ -142,10 +168,6 @@ public class InformationDomainValue extends Metrics {
         this.externalInterfaceFiles = new Input(this.saveData.get(10),this.saveData.get(11));
 
         updateTotalCount();
-    }
-
-    public InformationDomainValue(int[] complexWeightFactors){
-        //Deprecated
     }
 
     //Getters
@@ -193,6 +215,8 @@ public class InformationDomainValue extends Metrics {
 
 
     //Access numbers of inputs
+    //
+    //TODO: Delete(?), unused
     public int getNumberOfExternalInputs(){
         return externalInputs.numberInputs;
     }
@@ -214,8 +238,9 @@ public class InformationDomainValue extends Metrics {
     }
 
     //Setters
-    //TODO: Setters for new Input(?)
+    //
     //Individual setters for number of inputs for each IDV
+    //
     public void setNumberOfExternalInputs(int numberOfInputs){
         this.externalInputs.numberInputs = numberOfInputs;
         this.updateTotalCount();
@@ -269,6 +294,9 @@ public class InformationDomainValue extends Metrics {
     }
 
     //Misc. Methods
+    //
+    //Update Methods
+    //
     public void updateSumsOfInputs(){
         //Unused
         //Updates the individual sums of the IDVs
@@ -285,7 +313,7 @@ public class InformationDomainValue extends Metrics {
         }
     }
 
-    //TODO: Fix
+    //TODO: Delete(?), new save system doesn't need this
     @Override
     public String toString() {
         //To allow easy saving

@@ -1,196 +1,148 @@
 package Project543;
 
-import com.sun.source.tree.IfTree;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.util.converter.NumberStringConverter;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 public class FunctionPointTab extends MetricsTab {
-    //Member Variables
+    //Member Fields
     //
-    //Member Classes and Enums
+    //Member Enums and Classes
     //
 
-    //Static Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
     //
     public static final String TAB_TITLE = "Function Points";
 
-    //Non-Static Variables
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
     FunctionPoint functionPoint;
     GridPane gridPane;
-    TextField[] IDVInputArray, IDVOutputArray;
+    TextField[] inputsArray, outputsArray; //Input and output array for IDV Inputs respectively
     TextField totalCountOutput, functionPointOutput, valueAdjustmentOutput, codeSizeOutput, languageOutput;
-    //TODO: Radio buttons; probably 2d array
     RadioButton[][] complexityRadios; //row# = IDV type, column# = complexity level (simple, avg, or complex, respectively)
 
     //Member Methods
     //
     //Constructor(s)
     //
-    public FunctionPointTab(String title){
-        //Default Constructor
+    //TODO: Remove title
+    public FunctionPointTab(String tabTitle){
+        //Default constructor
+        //Call super constructor
         super(TAB_TITLE);
-        functionPoint = new FunctionPoint();
+
+        //Initialize member fields
+        this.functionPoint = new FunctionPoint();
         initializeMembers();
         setTabTitle();
-        this.setGridPane(); //Set all?
+        this.setGridPane();
     }
 
-    public FunctionPointTab(String title, FunctionPoint functionPoint){
+    public FunctionPointTab(String tabTitle, FunctionPoint functionPoint){
         //FunctionPoint constructor
-        super(title);
+        //Call super constructor
+        super(tabTitle);
+
+        //Initialize member fields
         this.functionPoint = functionPoint;
         initializeMembers();
         setTabTitle();
-        this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
+        this.setGridPane();
     }
 
-    public FunctionPointTab(String title, String saveDataString){
-        super(title);
-        functionPoint = new FunctionPoint(saveDataString);
+    public FunctionPointTab(String tabTitle, String saveDataString){
+        //Save data constructor
+        //call super constructor
+        super(tabTitle);
+
+        //Initialize member fields
+        this.functionPoint = new FunctionPoint(saveDataString); //Initialize functionPoint from save data
         initializeMembers();
         setTabTitle();
-        this.setGridPane(); //Set all? //TODO: remove; I don't think you need to repeat this in other constructors if you do super(this)
-    }
-
-    //Initializer(s)
-    private void initializeMembers(){
-        //Initializes Member Variables
-        initializeIDVInputArray();
-        initializeIDVOutputArray();
-        initializeTotalCountOutput();
-        initializeFunctionPointOutput();
-        initializeValueAdjustmentOutput();
-        initializeCodeSizeOutput();
-        initializeLanguageOutput();
-        initializeComplexities();
-    }
-
-    private void initializeIDVInputArray(){
-        this.IDVInputArray = new TextField[5];
-        for (int i = 0; i < 5; i++) { //initializes elements of input array
-            this.IDVInputArray[i] = new TextField();
-            IDVInputArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-            IDVInputArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
-        }
-    }
-    private void initializeIDVOutputArray(){
-        this.IDVOutputArray = new TextField[5];
-        for (int i = 0; i < 5; i++){ //initializes elements of output array
-            this.IDVOutputArray[i] = new TextField();
-            this.IDVOutputArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
-            this.IDVOutputArray[i].setEditable(false);
-            this.IDVOutputArray[i].setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-            this.IDVOutputArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
-        }
-    }
-    private void initializeTotalCountOutput(){
-        this.totalCountOutput = new TextField();
-        this.totalCountOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
-        this.totalCountOutput.setEditable(false);
-        this.totalCountOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.totalCountOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
-    }
-    private void initializeFunctionPointOutput(){
-        this.functionPointOutput = new TextField();
-        this.functionPointOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
-        this.functionPointOutput.setEditable(false);
-        this.functionPointOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.functionPointOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
-    }
-    private void initializeValueAdjustmentOutput(){
-        this.valueAdjustmentOutput = new TextField();
-        this.valueAdjustmentOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
-        this.valueAdjustmentOutput.setEditable(false);
-        this.valueAdjustmentOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.valueAdjustmentOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
-    }
-    private void initializeCodeSizeOutput(){
-        this.codeSizeOutput = new TextField();
-        this.codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
-        this.codeSizeOutput.setEditable(false);
-        this.codeSizeOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.codeSizeOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
-    }
-    private void initializeLanguageOutput(){
-        this.languageOutput = new TextField();
-        this.languageOutput.setEditable(false);
-        this.languageOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
-    }
-    private void initializeComplexities(){
-        //Initializes each radio button, (initializes and) sets a toggle group for each radio button so that only one per group can be selected
-        this.complexityRadios = new RadioButton[5][3];
-        for (int i = 0; i < 5; i++) {
-            ToggleGroup IDVComplexities = new ToggleGroup();
-            for (int j = 0; j < 3; j++) {
-                this.complexityRadios[i][j] = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i][j]));
-                this.complexityRadios[i][j].setToggleGroup(IDVComplexities);
-            }
-        }
+        this.setGridPane();
     }
 
     //Getters
     //
-    public int getEIInput(){
+    //IDV Inputs from user inputs getters
+    //
+    public int getExternalInputsFromInput(){
         //Returns the number of external inputs entered by the user
-        return Integer.parseInt(this.IDVInputArray[0].getText().replaceAll("[,.]", ""));
-    }
-    public int getEOInput(){
-        //Returns the number of external outputs entered by the user
-        return Integer.parseInt(this.IDVInputArray[1].getText().replaceAll("[,.]", ""));
-    }
-    public int getEQInput(){
-        //Returns the number of external inquiries entered by the user
-        return Integer.parseInt(this.IDVInputArray[2].getText().replaceAll("[,.]", ""));
-    }
-    public int getILFInput(){
-        //Returns the number of internal logical files entered by the user
-        return Integer.parseInt(this.IDVInputArray[3].getText().replaceAll("[,.]", ""));
-    }
-    public int getEIFInput(){
-        //Returns the number of external interface files entered by the user
-        return Integer.parseInt(this.IDVInputArray[4].getText().replaceAll("[,.]", ""));
+        return Integer.parseInt(this.inputsArray[0].getText().replaceAll("[,.]", ""));
     }
 
-    public InformationDomainValue.Complexity getEIComplexity(){
+    public int getExternalOutputsFromInput(){
+        //Returns the number of external outputs entered by the user
+        return Integer.parseInt(this.inputsArray[1].getText().replaceAll("[,.]", ""));
+    }
+
+    public int getExternalInquiriesFromInput(){
+        //Returns the number of external inquiries entered by the user
+        return Integer.parseInt(this.inputsArray[2].getText().replaceAll("[,.]", ""));
+    }
+
+    public int getInternalLogicFilesFromInput(){
+        //Returns the number of internal logical files entered by the user
+        return Integer.parseInt(this.inputsArray[3].getText().replaceAll("[,.]", ""));
+    }
+
+    public int getExternalInterfaceFilesFromInput(){
+        //Returns the number of external interface files entered by the user
+        return Integer.parseInt(this.inputsArray[4].getText().replaceAll("[,.]", ""));
+    }
+
+    //IDV Complexity from user inputs getters
+    //
+    //TODO: possibly refactor to: public InformationDomainValue.Complexity getComplexityFromInputs(IDVComplexityToGet){}
+    public InformationDomainValue.Complexity getExternalInputsComplexityFromInput(){
         for (int i = 0; i < 3; i++){
             if (complexityRadios[0][i].isSelected())
                 return InformationDomainValue.Complexity.values()[i];
         }
         return InformationDomainValue.Complexity.AVERAGE; //default
     }
-    public InformationDomainValue.Complexity getEOComplexity(){
+
+    public InformationDomainValue.Complexity getExternalOutputsComplexityFromInput(){
         for (int i = 0; i < 3; i++){
             if (complexityRadios[1][i].isSelected())
                 return InformationDomainValue.Complexity.values()[i];
         }
         return InformationDomainValue.Complexity.AVERAGE; //default
     }
-    public InformationDomainValue.Complexity getEQComplexity(){
+
+    public InformationDomainValue.Complexity getExternalInquiriesComplexityFromInput(){
         for (int i = 0; i < 3; i++){
             if (complexityRadios[2][i].isSelected())
                 return InformationDomainValue.Complexity.values()[i];
         }
         return InformationDomainValue.Complexity.AVERAGE; //default
     }
-    public InformationDomainValue.Complexity getILFComplexity(){
+
+    public InformationDomainValue.Complexity getInternalLogicFilesComplexityFromInput(){
         for (int i = 0; i < 3; i++){
             if (complexityRadios[3][i].isSelected())
                 return InformationDomainValue.Complexity.values()[i];
         }
         return InformationDomainValue.Complexity.AVERAGE; //default
     }
-    public InformationDomainValue.Complexity getEIFComplexity(){
+
+    public InformationDomainValue.Complexity getExternalInterfaceFilesComplexityFromInput(){
         for (int i = 0; i < 3; i++){
             if (complexityRadios[4][i].isSelected())
                 return InformationDomainValue.Complexity.values()[i];
@@ -200,7 +152,8 @@ public class FunctionPointTab extends MetricsTab {
 
     //Setters
     //
-    //Member Variable Setters
+    //Member Field Setters
+    //
     public void setGridPane(){
         //Sets gridPane
         this.gridPane = new GridPane();
@@ -233,9 +186,9 @@ public class FunctionPointTab extends MetricsTab {
         //Adding the "changing" cells of gridPane
         //User Input Cells
         //IDV Input Fields
-        setIDVInputArray();
+        setInputsArray();
         for (int i = 0; i < 5; i++)
-            gridPane.add(IDVInputArray[i], 1, i+2);
+            gridPane.add(inputsArray[i], 1, i+2);
 
         //Complexity Radio Button Stuff
         //TODO: REDO
@@ -252,10 +205,10 @@ public class FunctionPointTab extends MetricsTab {
 
         //Non-User Input Cells
         //IDV Output Fields
-        setIDVOutputArray();
+        setOutputsArray();
         for (int i = 0; i < 5; i++) {
-            gridPane.add(IDVOutputArray[i], 3, i + 2);
-            gridPane.setHalignment(IDVOutputArray[i], HPos.RIGHT);
+            gridPane.add(outputsArray[i], 3, i + 2);
+            gridPane.setHalignment(outputsArray[i], HPos.RIGHT);
         }
 
         //Output Fields
@@ -283,38 +236,45 @@ public class FunctionPointTab extends MetricsTab {
         this.setContent(gridPane);
     }
 
-    public void setIDVInputArray(){
+    public void setInputsArray(){
         //Sets IDVInputArray from functionPoint data
         for (int i = 0; i < 5; i++){
-            IDVInputArray[i].setText(Integer.toString(functionPoint.getNumberOfInputs()[i]));
+            inputsArray[i].setText(Integer.toString(functionPoint.getNumberOfInputs()[i]));
         }
     }
-    public void setIDVOutputArray(){
+
+    public void setOutputsArray(){
         //Sets IDVOutputArray from functionPoint data
         for (int i = 0; i < 5; i++) {
-            IDVOutputArray[i].setText(Integer.toString(functionPoint.getSumsOfInputs()[i]));
+            outputsArray[i].setText(Integer.toString(functionPoint.getSumsOfInputs()[i]));
         }
     }
+
     public void setTotalCountOutput(){
         //Sets totalCountOutput from functionPoint data
         totalCountOutput.setText(Integer.toString(functionPoint.getTotalCount()));
     }
+
     public void setFunctionPointOutput(){
         //Sets functionPointOutput from functionPoint data
-        functionPointOutput.setText(Integer.toString(functionPoint.getFunctionPoints()));
+        functionPointOutput.setText(Integer.toString(functionPoint.getTotalFunctionPoints()));
     }
+
     public void setValueAdjustmentOutput(){
         //Sets valueAdjustmentOutput from functionPoint data
         valueAdjustmentOutput.setText(Integer.toString(functionPoint.getSumOfValAdjFac()));
     }
+
     public void setCodeSizeOutput(){
         //Sets codeSizeOutput from functionPoint data
         codeSizeOutput.setText(Integer.toString(functionPoint.getCodeSize()));
     }
+
     public void setLanguageOutput(){
         //Sets languageOutput from functionPoint data
         languageOutput.setText(functionPoint.getFunctionPointLanguage().toString());
     }
+
     public void setComplexityRadios(){
         for (int i = 0; i < 5; i++){
             complexityRadios[i][functionPoint.getComplexityOfInputs()[i].ordinal()].setSelected(true);
@@ -322,16 +282,19 @@ public class FunctionPointTab extends MetricsTab {
     }
 
     //Related Variable Setters
+    //
     public void setFunctionPointLanguage(){
         //opens language selection window, which returns selected language
         //then sets the language of the tab/metric/functionPoint object using the selected language
-        functionPoint.setFunctionPointLanguage(Language.openLangSelectWindow());
+        functionPoint.setFunctionPointLanguage(Language.openLanguageSelectWindow());
     }
 
     //Setters from Parent Class (Defining Virtual Methods)
+    //
     public void setMetric(){
         this.metric = this.functionPoint;
     }
+
     public void setTabTitle(){
         if (functionPoint.getFunctionPointLanguage() != Language.NONE) {
             setLanguageOutput();
@@ -344,31 +307,119 @@ public class FunctionPointTab extends MetricsTab {
 
     //Misc. Member Methods
     //
-    public void updateFunctionPointObj(){ //TODO: rename?
-        functionPoint.setNumberOfExternalInputs(getEIInput());
-        functionPoint.setNumberOfExternalOutputs(getEOInput());
-        functionPoint.setNumberOfExternalInquiries(getEQInput());
-        functionPoint.setNumberOfInternalLogicFiles(getILFInput());
-        functionPoint.setNumberOfExternalInterfaceFiles(getEIFInput());
-
-        //TODO: update complexities based on radio button selections
-        functionPoint.setComplexityOfExternalInputs(getEIComplexity());
-        functionPoint.setComplexityOfExternalOutputs(getEOComplexity());
-        functionPoint.setComplexityOfExternalInquiries(getEQComplexity());
-        functionPoint.setComplexityOfInternalLogicFiles(getILFComplexity());
-        functionPoint.setComplexityOfExternalInterfaceFiles(getEIFComplexity());
+    //Initializer Method(s)
+    //
+    private void initializeMembers(){
+        //Initializes Member Variables
+        initializeInputsArray();
+        initializeOutputsArray();
+        initializeTotalCountOutput();
+        initializeFunctionPointOutput();
+        initializeValueAdjustmentOutput();
+        initializeCodeSizeOutput();
+        initializeLanguageOutput();
+        initializeComplexities();
     }
 
+    private void initializeInputsArray(){
+        this.inputsArray = new TextField[5];
+        for (int i = 0; i < 5; i++) { //initializes elements of input array
+            this.inputsArray[i] = new TextField();
+            inputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+            inputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        }
+    }
+
+    private void initializeOutputsArray(){
+        this.outputsArray = new TextField[5];
+        for (int i = 0; i < 5; i++){ //initializes elements of output array
+            this.outputsArray[i] = new TextField();
+            this.outputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
+            this.outputsArray[i].setEditable(false);
+            this.outputsArray[i].setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+            this.outputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        }
+    }
+
+    private void initializeTotalCountOutput(){
+        this.totalCountOutput = new TextField();
+        this.totalCountOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
+        this.totalCountOutput.setEditable(false);
+        this.totalCountOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+        this.totalCountOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+    }
+
+    private void initializeFunctionPointOutput(){
+        this.functionPointOutput = new TextField();
+        this.functionPointOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
+        this.functionPointOutput.setEditable(false);
+        this.functionPointOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+        this.functionPointOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+    }
+
+    private void initializeValueAdjustmentOutput(){
+        this.valueAdjustmentOutput = new TextField();
+        this.valueAdjustmentOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
+        this.valueAdjustmentOutput.setEditable(false);
+        this.valueAdjustmentOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+        this.valueAdjustmentOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+    }
+
+    private void initializeCodeSizeOutput(){
+        this.codeSizeOutput = new TextField();
+        this.codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
+        this.codeSizeOutput.setEditable(false);
+        this.codeSizeOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+        this.codeSizeOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+    }
+
+    private void initializeLanguageOutput(){
+        this.languageOutput = new TextField();
+        this.languageOutput.setEditable(false);
+        this.languageOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
+        this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+    }
+
+    private void initializeComplexities(){
+        //Initializes each radio button, (initializes and) sets a toggle group for each radio button so that only one per group can be selected
+        this.complexityRadios = new RadioButton[5][3];
+        for (int i = 0; i < 5; i++) {
+            ToggleGroup IDVComplexities = new ToggleGroup();
+            for (int j = 0; j < 3; j++) {
+                this.complexityRadios[i][j] = new RadioButton(Integer.toString(InformationDomainValue.weightFactors[i][j]));
+                this.complexityRadios[i][j].setToggleGroup(IDVComplexities);
+            }
+        }
+    }
+
+    //Update Methods
+    //
+    public void updateFunctionPoint(){
+        functionPoint.setNumberOfExternalInputs(getExternalInputsFromInput());
+        functionPoint.setNumberOfExternalOutputs(getExternalOutputsFromInput());
+        functionPoint.setNumberOfExternalInquiries(getExternalInquiriesFromInput());
+        functionPoint.setNumberOfInternalLogicFiles(getInternalLogicFilesFromInput());
+        functionPoint.setNumberOfExternalInterfaceFiles(getExternalInterfaceFilesFromInput());
+
+        functionPoint.setComplexityOfExternalInputs(getExternalInputsComplexityFromInput());
+        functionPoint.setComplexityOfExternalOutputs(getExternalOutputsComplexityFromInput());
+        functionPoint.setComplexityOfExternalInquiries(getExternalInquiriesComplexityFromInput());
+        functionPoint.setComplexityOfInternalLogicFiles(getInternalLogicFilesComplexityFromInput());
+        functionPoint.setComplexityOfExternalInterfaceFiles(getExternalInterfaceFilesComplexityFromInput());
+    }
+
+    //Button and corresponding onclick methods
     public Button totalCountButton(){
         //Returns the button labelled "Total Count" with triggered actions as defined in totalCountClick()
         Button totalCountButton = new Button("Total Count");
         totalCountButton.setOnAction(e -> totalCountClick());
         return totalCountButton;
     }
+
     public void totalCountClick(){
         //updates functionPoint with user-entered IDVs then updates output fields accordingly
-        updateFunctionPointObj();
-        setIDVOutputArray();
+        updateFunctionPoint();
+        setOutputsArray();
         setTotalCountOutput();
     }
 
@@ -379,8 +430,8 @@ public class FunctionPointTab extends MetricsTab {
         return computeFP;
     }
     public void computeFPClick(){
-        updateFunctionPointObj();
-        setIDVOutputArray();
+        updateFunctionPoint();
+        setOutputsArray();
         setTotalCountOutput();
         setFunctionPointOutput();
     }
@@ -391,9 +442,10 @@ public class FunctionPointTab extends MetricsTab {
         valueAdjustments.setOnAction(e -> valueAdjustmentsClick());
         return valueAdjustments;
     }
+
     public void valueAdjustmentsClick(){
         //opens VAF window, gets user inputs, moves user inputs into functionPoint
-        this.functionPoint.setValAdjFacs(openVAFWindow()); //TODO: update IDV outputs and total count
+        this.functionPoint.setValueAdjustmentFactorsFromArray(openValueAdjustmentsWindow()); //TODO: update IDV outputs and total count
         //sets valueAdjustmentOutput
         setValueAdjustmentOutput();
         setFunctionPointOutput();
@@ -412,10 +464,10 @@ public class FunctionPointTab extends MetricsTab {
             changeLanguage();
         }
 
-        updateFunctionPointObj();
+        updateFunctionPoint();
         //update output fields too
         //TODO: output field updates are very similar to totalCountClick and computeFPClick...refactor somehow?
-        setIDVOutputArray();
+        setOutputsArray();
         setTotalCountOutput();
         setFunctionPointOutput();
         setCodeSizeOutput();
@@ -432,7 +484,7 @@ public class FunctionPointTab extends MetricsTab {
         changeLanguage();
     }
 
-    //Helper Functions
+    //Helper Methods
     public void changeLanguage(){
         //changes language in functionPoint
         setFunctionPointLanguage();
@@ -441,7 +493,8 @@ public class FunctionPointTab extends MetricsTab {
         //updates tab title
         setTabTitle();
     }
-    public int[] openVAFWindow(){
+
+    public int[] openValueAdjustmentsWindow(){
         //TODO: refactor
         Dialog dialog = new Dialog();
         dialog.setTitle("Value Adjustments Factors");
@@ -458,49 +511,20 @@ public class FunctionPointTab extends MetricsTab {
             vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
             grid.add(new Label(ValueAdjustmentFactor.descriptionText[i]), 0, i);
             grid.add(vafChoices, 1, i);
-            vafChoices.setValue(Integer.toString(functionPoint.getValAdjFac(i)));
+            vafChoices.setValue(Integer.toString(functionPoint.getValueAdjustmentFactor(i)));
         }
 
         dialog.getDialogPane().setContent(grid);
         dialog.showAndWait();
 
-//        ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
-//        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
-//        {
-//            dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
-//        }
-//        return dialogInfoEntered;
-
         int[] VAFValuesEntered = new int[ValueAdjustmentFactor.NUM_VAF];
         for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++) {
             VAFValuesEntered[i] = Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue());
         }
+
         return VAFValuesEntered;
-
-
-//        //Converts OK button result into ArrayList of VAF values (as integers)
-//        dialog.setResultConverter(dialogButton -> {
-//            if (dialogButton == ButtonType.OK) {
-//                ArrayList<Integer> dialogInfoEntered = new ArrayList<Integer>(ValueAdjustmentFactor.NUM_VAF);
-//                for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
-//                {
-//                    dialogInfoEntered.add(Integer.parseInt((String) ((ChoiceBox) getNodeFromGridPane(grid, 1, i)).getValue()));
-//                }
-//                return dialogInfoEntered;
-//            }
-//            return null;
-//        });
-//
-//        //Updates project meta data
-//        Optional<ArrayList<Integer>> result = dialog.showAndWait();
-//        result.ifPresent(dialogInfoEntered ->
-//                {
-//                    for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++)
-//                        return dialogInfoEntered;
-//                        functionPoint.setValAdjFac(i, dialogInfoEntered.get(i));
-//                }
-//        );
     }
+
     public static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {

@@ -10,118 +10,117 @@ public enum Language {
     NONE, ASSEMBLER, ADA, C, CPP, CSHARP, COBOL, FORTRAN, HTML, JAVA, JAVASCRIPT, VBSCRIPT, VISUALBASIC;
 
     //Member Methods
+    //
     //Constructor(s)
+    //
 
     //Misc. Member Methods
+    //
     @Override
     public String toString() {
         //return super.toString();
 
-        String progLang = "ERROR";
+        String programmingLanguage = "ERROR";
 
         switch(this){
             case NONE:
-                progLang = "";
+                programmingLanguage = "";
                 break;
             case ASSEMBLER:
-                progLang = "Assembler";
+                programmingLanguage = "Assembler";
                 break;
             case ADA:
-                progLang = "Ada 95";
+                programmingLanguage = "Ada 95";
                 break;
             case C:
-                progLang = "C";
+                programmingLanguage = "C";
                 break;
             case CPP:
-                progLang = "C++";
+                programmingLanguage = "C++";
                 break;
             case HTML:
-                progLang = "HTML";
+                programmingLanguage = "HTML";
                 break;
             case JAVA:
-                progLang = "Java";
+                programmingLanguage = "Java";
                 break;
             case COBOL:
-                progLang = "COBOL";
+                programmingLanguage = "COBOL";
                 break;
             case CSHARP:
-                progLang = "C#";
+                programmingLanguage = "C#";
                 break;
             case FORTRAN:
-                progLang = "FORTRAN";
+                programmingLanguage = "FORTRAN";
                 break;
             case VBSCRIPT:
-                progLang = "VBScript";
+                programmingLanguage = "VBScript";
                 break;
             case JAVASCRIPT:
-                progLang = "JavaScript";
+                programmingLanguage = "JavaScript";
                 break;
             case VISUALBASIC:
-                progLang = "Visual Basic";
+                programmingLanguage = "Visual Basic";
                 break;
             default:
-                //progLang = "ERROR";
                 System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
                 break;
         }
 
 //        System.out.println("Languages.toString returned: " + progLang);
-        return progLang;
+        return programmingLanguage;
     }
 
-    public int locPerFP(){
+    public int linesOfCodePerFunctionPoint(){
         //Returns average lines of code per FP for a given language
 
-        //int[] locPerFP = new int[] {-1,-1,-1};
-        int locPerFP = -1;
+        int linesOfCode = -1;
         switch(this) {
             case NONE:
-                locPerFP = 0;
+                linesOfCode = 0;
                 break;
             case VISUALBASIC:
-                locPerFP = 50;
+                linesOfCode = 50;
                 break;
             case JAVASCRIPT:
-                locPerFP = 54;
+                linesOfCode = 54;
                 break;
             case VBSCRIPT:
-                locPerFP = 38;
+                linesOfCode = 38;
                 break;
             case FORTRAN:
-                locPerFP = 90;
+                linesOfCode = 90;
                 break;
             case CSHARP:
-                locPerFP = 58;
+                linesOfCode = 58;
                 break;
             case C:
-                locPerFP = 148;
+                linesOfCode = 148;
                 break;
             case COBOL:
-                locPerFP = 80;
+                linesOfCode = 80;
                 break;
             case JAVA:
-                locPerFP = 55;
+                linesOfCode = 55;
                 break;
             case HTML:
-                locPerFP = 43;
+                linesOfCode = 43;
                 break;
             case CPP:
-                locPerFP = 59;
+                linesOfCode = 59;
                 break;
             case ADA:
-                locPerFP = 154;
+                linesOfCode = 154;
                 break;
             case ASSEMBLER:
-                locPerFP = 209;
+                linesOfCode = 209;
                 break;
             default:
                 System.err.println("ERROR: PROGRAMMING LANGUAGE NOT FOUND");
-                //locPerFP = new int[]{-1,-1,-1};
                 break;
 
         }
-        System.out.println("LOC per FP for " + this + ": " + locPerFP);
-        return locPerFP;
+        return linesOfCode;
     }
 
     public boolean isNone(){
@@ -133,8 +132,7 @@ public enum Language {
         return false;
     }
 
-    public static Language openLangSelectWindow()
-    { //TODO: refactor?
+    public static Language openLanguageSelectWindow() { //TODO: refactor(?)
         /* Language Selection Dialog Window initialization */
         Dialog<Language> langSelectWindow = new Dialog<Language>();
         langSelectWindow.setTitle("Language Selection");

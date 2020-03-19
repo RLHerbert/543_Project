@@ -4,7 +4,15 @@ import java.util.Scanner;
 
 //A class to handle the Value Adjustment Factors (VAF)
 public class ValueAdjustmentFactor {
-    //Member Variables
+    //Member Fields
+    //
+    //Member Enums and Classes
+    //
+
+    //Static Member Fields
+    //
+    //Constant Static Fields
+    //
     public static final int NUM_VAF = 14; //The 14 value adjustment factors
     public static final String descriptionText[] = {
             "Does the system require reliable backup and recovery processes?",
@@ -23,83 +31,99 @@ public class ValueAdjustmentFactor {
             "Is the application designed to facilitate change and for ease of use by the user?"
     };
 
-    private int[] currentVals;
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
+    private int[] currentValues;
 
 
     //Member Methods
+    //
     //Constructor(s)
+    //
     public ValueAdjustmentFactor(){
-        currentVals = new int[NUM_VAF];
+        //Default constructor
+
+        //Initialize member fields
+        currentValues = new int[NUM_VAF];
         for (int i=0; i < NUM_VAF; i++){
-            currentVals[i] = 0;
+            currentValues[i] = 0;
         }
     }
 
     public ValueAdjustmentFactor(Scanner savedFile){
-        currentVals = new int[NUM_VAF];
+        //TODO: Delete(?), now unused(?)
+        //Save file constructor
+        currentValues = new int[NUM_VAF];
 
-        //savedFile.nextLine();
         String fileLine = "";
 
         for (int i = 0; i < NUM_VAF; i++){
-            //this.currentVals[i] = savedFile.nextInt();
             fileLine = savedFile.nextLine();
             fileLine = fileLine.substring(fileLine.lastIndexOf(":")+2);
-            this.currentVals[i] = Integer.parseInt(fileLine);
+            this.currentValues[i] = Integer.parseInt(fileLine);
         }
     }
 
-    //TODO: Implement ValAdjFac(SAVEDFILE){}
-
     //Getters
-    public int getVal(int valToGet){
+    //
+    public int getValue(int valueToGet){
         //Returns the specified VAF
         //PRECONDITIONS: 0 <= valToSet < NUM_VAF
 
-        return currentVals[valToGet];
+        return currentValues[valueToGet];
     }
 
-    public int getSumOfVals(){
+    public int getSumOfValues(){
         //Returns the sum of the VAFs
-        int sumVals = 0;
+        int sumOfValues = 0;
         for (int i = 0; i < NUM_VAF; i++){
-            sumVals += getVal(i);
+            sumOfValues += getValue(i);
         }
 
-        return sumVals;
+        return sumOfValues;
     }
 
-    public int[] getValArray()
+    public int[] getCurrentValuesArray()
     {
-        return currentVals;
+        return currentValues;
     }
 
     //Setters
-    public void setVal(int valToSet, int newVal){
+    public void setValue(int valueToSet, int newValue){
         //Sets the value of the specified VAF to a new value
         //PRECONDITIONS: 0 <= valToSet < NUM_VAF, 0 <= newVal <= 5
 
-        if ((0 <= newVal) && (newVal <= 5)) {
-            currentVals[valToSet] = newVal;
+        if ((0 <= newValue) && (newValue <= 5)) {
+            currentValues[valueToSet] = newValue;
         }
         else {System.err.println("ERROR: INVALID_VAF_VALUE");}
 
         //POSTCONDITIONS: The value of the specified VAF is updated to the new value
     }
 
-    public void setAllVals(int[] newVals){
-        for (int i = 0; i < currentVals.length; i++)
-            this.currentVals[i] = newVals[i];
+    public void setAllValuesFromArray(int[] newValues){
+        for (int i = 0; i < currentValues.length; i++)
+            this.currentValues[i] = newValues[i];
     }
 
     //Misc. Member Methods
+    //
+    //TODO: Delete(?), unused now(?)
     @Override
     public String toString(){
         //To allow easy saving
         String outString = "";
 
         for (int i = 0; i < NUM_VAF; i++){
-            outString += "VAF_" + i + ": " + currentVals[i];
+            outString += "VAF_" + i + ": " + currentValues[i];
             if (i < NUM_VAF-1) {outString += "\n";}
         }
 

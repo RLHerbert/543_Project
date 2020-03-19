@@ -4,15 +4,25 @@ import java.util.*;
 import javafx.scene.control.*;
 
 public class Metrics {
-    //Member Variables
+    //Member Fields
     //
-    //Member Classes and Enums
-    //
-
-    //Static Variables
+    //Member Enums and Classes
     //
 
-    //Non-Static Variables
+    //Static Member Fields
+    //
+    //Constant Static Fields
+    //
+
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
     //
     protected ArrayList<Integer> saveData;
 
@@ -26,7 +36,7 @@ public class Metrics {
 
     public Metrics(String saveDataString){
         this.saveData = new ArrayList<Integer>();
-        readData(saveDataString);
+        readSaveData(saveDataString);
     }
 
     //Getters
@@ -38,12 +48,12 @@ public class Metrics {
 
     //Misc. Member Methods
     //
-    public String writeData()
+    public String writeSaveDataString()
     {
         return saveData.toString();
     }
 
-    public void readData(String data) {
+    public void readSaveData(String data) {
         //Scanner readInt = new Scanner(data);
 
         StringTokenizer lineTokenizer = new StringTokenizer(data, ",");

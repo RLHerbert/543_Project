@@ -2,6 +2,7 @@ package Project543;
 
 import javafx.scene.control.Tab;
 
+//Base class for all Metrics Tabs //TODO: Make abstract?
 public class MetricsTab extends Tab {
     //Member Fields
     //

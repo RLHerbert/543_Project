@@ -12,8 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.awt.desktop.AppForegroundListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,40 +22,42 @@ import java.util.Optional;
 //TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
 
 public class UserInterface {
-    //Member Variables
+    //Member Fields
     //
-    //Member Classes and Enums
+    //Member Enums and Classes
     //
     enum MenuOptions {FILE, EDIT, PREFERENCES, METRICS, HELP}
 
-    //Static Member Variables
+    //Static Member Fields
     //
-    //Constants
+    //Constant Static Fields
     //
     public static final String DEFAULT_STAGE_NAME = "CECS 543 Metrics Suite";
     public static final double MAX_HEIGHT = new Stage().getMaxHeight() - 25.0;
     public static final double MAX_WIDTH = new Stage().getMaxWidth();
     public static Language selectedLanguage = Language.NONE;
+    public static final String[] MAIN_MENU = {"File", "Edit", "Preferences", "Metrics", "Help"}; //TODO: Use
     public static final String[] FILE_MENU = {"New", "Open", "Save", "Exit"};
-    //public static final String[] EDIT_MENU = {""};
-    //public static final String[] PREFERENCES_MENU = {""};
+    public static final String[] EDIT_MENU = {""}; //Not yet implemented
+    public static final String[] PREFERENCES_MENU = {"Select Language"}; //TODO: Use
     public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index"};
-    //public static final String[] HELP_MENU = {""};
+    public static final String[] HELP_MENU = {""}; //Not yet implemented
 
     //Non-static Member Variables
-    VBox mainMenuBox; //The menu for every new window //TODO: Convert to MenuBar
-    TabPane projectTabs;
-    Stage projectStage;
-    Scene projectScene;
+    VBox mainMenuBox; //The menu for every new window //TODO: Delete, no longer used
+    TabPane projectTabs; //The window's TabPane to hold the metrics tabs
+    Stage projectStage; //The window's stage
+    Scene projectScene; //The window's scene
     Language defaultLanguage; //The default language of all new Metrics
-    boolean hasProject;
-    //public ProjectData project; //Maybe?
+    boolean hasProject; //Keeps track of whether or not a project occupies the window or not
 
     //Member Methods
     //
     //Constructor(s)
     //
     public UserInterface(){
+        //Default constructor
+
         //Create initial stage
         //Initialize
         projectTabs = new TabPane();
@@ -70,7 +70,7 @@ public class UserInterface {
 
     public UserInterface(ApplicationController controller){
         //First constructor called, hooks up to controller
-        //TODO: Convert to default constructor, shouldn't need to know about the controller
+        //TODO: Delete
         //mainMenuBox = setMainMenuBox(controller);
         setMainMenuBox(controller);
 
@@ -88,6 +88,7 @@ public class UserInterface {
 
         projectData.setDefaultProjectLanguage(this.defaultLanguage);
 
+        //Open the window
         this.newWindow(projectData);
     }
 
@@ -130,8 +131,6 @@ public class UserInterface {
         return scene;
     }
 
-    //TODO: public static Scene getNewScene(ProjectData projectData){}
-
     //Setters
     //
     public void setStageToDefault(Stage stageToSet, String stageName){
@@ -143,6 +142,7 @@ public class UserInterface {
     }
 
     public void setMainMenu(MenuBar menuBar, Menu[] mainMenu){
+        //Sets the main menu
         //File
         mainMenu[0] = new Menu("File");
 
@@ -162,6 +162,7 @@ public class UserInterface {
     }
 
     public void setSubMenus(Menu[] mainMenu){
+        //Sets the submenus of each of the main menu items
         //File
         MenuItem[] fileOptions = new MenuItem[4];
         setFileMenu(fileOptions);
@@ -185,8 +186,8 @@ public class UserInterface {
         //NYI
     }
 
-    //TODO
     public void setSubMenus(Menu[] mainMenu, ProjectData projectData){
+        //Sets the submenus and hooks them up to the ProjectData that is passed in
         //File
         MenuItem[] fileOptions = new MenuItem[4];
         setFileMenu(fileOptions, projectData);
@@ -211,6 +212,7 @@ public class UserInterface {
     }
 
     public void setFileMenu(MenuItem[] fileOptions){
+        //Sets the "File" menu
         for (int i = 0; i < 4; i++){
             fileOptions[i] = new MenuItem(FILE_MENU[i]);
         }
@@ -230,6 +232,7 @@ public class UserInterface {
     }
 
     public void setFileMenu(MenuItem[] fileOptions, ProjectData projectData){
+        //Sets the "File" menu and hooks it up to the ProjectData passed in
         for (int i = 0; i < 4; i++){
             fileOptions[i] = new MenuItem(FILE_MENU[i]);
         }
@@ -255,18 +258,21 @@ public class UserInterface {
     }
 
     public void setPreferencesMenu(MenuItem[] preferencesOptions){
+        //Sets the "Preferences" menu
         preferencesOptions[0] = new MenuItem("Select Language");
 
         preferencesOptions[0].setOnAction(actionEvent -> preferencesLanguageClick());
     }
 
     public void setPreferencesMenu(MenuItem[] preferencesOptions, ProjectData projectData){
+        //Sets the "Preferences" menu and hooks it up to the ProjectData passed in
         preferencesOptions[0] = new MenuItem("Select Language");
 
         preferencesOptions[0].setOnAction(actionEvent -> preferencesLanguageClick(projectData));
     }
     
     public void setMetricsMenu(Menu[] metricsOptions){
+        //Sets the "Metrics" menu
         for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
             metricsOptions[i] = new Menu(METRICS_MENU[i]);
         }
@@ -283,6 +289,7 @@ public class UserInterface {
     }
     
     public void setMetricsMenu(Menu[] metricsOptions, ProjectData projectData){
+        //Sets the "Metrics" menu and hooks it up to the ProjectData passed in
         for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
             metricsOptions[i] = new Menu(METRICS_MENU[i]);
         }
@@ -299,6 +306,7 @@ public class UserInterface {
     }
 
     public void setMainMenuBox(ApplicationController controller){
+        //TODO: Delete
         VBox mainMenuBox;
 
         //Create the Menu Bar for the main menu //TODO: convert to method
@@ -360,6 +368,7 @@ public class UserInterface {
     //Misc. Member Methods
     //
     public void openProjectWindow(ApplicationController controller){
+        //TODO: Delete
         //Create a new stage
         Stage projectStage = new Stage();
 
@@ -374,6 +383,7 @@ public class UserInterface {
         projectStage.show();
     }
 
+    //TODO: Delete(?)
     public void openProjectWindow(ProjectData project){
         //Create a new stage
         Stage projectStage = new Stage();
@@ -391,6 +401,7 @@ public class UserInterface {
         projectStage.show();
     }
 
+    //TODO: Delete
     private Scene mainMenu(ApplicationController controller){
         Scene mainMenu;
 
@@ -400,20 +411,18 @@ public class UserInterface {
     }
 
     public static void openProjectPane(ProjectData project){
-
+        //TODO: Delete(?)
     }
 
+    //TODO: Delete(?)
     public static void createNewProject(ProjectData newProject){
         //Open new project dialog window
         //Set newProject data to values in dialog window
         openProjectPane(newProject);
     }
 
-    public static void openLanguageSelectionWindow(ProjectData project){
-        //TODO: Move into FP tab
-    }
-
     public void newWindow(){
+        //Creates a new window without an associated ProjectData
         this.projectStage = new Stage();
         setStageToDefault(projectStage, DEFAULT_STAGE_NAME);
 
@@ -425,6 +434,7 @@ public class UserInterface {
     }
 
     public void newWindow(ProjectData projectData){
+        //Creates a new window associated to the passed ProjectData
         projectStage = new Stage();
         setStageToDefault(projectStage, DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
 
@@ -436,6 +446,7 @@ public class UserInterface {
     }
 
     public static String[] openNewProjectDialog(){
+        //Opens the new project dialog and returns the metadata entered by the user
         //TODO: Cleanup and comments, refactor and allow for cancelling
         String[] newProjectMetaData = new String[4];
 
@@ -503,12 +514,14 @@ public class UserInterface {
         return newProjectMetaData;
     }
 
+    //Onclick methods
+    //
     public void fileNewClick(){
         //Click action for File -> New
         if (this.hasProject == false){
             //If there is not a project associated with window, make one and associate it
             hasProject = true;
-            ProjectData projectData = ApplicationController.createProject(openNewProjectDialog());
+            ProjectData projectData = ApplicationController.createProjectFromMetaData(openNewProjectDialog());
             projectData.setDefaultProjectLanguage(this.defaultLanguage);
             projectScene = getNewScene(projectData);
             projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
@@ -516,7 +529,7 @@ public class UserInterface {
         }
         else {
             //Otherwise open a new windows
-            UserInterface newProjectWindow = new UserInterface(ApplicationController.createProject(openNewProjectDialog()));
+            UserInterface newProjectWindow = new UserInterface(ApplicationController.createProjectFromMetaData(openNewProjectDialog()));
         }
     }
 
@@ -567,11 +580,11 @@ public class UserInterface {
     }
 
     public void preferencesLanguageClick(){
-        this.defaultLanguage = Language.openLangSelectWindow();
+        this.defaultLanguage = Language.openLanguageSelectWindow();
     }
 
     public void preferencesLanguageClick(ProjectData projectData){
-        this.defaultLanguage = Language.openLangSelectWindow();
+        this.defaultLanguage = Language.openLanguageSelectWindow();
         projectData.setDefaultProjectLanguage(this.defaultLanguage);
     }
 

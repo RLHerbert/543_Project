@@ -4,8 +4,6 @@
 
 package Project543;
 
-import javafx.scene.control.Tab;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,22 +11,27 @@ import java.util.Scanner;
 
 //TODO: Refactor to new UI
 public class ApplicationController {
-    //Member Variables
+    //Member Fields
     //
     //Member Classes and Enums
     //
 
-    //Static Member Variables
+    //Static Member Fields
     //
-    //Constants
+    //Constant Static Fields
     //
     public static final int TOTAL_METRICS = 2;
 
-    //Non-Constant
+    //Non-Constant Static Fields
     //
-    public static ArrayList<ProjectData> projectList; //TODO: Private
+    public static ArrayList<ProjectData> openProjectList; //TODO: Private
 
     //Non-Static Member Variables
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
     UserInterface userInterface;
 
     //Member Methods
@@ -36,9 +39,11 @@ public class ApplicationController {
     //Constructor(s)
     //
     public ApplicationController(){
-        //userInterface = new UserInterface(this);
+        //Default constructor
+
+        //Initialize member fields
         userInterface = new UserInterface();
-        projectList = new ArrayList<ProjectData>();
+        openProjectList = new ArrayList<ProjectData>();
     }
 
     //Getters
@@ -49,21 +54,26 @@ public class ApplicationController {
 
     //Misc. Member Methods
     //
-    public static ProjectData createProject(String[] metaData){
+    //Project Manipulation
+    public static ProjectData createProjectFromMetaData(String[] metaData){
+        //Takes in a string of project metadata to create and return a new ProjectData object
         ProjectData projectData = new ProjectData(metaData); //TODO: String[] constructor?
-        ApplicationController.projectList.add(projectData);
+        ApplicationController.openProjectList.add(projectData);
 
         return projectData;
-        //project.setProjectName("TEST");
+    }
 
-        //userInterface.openProjectWindow(projectList.get(projectList.size()-1));
+    public static void deleteProject(ProjectData projectToDelete){
+        //Function prototype
+        //Deletes the specified project from the open project list
     }
 
     public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
+        //Opens a project (from a .ms file) to add it to the open project list and return it
         Scanner projectScanner = new Scanner(projectToOpen);
 
         ProjectData projectData = new ProjectData(projectScanner, projectToOpen.getName());
-        ApplicationController.projectList.add(projectData);
+        ApplicationController.openProjectList.add(projectData);
 
         return projectData;
     }
@@ -71,7 +81,7 @@ public class ApplicationController {
     public static boolean projectIsOpen(String fileNameToCheck){
         //Checks if a project with a given file name is already open
 
-        for (ProjectData projectData : projectList){
+        for (ProjectData projectData : openProjectList){
             if (projectData.getFileName().equals(fileNameToCheck)){
                 return true;
             }
@@ -79,6 +89,4 @@ public class ApplicationController {
 
         return false;
     }
-
-//    public static
 }

@@ -1,19 +1,40 @@
 package Project543;
 
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class ProjectMetaData {
-    //Member Variables
+    //Member Fields
+    //
+    //Member Enums and Classes
+    //
+
+    //Static Member Fields
+    //
+    //Constant Static Fields
     //
     public static final String FILE_EXT = ".ms"; //Requirement: CECS 543 Metrics Suite deals with .ms files
+
+    //Non-Constant Static Fields
+    //
+
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
     protected String fileName, projectName, productName, creatorName, projectComments; //Project metadata
-    protected Language defaultProjectLanguage; //The project's default language //TODO: Pass this to new FPs
+    protected Language defaultProjectLanguage; //The project's default language
 
     //Member Methods
+    //
     //Constructor(s)
+    //
     public ProjectMetaData(){
         //Default constructor
+
+        //Initialize member fields
         this.projectName = "";
         this.productName = "";
         this.creatorName = "";
@@ -24,7 +45,9 @@ public class ProjectMetaData {
     }
 
     public ProjectMetaData(String[] metaData){
-        //New save file constructor
+        //Metadata constructor, takes in a string of metadata and sets relevant fields
+
+        //Initialize member fields
         this.projectName = metaData[0];
         this.productName = metaData[1];
         this.creatorName = metaData[2];
@@ -34,20 +57,9 @@ public class ProjectMetaData {
         this.defaultProjectLanguage = Language.NONE;
     }
 
-    //TODO: implement: public ProjectMetaData(SAVEDFILE){}
     public ProjectMetaData(Scanner savedFile, String fileName){
         //Save file constructor
         this.setFileName(fileName);
-
-        //String saveData = savedFile.nextLine();
-
-        //StringTokenizer stringTokenizer = new StringTokenizer(saveData, ",");
-
-        //this.projectName = stringTokenizer.nextToken();
-        //this.productName = stringTokenizer.nextToken();
-        //this.creatorName = stringTokenizer.nextToken();
-        //this.projectComments = stringTokenizer.nextToken();
-        //this.defaultProjectLanguage = parseLanguage(stringTokenizer.nextToken());
 
         this.projectName = savedFile.nextLine();
         this.productName = savedFile.nextLine();
@@ -59,6 +71,7 @@ public class ProjectMetaData {
     //Getters
     //
     //Getters for member variables
+    //
     public String getFileName() {
         return this.fileName;
     }
@@ -83,10 +96,10 @@ public class ProjectMetaData {
         return this.defaultProjectLanguage;
     }
 
-    public int getLanguageLOC(){
+    public int getLanguageLinesOfCode(){
         //Returns the lines of code per FP for the project's language
         if (defaultProjectLanguage != null) {
-            return this.defaultProjectLanguage.locPerFP();
+            return this.defaultProjectLanguage.linesOfCodePerFunctionPoint();
         }
 
         System.err.println("ERROR: LANGUAGE_NOT_SET");
@@ -96,6 +109,7 @@ public class ProjectMetaData {
     //Setters
     //
     //Setters for the member variables
+    //
     public void setFileName(){
         this.fileName = projectName + FILE_EXT;
     }
@@ -140,12 +154,6 @@ public class ProjectMetaData {
                 projectComments + "\n" +
                 defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
 
-//        String outString =
-//                        "PROJECT_NAME: " + projectName + "\n"        +
-//                        "PRODUCT_NAME: " + productName + "\n"        +
-//                        "CREATOR_NAME: " + creatorName + "\n"        +
-//                        "PROJECT_COMMENTS: " + projectComments + "\n"    +
-//                        "PROJECT_LANGUAGE: " + defaultProjectLanguage; //CALLER ALWAYS ADDS "\n"
         return metaData;
     }
 
