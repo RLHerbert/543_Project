@@ -43,8 +43,13 @@ public class UserInterface {
     public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index"};
     public static final String[] HELP_MENU = {""}; //Not yet implemented
 
-    //Non-static Member Variables
-    VBox mainMenuBox; //The menu for every new window //TODO: Delete, no longer used
+    //Non-Static Member Fields
+    //
+    //Constant Member Fields
+    //
+
+    //Non-Constant Member Fields
+    //
     TabPane projectTabs; //The window's TabPane to hold the metrics tabs
     Stage projectStage; //The window's stage
     Scene projectScene; //The window's scene
@@ -66,17 +71,6 @@ public class UserInterface {
 
         //Open the window
         this.newWindow();
-    }
-
-    public UserInterface(ApplicationController controller){
-        //First constructor called, hooks up to controller
-        //TODO: Delete
-        //mainMenuBox = setMainMenuBox(controller);
-        setMainMenuBox(controller);
-
-        defaultLanguage =  Language.NONE;
-
-        this.openProjectWindow(controller);
     }
 
     public UserInterface(ProjectData projectData){
@@ -305,122 +299,8 @@ public class UserInterface {
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
 
-    public void setMainMenuBox(ApplicationController controller){
-        //TODO: Delete
-        VBox mainMenuBox;
-
-        //Create the Menu Bar for the main menu //TODO: convert to method
-        MenuBar menuBar = new MenuBar();
-        Menu fileMenu = new Menu("File");
-        Menu editMenu = new Menu("Edit");
-        Menu preferencesMenu = new Menu("Preferences");
-        Menu metricsMenu = new Menu("Metrics");
-        Menu helpMenu = new Menu("Help");
-        menuBar.getMenus().addAll(fileMenu, editMenu, preferencesMenu, metricsMenu, helpMenu);
-
-        //Fill "File" with submenus //TODO: Convert to method
-        MenuItem[] fileMenuList = new MenuItem[4];
-        fileMenuList[0] = new MenuItem("New");
-        fileMenuList[1] = new MenuItem("Open");
-        fileMenuList[2] = new MenuItem("Save");
-        fileMenuList[3] = new MenuItem("Exit");
-        fileMenu.getItems().addAll(fileMenuList);
-
-        //Set fileMenuList actions //TODO: Convert to method
-        //fileMenuList[0].setOnAction(actionEvent -> controller.createProject());
-        fileMenuList[3].setOnAction(actionEvent -> Platform.exit());
-
-        //Fill "Metrics" with submenu(s) //TODO: Convert to method
-        Menu functionPointsMenu = new Menu("Function Points");
-        Menu softwareMaturityIndexMenu = new Menu("Software Maturity Index");
-        metricsMenu.getItems().addAll(functionPointsMenu, softwareMaturityIndexMenu);
-
-        //Fill "Function Points" menu with submenu //TODO: Convert to method?
-        MenuItem enterFPData = new MenuItem("Enter FP Data");
-        functionPointsMenu.getItems().add(enterFPData);
-
-        //Set enterFPData action //TODO: Convert to method?
-        //TODO: IMPORTANT!!! change action below to check if project exists already
-        // if project exists, thisProject.getNewFunctionPoint() and add to tab pane
-        // also make tab title language specific? or like differentiate tab titles somehow
-        FunctionPointTab newFPTab;
-        TabPane metricsTabPane = new TabPane();
-        enterFPData.setOnAction(e ->
-                metricsTabPane.getTabs().add(new FunctionPointTab("New tab")));
-
-        //Display everything
-        mainMenuBox = new VBox(menuBar);
-
-        //TODO: change stuff below; modularize into methods and stuff
-        //change so that it only creates tab pane on first tab opening
-
-
-        mainMenuBox.getChildren().add(metricsTabPane);
-
-//        FPtab.setContent(grid);
-//        tabs.getTabs().add(FPtab);
-//        stage.projectStageLayout.getChildren().add(tabs);
-
-        this.mainMenuBox = mainMenuBox;
-        //return mainMenuBox;
-    }
-
     //Misc. Member Methods
     //
-    public void openProjectWindow(ApplicationController controller){
-        //TODO: Delete
-        //Create a new stage
-        Stage projectStage = new Stage();
-
-        //Stage setup
-        projectStage.setTitle(DEFAULT_STAGE_NAME);
-        projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
-        //Scene primaryScene = new Scene(primaryStage, 800, 775);
-
-        Scene projectMenuScene = mainMenu(controller);
-        projectStage.setScene(projectMenuScene);
-
-        projectStage.show();
-    }
-
-    //TODO: Delete(?)
-    public void openProjectWindow(ProjectData project){
-        //Create a new stage
-        Stage projectStage = new Stage();
-        //TODO: Handle new project dialog
-
-        //Stage setup
-        projectStage.setTitle(DEFAULT_STAGE_NAME + " - " + project.getProjectName());
-        projectStage.setX(0); projectStage.setX(0); projectStage.setWidth(800); projectStage.setHeight(775);
-        projectStage.initModality(Modality.NONE);
-        VBox localMenuBox = new VBox(mainMenuBox);
-
-        Scene projectMenuScene = new Scene(localMenuBox);
-        projectStage.setScene(projectMenuScene);
-
-        projectStage.show();
-    }
-
-    //TODO: Delete
-    private Scene mainMenu(ApplicationController controller){
-        Scene mainMenu;
-
-        mainMenu = new Scene(mainMenuBox);
-
-        return mainMenu;
-    }
-
-    public static void openProjectPane(ProjectData project){
-        //TODO: Delete(?)
-    }
-
-    //TODO: Delete(?)
-    public static void createNewProject(ProjectData newProject){
-        //Open new project dialog window
-        //Set newProject data to values in dialog window
-        openProjectPane(newProject);
-    }
-
     public void newWindow(){
         //Creates a new window without an associated ProjectData
         this.projectStage = new Stage();

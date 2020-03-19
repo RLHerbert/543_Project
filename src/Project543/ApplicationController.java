@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//TODO: Refactor to new UI
 public class ApplicationController {
     //Member Fields
     //
@@ -57,7 +56,7 @@ public class ApplicationController {
     //Project Manipulation
     public static ProjectData createProjectFromMetaData(String[] metaData){
         //Takes in a string of project metadata to create and return a new ProjectData object
-        ProjectData projectData = new ProjectData(metaData); //TODO: String[] constructor?
+        ProjectData projectData = new ProjectData(metaData);
         ApplicationController.openProjectList.add(projectData);
 
         return projectData;

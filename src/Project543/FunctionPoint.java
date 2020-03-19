@@ -44,16 +44,6 @@ public class FunctionPoint extends InformationDomainValue {
         this.functionPointLanguage = Language.NONE;
     }
 
-    //TODO: Delete
-    public FunctionPoint(Scanner savedFile){
-        //OLD Constructor for saved files
-        super(savedFile);
-        this.valueAdjustmentFactors = new ValueAdjustmentFactor(savedFile);
-
-        //Update total function points
-        updateTotalFunctionPoints();
-    }
-
     public FunctionPoint(String saveDataString){
         //Save data constructor
 
@@ -198,13 +188,5 @@ public class FunctionPoint extends InformationDomainValue {
                 totalCount * (0.65 + (0.01 * getSumOfValAdjFac())) //The formula for calculating FPs
         );
         this.updateCodeSize();
-    }
-
-
-    //Not used
-    @Override public String toString(){
-        //To allow simple saving
-        String outString = super.toString() + "\n" + valueAdjustmentFactors;
-        return outString;
     }
 }

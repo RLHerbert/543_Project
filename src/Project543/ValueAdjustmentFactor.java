@@ -58,20 +58,6 @@ public class ValueAdjustmentFactor {
         }
     }
 
-    public ValueAdjustmentFactor(Scanner savedFile){
-        //TODO: Delete(?), now unused(?)
-        //Save file constructor
-        currentValues = new int[NUM_VAF];
-
-        String fileLine = "";
-
-        for (int i = 0; i < NUM_VAF; i++){
-            fileLine = savedFile.nextLine();
-            fileLine = fileLine.substring(fileLine.lastIndexOf(":")+2);
-            this.currentValues[i] = Integer.parseInt(fileLine);
-        }
-    }
-
     //Getters
     //
     public int getValue(int valueToGet){
@@ -116,17 +102,4 @@ public class ValueAdjustmentFactor {
 
     //Misc. Member Methods
     //
-    //TODO: Delete(?), unused now(?)
-    @Override
-    public String toString(){
-        //To allow easy saving
-        String outString = "";
-
-        for (int i = 0; i < NUM_VAF; i++){
-            outString += "VAF_" + i + ": " + currentValues[i];
-            if (i < NUM_VAF-1) {outString += "\n";}
-        }
-
-        return outString;
-    }
 }

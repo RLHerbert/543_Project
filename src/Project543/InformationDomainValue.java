@@ -18,31 +18,6 @@ public class InformationDomainValue extends Metrics {
     public enum Complexity{
         //Enum to hold complexity for each IDV
         SIMPLE, AVERAGE, COMPLEX;
-
-
-        //TODO: delete
-        @Override
-        public String toString() {
-            String outString = "COMPLEXITY: ";
-
-            switch (this){
-                case SIMPLE:
-                    outString += "SIMPLE";
-                    break;
-                case AVERAGE:
-                    outString += "AVERAGE";
-                    break;
-                case COMPLEX:
-                    outString += "COMPLEX";
-                    break;
-                default:
-                    outString += "ERROR";
-                    System.err.println("ERROR: COMPLEXITY_UNDEFINED");
-                    break;
-            }
-
-            return outString;
-        }
     }
 
     //Nested class to handle inputs
@@ -55,42 +30,10 @@ public class InformationDomainValue extends Metrics {
             inputComplexity = Complexity.AVERAGE;
         }
 
-        public Input(Scanner savedFileLine){
-            //OLD save file constructor //TODO: Delete
-            String fileLine = savedFileLine.nextLine();
-            //System.out.println(fileLine);
-            String number = fileLine.substring(fileLine.indexOf(" INPUTS: ") + 9, fileLine.indexOf(" C"));
-            //System.out.println(number);
-            numberInputs = Integer.parseInt(number);
-            String complexity = fileLine.substring(fileLine.lastIndexOf(":")+2);
-            //System.out.println(complexity);
-            switch (complexity){
-                case "SIMPLE":
-                    inputComplexity = Complexity.SIMPLE;
-                    break;
-                case "AVERAGE":
-                    inputComplexity = Complexity.AVERAGE;
-                    break;
-                case "COMPLEX":
-                    inputComplexity = Complexity.COMPLEX;
-                    break;
-                default:
-                    System.err.println("ERROR: ERROR_READING_COMPLEXITY");
-                    break;
-            }
-            //numberInputs = savedFileLine.nextInt();
-        }
-
         public Input(int numberInputs, int inputComplexity){
             //Parameterized constructor
             this.numberInputs = numberInputs;
             this.inputComplexity = Complexity.values()[inputComplexity];
-        }
-
-        @Override
-        public String toString() {
-            //TODO: Delete
-            return "INPUTS: " + numberInputs + " " + inputComplexity;
         }
     }
 
@@ -139,18 +82,6 @@ public class InformationDomainValue extends Metrics {
         this.externalInquiries = new Input();
         this.internalLogicFiles = new Input();
         this.externalInterfaceFiles = new Input();
-
-        updateTotalCount();
-    }
-
-    public InformationDomainValue(Scanner savedFile){
-        //TODO: Delete
-        //OLD Save file constructor
-        this.externalInputs = new Input(savedFile);
-        this.externalOutputs =  new Input(savedFile);
-        this.externalInquiries = new Input(savedFile);
-        this.internalLogicFiles = new Input(savedFile);
-        this.externalInterfaceFiles = new Input(savedFile);
 
         updateTotalCount();
     }
@@ -311,21 +242,5 @@ public class InformationDomainValue extends Metrics {
         for (int i = InformationDomain.EXTERNAL_INPUTS.ordinal() /*0*/; i <= InformationDomain.EXTERNAL_INTERFACE_FILES.ordinal() /*4*/; i++){
             totalCount += currentSumsOfInputs[i];
         }
-    }
-
-    //TODO: Delete(?), new save system doesn't need this
-    @Override
-    public String toString() {
-        //To allow easy saving
-        //TODO: Refactor
-        String outString =
-                "EXTERNAL_INPUTS: "             + externalInputs        + "\n" +
-                "EXTERNAL_OUTPUTS: "            + externalOutputs       + "\n" +
-                "EXTERNAL_INQUIRIES: "          + externalInquiries     + "\n" +
-                "INTERNAL_LOGIC_FILES: "        + internalLogicFiles    + "\n" +
-                "EXTERNAL_INTERFACE_FILES: "    + externalInterfaceFiles //CALLER ALWAYS ADDS "\n"
-                ;
-
-        return outString;
     }
 }

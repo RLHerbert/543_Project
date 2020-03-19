@@ -31,7 +31,6 @@ public class ProjectData extends ProjectMetaData {
 
     //Non-Constant Member Fields
     //
-    public FunctionPoint functionPointMetric; //TODO: Delete
     public ArrayList<MetricsTab> metricsTabs;
 
     //Member Methods
@@ -71,11 +70,7 @@ public class ProjectData extends ProjectMetaData {
     }
 
     //Getters
-    //TODO: Delete, moved into FP
-    public int getCodeSize(){
-        //Returns the lines of code (LOC) for the project based on all entered data and the selected language
-        return (functionPointMetric.getTotalFunctionPoints() * this.getLanguageLinesOfCode());
-    }
+    //
 
     public Tab getNewFunctionPoint(){
         //Creates a new FunctionPointTab, adds it to metricsTabs, and returns it
