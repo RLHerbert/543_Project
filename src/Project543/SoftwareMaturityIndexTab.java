@@ -36,7 +36,7 @@ public class SoftwareMaturityIndexTab extends MetricsTab {
     //Constructor(s)
     //
     SoftwareMaturityIndexTab(String tabTitle){
-
+        super(TAB_TITLE);
     }
 
     SoftwareMaturityIndexTab(String tabTitle, SoftwareMaturityIndex softwareMaturityIndex){
