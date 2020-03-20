@@ -189,7 +189,7 @@ public class SoftwareMaturityIndex extends Metrics {
     }
 
     public void setMetrics(MetricValuesRow metricValuesRow){
-        //Recomputes the metrics of the row
+        //Recomputes the metrics of the row, i.e. SMI and TotalModules
         this.setTotalModules(metricValuesRow);
         this.setSoftwareMaturityIndex(metricValuesRow);
     }
@@ -211,6 +211,13 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     public void /*return something?*/ addRow(){
         //Adds a row to the metrics //Returns it?
-
+        if (this.softwareMaturityIndexRows.size() == 0){
+            //If the metric is empty
+            this.softwareMaturityIndexRows.add(new MetricValuesRow());
+        }
+        else {
+            //Otherwise
+            this.softwareMaturityIndexRows.add(new MetricValuesRow(this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1)));
+        }
     }
 }
