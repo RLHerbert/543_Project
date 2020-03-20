@@ -34,6 +34,7 @@ public class SoftwareMaturityIndex extends Metrics {
 
     //Setters
     //
+    public void setSaveData() {}
 
     //Misc. Member Methods
     //
