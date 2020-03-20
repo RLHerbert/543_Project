@@ -3,6 +3,7 @@ package Project543;
 import java.util.ArrayList;
 
 //Class to handle the Software Maturity Index metric
+//TODO: Ensure that the first row only takes in modules added
 public class SoftwareMaturityIndex extends Metrics {
     //Member Fields
     //
@@ -20,9 +21,22 @@ public class SoftwareMaturityIndex extends Metrics {
             this.SMI = 0.0; this.modulesAdded = 0; this.modulesChanged = 0; this.modulesDeleted = 0; this.totalModules = 0;
         }
 
-        public MetricValuesRow(int[] saveData){
-            //Save file constructor
-            //TODO:
+        public MetricValuesRow(int firstModulesAdded){
+            //First row constructor
+            this.SMI = 0.0;
+            this.modulesAdded = firstModulesAdded;
+            this.modulesChanged = 0;
+            this.modulesChanged = 0;
+            this.totalModules = firstModulesAdded;
+        }
+
+        public MetricValuesRow(MetricValuesRow previousRow, int[] saveData){
+            //Save data constructor, all rows except the first
+            this.SMI = 0.0;
+            this.modulesAdded = saveData[0];
+            this.modulesChanged = saveData[1];
+            this.modulesDeleted = saveData[2];
+            this.totalModules = previousRow.totalModules;
         }
 
         public MetricValuesRow(MetricValuesRow previousRow){
@@ -42,7 +56,9 @@ public class SoftwareMaturityIndex extends Metrics {
     //Constant Static Fields
     //
     public static final int METRIC_ID = ((int) ('S' + 'M' + 'I'));
-    public static final String[] tabColumnNames = {"SMI", "Modules Added", "Modules Changed", "Modules Deleted", "Total Modules"};
+    //Save data format: [METRIC_ID, 3-tuples of [modulesAdded, modulesChanged, modulesDeleted]]
+    public static final String METRIC_NAME = "Software Maturity Index";
+    public static final String[] TAB_COLUMN_NAMES = {"SMI", "Modules Added", "Modules Changed", "Modules Deleted", "Total Modules"};
     public static final int NUMBER_OF_COLUMNS = ColumnNames.values().length; //TODO: Use or delete
 
     //Non-Constant Static Fields
@@ -63,6 +79,7 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     public SoftwareMaturityIndex(){
         //Default constructor
+        super();
 
         //Initialize member fields
         this.softwareMaturityIndexRows = new ArrayList<MetricValuesRow>();
@@ -70,8 +87,14 @@ public class SoftwareMaturityIndex extends Metrics {
 
     public SoftwareMaturityIndex(String saveData){
         //Saved file constructor
+        super();
+
+        //Set the save data from read
+        this.readSaveData(saveData);
 
         //Initialize member fields
+        this.softwareMaturityIndexRows = new ArrayList<MetricValuesRow>();
+        this.setFromSaveData();
     }
 
     //Getters
@@ -110,6 +133,27 @@ public class SoftwareMaturityIndex extends Metrics {
         return (metricValuesRow.modulesAdded + metricValuesRow.modulesChanged + metricValuesRow.modulesDeleted);
     }
 
+    public ArrayList<MetricValuesRow> getAllRows(){
+        //Gets them all
+        return this.softwareMaturityIndexRows;
+    }
+
+    public MetricValuesRow getNewRow(){
+        //Creates a new row and returns it
+        this.addRow();
+
+        return this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1);
+    }
+
+    public MetricValuesRow getLatestRow(){
+        //Returns the row at the end of softwareMaturityIndexRows if it exists, otherwise it adds a row and returns it
+        if (this.softwareMaturityIndexRows.size() == 0){
+            return this.getNewRow();
+        }
+
+        return softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1);
+    }
+
     /*
     public int[] getMetricArray(MetricValuesRow metricValuesRow){
         //Gets an array of all the values of the specified MetricValues
@@ -131,9 +175,8 @@ public class SoftwareMaturityIndex extends Metrics {
     public void setSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
         if (metricValuesRow.totalModules > 0) {
             metricValuesRow.SMI =
-                    (metricValuesRow.totalModules - getAllModulesSum(metricValuesRow))
-                    /
-                    metricValuesRow.totalModules;
+                    ((double) metricValuesRow.totalModules - getAllModulesSum(metricValuesRow))
+                    / (double) metricValuesRow.totalModules;
         }
         else {
             System.err.println("ERROR: NON_POSITIVE_TOTAL_MODULES");
@@ -145,8 +188,8 @@ public class SoftwareMaturityIndex extends Metrics {
         //Set module data
         metricValuesRow.modulesAdded = modulesAdded;
 
-       //Recompute metrics
-        this.setMetrics(metricValuesRow);
+        //Recompute metrics
+        // this.setMetrics(metricValuesRow);
     }
 
     public void setModulesChanged(MetricValuesRow metricValuesRow, int modulesChanged){
@@ -154,7 +197,7 @@ public class SoftwareMaturityIndex extends Metrics {
         metricValuesRow.modulesChanged = modulesChanged;
 
         //Recompute metrics
-        this.setMetrics(metricValuesRow);
+        //this.setMetrics(metricValuesRow);
     }
 
     public void setModulesDeleted(MetricValuesRow metricValuesRow, int modulesDeleted){
@@ -162,7 +205,7 @@ public class SoftwareMaturityIndex extends Metrics {
         metricValuesRow.modulesDeleted = modulesDeleted;
 
         //Recompute metrics
-        this.setMetrics(metricValuesRow);
+        //this.setMetrics(metricValuesRow);
     }
 
     public void setTotalModules(MetricValuesRow metricValuesRow){
@@ -176,6 +219,8 @@ public class SoftwareMaturityIndex extends Metrics {
         }
     }
 
+    //Helpers
+    //
     public void setMetricValuesFromArray(MetricValuesRow metricValuesRow, int[] metricValueArray){
         //Takes in an int array of size 3, sets the values for the row from this
         //PRECONDITION: metricValueArray is an integer array of size 3
@@ -194,10 +239,33 @@ public class SoftwareMaturityIndex extends Metrics {
         this.setSoftwareMaturityIndex(metricValuesRow);
     }
 
+    public void setFromSaveData(){
+        //Sets the rows from the save data
+        for (int i = 1; i < this.softwareMaturityIndexRows.size(); i+=3){
+            int[] rowSavedData = new int[] {};
+            if (i == 1){
+                MetricValuesRow firstRow = new MetricValuesRow(rowSavedData[0]);
+                this.softwareMaturityIndexRows.add(firstRow);
+            }
+            else {
+                MetricValuesRow rowToAdd = new MetricValuesRow(this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1), rowSavedData);
+                this.setMetrics(rowToAdd);
+                this.softwareMaturityIndexRows.add(rowToAdd);
+            }
+        }
+    }
+
     //Implement setSaveData method from Metrics
     //
     @Override
-    public void setSaveData() {}
+    public void setSaveData() {
+        this.saveData.add(METRIC_ID);
+        for (MetricValuesRow metricValuesRow : this.softwareMaturityIndexRows){
+            this.saveData.add(metricValuesRow.modulesAdded);
+            this.saveData.add(metricValuesRow.modulesChanged);
+            this.saveData.add(metricValuesRow.modulesDeleted);
+        }
+    }
 
     //Misc. Member Methods
     //
@@ -218,6 +286,7 @@ public class SoftwareMaturityIndex extends Metrics {
         else {
             //Otherwise
             this.softwareMaturityIndexRows.add(new MetricValuesRow(this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1)));
+            this.setMetrics(this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1));
         }
     }
 }
