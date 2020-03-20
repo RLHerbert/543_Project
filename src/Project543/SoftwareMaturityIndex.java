@@ -9,7 +9,24 @@ public class SoftwareMaturityIndex extends Metrics {
     //Member Enums and Classes
     //
     enum ColumnNames {SMI, MODULES_ADDED, MODULES_CHANGED, MODULES_DELETED, TOTAL_MODULES} //The names of the columns in the SMI tab //TODO: Use or delete
-    public class MetricValuesRow {public int SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules;}
+    public class MetricValuesRow {
+        //Member fields
+        public int SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules;
+
+        //Constructor(s)
+        public MetricValuesRow(){
+            //Default constructor
+            this.SMI = 0; this.modulesAdded = 0; this.modulesChanged = 0; this.modulesDeleted = 0; this.totalModules = 0;
+        }
+
+        public MetricValuesRow(int[] saveData){
+            //Save file constructor
+        }
+
+        public MetricValuesRow(MetricValuesRow previousRow){
+            //Constructor for constructing from previous row
+        }
+    }
 
     //Static Member Fields
     //
@@ -38,7 +55,14 @@ public class SoftwareMaturityIndex extends Metrics {
     public SoftwareMaturityIndex(){
         //Default constructor
 
-        //Initialize
+        //Initialize member fields
+
+    }
+
+    public SoftwareMaturityIndex(String saveData){
+        //Saved file constructor
+
+        //Initialize member fields
     }
 
     //Getters
@@ -65,10 +89,21 @@ public class SoftwareMaturityIndex extends Metrics {
         return metricValuesRow.totalModules;
     }
 
+    public int getModulesDelta(MetricValuesRow metricValuesRow){
+        //Returns the change in the row's totalModules from the previous row
+        return metricValuesRow.modulesAdded - metricValuesRow.modulesDeleted;
+    }
+
     public int[] getMetricArray(MetricValuesRow metricValuesRow){
         //Gets an array of all the values of the specified MetricValues
-        //TODO
-        return new int[] {0};
+        int[] rowValues = new int[] {
+                metricValuesRow.SMI,
+                metricValuesRow.modulesAdded,
+                metricValuesRow.modulesChanged,
+                metricValuesRow.modulesDeleted,
+                metricValuesRow.totalModules
+        };
+        return rowValues;
     }
 
     //Setters
