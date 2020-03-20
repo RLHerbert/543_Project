@@ -11,20 +11,29 @@ public class SoftwareMaturityIndex extends Metrics {
     enum ColumnNames {SMI, MODULES_ADDED, MODULES_CHANGED, MODULES_DELETED, TOTAL_MODULES} //The names of the columns in the SMI tab //TODO: Use or delete
     public class MetricValuesRow {
         //Member fields
-        public int SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules;
+        public double SMI;
+        public int modulesAdded, modulesChanged, modulesDeleted, totalModules;
 
         //Constructor(s)
         public MetricValuesRow(){
             //Default constructor
-            this.SMI = 0; this.modulesAdded = 0; this.modulesChanged = 0; this.modulesDeleted = 0; this.totalModules = 0;
+            this.SMI = 0.0; this.modulesAdded = 0; this.modulesChanged = 0; this.modulesDeleted = 0; this.totalModules = 0;
         }
 
         public MetricValuesRow(int[] saveData){
             //Save file constructor
+            //TODO:
         }
 
         public MetricValuesRow(MetricValuesRow previousRow){
             //Constructor for constructing from previous row
+
+            //Initialize
+            this.SMI = 1.0;
+            this.modulesAdded = 0;
+            this.modulesChanged = 0;
+            this.modulesDeleted = 0;
+            this.totalModules = previousRow.totalModules;
         }
     }
 
@@ -46,7 +55,7 @@ public class SoftwareMaturityIndex extends Metrics {
 
     //Non-Constant Member Fields
     //
-    public ArrayList<MetricValuesRow> softwareMaturityValues;
+    public ArrayList<MetricValuesRow> softwareMaturityIndexRows;
 
     //Member Methods
     //
@@ -56,7 +65,7 @@ public class SoftwareMaturityIndex extends Metrics {
         //Default constructor
 
         //Initialize member fields
-
+        this.softwareMaturityIndexRows = new ArrayList<MetricValuesRow>();
     }
 
     public SoftwareMaturityIndex(String saveData){
@@ -69,7 +78,7 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     //Get metric values
     //
-    public int getSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
+    public double getSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
         return metricValuesRow.SMI;
     }
 
@@ -89,11 +98,19 @@ public class SoftwareMaturityIndex extends Metrics {
         return metricValuesRow.totalModules;
     }
 
-    public int getModulesDelta(MetricValuesRow metricValuesRow){
+    //Helpers
+    //
+    public int getTotalModulesDelta(MetricValuesRow metricValuesRow){
         //Returns the change in the row's totalModules from the previous row
         return metricValuesRow.modulesAdded - metricValuesRow.modulesDeleted;
     }
 
+    public int getAllModulesSum(MetricValuesRow metricValuesRow){
+        //Returns the sum of modules added, changed, and deleted
+        return (metricValuesRow.modulesAdded + metricValuesRow.modulesChanged + metricValuesRow.modulesDeleted);
+    }
+
+    /*
     public int[] getMetricArray(MetricValuesRow metricValuesRow){
         //Gets an array of all the values of the specified MetricValues
         int[] rowValues = new int[] {
@@ -105,33 +122,76 @@ public class SoftwareMaturityIndex extends Metrics {
         };
         return rowValues;
     }
+     */
 
     //Setters
     //
     //Set metric values
     //
     public void setSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
-
+        if (metricValuesRow.totalModules > 0) {
+            metricValuesRow.SMI =
+                    (metricValuesRow.totalModules - getAllModulesSum(metricValuesRow))
+                    /
+                    metricValuesRow.totalModules;
+        }
+        else {
+            System.err.println("ERROR: NON_POSITIVE_TOTAL_MODULES");
+            metricValuesRow.SMI = 0;
+        }
     }
 
     public void setModulesAdded(MetricValuesRow metricValuesRow, int modulesAdded){
+        //Set module data
+        metricValuesRow.modulesAdded = modulesAdded;
 
+       //Recompute metrics
+        this.setMetrics(metricValuesRow);
     }
 
     public void setModulesChanged(MetricValuesRow metricValuesRow, int modulesChanged){
+        //Set module data
+        metricValuesRow.modulesChanged = modulesChanged;
 
+        //Recompute metrics
+        this.setMetrics(metricValuesRow);
     }
 
-    public void setModulesDeleted(MetricValuesRow metricValuesRow, int modulesChanged){
+    public void setModulesDeleted(MetricValuesRow metricValuesRow, int modulesDeleted){
+        //Set module data
+        metricValuesRow.modulesDeleted = modulesDeleted;
 
+        //Recompute metrics
+        this.setMetrics(metricValuesRow);
     }
 
     public void setTotalModules(MetricValuesRow metricValuesRow){
-
+        int totalModules = metricValuesRow.totalModules + this.getTotalModulesDelta(metricValuesRow);
+        if (totalModules < 0){
+            System.err.println("ERROR: NEGATIVE_TOTAL_MODULES");
+            metricValuesRow.modulesDeleted = metricValuesRow.modulesAdded;
+        }
+        else {
+            metricValuesRow.totalModules = totalModules;
+        }
     }
 
     public void setMetricValuesFromArray(MetricValuesRow metricValuesRow, int[] metricValueArray){
         //Takes in an int array of size 3, sets the values for the row from this
+        //PRECONDITION: metricValueArray is an integer array of size 3
+        //Set the modules
+        metricValuesRow.modulesAdded = metricValueArray[0];
+        metricValuesRow.modulesChanged = metricValueArray[1];
+        metricValuesRow.modulesDeleted = metricValueArray[2];
+
+        //Recompute the metrics
+        this.setMetrics(metricValuesRow);
+    }
+
+    public void setMetrics(MetricValuesRow metricValuesRow){
+        //Recomputes the metrics of the row
+        this.setTotalModules(metricValuesRow);
+        this.setSoftwareMaturityIndex(metricValuesRow);
     }
 
     //Implement setSaveData method from Metrics
@@ -145,5 +205,12 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     public void updateAllRows(){
         //Updates each SMI row based on currently entered information
+    }
+
+    //Helpers
+    //
+    public void /*return something?*/ addRow(){
+        //Adds a row to the metrics //Returns it?
+
     }
 }
