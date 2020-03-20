@@ -1,6 +1,5 @@
 package Project543;
 
-import java.time.chrono.MinguoEra;
 import java.util.ArrayList;
 
 //Class to handle the Software Maturity Index metric
@@ -10,7 +9,7 @@ public class SoftwareMaturityIndex extends Metrics {
     //Member Enums and Classes
     //
     enum ColumnNames {SMI, MODULES_ADDED, MODULES_CHANGED, MODULES_DELETED, TOTAL_MODULES} //The names of the columns in the SMI tab //TODO: Use or delete
-    public class MetricValues{public int SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules;}
+    public class MetricValuesRow {public int SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules;}
 
     //Static Member Fields
     //
@@ -30,7 +29,7 @@ public class SoftwareMaturityIndex extends Metrics {
 
     //Non-Constant Member Fields
     //
-    public ArrayList<MetricValues> softwareMaturityValues;
+    public ArrayList<MetricValuesRow> softwareMaturityValues;
 
     //Member Methods
     //
@@ -46,27 +45,27 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     //Get metric values
     //
-    public int getSoftwareMaturityIndex(MetricValues metricValues){
-        return metricValues.SMI;
+    public int getSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
+        return metricValuesRow.SMI;
     }
 
-    public int getModulesAdded(MetricValues metricValues){
-        return metricValues.modulesAdded;
+    public int getModulesAdded(MetricValuesRow metricValuesRow){
+        return metricValuesRow.modulesAdded;
     }
 
-    public int getModulesChanged(MetricValues metricValues){
-        return metricValues.modulesChanged;
+    public int getModulesChanged(MetricValuesRow metricValuesRow){
+        return metricValuesRow.modulesChanged;
     }
 
-    public int getModulesDeleted(MetricValues metricValues){
-        return metricValues.modulesDeleted;
+    public int getModulesDeleted(MetricValuesRow metricValuesRow){
+        return metricValuesRow.modulesDeleted;
     }
 
-    public int getTotalModules(MetricValues metricValues){
-        return metricValues.totalModules;
+    public int getTotalModules(MetricValuesRow metricValuesRow){
+        return metricValuesRow.totalModules;
     }
 
-    public int[] getMetricArray(MetricValues metricValues){
+    public int[] getMetricArray(MetricValuesRow metricValuesRow){
         //Gets an array of all the values of the specified MetricValues
         //TODO
         return new int[] {0};
@@ -76,27 +75,27 @@ public class SoftwareMaturityIndex extends Metrics {
     //
     //Set metric values
     //
-    public void setSoftwareMaturityIndex(MetricValues metricValues){
+    public void setSoftwareMaturityIndex(MetricValuesRow metricValuesRow){
 
     }
 
-    public void setModulesAdded(MetricValues metricValues, int modulesAdded){
+    public void setModulesAdded(MetricValuesRow metricValuesRow, int modulesAdded){
 
     }
 
-    public void setModulesChanged(MetricValues metricValues, int modulesChanged){
+    public void setModulesChanged(MetricValuesRow metricValuesRow, int modulesChanged){
 
     }
 
-    public void setModulesDeleted(MetricValues metricValues, int modulesChanged){
+    public void setModulesDeleted(MetricValuesRow metricValuesRow, int modulesChanged){
 
     }
 
-    public void setTotalModules(MetricValues metricValues){
+    public void setTotalModules(MetricValuesRow metricValuesRow){
 
     }
 
-    public void setMetricValuesFromArray(MetricValues metricValues, int[] metricValueArray){
+    public void setMetricValuesFromArray(MetricValuesRow metricValuesRow, int[] metricValueArray){
         //Takes in an int array of size 3, sets the values for the row from this
     }
 
@@ -107,4 +106,9 @@ public class SoftwareMaturityIndex extends Metrics {
 
     //Misc. Member Methods
     //
+    //Update methods
+    //
+    public void updateAllRows(){
+        //Updates each SMI row based on currently entered information
+    }
 }
