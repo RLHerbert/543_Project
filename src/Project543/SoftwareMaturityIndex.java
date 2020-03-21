@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 //Class to handle the Software Maturity Index metric
 //TODO: Ensure that the first row only takes in modules added
-public class SoftwareMaturityIndex extends Metrics {
+public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -258,8 +258,23 @@ public class SoftwareMaturityIndex extends Metrics {
     //Save and open
     //
     public boolean hasChanged(){
-        //Checks if the metric's data has been saved since its last edit
-        //TODO
+        //Checks if the metric's data has been saved since its last edit and returns true if it has, false otherwise
+
+        if (this.saveData.size() == 0){ return true; }
+
+        int accumulator = 1;
+        for (MetricValuesRow rowValues : this.softwareMaturityIndexRows){
+            if (
+                    rowValues.modulesAdded != this.saveData.get(accumulator)
+                    || rowValues.modulesChanged != this.saveData.get(accumulator+1)
+                    || rowValues.modulesDeleted != this.saveData.get(accumulator + 2)
+            ){
+                return true;
+            }
+
+            accumulator+=3;
+        }
+
         return false;
     }
 

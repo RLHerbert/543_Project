@@ -3,7 +3,7 @@ package Project543;
 import javafx.scene.control.Tab;
 
 //Base class for all Metrics Tabs //TODO: Make abstract?
-public class MetricsTab extends Tab {
+public class MetricsTab extends Tab implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -55,6 +55,10 @@ public class MetricsTab extends Tab {
     //
     //Save and open methods
     //
+    public boolean hasChanged(){
+        return true;
+    }
+
     public boolean saveQuery(){
         //Upon attempting to close the tab, prompts the user if they want to save the data first
         //TODO: Needed or not? If the user closes a tab can they even save it? Maybe prompt for just closing, not saving?

@@ -429,6 +429,10 @@ public class UserInterface {
         return result.get();
     }
 
+    public void saveProjectToFile(){
+
+    }
+
     //Onclick methods
     //
     public void exitProgramClick(){
@@ -442,7 +446,7 @@ public class UserInterface {
     public void exitStageClick(ProjectData projectData){
         //Prompts the user to save any changes since the last edit when closing a stage
         //TODO: FINISH
-        if (projectData.metricHasChanged()){
+        if (projectData.hasChanged()){
             //if (saveProjectDialog()) projectData.saveData() or whatever;
             //TODO: filechooser for saving
         }
@@ -471,6 +475,7 @@ public class UserInterface {
         //On click action for File -> Open
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
         File selectedFile = fileChooser.showOpenDialog(projectStage);
 
         if (selectedFile != null){

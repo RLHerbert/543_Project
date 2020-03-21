@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class ProjectData extends ProjectMetaData {
+public class ProjectData extends ProjectMetaData implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -117,7 +117,7 @@ public class ProjectData extends ProjectMetaData {
         return false;
     }
 
-    public boolean metricHasChanged(){
+    public boolean hasChanged(){
         //Returns true if any metric has unsaved changes (edits since most recent save)
         //TODO: FINISH
         for (MetricsTab openTabs : this.metricsTabs){

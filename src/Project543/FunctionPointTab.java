@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.converter.NumberStringConverter;
 
-public class FunctionPointTab extends MetricsTab {
+public class FunctionPointTab extends MetricsTab implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -484,6 +484,7 @@ public class FunctionPointTab extends MetricsTab {
     }
 
     //Helper Methods
+    //
     public void changeLanguage(){
         //changes language in functionPoint
         setFunctionPointLanguage();
@@ -531,5 +532,11 @@ public class FunctionPointTab extends MetricsTab {
             }
         }
         return null;
+    }
+
+    //Open and Save Methods
+    //
+    public boolean hasChanged(){
+        return this.functionPoint.hasChanged();
     }
 }

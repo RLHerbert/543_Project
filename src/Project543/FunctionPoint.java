@@ -3,7 +3,7 @@ package Project543;
 import java.lang.Math;
 import java.util.*;
 
-public class FunctionPoint extends InformationDomainValue {
+public class FunctionPoint extends InformationDomainValue implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -184,7 +184,27 @@ public class FunctionPoint extends InformationDomainValue {
     //Save and open methods
     public boolean hasChanged(){
         //Checks if the metric's data has been saved since its last edit
-        //TODO
+        if(saveData.size() == 0) {return true;}
+
+        else if (this.functionPointLanguage.ordinal() != this.saveData.get(1)
+                || this.externalInputs.numberInputs != this.saveData.get(2)
+                || this.externalInputs.inputComplexity.ordinal() != this.saveData.get(3)
+                || this.externalOutputs.numberInputs != this.saveData.get(4)
+                || this.externalOutputs.inputComplexity.ordinal() != this.saveData.get(5)
+                || this.externalInquiries.numberInputs != this.saveData.get(6)
+                || this.externalInquiries.inputComplexity.ordinal() != this.saveData.get(7)
+                || this.internalLogicFiles.numberInputs != this.saveData.get(8)
+                || this.internalLogicFiles.inputComplexity.ordinal() != this.saveData.get(9)
+                || this.externalInterfaceFiles.numberInputs != this.saveData.get(10)
+                || this.externalInterfaceFiles.inputComplexity.ordinal() != this.saveData.get(11)
+        ){
+            return true;
+        }
+
+        for (int i = 0; i < ValueAdjustmentFactor.NUM_VAF; i++){
+            if (this.valueAdjustmentFactors.getValue(i) != this.saveData.get(i+12)){return true;}
+        }
+
         return false;
     }
 
