@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 //TODO
-public class SoftwareMaturityIndexTab extends MetricsTab {
+public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -115,4 +115,8 @@ public class SoftwareMaturityIndexTab extends MetricsTab {
 
     //Misc. Member Methods
     //
+
+    public boolean hasChanged(){
+        return this.softwareMaturityIndex.hasChanged();
+    }
 }

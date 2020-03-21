@@ -447,7 +447,14 @@ public class UserInterface {
         //Prompts the user to save any changes since the last edit when closing a stage
         //TODO: FINISH
         if (projectData.hasChanged()){
-            //if (saveProjectDialog()) projectData.saveData() or whatever;
+            if (saveProjectDialog()) {
+                try {
+                    projectData.saveProject();
+                } catch (IOException e){
+                    System.err.println("ERROR: PROJECT_SAVE_ERROR");
+                    e.printStackTrace();
+                }
+            }
             //TODO: filechooser for saving
         }
 
