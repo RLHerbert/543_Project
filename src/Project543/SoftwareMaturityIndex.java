@@ -49,6 +49,22 @@ public class SoftwareMaturityIndex extends Metrics {
             this.modulesDeleted = 0;
             this.totalModules = previousRow.totalModules;
         }
+
+        public double getSMI(){
+            return this.SMI;
+        }
+        public int getModulesAdded(){
+            return this.modulesAdded;
+        }
+        public int getModulesChanged(){
+            return this.modulesChanged;
+        }
+        public int getModulesDeleted(){
+            return this.modulesDeleted;
+        }
+        public int getTotalModules(){
+            return this.totalModules;
+        }
     }
 
     //Static Member Fields

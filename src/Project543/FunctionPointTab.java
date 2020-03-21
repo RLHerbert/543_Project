@@ -191,7 +191,6 @@ public class FunctionPointTab extends MetricsTab {
             gridPane.add(inputsArray[i], 1, i+2);
 
         //Complexity Radio Button Stuff
-        //TODO: REDO
         setComplexityRadios();
         for (int i = 0; i < 5; i++){
             HBox complexitiesBox = new HBox(40); //TODO: spacing based on constants/screen size?
