@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+//TODO: Confirm SMI is hooked up properly and working
 public class ProjectData extends ProjectMetaData implements SaveInterface {
     //Member Fields
     //
@@ -111,15 +112,9 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
     //Save and open methods
     //
-    public boolean saveQuery(){
-        //Prompts the user to save their project when attempting to close the window
-        //TODO
-        return false;
-    }
 
     public boolean hasChanged(){
         //Returns true if any metric has unsaved changes (edits since most recent save)
-        //TODO: FINISH
         for (MetricsTab openTabs : this.metricsTabs){
             if (openTabs.hasChanged()) return true;
         }
@@ -137,8 +132,8 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
             return new FunctionPointTab("Function Point", metricSaveData);
         }
         else if (metricID == SoftwareMaturityIndex.METRIC_ID){
-            //Not yet implemented //TODO: FINISH
-            return new SoftwareMaturityIndexTab("SMI");
+            //Not yet implemented
+            return new SoftwareMaturityIndexTab("SMI", metricSaveData);
         }
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");

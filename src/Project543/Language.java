@@ -132,7 +132,7 @@ public enum Language {
         return false;
     }
 
-    public static Language openLanguageSelectWindow() { //TODO: refactor(?)
+    public static Language openLanguageSelectWindow() {
         /* Language Selection Dialog Window initialization */
         Dialog<Language> langSelectWindow = new Dialog<Language>();
         langSelectWindow.setTitle("Language Selection");

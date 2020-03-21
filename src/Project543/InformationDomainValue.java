@@ -102,7 +102,6 @@ public abstract class InformationDomainValue extends Metrics {
     }
 
     //Getters
-    //TODO: More getters for new Input(?)
     public int getTotalCount(){
         //Returns the most recent total count value
         this.updateTotalCount();

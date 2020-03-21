@@ -159,7 +159,6 @@ public class ProjectMetaData {
 
     public static Language parseLanguage(String language){
         //Returns the language produced by the Language.toString() method
-        //TODO: Rethink and refactor this approach
         switch (language){
             case "":
                 return Language.NONE;

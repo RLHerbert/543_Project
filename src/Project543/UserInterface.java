@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
-//TODO: Possibly implement extensions of common JavaFX classes such as dropdown menus in Generic form to have immediate access to the values they are supposed to represent
-
 public class UserInterface {
     //Member Fields
     //
@@ -300,8 +297,7 @@ public class UserInterface {
     }
 
     public void setExitEvent(ProjectData projectData){
-        //TODO: Query the user to save changes
-
+        //Ensures that the user does not exit without being prompted to save their projects
         this.projectStage.setOnCloseRequest(WindowEvent -> this.exitStageClick(projectData));
     }
 
