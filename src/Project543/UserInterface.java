@@ -4,7 +4,6 @@
 
 package Project543;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -301,7 +300,9 @@ public class UserInterface {
     }
 
     public void setExitEvent(ProjectData projectData){
-        this.projectStage.setOnCloseRequest(WindowEvent -> ApplicationController.deleteProject(projectData));
+        //TODO: Query the user to save changes
+
+        this.projectStage.setOnCloseRequest(WindowEvent -> this.exitStageClick(projectData));
     }
 
     //Misc. Member Methods
@@ -399,8 +400,55 @@ public class UserInterface {
         return newProjectMetaData;
     }
 
+    //Save and open methods
+    //
+    public boolean saveProjectDialog(){
+        //Opens a dialog menu to query the user to save their data
+        Dialog saveProjectDialog = new Dialog();
+        saveProjectDialog.setTitle("Save Project");
+        saveProjectDialog.setHeaderText("Would you like to save the project before exiting?");
+
+        saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+
+
+
+        saveProjectDialog.setResultConverter(dialogButton -> {
+            Boolean saveProject = true;
+            if(dialogButton == ButtonType.YES){
+                saveProject = true;
+            }
+            else if (dialogButton == ButtonType.NO){
+                saveProject = false;
+            }
+
+            return saveProject;
+        });
+
+        Optional<Boolean> result = saveProjectDialog.showAndWait();
+
+        return result.get();
+    }
+
     //Onclick methods
     //
+    public void exitProgramClick(){
+        //Prompts the user to save all changes since last edit, to discard all changes, or to cancel exiting when exiting
+        //Call an ApplicationController save all method
+        //TODO: FINISH
+
+        System.exit(0);
+    }
+
+    public void exitStageClick(ProjectData projectData){
+        //Prompts the user to save any changes since the last edit when closing a stage
+        //TODO: FINISH
+        if (projectData.metricHasChanged()){
+            //if (saveProjectDialog()) projectData.saveData() or whatever;
+            //TODO: filechooser for saving
+        }
+
+        ApplicationController.deleteProject(projectData);
+    }
 
     public void fileNewClick(){
         //Click action for File -> New

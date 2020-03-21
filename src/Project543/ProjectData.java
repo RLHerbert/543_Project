@@ -65,7 +65,7 @@ public class ProjectData extends ProjectMetaData {
 
         //Populate metricsTabs
         while (savedFile.hasNextLine()){
-            metricsTabs.add(metricsTabFromSavedFile(savedFile.nextLine()));
+            metricsTabs.add(openMetricsTabFromSavedFile(savedFile.nextLine()));
         }
     }
 
@@ -89,6 +89,8 @@ public class ProjectData extends ProjectMetaData {
 
     //Misc. Member Methods
     //
+    //Metric tab creation
+    //
     public void createNewFunctionPoint(){
         //Creates a new FunctionPointTab and adds it to metricsTabs
         FunctionPoint functionPoint = new FunctionPoint(this.defaultProjectLanguage);
@@ -101,13 +103,31 @@ public class ProjectData extends ProjectMetaData {
         //Creates a new SoftwareMaturityIndexTab and adds it to metricsTabs
         //TODO: make sure this works
         SoftwareMaturityIndex softwareMaturityIndex = new SoftwareMaturityIndex();
-//        SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI", softwareMaturityIndex);
+        //SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI", softwareMaturityIndex);
         SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI");
 
         this.metricsTabs.add(softwareMaturityIndexTab);
     }
 
-    public MetricsTab metricsTabFromSavedFile(String metricSaveData){
+    //Save and open methods
+    //
+    public boolean saveQuery(){
+        //Prompts the user to save their project when attempting to close the window
+        //TODO
+        return false;
+    }
+
+    public boolean metricHasChanged(){
+        //Returns true if any metric has unsaved changes (edits since most recent save)
+        //TODO: FINISH
+        for (MetricsTab openTabs : this.metricsTabs){
+            //if (openTabs.hasChanged()) return true;
+        }
+
+        return false;
+    }
+
+    public MetricsTab openMetricsTabFromSavedFile(String metricSaveData){
         //Adds all the saved metrics and their tab forms to the project
         metricSaveData = metricSaveData.substring(1, metricSaveData.length()-1);
         StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
@@ -116,11 +136,10 @@ public class ProjectData extends ProjectMetaData {
         if (metricID == FunctionPoint.METRIC_ID){
             return new FunctionPointTab("Function Point", metricSaveData);
         }
-        /*
         else if (metricID == SoftwareMaturityIndex.METRIC_ID){
-            //Not yet implemented //TODO
+            //Not yet implemented //TODO: FINISH
+            return new SoftwareMaturityIndexTab("SMI");
         }
-         */
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");
             return new MetricsTab();

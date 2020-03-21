@@ -53,4 +53,11 @@ public class MetricsTab extends Tab {
 
     //Misc. Member Methods
     //
+    //Save and open methods
+    //
+    public boolean saveQuery(){
+        //Upon attempting to close the tab, prompts the user if they want to save the data first
+        //TODO: Needed or not? If the user closes a tab can they even save it? Maybe prompt for just closing, not saving?
+        return false;
+    }
 }

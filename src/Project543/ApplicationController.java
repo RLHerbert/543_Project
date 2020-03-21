@@ -54,6 +54,7 @@ public class ApplicationController {
     //Misc. Member Methods
     //
     //Project Manipulation
+    //
     public static ProjectData createProjectFromMetaData(String[] metaData){
         //Takes in a string of project metadata to create and return a new ProjectData object
         ProjectData projectData = new ProjectData(metaData);
@@ -68,6 +69,8 @@ public class ApplicationController {
         ApplicationController.openProjectList.remove(projectToDelete);
     }
 
+    //Open and Save methods
+    //
     public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
         //Opens a project (from a .ms file) to add it to the open project list and return it
         Scanner projectScanner = new Scanner(projectToOpen);
@@ -88,5 +91,9 @@ public class ApplicationController {
         }
 
         return false;
+    }
+
+    public static void saveAllProjects(){
+        //Saves all currently open projects //TODO
     }
 }
