@@ -121,7 +121,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         //Returns true if any metric has unsaved changes (edits since most recent save)
         //TODO: FINISH
         for (MetricsTab openTabs : this.metricsTabs){
-            //if (openTabs.hasChanged()) return true;
+            if (openTabs.hasChanged()) return true;
         }
 
         return false;

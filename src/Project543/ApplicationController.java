@@ -6,6 +6,7 @@ package Project543;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -94,6 +95,14 @@ public class ApplicationController {
     }
 
     public static void saveAllProjects(){
-        //Saves all currently open projects //TODO
+        //Saves all currently open projects
+        for (ProjectData openProject : ApplicationController.openProjectList){
+            try {
+                openProject.saveProject();
+            } catch (IOException e){
+                System.err.println("ERROR: PROJECT_SAVE_ERROR");
+                e.printStackTrace();
+            }
+        }
     }
 }
