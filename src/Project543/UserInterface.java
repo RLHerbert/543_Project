@@ -475,6 +475,7 @@ public class UserInterface {
 
     public void enterSoftwareMaturityClick(ProjectData projectData){
         //Click action of the Metrics -> Software Maturity Index -> "Enter SMI Data" button
-        System.out.println("Not yet implemented");
+        //TODO: make sure this works
+        this.projectTabs.getTabs().add(projectData.getNewSoftwareMaturityIndex());
     }
 }

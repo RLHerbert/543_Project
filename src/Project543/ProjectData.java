@@ -71,10 +71,16 @@ public class ProjectData extends ProjectMetaData {
 
     //Getters
     //
-
     public Tab getNewFunctionPoint(){
         //Creates a new FunctionPointTab, adds it to metricsTabs, and returns it
         this.createNewFunctionPoint();
+        return this.metricsTabs.get(this.metricsTabs.size()-1);
+    }
+
+    public Tab getNewSoftwareMaturityIndex(){
+        //Creates a new SoftwareMaturityIndexTab, adds it to metricsTabs, and returns it
+        //TODO: make sures this works
+        this.createNewSoftwareMaturityIndex();
         return this.metricsTabs.get(this.metricsTabs.size()-1);
     }
 
@@ -89,6 +95,16 @@ public class ProjectData extends ProjectMetaData {
         FunctionPointTab functionPointTab = new FunctionPointTab("Function Point", functionPoint);
 
         this.metricsTabs.add(functionPointTab);
+    }
+
+    public void createNewSoftwareMaturityIndex(){
+        //Creates a new SoftwareMaturityIndexTab and adds it to metricsTabs
+        //TODO: make sure this works
+        SoftwareMaturityIndex softwareMaturityIndex = new SoftwareMaturityIndex();
+//        SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI", softwareMaturityIndex);
+        SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI");
+
+        this.metricsTabs.add(softwareMaturityIndexTab);
     }
 
     public MetricsTab metricsTabFromSavedFile(String metricSaveData){
