@@ -402,11 +402,11 @@ public class UserInterface {
 
     //Save and open methods
     //
-    public boolean saveProjectDialog(){
+    public static boolean saveProjectDialog(String projectName){
         //Opens a dialog menu to query the user to save their data
         Dialog saveProjectDialog = new Dialog();
         saveProjectDialog.setTitle("Save Project");
-        saveProjectDialog.setHeaderText("Would you like to save the project before exiting?");
+        saveProjectDialog.setHeaderText("Would you like to save \"" + projectName + "\" before exiting?");
 
         saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
 
@@ -440,16 +440,25 @@ public class UserInterface {
         //Call an ApplicationController save all method
         //TODO: FINISH
 
+        //Temporary: prompt for each window
+        ApplicationController.saveAllProjects();
+
         System.exit(0);
     }
 
-    public void exitStageClick(ProjectData projectData){
+    public static void exitStageClick(ProjectData projectData){
         //Prompts the user to save any changes since the last edit when closing a stage
         //TODO: FINISH
-        if (projectData.hasChanged()){
-            if (saveProjectDialog()) {
+        UserInterface.exitProjectQuery(projectData);
+
+        ApplicationController.deleteProject(projectData);
+    }
+
+    public static void exitProjectQuery(ProjectData projectToExit){
+        if (projectToExit.hasChanged()){
+            if (saveProjectDialog(projectToExit.getProjectName())) {
                 try {
-                    projectData.saveProject();
+                    projectToExit.saveProject();
                 } catch (IOException e){
                     System.err.println("ERROR: PROJECT_SAVE_ERROR");
                     e.printStackTrace();
@@ -457,8 +466,6 @@ public class UserInterface {
             }
             //TODO: filechooser for saving
         }
-
-        ApplicationController.deleteProject(projectData);
     }
 
     public void fileNewClick(){
