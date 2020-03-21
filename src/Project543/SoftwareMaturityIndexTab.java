@@ -3,6 +3,7 @@ package Project543;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -90,13 +91,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab {
         softwareMaturityIndex.addRow();
         table.getItems().add(softwareMaturityIndex.softwareMaturityIndexRows.get(0));
 
+        //TODO: make last row editable
         table.setEditable(true);
-        Callback<TableColumn, TableCell> cellFactory =
-                new Callback<TableColumn, TableCell>() {
-                    public TableCell call(TableColumn p) {
-                        return new EditingCell();
-                    }
-                };
+//        SMI.setCellValueFactory(TextFieldTableCell.forTableColumn());
+
+
 
         VBox tableBox = new VBox(table);
         this.setContent(table);
