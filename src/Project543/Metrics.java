@@ -3,7 +3,7 @@ package Project543;
 import java.util.*;
 import javafx.scene.control.*;
 
-public class Metrics {
+public abstract class Metrics {
     //Member Fields
     //
     //Member Enums and Classes
@@ -44,10 +44,15 @@ public class Metrics {
 
     //Setters
     //
-    public void setSaveData(){} //Virtual
+    public abstract void setSaveData(); //Virtual
 
     //Misc. Member Methods
     //
+
+    //Save and open
+    //
+    public abstract boolean hasChanged();
+
     public String writeSaveDataString()
     {
         return saveData.toString();
@@ -70,9 +75,4 @@ public class Metrics {
             saveData.add(dataToAdd);
         }
     }
-
-    public Tab toTab()
-    {
-        return new Tab();
-    } //Not implemented?
 }

@@ -3,7 +3,7 @@ package Project543;
 import java.util.Scanner;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
-public class InformationDomainValue extends Metrics {
+public abstract class InformationDomainValue extends Metrics {
     //Member Fields
     //
     //Member Enums and Classes
