@@ -65,6 +65,7 @@ public class ApplicationController {
     public static void deleteProject(ProjectData projectToDelete){
         //Function prototype
         //Deletes the specified project from the open project list
+        ApplicationController.openProjectList.remove(projectToDelete);
     }
 
     public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {

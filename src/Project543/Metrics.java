@@ -44,7 +44,7 @@ public class Metrics {
 
     //Setters
     //
-    public void setSaveData() {} //Virtual
+    public void setSaveData(){} //Virtual
 
     //Misc. Member Methods
     //

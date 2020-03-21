@@ -118,6 +118,7 @@ public class UserInterface {
 
     public Scene getNewScene(ProjectData projectData){
         this.projectTabs.getTabs().addAll(projectData.metricsTabs);
+        this.setExitEvent(projectData);
         VBox sceneContents = new VBox(getNewMenuBar(projectData), projectTabs);
 
         Scene scene = new Scene(sceneContents);
@@ -299,6 +300,10 @@ public class UserInterface {
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
     }
 
+    public void setExitEvent(ProjectData projectData){
+        this.projectStage.setOnCloseRequest(WindowEvent -> ApplicationController.deleteProject(projectData));
+    }
+
     //Misc. Member Methods
     //
     public void newWindow(){
@@ -396,6 +401,7 @@ public class UserInterface {
 
     //Onclick methods
     //
+
     public void fileNewClick(){
         //Click action for File -> New
         if (this.hasProject == false){
