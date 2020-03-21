@@ -222,7 +222,7 @@ public class UserInterface {
         //Cannot save a project which doesn't yet exist
 
         //File ->
-        fileOptions[3].setOnAction(actionEvent -> System.exit(0));
+        fileOptions[3].setOnAction(actionEvent -> this.exitProgramClick());
     }
 
     public void setFileMenu(MenuItem[] fileOptions, ProjectData projectData){
@@ -248,7 +248,7 @@ public class UserInterface {
         });
 
         //File ->
-        fileOptions[3].setOnAction(actionEvent -> System.exit(0));
+        fileOptions[3].setOnAction(actionEvent -> this.exitProgramClick());
     }
 
     public void setPreferencesMenu(MenuItem[] preferencesOptions){
