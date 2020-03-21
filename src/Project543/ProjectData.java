@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 //TODO: Confirm SMI is hooked up properly and working
+//TODO: Reopen only saved metrics, open previously open metrics tabs
 public class ProjectData extends ProjectMetaData implements SaveInterface {
     //Member Fields
     //
