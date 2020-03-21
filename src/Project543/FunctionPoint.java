@@ -143,6 +143,7 @@ public class FunctionPoint extends InformationDomainValue {
         this.functionPointLanguage = languageToSet;
     }
 
+
     public void setFromSavedData() {
         //Sets variable values based on integers in saveData
         //Sets language
@@ -178,6 +179,13 @@ public class FunctionPoint extends InformationDomainValue {
     public void updateCodeSize(){
         //Updates codeSize (estimated lines of code) for the FP metric based on all entered data and the selected language
         this.codeSize = (this.getTotalFunctionPoints() * this.functionPointLanguage.linesOfCodePerFunctionPoint());
+    }
+
+    //Save and open methods
+    public boolean hasChanged(){
+        //Checks if the metric's data has been saved since its last edit
+        //TODO
+        return false;
     }
 
     //TODO: Use(?)

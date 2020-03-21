@@ -255,6 +255,14 @@ public class SoftwareMaturityIndex extends Metrics {
         this.setSoftwareMaturityIndex(metricValuesRow);
     }
 
+    //Save and open
+    //
+    public boolean hasChanged(){
+        //Checks if the metric's data has been saved since its last edit
+        //TODO
+        return false;
+    }
+
     public void setFromSaveData(){
         //Sets the rows from the save data
         for (int i = 1; i < this.softwareMaturityIndexRows.size(); i+=3){
