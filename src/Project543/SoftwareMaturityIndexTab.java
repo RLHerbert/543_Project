@@ -1,9 +1,12 @@
 package Project543;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -31,7 +34,7 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     //Non-Constant Member Fields
     //
     SoftwareMaturityIndex softwareMaturityIndex;
-    TableView table;
+    TableView<SoftwareMaturityIndex.MetricValuesRow> table;
 
     //Member Methods
     //
@@ -40,6 +43,7 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     SoftwareMaturityIndexTab(String tabTitle){
         super(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex();
+        initializeTable();
         setTable();
     }
 
@@ -52,6 +56,39 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this(tabTitle);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
     }
+
+    //Initializers
+    //
+    public void initializeTable(){
+        this.table = new TableView<SoftwareMaturityIndex.MetricValuesRow>();
+
+        TableColumn<SoftwareMaturityIndex.MetricValuesRow, Double> SMIColumn = new TableColumn<>("SMI");
+        SMIColumn.setCellValueFactory(new PropertyValueFactory<>("SMI"));
+
+        TableColumn<SoftwareMaturityIndex.MetricValuesRow, Integer> modulesAddedColumn = new TableColumn<>("Modules Added");
+        modulesAddedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesAdded"));
+
+        TableColumn<SoftwareMaturityIndex.MetricValuesRow, Integer> modulesChangedColumn = new TableColumn<>("Modules Changed");
+        modulesChangedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesChanged"));
+
+        TableColumn<SoftwareMaturityIndex.MetricValuesRow, Integer> modulesDeletedColumn = new TableColumn<>("Modules Deleted");
+        modulesDeletedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesDeleted"));
+
+        TableColumn<SoftwareMaturityIndex.MetricValuesRow, Integer> totalModulesColumn = new TableColumn<>("Total Modules");
+        totalModulesColumn.setCellValueFactory(new PropertyValueFactory<>("totalModules"));
+
+
+        table.getColumns().addAll(SMIColumn, modulesAddedColumn, modulesChangedColumn, modulesDeletedColumn, totalModulesColumn);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); //sets all columns to same width
+        table.setPlaceholder(new Label("No rows to display"));
+
+        HBox buttonsBox = new HBox(20, addRowButton(), computeIndexButton());
+        buttonsBox.setAlignment(Pos.CENTER);
+        VBox tabLayout = new VBox(table, buttonsBox); //TODO: add buttons to layout??
+        tabLayout.setAlignment(Pos.CENTER);
+        this.setContent(tabLayout);
+    }
+
 
     //Getters
     //
@@ -67,38 +104,17 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         return 0;
     }
 
+    public ObservableList<SoftwareMaturityIndex.MetricValuesRow> getAllRows() { //TODO: note, from data NOT from input
+        ObservableList<SoftwareMaturityIndex.MetricValuesRow> allRows = FXCollections.observableArrayList();
+        allRows.addAll(softwareMaturityIndex.getAllRows());
+        return allRows;
+    }
+
     //Setters
     //
-    public void setTable(){
-        this.table = new TableView();
-
-        TableColumn<Double, SoftwareMaturityIndex> SMI = new TableColumn<Double, SoftwareMaturityIndex>("SMI");
-        TableColumn<Integer, SoftwareMaturityIndex> modulesAdded = new TableColumn<Integer, SoftwareMaturityIndex>("Modules Added");
-        TableColumn<Integer, SoftwareMaturityIndex> modulesChanged = new TableColumn<Integer, SoftwareMaturityIndex>("Modules Changed");
-        TableColumn<Integer, SoftwareMaturityIndex> modulesDeleted = new TableColumn<Integer, SoftwareMaturityIndex>("Modules Deleted");
-        TableColumn<Integer, SoftwareMaturityIndex> totalModules = new TableColumn<Integer, SoftwareMaturityIndex>("Total Modules");
-
-        SMI.setCellValueFactory(new PropertyValueFactory<Double, SoftwareMaturityIndex>("SMI"));
-        modulesAdded.setCellValueFactory(new PropertyValueFactory<Integer, SoftwareMaturityIndex>("modulesAdded"));
-        modulesChanged.setCellValueFactory(new PropertyValueFactory<Integer, SoftwareMaturityIndex>("modulesChanged"));
-        modulesDeleted.setCellValueFactory(new PropertyValueFactory<Integer, SoftwareMaturityIndex>("modulesDeleted"));
-        totalModules.setCellValueFactory(new PropertyValueFactory<Integer, SoftwareMaturityIndex>("totalModules"));
-
-        table.getColumns().addAll(SMI, modulesAdded, modulesChanged, modulesDeleted, totalModules);
-        table.setPlaceholder(new Label("No rows to display"));
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        softwareMaturityIndex.addRow();
-        table.getItems().add(softwareMaturityIndex.softwareMaturityIndexRows.get(0));
-
-        //TODO: make last row editable
-        table.setEditable(true);
-//        SMI.setCellValueFactory(TextFieldTableCell.forTableColumn());
-
-
-
-        VBox tableBox = new VBox(table);
-        this.setContent(table);
+    public void setTable(){ //TODO: make sure this is called every time a row/cell is added or edited
+        table.setItems(this.getAllRows());
+//        //TODO: make last row editable
     }
 
     
@@ -111,10 +127,34 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
 
     public void setTabTitle(){ //TODO: do we need for this metric?
         this.setText(TAB_TITLE);
-    }
+    } //TODO: use
 
     //Misc. Member Methods
     //
+    public Button addRowButton() {
+        //Returns the button labelled "Add Row" with triggered actions as defined in addRowClick()
+        Button addRow = new Button("Add Row");
+        addRow.setOnAction(e -> addRowClick());
+        return addRow;
+    }
+
+    public void addRowClick(){
+        //opens VAF window, gets user inputs, moves user inputs into functionPoint
+        this.softwareMaturityIndex.addRow();
+        setTable();
+    }
+
+    public Button computeIndexButton() {
+        //Returns the button labelled "Compute Index" with triggered actions as defined in computeIndexClick()
+        Button computeIndex = new Button("Compute Index");
+        computeIndex.setOnAction(e -> computeIndexClick());
+        return computeIndex;
+    }
+
+    public void computeIndexClick(){
+        //opens VAF window, gets user inputs, moves user inputs into functionPoint
+        this.softwareMaturityIndex.setMetrics(softwareMaturityIndex.getLatestRow());
+    }
 
     public boolean hasChanged(){
         return this.softwareMaturityIndex.hasChanged();
