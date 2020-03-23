@@ -65,6 +65,18 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
         public int getTotalModules(){
             return this.totalModules;
         }
+
+        public void setModulesAdded(int newVal){
+            this.modulesAdded = newVal;
+        }
+
+        public void setModulesChanged(int newVal){
+            this.modulesChanged = newVal;
+        }
+
+        public void setModulesDeleted(int newVal){
+            this.modulesDeleted = newVal;
+        }
     }
 
     //Static Member Fields
