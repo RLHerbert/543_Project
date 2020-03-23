@@ -258,6 +258,10 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     public void computeIndexClick(){
         //TODO: describe
         getModulesAddedFromLastRow();
+        //TODO: update backend modules stuff first
+        this.softwareMaturityIndex.setModulesAdded(this.getLastRow(), this.getLastRow().getModulesAdded());
+        this.softwareMaturityIndex.setModulesChanged(this.getLastRow(), this.getLastRow().getModulesChanged());
+        this.softwareMaturityIndex.setModulesDeleted(this.getLastRow(), this.getLastRow().getModulesDeleted());
         this.softwareMaturityIndex.setMetrics(this.getLastRow());
         System.out.println("New Total Modules in last row: " + getLastRow().totalModules);
 
