@@ -137,6 +137,10 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         return table.getItems().get(table.getItems().size()-1);
     }
 
+    public SoftwareMaturityIndex.MetricValuesRow getLastRowFromData() {
+        return softwareMaturityIndex.getAllRows().get(softwareMaturityIndex.softwareMaturityIndexRows.size()-1);
+    }
+
     public ObservableList<SoftwareMaturityIndex.MetricValuesRow> getAllRows(){
         return table.getItems();
     }
@@ -259,11 +263,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         //TODO: describe
         getModulesAddedFromLastRow();
         //TODO: update backend modules stuff first
-        this.softwareMaturityIndex.setModulesAdded(this.getLastRow(), this.getLastRow().getModulesAdded());
-        this.softwareMaturityIndex.setModulesChanged(this.getLastRow(), this.getLastRow().getModulesChanged());
-        this.softwareMaturityIndex.setModulesDeleted(this.getLastRow(), this.getLastRow().getModulesDeleted());
+        this.softwareMaturityIndex.setModulesAdded(getLastRowFromData(), this.getLastRow().getModulesAdded());
+        this.softwareMaturityIndex.setModulesChanged(getLastRowFromData(), this.getLastRow().getModulesChanged());
+        this.softwareMaturityIndex.setModulesDeleted(getLastRowFromData(), this.getLastRow().getModulesDeleted());
         this.softwareMaturityIndex.setMetrics(this.getLastRow());
-        System.out.println("New Total Modules in last row: " + getLastRow().totalModules);
+        System.out.println("New Total Modules in last row (of data object): " + getLastRowFromData().totalModules);
 
         setTableFromData();
     }
