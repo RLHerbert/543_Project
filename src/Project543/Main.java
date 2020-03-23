@@ -3,6 +3,7 @@ package Project543;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+//TODO: Only one SMI tab per project
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
