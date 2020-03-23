@@ -36,7 +36,7 @@ public class UserInterface {
     public static final String[] FILE_MENU = {"New", "Open", "Save", "Exit"};
     public static final String[] EDIT_MENU = {""}; //Not yet implemented
     public static final String[] PREFERENCES_MENU = {"Select Language"}; //TODO: Use
-    public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index"};
+    public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index", "Hidden Metrics Tabs"};
     public static final String[] HELP_MENU = {""}; //Not yet implemented
 
     //Non-Static Member Fields
@@ -169,7 +169,7 @@ public class UserInterface {
 
 
         //Metrics
-        Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
+        Menu[] metricsOptions = new Menu[METRICS_MENU.length];
         setMetricsMenu(metricsOptions);
         mainMenu[3].getItems().addAll(metricsOptions);
 
@@ -193,7 +193,7 @@ public class UserInterface {
         mainMenu[MenuOptions.PREFERENCES.ordinal()].getItems().addAll(preferencesOptions);
 
         //Metrics
-        Menu[] metricsOptions = new Menu[ApplicationController.TOTAL_METRICS]; //TODO: Automate based on number of metrics?
+        Menu[] metricsOptions = new Menu[METRICS_MENU.length];
         setMetricsMenu(metricsOptions, projectData);
         mainMenu[3].getItems().addAll(metricsOptions);
         //setMetricsMenu(metricsOptions);
@@ -264,7 +264,7 @@ public class UserInterface {
     
     public void setMetricsMenu(Menu[] metricsOptions){
         //Sets the "Metrics" menu
-        for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
+        for (int i = 0; i < METRICS_MENU.length; i++){
             metricsOptions[i] = new Menu(METRICS_MENU[i]);
         }
 
@@ -277,11 +277,14 @@ public class UserInterface {
         MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
         enterSoftwareMaturityData.setDisable(true);
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
+
+        //Hidden Metrics
+        metricsOptions[2].setDisable(true);
     }
     
     public void setMetricsMenu(Menu[] metricsOptions, ProjectData projectData){
         //Sets the "Metrics" menu and hooks it up to the ProjectData passed in
-        for (int i = 0; i < ApplicationController.TOTAL_METRICS; i++){
+        for (int i = 0; i < METRICS_MENU.length; i++){
             metricsOptions[i] = new Menu(METRICS_MENU[i]);
         }
 
@@ -292,8 +295,23 @@ public class UserInterface {
 
         //Software Maturity Index
         MenuItem enterSoftwareMaturityData = new MenuItem("Enter SMI Data");
-        enterSoftwareMaturityData.setOnAction(actionEvent -> this.enterSoftwareMaturityClick(projectData));
+        enterSoftwareMaturityData.setOnAction(actionEvent ->
+                {
+                    this.enterSoftwareMaturityClick(projectData);
+                    enterSoftwareMaturityData.setDisable(true);
+                }
+        );
         metricsOptions[1].getItems().add(enterSoftwareMaturityData);
+
+        //Hidden Metrics
+        //metricsOptions[2].setOnAction(actionEvent -> this.reopenMetricsClick(projectData));
+        MenuItem reopenMetrics = new MenuItem("Reopen Closed Metrics");
+        reopenMetrics.setOnAction(actionEvent -> this.reopenMetricsClick(projectData));
+
+        MenuItem closeMetrics = new MenuItem("Close Hidden Metrics");
+        closeMetrics.setOnAction(actionEvent -> closeHiddenMetricsClick(projectData));
+
+        metricsOptions[2].getItems().addAll(reopenMetrics, closeMetrics);
     }
 
     public void setExitEvent(ProjectData projectData){
@@ -544,7 +562,24 @@ public class UserInterface {
 
     public void enterSoftwareMaturityClick(ProjectData projectData){
         //Click action of the Metrics -> Software Maturity Index -> "Enter SMI Data" button
-        //TODO: make sure this works
         this.projectTabs.getTabs().add(projectData.getNewSoftwareMaturityIndex());
+    }
+
+    public void reopenMetricsClick(ProjectData projectData){
+        //TODO: More efficient
+        this.projectTabs.getTabs().clear();
+        this.projectTabs.getTabs().addAll(projectData.metricsTabs);
+    }
+
+    public void closeHiddenMetricsClick(ProjectData projectData){
+        //Deletes the hidden metrics
+
+        ArrayList<MetricsTab> closedHiddenMetricsTabs = new ArrayList<MetricsTab>();
+
+        for (Tab projectTab : this.projectTabs.getTabs()) {
+            closedHiddenMetricsTabs.add((MetricsTab) projectTab);
+        }
+
+        projectData.metricsTabs = closedHiddenMetricsTabs;
     }
 }
