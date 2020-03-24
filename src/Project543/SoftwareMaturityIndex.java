@@ -278,6 +278,8 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
 
         if (this.saveData.size() == 0){ return true; }
 
+        if (this.softwareMaturityIndexRows.size()*3 > this.saveData.size()-1) { return true; }
+
         int accumulator = 1;
         for (MetricValuesRow rowValues : this.softwareMaturityIndexRows){
             if (
