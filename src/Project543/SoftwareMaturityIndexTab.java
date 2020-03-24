@@ -76,9 +76,9 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
         startTab();
-        changeModulesAdded();
-        changeModulesChanged();
-        changeModulesDeleted();
+//        changeModulesAdded();
+//        changeModulesChanged();
+//        changeModulesDeleted();
     }
 
     //Initializers
@@ -87,6 +87,9 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         initializeTable(); //initializes and sets up table and columns
         setTabLayout(); //makes layout pretty and adds the buttons
         setTableFromData(); //updates row values based on softwareMaturityIndex data
+
+        table.getSelectionModel().setCellSelectionEnabled(true);
+        table.setEditable(true);
     }
 
     public void initializeTable(){
@@ -100,13 +103,18 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         //Editable Module columns (x3)
         this.modulesAddedColumn = new TableColumn<>("Modules Added");
         this.modulesAddedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesAdded"));
-//        this.modulesAddedColumn.setCellFactory(column -> EditCell.createStringEditCell());
+        this.modulesAddedColumn.setCellFactory(col -> new EditableTableCell<SoftwareMaturityIndex.MetricValuesRow, Integer>(stringToIntConverter()));
+        this.modulesAddedColumn.setOnEditCommit(this::changeModulesAddedCellEvent);
 
         this.modulesChangedColumn = new TableColumn<>("Modules Changed");
         this.modulesChangedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesChanged"));
+        this.modulesChangedColumn.setCellFactory(col -> new EditableTableCell<SoftwareMaturityIndex.MetricValuesRow, Integer>(stringToIntConverter()));
+        this.modulesChangedColumn.setOnEditCommit(this::changeModulesChangedCellEvent);
 
         this.modulesDeletedColumn = new TableColumn<>("Modules Deleted");
         this.modulesDeletedColumn.setCellValueFactory(new PropertyValueFactory<>("modulesDeleted"));
+        this.modulesDeletedColumn.setCellFactory(col -> new EditableTableCell<SoftwareMaturityIndex.MetricValuesRow, Integer>(stringToIntConverter()));
+        this.modulesDeletedColumn.setOnEditCommit(this::changeModulesDeletedCellEvent);
 
         //Uneditable Total Modules column
         TableColumn<SoftwareMaturityIndex.MetricValuesRow, Integer> totalModulesColumn = new TableColumn<>("Total Modules");
@@ -186,39 +194,39 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         table.getItems().set(getAllRows().size()-1, getLastRow());
     }
 
-    public void changeModulesAdded(){
-        //TODO: describe
-        table.setEditable(true);
-        modulesAddedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
-        modulesAddedColumn.setOnEditCommit(this::changeModulesAddedCellEvent);
-    }
-
+//    public void changeModulesAdded(){
+//        //TODO: describe
+//        table.setEditable(true);
+//        modulesAddedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
+//        modulesAddedColumn.setOnEditCommit(this::changeModulesAddedCellEvent);
+//    }
+//
     public void changeModulesAddedCellEvent(TableColumn.CellEditEvent editedCell){
         //TODO: describe
         SoftwareMaturityIndex.MetricValuesRow metricRowSelected = table.getSelectionModel().getSelectedItem();
         metricRowSelected.setModulesAdded(Integer.parseInt(editedCell.getNewValue().toString()));
     }
-
-    public void changeModulesChanged(){
-        //TODO: describe
-        table.setEditable(true);
-        modulesChangedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
-        modulesChangedColumn.setOnEditCommit(this::changeModulesChangedCellEvent);
-    }
-
+//
+//    public void changeModulesChanged(){
+//        //TODO: describe
+//        table.setEditable(true);
+//        modulesChangedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
+//        modulesChangedColumn.setOnEditCommit(this::changeModulesChangedCellEvent);
+//    }
+//
     public void changeModulesChangedCellEvent(TableColumn.CellEditEvent editedCell){
         //TODO: describe
         SoftwareMaturityIndex.MetricValuesRow metricRowSelected = table.getSelectionModel().getSelectedItem();
         metricRowSelected.setModulesChanged(Integer.parseInt(editedCell.getNewValue().toString()));
     }
-
-    public void changeModulesDeleted(){
-        //TODO: describe
-        table.setEditable(true);
-        modulesDeletedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
-        modulesDeletedColumn.setOnEditCommit(this::changeModulesDeletedCellEvent);
-    }
-
+//
+//    public void changeModulesDeleted(){
+//        //TODO: describe
+//        table.setEditable(true);
+//        modulesDeletedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
+//        modulesDeletedColumn.setOnEditCommit(this::changeModulesDeletedCellEvent);
+//    }
+//
     public void changeModulesDeletedCellEvent(TableColumn.CellEditEvent editedCell){
         //TODO: describe
         SoftwareMaturityIndex.MetricValuesRow metricRowSelected = table.getSelectionModel().getSelectedItem();
@@ -235,17 +243,19 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
 
     public void addRowClick(){
         //TODO: describe
+        //TODO: update everything in previous row
         this.softwareMaturityIndex.addRow();
         setTableFromData();
-        if (getAllRows().size() == 1) {
-            changeModulesAdded();
+        if (getAllRows().size() > 1) {
+            //TODO: update second to last row
+//            changeModulesAdded();
 //            table.edit(getAllRows().size()-1, modulesAddedColumn);
             //TODO: commit edit?
 
         } else {
-            changeModulesAdded();
-            changeModulesDeleted();
-            changeModulesChanged();
+//            changeModulesAdded();
+//            changeModulesDeleted();
+//            changeModulesChanged();
 //            table.edit(getAllRows().size()-1, modulesAddedColumn);
 //            table.edit(getAllRows().size()-1, modulesChangedColumn);
 //            table.edit(getAllRows().size()-1, modulesDeletedColumn);
