@@ -81,7 +81,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         initializeTable(); //initializes and sets up table and columns
         setTabLayout(); //makes layout pretty and adds the buttons
         setTableFromData(); //updates row values based on softwareMaturityIndex data
-        changeModulesAdded();
     }
 
     public void initializeTable(){
@@ -266,9 +265,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this.softwareMaturityIndex.setModulesAdded(getLastRowFromData(), this.getLastRow().getModulesAdded());
         this.softwareMaturityIndex.setModulesChanged(getLastRowFromData(), this.getLastRow().getModulesChanged());
         this.softwareMaturityIndex.setModulesDeleted(getLastRowFromData(), this.getLastRow().getModulesDeleted());
-        this.softwareMaturityIndex.setMetrics(this.getLastRow());
+        this.softwareMaturityIndex.setMetrics(this.getLastRowFromData());
         System.out.println("New Total Modules in last row (of data object): " + getLastRowFromData().totalModules);
+        System.out.println("New Total Modules in last row (of data object): " + getAllRowsFromData().get(getAllRowsFromData().size() - 1).totalModules);
 
+        startTab();
         setTableFromData();
     }
 
