@@ -12,7 +12,6 @@ import javafx.util.StringConverter;
 //TODO: make empty rows white or clear?
 //TODO: textfield should appear immediately after addRow() is called?
 //TODO: Sorting should be disabled maybe?
-//TODO: address the case where 1. user presses add row and enters data 2. user closes tab w/o clicking compute index 3. opens same project tab but smi not updated
 
 public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterface {
     //Member Fields
