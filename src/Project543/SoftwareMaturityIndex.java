@@ -300,14 +300,15 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
         //Sets the rows from the save data
         for (int i = 1; i < this.saveData.size(); i+=3){
             int[] rowSavedData = new int[] {this.saveData.get(i), this.saveData.get(i+1), this.saveData.get(i+2)};
+
             if (i == 1){
                 MetricValuesRow firstRow = new MetricValuesRow(rowSavedData[0]);
                 this.softwareMaturityIndexRows.add(firstRow);
             }
             else {
                 MetricValuesRow rowToAdd = new MetricValuesRow(this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-1), rowSavedData);
-                this.setMetrics(rowToAdd);
                 this.softwareMaturityIndexRows.add(rowToAdd);
+                this.setMetrics(rowToAdd);
             }
         }
     }
