@@ -19,7 +19,8 @@ import java.security.Key;
 //TODO: make empty rows white or clear
 //TODO: first addRow() call should make only modules added field editable; textfield should appear immediately after addRow() is called
 //TODO: Total Modules should update after any module cell is changed (in that row)
-//TODO: only last row should be editable
+//TODO: only last row should be editable, even after opening from save data
+//TODO: doesn't update previous smi/tot modules if addRow() is called before computeIndex()
 //TODO: edits should be committed after focus change or w/e (like if the user clicks out of the text field) as well as pressing enter
 //TODO: SMI should change only when compute index button is pressed
 //TODO: Sorting should be disabled maybe?
@@ -66,13 +67,13 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     }
 
     SoftwareMaturityIndexTab(String tabTitle, SoftwareMaturityIndex softwareMaturityIndex){
-        this(tabTitle);
+        this(TAB_TITLE);
         this.softwareMaturityIndex = softwareMaturityIndex;
         startTab();
     }
 
     SoftwareMaturityIndexTab(String tabTitle, String saveData){
-        this(tabTitle);
+        this(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
         startTab();
     }
@@ -163,10 +164,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     public void setMetric(){
         this.metric = this.softwareMaturityIndex;
     }
-
-    public void setTabTitle(){ //TODO: do we need for this metric?
-        this.setText(TAB_TITLE);
-    } //TODO: use
 
     public void setTabLayout(){
         //Buttons
