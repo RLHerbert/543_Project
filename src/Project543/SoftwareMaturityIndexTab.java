@@ -76,6 +76,9 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
         startTab();
+        changeModulesAdded();
+        changeModulesChanged();
+        changeModulesDeleted();
     }
 
     //Initializers
