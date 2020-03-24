@@ -244,6 +244,8 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     public void addRowClick(){
         //TODO: describe
         //TODO: update everything in previous row
+        if (getAllRows().size() > 0)
+            computeIndexClick();
         this.softwareMaturityIndex.addRow();
         setTableFromData();
         if (getAllRows().size() > 1) {

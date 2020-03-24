@@ -76,9 +76,7 @@ public class EditableTableCell<S, T> extends TableCell<S, T> {
 
         //Hopefully cancels editable-ness of previous cells
         TablePosition<S, T> cellPos = this.getTableView().getFocusModel().getFocusedCell();
-        System.out.println("printing size in editabletablecell class: " + this.getTableView().getItems().size());
-        System.out.println("cell pozish: " + cellPos.getRow());
-        if (cellPos.getRow() < this.getTableView().getItems().size()-1)
+        if (cellPos.getRow() < this.getTableView().getItems().size()-1 || (cellPos.getRow() == 0 && cellPos.getColumn() > 1))
             cancelEdit();
     }
 
