@@ -68,11 +68,13 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     SoftwareMaturityIndexTab(String tabTitle, SoftwareMaturityIndex softwareMaturityIndex){
         this(tabTitle);
         this.softwareMaturityIndex = softwareMaturityIndex;
+        startTab();
     }
 
     SoftwareMaturityIndexTab(String tabTitle, String saveData){
         this(tabTitle);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
+        startTab();
     }
 
     //Initializers
@@ -270,7 +272,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         System.out.println("New Total Modules in last row (of data object): " + getAllRowsFromData().get(getAllRowsFromData().size() - 1).totalModules);
 
         startTab();
-        setTableFromData();
     }
 
     //Helper Methods
