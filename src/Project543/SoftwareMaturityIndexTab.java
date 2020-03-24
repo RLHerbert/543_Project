@@ -2,31 +2,18 @@ package Project543;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import java.security.Key;
-
-//TODO: make empty rows white or clear
-//TODO: first addRow() call should make only modules added field editable; textfield should appear immediately after addRow() is called
-//TODO: Total Modules should update after any module cell is changed (in that row)
-//TODO: only last row should be editable, even after opening from save data
-//TODO: doesn't update previous smi/tot modules if addRow() is called before computeIndex()
-//TODO: edits should be committed after focus change or w/e (like if the user clicks out of the text field) as well as pressing enter
-//TODO: SMI should change only when compute index button is pressed
+//TODO: make empty rows white or clear?
+//TODO: textfield should appear immediately after addRow() is called?
 //TODO: Sorting should be disabled maybe?
+//TODO: address the case where 1. user presses add row and enters data 2. user closes tab w/o clicking compute index 3. opens same project tab but smi not updated
 
-//TODO: tell Rowan that total modules adds the amount added every time setMetrics is called (it should only add it once, and subtract the previous value
-// if that value is changed to something else, which should also only be added once)
 public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterface {
     //Member Fields
     //
@@ -76,9 +63,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
         startTab();
-//        changeModulesAdded();
-//        changeModulesChanged();
-//        changeModulesDeleted();
     }
 
     //Initializers
@@ -87,9 +71,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         initializeTable(); //initializes and sets up table and columns
         setTabLayout(); //makes layout pretty and adds the buttons
         setTableFromData(); //updates row values based on softwareMaturityIndex data
-
-        table.getSelectionModel().setCellSelectionEnabled(true);
-        table.setEditable(true);
     }
 
     public void initializeTable(){
@@ -124,6 +105,8 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         this.table.getColumns().addAll(SMIColumn, this.modulesAddedColumn, this.modulesChangedColumn, this.modulesDeletedColumn, totalModulesColumn);
         this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); //sets all columns to same width
         this.table.setPlaceholder(new Label("No rows to display"));
+        this.table.setEditable(true);
+        this.table.getSelectionModel().setCellSelectionEnabled(true);
     }
 
     //Getters
@@ -146,7 +129,7 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         return table.getItems().get(table.getItems().size()-1).modulesDeleted;
     }
 
-    public SoftwareMaturityIndex.MetricValuesRow getLastRow(){ //TODO: note - from input not data
+    public SoftwareMaturityIndex.MetricValuesRow getLastRow(){
         return table.getItems().get(table.getItems().size()-1);
     }
 
@@ -166,6 +149,27 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
 
     //Setters
     //
+    public void setModulesAddedInLastRow(int newVal){
+        //TODO: no parameter? just use input? also use
+//        System.out.println("Modules Added in last row: " + table.getItems().get(table.getItems().size()-1).modulesAdded);
+//        return table.getItems().get(table.getItems().size()-1).modulesAdded;
+        this.softwareMaturityIndex.setModulesAdded(getLastRowFromData(), this.getLastRow().getModulesAdded());
+    }
+
+    public void setModulesChangedInLastRow(int newVal){
+        //TODO: no parameter? just use input? also use
+//        System.out.println("Modules Changed in last row: " + table.getItems().get(table.getItems().size()-1).modulesChanged);
+//        return table.getItems().get(table.getItems().size()-1).modulesChanged;
+        this.softwareMaturityIndex.setModulesChanged(getLastRowFromData(), this.getLastRow().getModulesChanged());
+    }
+
+    public void setModulesDeletedInLastRow(int newVal){
+        //TODO: no parameter? just use input? also use
+//        System.out.println("Modules Deleted in last row: " + table.getItems().get(table.getItems().size()-1).modulesAdded);
+//        return table.getItems().get(table.getItems().size()-1).modulesDeleted;
+        this.softwareMaturityIndex.setModulesDeleted(getLastRowFromData(), this.getLastRow().getModulesDeleted());
+    }
+
     public void setTableFromData(){ //TODO: make sure this is called every time a row/cell is added or edited?
         table.setItems(this.getAllRowsFromData());
     }
@@ -195,7 +199,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     }
 
 //    public void changeModulesAdded(){
-//        //TODO: describe
 //        table.setEditable(true);
 //        modulesAddedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
 //        modulesAddedColumn.setOnEditCommit(this::changeModulesAddedCellEvent);
@@ -205,10 +208,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         //TODO: describe
         SoftwareMaturityIndex.MetricValuesRow metricRowSelected = table.getSelectionModel().getSelectedItem();
         metricRowSelected.setModulesAdded(Integer.parseInt(editedCell.getNewValue().toString()));
+        softwareMaturityIndex.setTotalModules(metricRowSelected);
+        startTab();
     }
 //
 //    public void changeModulesChanged(){
-//        //TODO: describe
 //        table.setEditable(true);
 //        modulesChangedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
 //        modulesChangedColumn.setOnEditCommit(this::changeModulesChangedCellEvent);
@@ -221,7 +225,6 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     }
 //
 //    public void changeModulesDeleted(){
-//        //TODO: describe
 //        table.setEditable(true);
 //        modulesDeletedColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToIntConverter()));
 //        modulesDeletedColumn.setOnEditCommit(this::changeModulesDeletedCellEvent);
@@ -231,6 +234,8 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
         //TODO: describe
         SoftwareMaturityIndex.MetricValuesRow metricRowSelected = table.getSelectionModel().getSelectedItem();
         metricRowSelected.setModulesDeleted(Integer.parseInt(editedCell.getNewValue().toString()));
+        softwareMaturityIndex.setTotalModules(metricRowSelected);
+        startTab();
     }
 
     //Buttons
@@ -242,27 +247,14 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     }
 
     public void addRowClick(){
-        //TODO: describe
-        //TODO: update everything in previous row
+        //If at least one row has been added, makes sure everything is updated in previous row before adding a new one
         if (getAllRows().size() > 0)
-            computeIndexClick();
+            computeIndexClick(); //TODO: refactor to not have to use this fxn, use a clearer fxn
         this.softwareMaturityIndex.addRow();
-        setTableFromData();
-        if (getAllRows().size() > 1) {
-            //TODO: update second to last row
-//            changeModulesAdded();
-//            table.edit(getAllRows().size()-1, modulesAddedColumn);
-            //TODO: commit edit?
 
-        } else {
-//            changeModulesAdded();
-//            changeModulesDeleted();
-//            changeModulesChanged();
-//            table.edit(getAllRows().size()-1, modulesAddedColumn);
-//            table.edit(getAllRows().size()-1, modulesChangedColumn);
-//            table.edit(getAllRows().size()-1, modulesDeletedColumn);
-        }
-        setTableFromData();
+        //Refreshes tab UI
+        startTab(); //TODO: refactor startTab()
+//        setTableFromData();
     }
 
     public Button computeIndexButton() {
@@ -274,15 +266,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
 
     public void computeIndexClick(){
         //TODO: describe
-        getModulesAddedFromLastRow();
         //TODO: update backend modules stuff first
         this.softwareMaturityIndex.setModulesAdded(getLastRowFromData(), this.getLastRow().getModulesAdded());
         this.softwareMaturityIndex.setModulesChanged(getLastRowFromData(), this.getLastRow().getModulesChanged());
         this.softwareMaturityIndex.setModulesDeleted(getLastRowFromData(), this.getLastRow().getModulesDeleted());
         this.softwareMaturityIndex.setMetrics(this.getLastRowFromData());
-        System.out.println("New Total Modules in last row (of data object): " + getLastRowFromData().totalModules);
-        System.out.println("New Total Modules in last row (of data object): " + getAllRowsFromData().get(getAllRowsFromData().size() - 1).totalModules);
-
         startTab();
     }
 

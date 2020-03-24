@@ -20,6 +20,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
     //Constant Static Fields
     //
     public static final String TAB_TITLE = "Function Points";
+    private static int DEFAULT_FIELD_WIDTH = 100; //TODO: make sizing based on constants/screen size
 
     //Non-Constant Static Fields
     //
@@ -41,7 +42,6 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
     //
     //Constructor(s)
     //
-    //TODO: Remove title
     public FunctionPointTab(String tabTitle){
         //Default constructor
         //Call super constructor
@@ -193,7 +193,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         //Complexity Radio Button Stuff
         setComplexityRadios();
         for (int i = 0; i < 5; i++){
-            HBox complexitiesBox = new HBox(40); //TODO: spacing based on constants/screen size?
+            HBox complexitiesBox = new HBox(40);
             for (int j = 0; j < 3; j++){
                 complexitiesBox.getChildren().add(this.complexityRadios[i][j]);
             }
@@ -325,7 +325,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         for (int i = 0; i < 5; i++) { //initializes elements of input array
             this.inputsArray[i] = new TextField();
             inputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-            inputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+            inputsArray[i].setMaxWidth(DEFAULT_FIELD_WIDTH);
         }
     }
 
@@ -336,7 +336,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
             this.outputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
             this.outputsArray[i].setEditable(false);
             this.outputsArray[i].setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-            this.outputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+            this.outputsArray[i].setMaxWidth(DEFAULT_FIELD_WIDTH);
         }
     }
 
@@ -345,7 +345,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         this.totalCountOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.totalCountOutput.setEditable(false);
         this.totalCountOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.totalCountOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.totalCountOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeFunctionPointOutput(){
@@ -353,7 +353,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         this.functionPointOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.functionPointOutput.setEditable(false);
         this.functionPointOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.functionPointOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+        this.functionPointOutput.setMaxWidth(DEFAULT_FIELD_WIDTH*3/2);
     }
 
     private void initializeValueAdjustmentOutput(){
@@ -361,7 +361,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         this.valueAdjustmentOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.valueAdjustmentOutput.setEditable(false);
         this.valueAdjustmentOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.valueAdjustmentOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.valueAdjustmentOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeCodeSizeOutput(){
@@ -369,14 +369,14 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         this.codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.codeSizeOutput.setEditable(false);
         this.codeSizeOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.codeSizeOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+        this.codeSizeOutput.setMaxWidth(DEFAULT_FIELD_WIDTH*3/2);
     }
 
     private void initializeLanguageOutput(){
         this.languageOutput = new TextField();
         this.languageOutput.setEditable(false);
         this.languageOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.languageOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeComplexities(){
@@ -444,7 +444,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
 
     public void valueAdjustmentsClick(){
         //opens VAF window, gets user inputs, moves user inputs into functionPoint
-        this.functionPoint.setValueAdjustmentFactorsFromArray(openValueAdjustmentsWindow()); //TODO: update IDV outputs and total count
+        this.functionPoint.setValueAdjustmentFactorsFromArray(openValueAdjustmentsWindow());
         //sets valueAdjustmentOutput
         setValueAdjustmentOutput();
         setFunctionPointOutput();
@@ -465,7 +465,6 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
 
         updateFunctionPoint();
         //update output fields too
-        //TODO: output field updates are very similar to totalCountClick and computeFPClick...refactor somehow?
         setOutputsArray();
         setTotalCountOutput();
         setFunctionPointOutput();
@@ -495,7 +494,6 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
     }
 
     public int[] openValueAdjustmentsWindow(){
-        //TODO: refactor
         Dialog dialog = new Dialog();
         dialog.setTitle("Value Adjustments Factors");
         dialog.setHeaderText("Pick values from 0 to 5");
