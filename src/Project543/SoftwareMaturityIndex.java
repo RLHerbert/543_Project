@@ -123,6 +123,7 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
         //Initialize member fields
         this.softwareMaturityIndexRows = new ArrayList<MetricValuesRow>();
         this.setFromSaveData();
+        System.out.println();
     }
 
     //Getters
@@ -295,8 +296,8 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
 
     public void setFromSaveData(){
         //Sets the rows from the save data
-        for (int i = 1; i < this.softwareMaturityIndexRows.size(); i+=3){
-            int[] rowSavedData = new int[] {};
+        for (int i = 1; i < this.saveData.size(); i+=3){
+            int[] rowSavedData = new int[] {this.saveData.get(i), this.saveData.get(i+1), this.saveData.get(i+2)};
             if (i == 1){
                 MetricValuesRow firstRow = new MetricValuesRow(rowSavedData[0]);
                 this.softwareMaturityIndexRows.add(firstRow);
@@ -313,6 +314,7 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
     //
     @Override
     public void setSaveData() {
+        this.saveData.clear();
         this.saveData.add(METRIC_ID);
         for (MetricValuesRow metricValuesRow : this.softwareMaturityIndexRows){
             this.saveData.add(metricValuesRow.modulesAdded);
