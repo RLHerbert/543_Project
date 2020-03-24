@@ -237,13 +237,16 @@ public class SoftwareMaturityIndex extends Metrics implements SaveInterface {
     }
 
     public void setTotalModules(MetricValuesRow metricValuesRow){
-        int totalModules = metricValuesRow.totalModules + this.getTotalModulesDelta(metricValuesRow);
-        if (totalModules < 0){
-            System.err.println("ERROR: NEGATIVE_TOTAL_MODULES");
-            metricValuesRow.modulesDeleted = metricValuesRow.modulesAdded;
-        }
+        if (this.softwareMaturityIndexRows.size() == 1) {metricValuesRow.totalModules = metricValuesRow.modulesAdded;}
+
         else {
-            metricValuesRow.totalModules = totalModules;
+            int totalModules = this.softwareMaturityIndexRows.get(this.softwareMaturityIndexRows.size()-2).totalModules + this.getTotalModulesDelta(metricValuesRow);
+            if (totalModules < 0) {
+                System.err.println("ERROR: NEGATIVE_TOTAL_MODULES");
+                metricValuesRow.modulesDeleted = metricValuesRow.modulesAdded;
+            } else {
+                metricValuesRow.totalModules = totalModules;
+            }
         }
     }
 
