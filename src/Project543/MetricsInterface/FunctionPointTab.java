@@ -511,7 +511,8 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
 
         for (int i = 0; i < ValueAdjustmentFactor.descriptionText.length; i++) {
             ChoiceBox vafChoices = new ChoiceBox();
-            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
+            String[] vafStringChoices = new String[] {"0", "1", "2", "3", "4", "5"}; //TODO: This should be static final somewhere
+            vafChoices.getItems().addAll((java.lang.Object[])vafStringChoices); //Suppressed a warning with the cast to Object[]
             grid.add(new Label(ValueAdjustmentFactor.descriptionText[i]), 0, i);
             grid.add(vafChoices, 1, i);
             vafChoices.setValue(Integer.toString(functionPoint.getValueAdjustmentFactor(i)));

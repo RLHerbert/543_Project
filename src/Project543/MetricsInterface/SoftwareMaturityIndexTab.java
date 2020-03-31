@@ -48,19 +48,19 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
     //
     //Constructor(s)
     //
-    SoftwareMaturityIndexTab(String tabTitle){
+    public SoftwareMaturityIndexTab(String tabTitle){
         super(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex();
         startTab();
     }
 
-    SoftwareMaturityIndexTab(String tabTitle, SoftwareMaturityIndex softwareMaturityIndex){
+    public SoftwareMaturityIndexTab(String tabTitle, SoftwareMaturityIndex softwareMaturityIndex){
         this(TAB_TITLE);
         this.softwareMaturityIndex = softwareMaturityIndex;
         startTab();
     }
 
-    SoftwareMaturityIndexTab(String tabTitle, String saveData){
+    public SoftwareMaturityIndexTab(String tabTitle, String saveData){
         this(TAB_TITLE);
         this.softwareMaturityIndex = new SoftwareMaturityIndex(saveData);
         startTab();
