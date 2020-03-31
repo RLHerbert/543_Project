@@ -147,8 +147,11 @@ public class UserInterface {
         //Metrics
         mainMenu[3] = new Menu("Metrics");
 
+        //Project code
+        mainMenu[4] = new Menu("Project code");
+
         //Help
-        mainMenu[4] = new Menu("Help");
+        mainMenu[5] = new Menu("Help");
 
         menuBar.getMenus().addAll(mainMenu);
     }
@@ -173,6 +176,11 @@ public class UserInterface {
         Menu[] metricsOptions = new Menu[METRICS_MENU.length];
         setMetricsMenu(metricsOptions);
         mainMenu[3].getItems().addAll(metricsOptions);
+
+        //Project code
+        MenuItem[] projectCodeOptions = new MenuItem[2];
+        setProjectCodeMenu(projectCodeOptions);
+        mainMenu[4].getItems().addAll(projectCodeOptions);
 
         //Help
         //NYI
@@ -313,6 +321,14 @@ public class UserInterface {
         closeMetrics.setOnAction(actionEvent -> closeHiddenMetricsClick(projectData));
 
         metricsOptions[2].getItems().addAll(reopenMetrics, closeMetrics);
+    }
+
+    public void setProjectCodeMenu(MenuItem[] metricsOptions) {
+        //TODO: finish
+    }
+
+    public void setProjectCodeMenu(MenuItem[] metricsOptions, ProjectData projectData) {
+        //TODO: finish
     }
 
     public void setExitEvent(ProjectData projectData){
