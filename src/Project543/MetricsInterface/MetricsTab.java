@@ -1,5 +1,7 @@
-package Project543;
+package Project543.MetricsInterface;
 
+import Project543.Metrics.Metrics;
+import Project543.SaveInterface;
 import javafx.scene.control.Tab;
 
 //Base class for all Metrics Tabs

@@ -4,6 +4,7 @@
 
 package Project543;
 
+import Project543.MetricsInterface.MetricsTab;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;

@@ -1,5 +1,10 @@
 package Project543;
 
+import Project543.Metrics.FunctionPoint;
+import Project543.Metrics.SoftwareMaturityIndex;
+import Project543.MetricsInterface.FunctionPointTab;
+import Project543.MetricsInterface.MetricsTab;
+import Project543.MetricsInterface.SoftwareMaturityIndexTab;
 import javafx.scene.control.Tab;
 
 import java.io.File;

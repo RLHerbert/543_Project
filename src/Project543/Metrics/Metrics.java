@@ -1,4 +1,4 @@
-package Project543;
+package Project543.Metrics;
 
 import java.util.*;
 import javafx.scene.control.*;

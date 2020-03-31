@@ -1,4 +1,4 @@
-package Project543;
+package Project543.MetricsInterface;
 
 import javafx.event.Event;
 import javafx.scene.control.*;

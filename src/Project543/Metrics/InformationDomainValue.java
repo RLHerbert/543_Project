@@ -1,6 +1,6 @@
-package Project543;
+package Project543.Metrics;
 
-import java.util.Scanner;
+import Project543.Metrics.Metrics;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
 public abstract class InformationDomainValue extends Metrics {
