@@ -29,7 +29,7 @@ public class ProjectCodeTab extends MetricsTab {
     //
     ProjectCode projectCode;
     VBox contentsBox;
-    TextField metricsTextField;
+    TextField metricsTextField; //TODO: Possibly switch to TextArea
 
 
     //**MEMBER METHODS**//
