@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-01 11:10:03
+// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-01 11:49:15
 
 package Project543;
 
@@ -1997,8 +1997,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = HexLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:833:12: ( '0' ( 'x' | 'X' ) ( HexDigit )+ ( IntegerTypeSuffix )? )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:833:14: '0' ( 'x' | 'X' ) ( HexDigit )+ ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:832:12: ( '0' ( 'x' | 'X' ) ( HexDigit )+ ( IntegerTypeSuffix )? )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:832:14: '0' ( 'x' | 'X' ) ( HexDigit )+ ( IntegerTypeSuffix )?
 			{
 			match('0'); 
 			if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -2009,7 +2009,7 @@ public class JavaJavaLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /Users/melissahazlewood/Downloads/JavaJava.g:833:28: ( HexDigit )+
+			// /Users/melissahazlewood/Downloads/JavaJava.g:832:28: ( HexDigit )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -2042,7 +2042,7 @@ public class JavaJavaLexer extends Lexer {
 				cnt1++;
 			}
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:833:38: ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:832:38: ( IntegerTypeSuffix )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='L'||LA2_0=='l') ) {
@@ -2082,10 +2082,10 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = DecimalLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:835:16: ( ( '0' | '1' .. '9' ( '0' .. '9' )* ) ( IntegerTypeSuffix )? )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:835:18: ( '0' | '1' .. '9' ( '0' .. '9' )* ) ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:834:16: ( ( '0' | '1' .. '9' ( '0' .. '9' )* ) ( IntegerTypeSuffix )? )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:834:18: ( '0' | '1' .. '9' ( '0' .. '9' )* ) ( IntegerTypeSuffix )?
 			{
-			// /Users/melissahazlewood/Downloads/JavaJava.g:835:18: ( '0' | '1' .. '9' ( '0' .. '9' )* )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:834:18: ( '0' | '1' .. '9' ( '0' .. '9' )* )
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='0') ) {
@@ -2103,16 +2103,16 @@ public class JavaJavaLexer extends Lexer {
 
 			switch (alt4) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:835:19: '0'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:834:19: '0'
 					{
 					match('0'); 
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:835:25: '1' .. '9' ( '0' .. '9' )*
+					// /Users/melissahazlewood/Downloads/JavaJava.g:834:25: '1' .. '9' ( '0' .. '9' )*
 					{
 					matchRange('1','9'); 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:835:34: ( '0' .. '9' )*
+					// /Users/melissahazlewood/Downloads/JavaJava.g:834:34: ( '0' .. '9' )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -2146,7 +2146,7 @@ public class JavaJavaLexer extends Lexer {
 
 			}
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:835:45: ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:834:45: ( IntegerTypeSuffix )?
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0=='L'||LA5_0=='l') ) {
@@ -2186,11 +2186,11 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = OctalLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:837:14: ( '0' ( '0' .. '7' )+ ( IntegerTypeSuffix )? )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:837:16: '0' ( '0' .. '7' )+ ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:836:14: ( '0' ( '0' .. '7' )+ ( IntegerTypeSuffix )? )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:836:16: '0' ( '0' .. '7' )+ ( IntegerTypeSuffix )?
 			{
 			match('0'); 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:837:20: ( '0' .. '7' )+
+			// /Users/melissahazlewood/Downloads/JavaJava.g:836:20: ( '0' .. '7' )+
 			int cnt6=0;
 			loop6:
 			while (true) {
@@ -2223,7 +2223,7 @@ public class JavaJavaLexer extends Lexer {
 				cnt6++;
 			}
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:837:32: ( IntegerTypeSuffix )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:836:32: ( IntegerTypeSuffix )?
 			int alt7=2;
 			int LA7_0 = input.LA(1);
 			if ( (LA7_0=='L'||LA7_0=='l') ) {
@@ -2261,7 +2261,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "HexDigit"
 	public final void mHexDigit() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:841:10: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:840:10: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
 			// /Users/melissahazlewood/Downloads/JavaJava.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
@@ -2284,7 +2284,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "IntegerTypeSuffix"
 	public final void mIntegerTypeSuffix() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:844:19: ( ( 'l' | 'L' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:843:19: ( ( 'l' | 'L' ) )
 			// /Users/melissahazlewood/Downloads/JavaJava.g:
 			{
 			if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
@@ -2309,14 +2309,14 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = FloatingPointLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:846:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )? | '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )? | ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )? | ( '0' .. '9' )+ FloatTypeSuffix )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:845:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )? | '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )? | ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )? | ( '0' .. '9' )+ FloatTypeSuffix )
 			int alt18=4;
 			alt18 = dfa18.predict(input);
 			switch (alt18) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:846:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:845:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )?
 					{
-					// /Users/melissahazlewood/Downloads/JavaJava.g:846:9: ( '0' .. '9' )+
+					// /Users/melissahazlewood/Downloads/JavaJava.g:845:9: ( '0' .. '9' )+
 					int cnt8=0;
 					loop8:
 					while (true) {
@@ -2350,7 +2350,7 @@ public class JavaJavaLexer extends Lexer {
 					}
 
 					match('.'); 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:846:26: ( '0' .. '9' )*
+					// /Users/melissahazlewood/Downloads/JavaJava.g:845:26: ( '0' .. '9' )*
 					loop9:
 					while (true) {
 						int alt9=2;
@@ -2379,7 +2379,7 @@ public class JavaJavaLexer extends Lexer {
 						}
 					}
 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:846:38: ( Exponent )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:845:38: ( Exponent )?
 					int alt10=2;
 					int LA10_0 = input.LA(1);
 					if ( (LA10_0=='E'||LA10_0=='e') ) {
@@ -2387,7 +2387,7 @@ public class JavaJavaLexer extends Lexer {
 					}
 					switch (alt10) {
 						case 1 :
-							// /Users/melissahazlewood/Downloads/JavaJava.g:846:38: Exponent
+							// /Users/melissahazlewood/Downloads/JavaJava.g:845:38: Exponent
 							{
 							mExponent(); 
 
@@ -2396,7 +2396,7 @@ public class JavaJavaLexer extends Lexer {
 
 					}
 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:846:48: ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:845:48: ( FloatTypeSuffix )?
 					int alt11=2;
 					int LA11_0 = input.LA(1);
 					if ( (LA11_0=='D'||LA11_0=='F'||LA11_0=='d'||LA11_0=='f') ) {
@@ -2423,10 +2423,10 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:847:9: '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:846:9: '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )?
 					{
 					match('.'); 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:847:13: ( '0' .. '9' )+
+					// /Users/melissahazlewood/Downloads/JavaJava.g:846:13: ( '0' .. '9' )+
 					int cnt12=0;
 					loop12:
 					while (true) {
@@ -2459,7 +2459,7 @@ public class JavaJavaLexer extends Lexer {
 						cnt12++;
 					}
 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:847:25: ( Exponent )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:846:25: ( Exponent )?
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0=='E'||LA13_0=='e') ) {
@@ -2467,7 +2467,7 @@ public class JavaJavaLexer extends Lexer {
 					}
 					switch (alt13) {
 						case 1 :
-							// /Users/melissahazlewood/Downloads/JavaJava.g:847:25: Exponent
+							// /Users/melissahazlewood/Downloads/JavaJava.g:846:25: Exponent
 							{
 							mExponent(); 
 
@@ -2476,7 +2476,7 @@ public class JavaJavaLexer extends Lexer {
 
 					}
 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:847:35: ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:846:35: ( FloatTypeSuffix )?
 					int alt14=2;
 					int LA14_0 = input.LA(1);
 					if ( (LA14_0=='D'||LA14_0=='F'||LA14_0=='d'||LA14_0=='f') ) {
@@ -2503,9 +2503,9 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 3 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:848:9: ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:847:9: ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )?
 					{
-					// /Users/melissahazlewood/Downloads/JavaJava.g:848:9: ( '0' .. '9' )+
+					// /Users/melissahazlewood/Downloads/JavaJava.g:847:9: ( '0' .. '9' )+
 					int cnt15=0;
 					loop15:
 					while (true) {
@@ -2540,7 +2540,7 @@ public class JavaJavaLexer extends Lexer {
 
 					mExponent(); 
 
-					// /Users/melissahazlewood/Downloads/JavaJava.g:848:30: ( FloatTypeSuffix )?
+					// /Users/melissahazlewood/Downloads/JavaJava.g:847:30: ( FloatTypeSuffix )?
 					int alt16=2;
 					int LA16_0 = input.LA(1);
 					if ( (LA16_0=='D'||LA16_0=='F'||LA16_0=='d'||LA16_0=='f') ) {
@@ -2567,9 +2567,9 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 4 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:849:9: ( '0' .. '9' )+ FloatTypeSuffix
+					// /Users/melissahazlewood/Downloads/JavaJava.g:848:9: ( '0' .. '9' )+ FloatTypeSuffix
 					{
-					// /Users/melissahazlewood/Downloads/JavaJava.g:849:9: ( '0' .. '9' )+
+					// /Users/melissahazlewood/Downloads/JavaJava.g:848:9: ( '0' .. '9' )+
 					int cnt17=0;
 					loop17:
 					while (true) {
@@ -2621,8 +2621,8 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "Exponent"
 	public final void mExponent() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:854:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:854:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+			// /Users/melissahazlewood/Downloads/JavaJava.g:853:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:853:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
 			{
 			if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
 				input.consume();
@@ -2632,7 +2632,7 @@ public class JavaJavaLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /Users/melissahazlewood/Downloads/JavaJava.g:854:22: ( '+' | '-' )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:853:22: ( '+' | '-' )?
 			int alt19=2;
 			int LA19_0 = input.LA(1);
 			if ( (LA19_0=='+'||LA19_0=='-') ) {
@@ -2655,7 +2655,7 @@ public class JavaJavaLexer extends Lexer {
 
 			}
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:854:33: ( '0' .. '9' )+
+			// /Users/melissahazlewood/Downloads/JavaJava.g:853:33: ( '0' .. '9' )+
 			int cnt20=0;
 			loop20:
 			while (true) {
@@ -2700,7 +2700,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "FloatTypeSuffix"
 	public final void mFloatTypeSuffix() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:857:17: ( ( 'f' | 'F' | 'd' | 'D' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:856:17: ( ( 'f' | 'F' | 'd' | 'D' ) )
 			// /Users/melissahazlewood/Downloads/JavaJava.g:
 			{
 			if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='d'||input.LA(1)=='f' ) {
@@ -2725,11 +2725,11 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = CharacterLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:859:5: ( '\\'' ( EscapeSequence |~ ( '\\'' | '\\\\' ) ) '\\'' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:859:9: '\\'' ( EscapeSequence |~ ( '\\'' | '\\\\' ) ) '\\''
+			// /Users/melissahazlewood/Downloads/JavaJava.g:858:5: ( '\\'' ( EscapeSequence |~ ( '\\'' | '\\\\' ) ) '\\'' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:858:9: '\\'' ( EscapeSequence |~ ( '\\'' | '\\\\' ) ) '\\''
 			{
 			match('\''); 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:859:14: ( EscapeSequence |~ ( '\\'' | '\\\\' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:858:14: ( EscapeSequence |~ ( '\\'' | '\\\\' ) )
 			int alt21=2;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0=='\\') ) {
@@ -2747,14 +2747,14 @@ public class JavaJavaLexer extends Lexer {
 
 			switch (alt21) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:859:16: EscapeSequence
+					// /Users/melissahazlewood/Downloads/JavaJava.g:858:16: EscapeSequence
 					{
 					mEscapeSequence(); 
 
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:859:33: ~ ( '\\'' | '\\\\' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:858:33: ~ ( '\\'' | '\\\\' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -2787,11 +2787,11 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = StringLiteral;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:863:5: ( '\"' ( EscapeSequence |~ ( '\\\\' | '\"' ) )* '\"' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:863:8: '\"' ( EscapeSequence |~ ( '\\\\' | '\"' ) )* '\"'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:862:5: ( '\"' ( EscapeSequence |~ ( '\\\\' | '\"' ) )* '\"' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:862:8: '\"' ( EscapeSequence |~ ( '\\\\' | '\"' ) )* '\"'
 			{
 			match('\"'); 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:863:12: ( EscapeSequence |~ ( '\\\\' | '\"' ) )*
+			// /Users/melissahazlewood/Downloads/JavaJava.g:862:12: ( EscapeSequence |~ ( '\\\\' | '\"' ) )*
 			loop22:
 			while (true) {
 				int alt22=3;
@@ -2805,14 +2805,14 @@ public class JavaJavaLexer extends Lexer {
 
 				switch (alt22) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:863:14: EscapeSequence
+					// /Users/melissahazlewood/Downloads/JavaJava.g:862:14: EscapeSequence
 					{
 					mEscapeSequence(); 
 
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:863:31: ~ ( '\\\\' | '\"' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:862:31: ~ ( '\\\\' | '\"' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -2846,7 +2846,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "EscapeSequence"
 	public final void mEscapeSequence() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:869:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | UnicodeEscape | OctalEscape )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:868:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | UnicodeEscape | OctalEscape )
 			int alt23=3;
 			int LA23_0 = input.LA(1);
 			if ( (LA23_0=='\\') ) {
@@ -2901,7 +2901,7 @@ public class JavaJavaLexer extends Lexer {
 
 			switch (alt23) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:869:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:868:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
 					{
 					match('\\'); 
 					if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -2915,14 +2915,14 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:870:9: UnicodeEscape
+					// /Users/melissahazlewood/Downloads/JavaJava.g:869:9: UnicodeEscape
 					{
 					mUnicodeEscape(); 
 
 					}
 					break;
 				case 3 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:871:9: OctalEscape
+					// /Users/melissahazlewood/Downloads/JavaJava.g:870:9: OctalEscape
 					{
 					mOctalEscape(); 
 
@@ -2940,7 +2940,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "OctalEscape"
 	public final void mOctalEscape() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:876:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:875:5: ( '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) ( '0' .. '7' ) | '\\\\' ( '0' .. '7' ) )
 			int alt24=3;
 			int LA24_0 = input.LA(1);
 			if ( (LA24_0=='\\') ) {
@@ -2998,7 +2998,7 @@ public class JavaJavaLexer extends Lexer {
 
 			switch (alt24) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:876:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:875:9: '\\\\' ( '0' .. '3' ) ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '3') ) {
@@ -3028,7 +3028,7 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:877:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:876:9: '\\\\' ( '0' .. '7' ) ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -3050,7 +3050,7 @@ public class JavaJavaLexer extends Lexer {
 					}
 					break;
 				case 3 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:878:9: '\\\\' ( '0' .. '7' )
+					// /Users/melissahazlewood/Downloads/JavaJava.g:877:9: '\\\\' ( '0' .. '7' )
 					{
 					match('\\'); 
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '7') ) {
@@ -3075,8 +3075,8 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "UnicodeEscape"
 	public final void mUnicodeEscape() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:883:5: ( '\\\\' 'u' HexDigit HexDigit HexDigit HexDigit )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:883:9: '\\\\' 'u' HexDigit HexDigit HexDigit HexDigit
+			// /Users/melissahazlewood/Downloads/JavaJava.g:882:5: ( '\\\\' 'u' HexDigit HexDigit HexDigit HexDigit )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:882:9: '\\\\' 'u' HexDigit HexDigit HexDigit HexDigit
 			{
 			match('\\'); 
 			match('u'); 
@@ -3102,8 +3102,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = ENUM;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:885:5: ( 'enum' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:885:9: 'enum'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:884:5: ( 'enum' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:884:9: 'enum'
 			{
 			match("enum"); 
 
@@ -3123,8 +3123,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = ASSERT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:889:5: ( 'assert' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:889:9: 'assert'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:888:5: ( 'assert' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:888:9: 'assert'
 			{
 			match("assert"); 
 
@@ -3144,12 +3144,12 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = Identifier;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:893:5: ( Letter ( Letter | JavaIDDigit )* )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:893:8: Letter ( Letter | JavaIDDigit )*
+			// /Users/melissahazlewood/Downloads/JavaJava.g:892:5: ( Letter ( Letter | JavaIDDigit )* )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:892:8: Letter ( Letter | JavaIDDigit )*
 			{
 			mLetter(); 
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:893:15: ( Letter | JavaIDDigit )*
+			// /Users/melissahazlewood/Downloads/JavaJava.g:892:15: ( Letter | JavaIDDigit )*
 			loop25:
 			while (true) {
 				int alt25=2;
@@ -3192,7 +3192,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "Letter"
 	public final void mLetter() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:905:5: ( '\\u0024' | '\\u0041' .. '\\u005a' | '\\u005f' | '\\u0061' .. '\\u007a' | '\\u00c0' .. '\\u00d6' | '\\u00d8' .. '\\u00f6' | '\\u00f8' .. '\\u00ff' | '\\u0100' .. '\\u1fff' | '\\u3040' .. '\\u318f' | '\\u3300' .. '\\u337f' | '\\u3400' .. '\\u3d2d' | '\\u4e00' .. '\\u9fff' | '\\uf900' .. '\\ufaff' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:904:5: ( '\\u0024' | '\\u0041' .. '\\u005a' | '\\u005f' | '\\u0061' .. '\\u007a' | '\\u00c0' .. '\\u00d6' | '\\u00d8' .. '\\u00f6' | '\\u00f8' .. '\\u00ff' | '\\u0100' .. '\\u1fff' | '\\u3040' .. '\\u318f' | '\\u3300' .. '\\u337f' | '\\u3400' .. '\\u3d2d' | '\\u4e00' .. '\\u9fff' | '\\uf900' .. '\\ufaff' )
 			// /Users/melissahazlewood/Downloads/JavaJava.g:
 			{
 			if ( input.LA(1)=='$'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z')||(input.LA(1) >= '\u00C0' && input.LA(1) <= '\u00D6')||(input.LA(1) >= '\u00D8' && input.LA(1) <= '\u00F6')||(input.LA(1) >= '\u00F8' && input.LA(1) <= '\u1FFF')||(input.LA(1) >= '\u3040' && input.LA(1) <= '\u318F')||(input.LA(1) >= '\u3300' && input.LA(1) <= '\u337F')||(input.LA(1) >= '\u3400' && input.LA(1) <= '\u3D2D')||(input.LA(1) >= '\u4E00' && input.LA(1) <= '\u9FFF')||(input.LA(1) >= '\uF900' && input.LA(1) <= '\uFAFF') ) {
@@ -3215,7 +3215,7 @@ public class JavaJavaLexer extends Lexer {
 	// $ANTLR start "JavaIDDigit"
 	public final void mJavaIDDigit() throws RecognitionException {
 		try {
-			// /Users/melissahazlewood/Downloads/JavaJava.g:919:5: ( '\\u0030' .. '\\u0039' | '\\u0660' .. '\\u0669' | '\\u06f0' .. '\\u06f9' | '\\u0966' .. '\\u096f' | '\\u09e6' .. '\\u09ef' | '\\u0a66' .. '\\u0a6f' | '\\u0ae6' .. '\\u0aef' | '\\u0b66' .. '\\u0b6f' | '\\u0be7' .. '\\u0bef' | '\\u0c66' .. '\\u0c6f' | '\\u0ce6' .. '\\u0cef' | '\\u0d66' .. '\\u0d6f' | '\\u0e50' .. '\\u0e59' | '\\u0ed0' .. '\\u0ed9' | '\\u1040' .. '\\u1049' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:918:5: ( '\\u0030' .. '\\u0039' | '\\u0660' .. '\\u0669' | '\\u06f0' .. '\\u06f9' | '\\u0966' .. '\\u096f' | '\\u09e6' .. '\\u09ef' | '\\u0a66' .. '\\u0a6f' | '\\u0ae6' .. '\\u0aef' | '\\u0b66' .. '\\u0b6f' | '\\u0be7' .. '\\u0bef' | '\\u0c66' .. '\\u0c6f' | '\\u0ce6' .. '\\u0cef' | '\\u0d66' .. '\\u0d6f' | '\\u0e50' .. '\\u0e59' | '\\u0ed0' .. '\\u0ed9' | '\\u1040' .. '\\u1049' )
 			// /Users/melissahazlewood/Downloads/JavaJava.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= '\u0660' && input.LA(1) <= '\u0669')||(input.LA(1) >= '\u06F0' && input.LA(1) <= '\u06F9')||(input.LA(1) >= '\u0966' && input.LA(1) <= '\u096F')||(input.LA(1) >= '\u09E6' && input.LA(1) <= '\u09EF')||(input.LA(1) >= '\u0A66' && input.LA(1) <= '\u0A6F')||(input.LA(1) >= '\u0AE6' && input.LA(1) <= '\u0AEF')||(input.LA(1) >= '\u0B66' && input.LA(1) <= '\u0B6F')||(input.LA(1) >= '\u0BE7' && input.LA(1) <= '\u0BEF')||(input.LA(1) >= '\u0C66' && input.LA(1) <= '\u0C6F')||(input.LA(1) >= '\u0CE6' && input.LA(1) <= '\u0CEF')||(input.LA(1) >= '\u0D66' && input.LA(1) <= '\u0D6F')||(input.LA(1) >= '\u0E50' && input.LA(1) <= '\u0E59')||(input.LA(1) >= '\u0ED0' && input.LA(1) <= '\u0ED9')||(input.LA(1) >= '\u1040' && input.LA(1) <= '\u1049') ) {
@@ -3240,10 +3240,10 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:935:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:935:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:934:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:934:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
 			{
-			// /Users/melissahazlewood/Downloads/JavaJava.g:935:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:934:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
 			int alt26=5;
 			switch ( input.LA(1) ) {
 			case ' ':
@@ -3278,35 +3278,35 @@ public class JavaJavaLexer extends Lexer {
 			}
 			switch (alt26) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:935:9: ' '
+					// /Users/melissahazlewood/Downloads/JavaJava.g:934:9: ' '
 					{
 					match(' '); 
 					ws++;
 					}
 					break;
 				case 2 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:935:20: '\\r'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:934:20: '\\r'
 					{
 					match('\r'); 
 					ws++;
 					}
 					break;
 				case 3 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:935:32: '\\t'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:934:32: '\\t'
 					{
 					match('\t'); 
 					ws++;
 					}
 					break;
 				case 4 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:935:44: '\\u000C'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:934:44: '\\u000C'
 					{
 					match('\f'); 
 					ws++;
 					}
 					break;
 				case 5 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:935:60: '\\n'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:934:60: '\\n'
 					{
 					match('\n'); 
 					ws++;
@@ -3332,12 +3332,12 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:939:5: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:939:9: '/*' ( options {greedy=false; } : . )* '*/'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:938:5: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:938:9: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 			match("/*"); 
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:939:14: ( options {greedy=false; } : . )*
+			// /Users/melissahazlewood/Downloads/JavaJava.g:938:14: ( options {greedy=false; } : . )*
 			loop27:
 			while (true) {
 				int alt27=2;
@@ -3358,7 +3358,7 @@ public class JavaJavaLexer extends Lexer {
 
 				switch (alt27) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:939:42: .
+					// /Users/melissahazlewood/Downloads/JavaJava.g:938:42: .
 					{
 					matchAny(); 
 					commentcount++;
@@ -3389,12 +3389,12 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = LINE_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:943:5: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( '\\r' )? '\\n' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:943:7: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( '\\r' )? '\\n'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:942:5: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( '\\r' )? '\\n' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:942:7: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( '\\r' )? '\\n'
 			{
 			match("//"); 
 
-			// /Users/melissahazlewood/Downloads/JavaJava.g:943:12: (~ ( ( '\\n' | '\\r' ) ) )*
+			// /Users/melissahazlewood/Downloads/JavaJava.g:942:12: (~ ( ( '\\n' | '\\r' ) ) )*
 			loop28:
 			while (true) {
 				int alt28=2;
@@ -3424,7 +3424,7 @@ public class JavaJavaLexer extends Lexer {
 			}
 
 			/*INSERT COUNT*/
-			// /Users/melissahazlewood/Downloads/JavaJava.g:943:49: ( '\\r' )?
+			// /Users/melissahazlewood/Downloads/JavaJava.g:942:49: ( '\\r' )?
 			int alt29=2;
 			int LA29_0 = input.LA(1);
 			if ( (LA29_0=='\r') ) {
@@ -3432,7 +3432,7 @@ public class JavaJavaLexer extends Lexer {
 			}
 			switch (alt29) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:943:49: '\\r'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:942:49: '\\r'
 					{
 					match('\r'); 
 					}
@@ -4225,7 +4225,7 @@ public class JavaJavaLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "845:1: FloatingPointLiteral : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )? | '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )? | ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )? | ( '0' .. '9' )+ FloatTypeSuffix );";
+			return "844:1: FloatingPointLiteral : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( Exponent )? ( FloatTypeSuffix )? | '.' ( '0' .. '9' )+ ( Exponent )? ( FloatTypeSuffix )? | ( '0' .. '9' )+ Exponent ( FloatTypeSuffix )? | ( '0' .. '9' )+ FloatTypeSuffix );";
 		}
 	}
 
