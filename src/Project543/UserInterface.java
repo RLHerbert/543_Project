@@ -33,7 +33,7 @@ public class UserInterface {
     public static final double MAX_HEIGHT = new Stage().getMaxHeight() - 25.0;
     public static final double MAX_WIDTH = new Stage().getMaxWidth();
     public static Language selectedLanguage = Language.NONE;
-    public static final String[] MAIN_MENU = {"File", "Edit", "Preferences", "Metrics", "Help"}; //TODO: Use
+    public static final String[] MAIN_MENU = {"File", "Edit", "Preferences", "Metrics", "Project Code", "Help"}; //TODO: Use
     public static final String[] FILE_MENU = {"New", "Open", "Save", "Exit"};
     public static final String[] EDIT_MENU = {""}; //Not yet implemented
     public static final String[] PREFERENCES_MENU = {"Select Language"}; //TODO: Use
