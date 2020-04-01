@@ -38,6 +38,7 @@ public class UserInterface {
     public static final String[] EDIT_MENU = {""}; //Not yet implemented
     public static final String[] PREFERENCES_MENU = {"Select Language"}; //TODO: Use
     public static final String[] METRICS_MENU = {"Function Point", "Software Maturity Index", "Hidden Metrics Tabs"};
+    public static final String[] PROJECT_CODE_MENU = {"Add Code", "Project Code Statistics"};
     public static final String[] HELP_MENU = {""}; //Not yet implemented
 
     //Non-Static Member Fields
@@ -87,7 +88,7 @@ public class UserInterface {
     //
     public MenuBar getNewMenuBar(){
         MenuBar menuBar = new MenuBar();
-        Menu[] mainMenu = new Menu[5];
+        Menu[] mainMenu = new Menu[6];
         setMainMenu(menuBar, mainMenu);
         setSubMenus(mainMenu);
 
@@ -177,7 +178,7 @@ public class UserInterface {
         setMetricsMenu(metricsOptions);
         mainMenu[3].getItems().addAll(metricsOptions);
 
-        //Project code
+        //Project Code
         MenuItem[] projectCodeOptions = new MenuItem[2];
         setProjectCodeMenu(projectCodeOptions);
         mainMenu[4].getItems().addAll(projectCodeOptions);
@@ -206,6 +207,11 @@ public class UserInterface {
         setMetricsMenu(metricsOptions, projectData);
         mainMenu[3].getItems().addAll(metricsOptions);
         //setMetricsMenu(metricsOptions);
+
+        //Project Code
+        MenuItem[] projectCodeOptions = new MenuItem[2];
+        setProjectCodeMenu(projectCodeOptions, projectData);
+        mainMenu[4].getItems().addAll(projectCodeOptions);
 
         //Help
         //NYI
@@ -323,12 +329,22 @@ public class UserInterface {
         metricsOptions[2].getItems().addAll(reopenMetrics, closeMetrics);
     }
 
-    public void setProjectCodeMenu(MenuItem[] metricsOptions) {
-        //TODO: finish
+    public void setProjectCodeMenu(MenuItem[] projectCodeOptions) {
+        //Sets the "Project Code" menu
+        for (int i = 0; i < 2; i++){
+            projectCodeOptions[i] = new MenuItem(PROJECT_CODE_MENU[i]);
+        }
+
+        //TODO: add project code menu item actions
     }
 
-    public void setProjectCodeMenu(MenuItem[] metricsOptions, ProjectData projectData) {
-        //TODO: finish
+    public void setProjectCodeMenu(MenuItem[] projectCodeOptions, ProjectData projectData) {
+        //Sets the "Project Code" menu and hooks it up to the ProjectData passed in
+        for (int i = 0; i < 2; i++){
+            projectCodeOptions[i] = new MenuItem(PROJECT_CODE_MENU[i]);
+        }
+
+        //TODO: add project code menu item actions
     }
 
     public void setExitEvent(ProjectData projectData){
