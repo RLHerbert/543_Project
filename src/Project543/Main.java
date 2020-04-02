@@ -1,5 +1,6 @@
 package Project543;
 
+import Project543.Metrics.ProjectCode;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
 //        ApplicationController test = new ApplicationController();
 //        Controller testController = new Controller();
 //        testController.openProject("TEST.ms");

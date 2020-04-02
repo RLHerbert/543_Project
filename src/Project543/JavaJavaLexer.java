@@ -1,7 +1,6 @@
-// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-01 11:49:15
+// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-02 12:31:29
 
 package Project543;
-
 
 
 import org.antlr.runtime.*;
@@ -153,8 +152,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__25;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:17:7: ( '!' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:17:9: '!'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:16:7: ( '!' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:16:9: '!'
 			{
 			match('!'); 
 			}
@@ -173,8 +172,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__26;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:18:7: ( '!=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:18:9: '!='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:17:7: ( '!=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:17:9: '!='
 			{
 			match("!="); 
 
@@ -194,8 +193,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__27;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:19:7: ( '%' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:19:9: '%'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:18:7: ( '%' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:18:9: '%'
 			{
 			match('%'); 
 			}
@@ -214,8 +213,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__28;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:20:7: ( '%=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:20:9: '%='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:19:7: ( '%=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:19:9: '%='
 			{
 			match("%="); 
 
@@ -235,8 +234,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__29;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:21:7: ( '&&' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:21:9: '&&'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:20:7: ( '&&' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:20:9: '&&'
 			{
 			match("&&"); 
 
@@ -256,8 +255,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__30;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:22:7: ( '&' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:22:9: '&'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:21:7: ( '&' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:21:9: '&'
 			{
 			match('&'); 
 			}
@@ -276,8 +275,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__31;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:23:7: ( '&=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:23:9: '&='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:22:7: ( '&=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:22:9: '&='
 			{
 			match("&="); 
 
@@ -297,8 +296,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__32;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:24:7: ( '(' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:24:9: '('
+			// /Users/melissahazlewood/Downloads/JavaJava.g:23:7: ( '(' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:23:9: '('
 			{
 			match('('); 
 			}
@@ -317,8 +316,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__33;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:25:7: ( ')' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:25:9: ')'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:24:7: ( ')' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:24:9: ')'
 			{
 			match(')'); 
 			}
@@ -337,8 +336,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__34;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:26:7: ( '*' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:26:9: '*'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:25:7: ( '*' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:25:9: '*'
 			{
 			match('*'); 
 			}
@@ -357,8 +356,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__35;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:27:7: ( '*=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:27:9: '*='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:26:7: ( '*=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:26:9: '*='
 			{
 			match("*="); 
 
@@ -378,8 +377,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__36;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:28:7: ( '+' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:28:9: '+'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:27:7: ( '+' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:27:9: '+'
 			{
 			match('+'); 
 			}
@@ -398,8 +397,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__37;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:29:7: ( '++' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:29:9: '++'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:28:7: ( '++' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:28:9: '++'
 			{
 			match("++"); 
 
@@ -419,8 +418,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__38;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:30:7: ( '+=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:30:9: '+='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:29:7: ( '+=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:29:9: '+='
 			{
 			match("+="); 
 
@@ -440,8 +439,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__39;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:31:7: ( ',' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:31:9: ','
+			// /Users/melissahazlewood/Downloads/JavaJava.g:30:7: ( ',' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:30:9: ','
 			{
 			match(','); 
 			}
@@ -460,8 +459,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__40;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:32:7: ( '-' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:32:9: '-'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:31:7: ( '-' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:31:9: '-'
 			{
 			match('-'); 
 			}
@@ -480,8 +479,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__41;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:33:7: ( '--' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:33:9: '--'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:32:7: ( '--' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:32:9: '--'
 			{
 			match("--"); 
 
@@ -501,8 +500,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__42;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:34:7: ( '-=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:34:9: '-='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:33:7: ( '-=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:33:9: '-='
 			{
 			match("-="); 
 
@@ -522,8 +521,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__43;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:35:7: ( '.' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:35:9: '.'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:34:7: ( '.' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:34:9: '.'
 			{
 			match('.'); 
 			}
@@ -542,8 +541,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__44;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:36:7: ( '...' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:36:9: '...'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:35:7: ( '...' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:35:9: '...'
 			{
 			match("..."); 
 
@@ -563,8 +562,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__45;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:37:7: ( '/' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:37:9: '/'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:36:7: ( '/' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:36:9: '/'
 			{
 			match('/'); 
 			}
@@ -583,8 +582,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__46;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:38:7: ( '/=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:38:9: '/='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:37:7: ( '/=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:37:9: '/='
 			{
 			match("/="); 
 
@@ -604,8 +603,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__47;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:39:7: ( ':' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:39:9: ':'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:38:7: ( ':' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:38:9: ':'
 			{
 			match(':'); 
 			}
@@ -624,8 +623,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__48;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:40:7: ( ';' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:40:9: ';'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:39:7: ( ';' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:39:9: ';'
 			{
 			match(';'); 
 			}
@@ -644,8 +643,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__49;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:41:7: ( '<' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:41:9: '<'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:40:7: ( '<' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:40:9: '<'
 			{
 			match('<'); 
 			}
@@ -664,8 +663,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__50;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:42:7: ( '=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:42:9: '='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:41:7: ( '=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:41:9: '='
 			{
 			match('='); 
 			}
@@ -684,8 +683,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__51;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:43:7: ( '==' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:43:9: '=='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:42:7: ( '==' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:42:9: '=='
 			{
 			match("=="); 
 
@@ -705,8 +704,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__52;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:44:7: ( '>' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:44:9: '>'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:43:7: ( '>' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:43:9: '>'
 			{
 			match('>'); 
 			}
@@ -725,8 +724,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__53;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:45:7: ( '?' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:45:9: '?'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:44:7: ( '?' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:44:9: '?'
 			{
 			match('?'); 
 			}
@@ -745,8 +744,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__54;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:46:7: ( '@' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:46:9: '@'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:45:7: ( '@' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:45:9: '@'
 			{
 			match('@'); 
 			}
@@ -765,8 +764,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__55;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:47:7: ( '[' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:47:9: '['
+			// /Users/melissahazlewood/Downloads/JavaJava.g:46:7: ( '[' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:46:9: '['
 			{
 			match('['); 
 			}
@@ -785,8 +784,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__56;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:48:7: ( ']' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:48:9: ']'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:47:7: ( ']' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:47:9: ']'
 			{
 			match(']'); 
 			}
@@ -805,8 +804,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__57;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:49:7: ( '^' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:49:9: '^'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:48:7: ( '^' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:48:9: '^'
 			{
 			match('^'); 
 			}
@@ -825,8 +824,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__58;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:50:7: ( '^=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:50:9: '^='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:49:7: ( '^=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:49:9: '^='
 			{
 			match("^="); 
 
@@ -846,8 +845,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__59;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:51:7: ( 'abstract' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:51:9: 'abstract'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:50:7: ( 'abstract' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:50:9: 'abstract'
 			{
 			match("abstract"); 
 
@@ -867,8 +866,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__60;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:52:7: ( 'boolean' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:52:9: 'boolean'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:51:7: ( 'boolean' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:51:9: 'boolean'
 			{
 			match("boolean"); 
 
@@ -888,8 +887,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__61;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:53:7: ( 'break' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:53:9: 'break'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:52:7: ( 'break' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:52:9: 'break'
 			{
 			match("break"); 
 
@@ -909,8 +908,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__62;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:54:7: ( 'byte' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:54:9: 'byte'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:53:7: ( 'byte' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:53:9: 'byte'
 			{
 			match("byte"); 
 
@@ -930,8 +929,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__63;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:55:7: ( 'case' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:55:9: 'case'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:54:7: ( 'case' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:54:9: 'case'
 			{
 			match("case"); 
 
@@ -951,8 +950,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__64;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:56:7: ( 'catch' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:56:9: 'catch'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:55:7: ( 'catch' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:55:9: 'catch'
 			{
 			match("catch"); 
 
@@ -972,8 +971,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__65;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:57:7: ( 'char' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:57:9: 'char'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:56:7: ( 'char' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:56:9: 'char'
 			{
 			match("char"); 
 
@@ -993,8 +992,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__66;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:58:7: ( 'class' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:58:9: 'class'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:57:7: ( 'class' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:57:9: 'class'
 			{
 			match("class"); 
 
@@ -1014,8 +1013,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__67;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:59:7: ( 'continue' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:59:9: 'continue'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:58:7: ( 'continue' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:58:9: 'continue'
 			{
 			match("continue"); 
 
@@ -1035,8 +1034,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__68;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:60:7: ( 'default' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:60:9: 'default'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:59:7: ( 'default' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:59:9: 'default'
 			{
 			match("default"); 
 
@@ -1056,8 +1055,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__69;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:61:7: ( 'do' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:61:9: 'do'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:60:7: ( 'do' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:60:9: 'do'
 			{
 			match("do"); 
 
@@ -1077,8 +1076,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__70;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:62:7: ( 'double' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:62:9: 'double'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:61:7: ( 'double' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:61:9: 'double'
 			{
 			match("double"); 
 
@@ -1098,8 +1097,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__71;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:63:7: ( 'else' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:63:9: 'else'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:62:7: ( 'else' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:62:9: 'else'
 			{
 			match("else"); 
 
@@ -1119,8 +1118,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__72;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:64:7: ( 'extends' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:64:9: 'extends'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:63:7: ( 'extends' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:63:9: 'extends'
 			{
 			match("extends"); 
 
@@ -1140,8 +1139,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__73;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:65:7: ( 'false' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:65:9: 'false'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:64:7: ( 'false' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:64:9: 'false'
 			{
 			match("false"); 
 
@@ -1161,8 +1160,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__74;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:66:7: ( 'final' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:66:9: 'final'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:65:7: ( 'final' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:65:9: 'final'
 			{
 			match("final"); 
 
@@ -1182,8 +1181,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__75;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:67:7: ( 'finally' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:67:9: 'finally'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:66:7: ( 'finally' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:66:9: 'finally'
 			{
 			match("finally"); 
 
@@ -1203,8 +1202,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__76;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:68:7: ( 'float' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:68:9: 'float'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:67:7: ( 'float' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:67:9: 'float'
 			{
 			match("float"); 
 
@@ -1224,8 +1223,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__77;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:69:7: ( 'for' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:69:9: 'for'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:68:7: ( 'for' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:68:9: 'for'
 			{
 			match("for"); 
 
@@ -1245,8 +1244,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__78;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:70:7: ( 'if' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:70:9: 'if'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:69:7: ( 'if' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:69:9: 'if'
 			{
 			match("if"); 
 
@@ -1266,8 +1265,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__79;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:71:7: ( 'implements' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:71:9: 'implements'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:70:7: ( 'implements' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:70:9: 'implements'
 			{
 			match("implements"); 
 
@@ -1287,8 +1286,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__80;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:72:7: ( 'import' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:72:9: 'import'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:71:7: ( 'import' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:71:9: 'import'
 			{
 			match("import"); 
 
@@ -1308,8 +1307,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__81;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:73:7: ( 'instanceof' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:73:9: 'instanceof'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:72:7: ( 'instanceof' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:72:9: 'instanceof'
 			{
 			match("instanceof"); 
 
@@ -1329,8 +1328,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__82;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:74:7: ( 'int' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:74:9: 'int'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:73:7: ( 'int' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:73:9: 'int'
 			{
 			match("int"); 
 
@@ -1350,8 +1349,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__83;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:75:7: ( 'interface' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:75:9: 'interface'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:74:7: ( 'interface' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:74:9: 'interface'
 			{
 			match("interface"); 
 
@@ -1371,8 +1370,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__84;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:76:7: ( 'long' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:76:9: 'long'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:75:7: ( 'long' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:75:9: 'long'
 			{
 			match("long"); 
 
@@ -1392,8 +1391,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__85;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:77:7: ( 'native' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:77:9: 'native'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:76:7: ( 'native' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:76:9: 'native'
 			{
 			match("native"); 
 
@@ -1413,8 +1412,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__86;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:78:7: ( 'new' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:78:9: 'new'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:77:7: ( 'new' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:77:9: 'new'
 			{
 			match("new"); 
 
@@ -1434,8 +1433,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__87;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:79:7: ( 'null' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:79:9: 'null'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:78:7: ( 'null' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:78:9: 'null'
 			{
 			match("null"); 
 
@@ -1455,8 +1454,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__88;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:80:7: ( 'package' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:80:9: 'package'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:79:7: ( 'package' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:79:9: 'package'
 			{
 			match("package"); 
 
@@ -1476,8 +1475,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__89;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:81:7: ( 'private' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:81:9: 'private'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:80:7: ( 'private' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:80:9: 'private'
 			{
 			match("private"); 
 
@@ -1497,8 +1496,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__90;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:82:7: ( 'protected' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:82:9: 'protected'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:81:7: ( 'protected' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:81:9: 'protected'
 			{
 			match("protected"); 
 
@@ -1518,8 +1517,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__91;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:83:7: ( 'public' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:83:9: 'public'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:82:7: ( 'public' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:82:9: 'public'
 			{
 			match("public"); 
 
@@ -1539,8 +1538,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__92;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:84:7: ( 'return' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:84:9: 'return'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:83:7: ( 'return' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:83:9: 'return'
 			{
 			match("return"); 
 
@@ -1560,8 +1559,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__93;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:85:7: ( 'short' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:85:9: 'short'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:84:7: ( 'short' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:84:9: 'short'
 			{
 			match("short"); 
 
@@ -1581,8 +1580,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__94;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:86:7: ( 'static' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:86:9: 'static'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:85:7: ( 'static' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:85:9: 'static'
 			{
 			match("static"); 
 
@@ -1602,8 +1601,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__95;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:87:7: ( 'strictfp' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:87:9: 'strictfp'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:86:7: ( 'strictfp' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:86:9: 'strictfp'
 			{
 			match("strictfp"); 
 
@@ -1623,8 +1622,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__96;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:88:7: ( 'super' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:88:9: 'super'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:87:7: ( 'super' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:87:9: 'super'
 			{
 			match("super"); 
 
@@ -1644,8 +1643,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__97;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:89:7: ( 'switch' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:89:9: 'switch'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:88:7: ( 'switch' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:88:9: 'switch'
 			{
 			match("switch"); 
 
@@ -1665,8 +1664,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__98;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:90:7: ( 'synchronized' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:90:9: 'synchronized'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:89:7: ( 'synchronized' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:89:9: 'synchronized'
 			{
 			match("synchronized"); 
 
@@ -1686,8 +1685,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__99;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:91:7: ( 'this' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:91:9: 'this'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:90:7: ( 'this' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:90:9: 'this'
 			{
 			match("this"); 
 
@@ -1707,8 +1706,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__100;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:92:8: ( 'throw' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:92:10: 'throw'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:91:8: ( 'throw' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:91:10: 'throw'
 			{
 			match("throw"); 
 
@@ -1728,8 +1727,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__101;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:93:8: ( 'throws' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:93:10: 'throws'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:92:8: ( 'throws' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:92:10: 'throws'
 			{
 			match("throws"); 
 
@@ -1749,8 +1748,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__102;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:94:8: ( 'transient' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:94:10: 'transient'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:93:8: ( 'transient' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:93:10: 'transient'
 			{
 			match("transient"); 
 
@@ -1770,8 +1769,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__103;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:95:8: ( 'true' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:95:10: 'true'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:94:8: ( 'true' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:94:10: 'true'
 			{
 			match("true"); 
 
@@ -1791,8 +1790,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__104;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:96:8: ( 'try' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:96:10: 'try'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:95:8: ( 'try' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:95:10: 'try'
 			{
 			match("try"); 
 
@@ -1812,8 +1811,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__105;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:97:8: ( 'void' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:97:10: 'void'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:96:8: ( 'void' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:96:10: 'void'
 			{
 			match("void"); 
 
@@ -1833,8 +1832,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__106;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:98:8: ( 'volatile' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:98:10: 'volatile'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:97:8: ( 'volatile' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:97:10: 'volatile'
 			{
 			match("volatile"); 
 
@@ -1854,8 +1853,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__107;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:99:8: ( 'while' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:99:10: 'while'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:98:8: ( 'while' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:98:10: 'while'
 			{
 			match("while"); 
 
@@ -1875,8 +1874,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__108;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:100:8: ( '{' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:100:10: '{'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:99:8: ( '{' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:99:10: '{'
 			{
 			match('{'); 
 			}
@@ -1895,8 +1894,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__109;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:101:8: ( '|' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:101:10: '|'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:100:8: ( '|' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:100:10: '|'
 			{
 			match('|'); 
 			}
@@ -1915,8 +1914,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__110;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:102:8: ( '|=' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:102:10: '|='
+			// /Users/melissahazlewood/Downloads/JavaJava.g:101:8: ( '|=' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:101:10: '|='
 			{
 			match("|="); 
 
@@ -1936,8 +1935,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__111;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:103:8: ( '||' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:103:10: '||'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:102:8: ( '||' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:102:10: '||'
 			{
 			match("||"); 
 
@@ -1957,8 +1956,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__112;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:104:8: ( '}' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:104:10: '}'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:103:8: ( '}' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:103:10: '}'
 			{
 			match('}'); 
 			}
@@ -1977,8 +1976,8 @@ public class JavaJavaLexer extends Lexer {
 		try {
 			int _type = T__113;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/melissahazlewood/Downloads/JavaJava.g:105:8: ( '~' )
-			// /Users/melissahazlewood/Downloads/JavaJava.g:105:10: '~'
+			// /Users/melissahazlewood/Downloads/JavaJava.g:104:8: ( '~' )
+			// /Users/melissahazlewood/Downloads/JavaJava.g:104:10: '~'
 			{
 			match('~'); 
 			}
