@@ -1,6 +1,7 @@
 package Project543.MetricsInterface;
 
 import Project543.Metrics.ProjectCode;
+import Project543.UserInterface;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -28,9 +29,9 @@ public class ProjectCodeTab extends MetricsTab {
 
     //Non-Constant Member Fields
     //
-    ProjectCode projectCode;
-    VBox contentsBox;
-    TextArea metricsTextField; //TODO: Possibly switch to TextArea
+    public ProjectCode projectCode;
+    public VBox contentsBox;
+    public TextArea metricsTextField; //TODO: Possibly switch to TextArea
 
 
     //**MEMBER METHODS**//
@@ -48,10 +49,14 @@ public class ProjectCodeTab extends MetricsTab {
         super(title);
 
         //Initialize members
+        //Create the text area
         this.metricsTextField = new TextArea();
         this.metricsTextField.setEditable(false);
+        this.metricsTextField.setPrefSize(5000.0, 5000.0);
 
+        //Create VBox and set its contents to be the text area
         this.contentsBox = new VBox(metricsTextField);
+        this.setContent(contentsBox);
     }
 
     public ProjectCodeTab(File javaInFile){
