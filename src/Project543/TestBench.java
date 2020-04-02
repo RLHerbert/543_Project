@@ -47,6 +47,8 @@ public class TestBench {
                 "Lorum Ipsum Lorum Ipsum Lorum Ipsum \n" +
                 "Lorum Ipsum Lorum Ipsum Lorum Ipsum");
 
+        Stage ui3 = new UserInterface_3();
+
         System.out.println("Constructed TestBench");
     }
 }
