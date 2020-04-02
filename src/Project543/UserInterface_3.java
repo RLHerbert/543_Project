@@ -6,9 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class UserInterface_3 extends Stage {
     //////////////////////
@@ -45,7 +47,7 @@ public class UserInterface_3 extends Stage {
     //Non-Constant Member Fields
     //
     public ProjectData projectData;
-    //public Language selectedLanguage //TODO
+    public Language defaultProjectLanguage; //TODO
     public BorderPane borderPane;
     public MenuBar menuBar;
     public TabPane tabPane;
@@ -61,26 +63,29 @@ public class UserInterface_3 extends Stage {
         //Default constructor
 
         //Initialize fields
-        projectData = null;
+        this.projectData = null;
+        this.defaultProjectLanguage = Language.NONE;
+
+        //BorderPane
+        this.borderPane = new BorderPane();
 
         //Menu
         //menuBar = new MenuBar();
         this.setMenuBar();
-        VBox menuContents = new VBox(menuBar);
+        //VBox menuContents = new VBox(menuBar);
 
         //Window body
         this.tabPane = new TabPane();
         VBox tabContents = new VBox(tabPane);
         VBox treeContents = new VBox();
         HBox projectContents = new HBox(treeContents, tabContents);
-        this.borderPane = new BorderPane();
         this.windowScene = new Scene(borderPane);
 
         //Configure
         this.setTitle(DEFAULT_STAGE_NAME);
         this.setWidth(MAX_WIDTH);
         this.setHeight(MAX_HEIGHT);
-        this.borderPane.setTop(menuContents);
+        //this.borderPane.setTop(menuContents);
         this.borderPane.setBottom(projectContents);
         this.setScene(this.windowScene);
 
@@ -89,9 +94,13 @@ public class UserInterface_3 extends Stage {
     }
 
     public UserInterface_3(ProjectData projectData){
+        //New project constructor
         this();
 
         this.projectData = projectData;
+        this.setMenuBar();
+        this.setScene(this.windowScene);
+        this.show();
     }
 
     //GETTERS
@@ -101,6 +110,7 @@ public class UserInterface_3 extends Stage {
     //
     private void setMenuBar(){
         //Sets the whole menu bar
+        this.menuBar = null;
         this.menuBar = new MenuBar(); //Create new MenuBar
 
         //Set the main menu items
@@ -179,6 +189,9 @@ public class UserInterface_3 extends Stage {
             projectCodeMenu[0].setOnAction(actionEvent -> this.projectCodeAddOnClick());
             projectCodeMenu[1].setOnAction(actionEvent -> this.projectCodeStatisticsOnClick());
         }
+
+        VBox menuContents = new VBox(menuBar);
+        this.borderPane.setTop(menuContents);
     }
 
     //MISC. MEMBER METHODS
@@ -187,10 +200,32 @@ public class UserInterface_3 extends Stage {
     //File
     private void fileNewOnClick(){
         //File -> New
+        if (this.projectData == null){
+            this.projectData = new ProjectData();
+            this.setMenuBar();
+            this.setScene(this.windowScene);
+            this.show();
+        }
+        else {
+            UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData());
+        }
     }
 
     private void fileOpenOnClick(){
         //File -> Open
+        ProjectData projectToOpen = this.openProjectDialog(); //Prompts user to open a file
+
+        if (projectToOpen != null){
+            //If the user has opened a file
+            if (this.projectData != null){
+                //If the window does not already have a project
+                this.projectData = projectToOpen;
+            }
+            else {
+                //The window already has a project
+                UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project
+            }
+        }
     }
 
     private void fileSaveOnClick(){
@@ -222,5 +257,24 @@ public class UserInterface_3 extends Stage {
 
     private void projectCodeStatisticsOnClick(){
         // -> Project Code Statistics
+    }
+
+    //Saving and opening files
+    private ProjectData openProjectDialog(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
+        File savedProject = fileChooser.showOpenDialog(this);
+
+        if (savedProject != null){
+            //Open the project
+            try {
+                return ApplicationController.openProject(savedProject);
+            } catch (FileNotFoundException f){
+                System.err.println("ERROR: FILE_NOT_FOUND");
+                f.printStackTrace();
+            }
+        }
+
+        return null;
     }
 }

@@ -19,11 +19,10 @@ public class ApplicationController {
     //
     //Constant Static Fields
     //
-    public static final int TOTAL_METRICS = 2;
 
     //Non-Constant Static Fields
     //
-    public static ArrayList<ProjectData> openProjectList; //TODO: Private
+    public static ArrayList<ProjectData> openProjectList = new ArrayList<ProjectData>(); //TODO: Private
 
     //Non-Static Member Variables
     //

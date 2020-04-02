@@ -10,7 +10,7 @@ public class Main extends Application {
 //        UI mainUI = new UI();
 //        Controller projectController = new Controller();
 
-        ApplicationController test = new ApplicationController();
+        //ApplicationController test = new ApplicationController();
 
         TestBench testBench = new TestBench();
     }
