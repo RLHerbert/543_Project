@@ -77,7 +77,7 @@ public class ProjectCodeTab extends MetricsTab {
     }
 
     public void setMetricsTextField(){
-        this.setMetricsTextField("TODO"); //TODO: get text from this.projectCode
+        this.setMetricsTextField(this.projectCode.outputString()); //TODO: get text from this.projectCode
     }
 
     //MISC. MEMBER METHODS
