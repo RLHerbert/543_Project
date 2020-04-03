@@ -23,6 +23,7 @@ public class ApplicationController {
     //Non-Constant Static Fields
     //
     public static ArrayList<ProjectData> openProjectList = new ArrayList<ProjectData>(); //TODO: Private
+    public static ArrayList<UserInterface_3> openProjectWindows;
 
     //Non-Static Member Variables
     //

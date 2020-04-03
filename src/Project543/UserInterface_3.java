@@ -1,9 +1,9 @@
 package Project543;
 
-import Project543.MetricsInterface.MetricsTab;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class UserInterface_3 extends Stage {
     //////////////////////
@@ -49,10 +51,13 @@ public class UserInterface_3 extends Stage {
     public ProjectData projectData;
     public Language defaultProjectLanguage; //TODO
     public BorderPane borderPane;
+    //VBox menuBarContents; //TODO
     public MenuBar menuBar;
+    //HBox projectWindowContents; //Holds the TabPane and the TreeView //TODO
     public TabPane tabPane;
-    public Scene windowScene;
     //public TreeView<> treeView; //TODO
+    public Scene windowScene;
+
 
     //////////////////////
     //**MEMBER METHODS**//
@@ -127,6 +132,7 @@ public class UserInterface_3 extends Stage {
             fileMenu[i] = new MenuItem(FILE_MENU[i]);
         }
         fileMenu[0].setOnAction(actionEvent -> fileNewOnClick());
+        fileMenu[2].setOnAction(actionEvent -> this.fileSaveOnClick());
         fileMenu[1].setOnAction(actionEvent -> fileOpenOnClick());
         fileMenu[3].setOnAction(actionEvent -> fileExitOnClick());
 
@@ -150,6 +156,8 @@ public class UserInterface_3 extends Stage {
         }
         MenuItem enterFunctionPointData = new MenuItem("Enter Function Point Data"); //Function Point
         MenuItem enterSMIData = new MenuItem("Enter SMI Data"); //SMI
+        enterFunctionPointData.setOnAction(actionEvent -> this.metricsEnterFunctionPointOnClick());
+        enterSMIData.setOnAction(actionEvent -> this.metricsEnterSMIOnCLick());
         metricsMenu[0].getItems().add(enterFunctionPointData);
         metricsMenu[1].getItems().add(enterSMIData);
         mainMenuItems[3].getItems().addAll(metricsMenu);
@@ -159,6 +167,8 @@ public class UserInterface_3 extends Stage {
         for (int i = 0; i < PROJECT_CODE_MENU.length; i++){
             projectCodeMenu[i] = new MenuItem(PROJECT_CODE_MENU[i]);
         }
+        projectCodeMenu[0].setOnAction(actionEvent -> this.projectCodeAddOnClick());
+        projectCodeMenu[1].setOnAction(actionEvent -> this.projectCodeStatisticsOnClick());
         mainMenuItems[4].getItems().addAll(projectCodeMenu);
 
 
@@ -177,18 +187,6 @@ public class UserInterface_3 extends Stage {
             projectCodeMenu[0].setDisable(true);
             projectCodeMenu[1].setDisable(true);
         }
-        else {
-            //File
-            fileMenu[2].setOnAction(actionEvent -> this.fileSaveOnClick());
-
-            //Metrics
-            enterFunctionPointData.setOnAction(actionEvent -> this.metricsEnterFunctionPointOnClick());
-            enterSMIData.setOnAction(actionEvent -> this.metricsEnterSMIOnCLick());
-
-            //Project Code
-            projectCodeMenu[0].setOnAction(actionEvent -> this.projectCodeAddOnClick());
-            projectCodeMenu[1].setOnAction(actionEvent -> this.projectCodeStatisticsOnClick());
-        }
 
         VBox menuContents = new VBox(menuBar);
         this.borderPane.setTop(menuContents);
@@ -200,19 +198,24 @@ public class UserInterface_3 extends Stage {
     //File
     private void fileNewOnClick(){
         //File -> New
-        if (this.projectData == null){
-            this.projectData = new ProjectData();
-            this.setMenuBar();
-            this.setScene(this.windowScene);
-            this.show();
-        }
-        else {
-            UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData());
+        System.out.println("File -> New Clicked");
+
+        String[] projectToCreateMetaData = this.createNewProjectDialog();
+
+        if (projectToCreateMetaData != null){
+            if (this.projectData == null){
+                this.projectData = new ProjectData(projectToCreateMetaData);
+                this.setMenuBar();
+            }
+            else {
+                UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData(projectToCreateMetaData));
+            }
         }
     }
 
     private void fileOpenOnClick(){
         //File -> Open
+        System.out.println("File -> Open Clicked");
         ProjectData projectToOpen = this.openProjectDialog(); //Prompts user to open a file
 
         if (projectToOpen != null){
@@ -230,36 +233,107 @@ public class UserInterface_3 extends Stage {
 
     private void fileSaveOnClick(){
         //File -> Save
+        System.out.println("File -> Save Clicked");
     }
 
     private void fileExitOnClick(){
         //File -> Exit
+        System.out.println("File -> Exit Clicked");
+        System.exit(0); //TODO: Implement save prompting
     }
 
     //Preferences
     private void preferencesSelectLanguageOnClick(){
         //Preferences -> Select Language
+        System.out.println("Preferences -> Select Language Clicked");
+        this.defaultProjectLanguage = Language.openLanguageSelectWindow();
     }
 
     //Metrics
     private void metricsEnterFunctionPointOnClick(){
         //Metrics -> Function Point -> Enter Function Point Data
+        System.out.println("Metrics -> Function Point -> Enter Function Point Data Clicked");
     }
 
     private void metricsEnterSMIOnCLick(){
         //Metrics -> Software Maturity Index -> Enter SMI Data
+        System.out.println("Metrics -> SMI -> Enter SMI Data Clicked");
     }
 
     //Project Code
     private void projectCodeAddOnClick(){
         // -> Add Code
+        System.out.println("Project Code -> Add Code Clicked");
     }
 
     private void projectCodeStatisticsOnClick(){
         // -> Project Code Statistics
+        System.out.println("Project Code -> Project Code Statistics Clicked");
     }
 
     //Saving and opening files
+    private String[] createNewProjectDialog(){
+        //Opens the new project dialog and returns the metadata entered by the user
+        //TODO: Cleanup and comments, refactor and allow for cancelling
+        String[] newProjectMetaData;
+
+        Dialog<String[]> dialog = new Dialog<>();
+
+        //Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
+        dialog.setTitle("New Project");
+        dialog.setHeaderText("Enter project information.");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        //TODO: make sizing based on constants
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField projectTitle = new TextField();
+        projectTitle.setPromptText("Project Title");
+        TextField productName = new TextField();
+        productName.setPromptText("Product Name");
+        TextField author = new TextField();
+        author.setPromptText("Author");
+        TextArea comments = new TextArea();
+        comments.setPromptText("Comments");
+
+        grid.add(new Label("Project Title:"), 0, 0);
+        grid.add(projectTitle, 1, 0);
+        grid.add(new Label("Product Name:"), 0, 1);
+        grid.add(productName, 1, 1);
+        grid.add(new Label("Author:"), 0, 2);
+        grid.add(author, 1, 2);
+        grid.add(new Label("Comments:"), 0, 3);
+        grid.add(comments, 1, 3);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                String[] dialogInfoEntered = new String[4];
+                dialogInfoEntered[0] = projectTitle.getText();
+                dialogInfoEntered[1] = productName.getText();
+                dialogInfoEntered[2] = author.getText();
+                dialogInfoEntered[3] = comments.getText();
+                return dialogInfoEntered;
+            }
+            else if (dialogButton == ButtonType.CANCEL) {
+                return new String[]{""};
+            }
+            return null;
+        });
+
+        //Updates project meta data
+
+        newProjectMetaData = dialog.showAndWait().get();
+
+        //Open the dialog
+        if (newProjectMetaData.length == 1){return null;}
+
+        return newProjectMetaData;
+    }
+
     private ProjectData openProjectDialog(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
