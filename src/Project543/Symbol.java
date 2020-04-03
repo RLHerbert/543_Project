@@ -5,12 +5,11 @@ public class Symbol {
     String type;
     String scope;
 
-    Symbol(String idk, String idk2, String idk3)
+    Symbol(String name, String type, String scope)
     {
-//        System.out.println("Inside Symbol constructor: idk, idk2, idk3 --> " + idk + " " + idk2 + " " + idk3);
-        this.name = idk;
-        this.type = idk2;
-        this.scope = idk3;
+        this.name = name;
+        this.type = type;
+        this.scope = scope;
     }
 
     @Override

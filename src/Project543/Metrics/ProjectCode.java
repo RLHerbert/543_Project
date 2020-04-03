@@ -10,6 +10,7 @@ import org.antlr.runtime.RecognitionException;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 public class ProjectCode extends Metrics {
     //**MEMBER FIELDS**//
@@ -26,6 +27,18 @@ public class ProjectCode extends Metrics {
 
     //Non-Constant Static Fields
     //
+    //From Hoffman
+    //(Halstead) Operators
+    public static Set<String> uniqueKeywords = new LinkedHashSet<String>();
+    public static Set<String> uniqueSpecial = new LinkedHashSet<String>();
+
+    //(Halstead) Operands
+    public static Set<String> uniqueIdentifiers = new LinkedHashSet<String>();
+    public static Set<Symbol> uIDSym = new LinkedHashSet<Symbol>();
+    public static Set<String> uniqueConstants = new LinkedHashSet<String>();
+
+    //McCabe's Cyclomatic Complexities
+    public static Set<String> mccabeValues = new LinkedHashSet<String>();
 
     //NON-STATIC MEMBER FIELDS
     //
@@ -35,41 +48,38 @@ public class ProjectCode extends Metrics {
     //Non-Constant Member Fields
     //
     public String filePath;
-    public String antlrOutput;
 
-    //from Hoffman
-    public static Set<String> uniqueKeywords = new LinkedHashSet<String>();
-    public static Set<String> uniqueIdentifiers = new LinkedHashSet<String>();
+    JavaJavaLexer lexer;
+    CommonTokenStream tokens;
+    JavaJavaParser parser;
+    int operators;
+    int operands;
 
-    public static Set<Symbol> uIDSym = new LinkedHashSet<Symbol>();
-
-    public static Set<String> uniqueConstants = new LinkedHashSet<String>();
-    public static Set<String> uniqueSpecial = new LinkedHashSet<String>();
-
-    public static Set<String> mccabeValues = new LinkedHashSet<String>();
 
     //**MEMBER METHODS**//
     //
     //CONSTRUCTOR(S)
     //
-    public ProjectCode() {
+    public ProjectCode() throws IOException, RecognitionException {
         //Default constructor
+        //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
         filePath = "/Users/melissahazlewood/Desktop/cecs543/543_Project/src/Project543/Metrics/FunctionPoint.java";
-        System.out.println("inside projectCode constructor");
-        try {
-            this.parseFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (RecognitionException e) {
-            e.printStackTrace();
-        }
+
+        JavaJavaLexer lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JavaJavaParser parser = new JavaJavaParser(tokens);
+
+        this.parseFile();
     }
 
-    public ProjectCode(String javaFile) {
-        //TODO: constructor that takes in a java file
+    public ProjectCode(String javaFile) throws IOException, RecognitionException {
+        //Constructor that takes in a java file for parsing
         this();
+        filePath = javaFile;
     }
+
+    //TODO: constructor with saveData as input?
 
     //GETTERS
     //
@@ -79,14 +89,7 @@ public class ProjectCode extends Metrics {
 
     //MISC. MEMBER METHODS
     //
-    public void parseFile () throws IOException, RecognitionException
-    {
-        JavaJavaLexer lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-        JavaJavaParser parser = new JavaJavaParser(tokens);
-
+    public void parseFile () throws RecognitionException {
         parser.compilationUnit();
 
         System.out.println("\nParser keyword count: " + parser.keywordCount);
@@ -97,25 +100,45 @@ public class ProjectCode extends Metrics {
         System.out.println("Parser import identifier count: " + parser.importIDCount);
         System.out.println("Unique identifiers set (size = " + this.uniqueIdentifiers.size() + "): " + this.uniqueIdentifiers);
 
-//        System.out.println("Parser uIDSym?? count: not a thing??");
         System.out.println("\nuIDSym set (size = " + this.uIDSym.size() + "): " + this.uIDSym);
 
-        System.out.println("\nUnique constants set (size = " + this.uniqueConstants.size() + "): " + this.uniqueConstants);
+        System.out.println("\nLexer constant count: " + lexer.constantcount);
+        System.out.println("Unique constants set (size = " + this.uniqueConstants.size() + "): " + this.uniqueConstants);
+        System.out.println("Parser special count: " + parser.specialcount);
         System.out.println("Unique specials set (size = " + this.uniqueSpecial.size() + "): " + this.uniqueSpecial);
-
-        System.out.println("\nParser cc?? count: " + parser.cc);
-        System.out.println("Parser ec?? count: " + parser.ec);
 
         System.out.println("\nMccabe values set (size = " + this.mccabeValues.size() + "): " + this.mccabeValues);
     }
-    //readFile
-    //do antlr stuff
-    //string that returns what antlr pops out
-    //hold file name/path/address
-    //read out save data arraylist of project save data - metrid id, file path
-    //metric id
-    //extends metrics
-    //in save data, use delimiter like quotes so we can use string tokenizer
+
+    public String outputMetaData() {
+        //TODO
+        String filename = filePath.substring(filePath.lastIndexOf('/') + 1);
+        String file = "";
+        byte[] fileBytes = file.getBytes();
+
+        return "File name: " + filename +
+                "File length in bytes: " + "not sure yet" + //TODO
+                "File white space: " + lexer.ws + //TODO: double-check
+                "File comment space in bytes: " + lexer.ws; //TODO: double check
+    }
+
+    public String outputHalsteadData() {
+        //TODO
+        return "";
+    }
+
+    public String outputMccabeData() {
+        //TODO
+        return "";
+    }
+
+    public String outputString() {
+        return outputMetaData() +
+        outputHalsteadData() +
+        outputMccabeData();
+    }
+
+
     @Override
     public void setSaveData() {
 
@@ -134,3 +157,12 @@ public class ProjectCode extends Metrics {
 //TODO: make everything static I think
 //TODO: make Symbol class a part of this one instead of separate?
 //TODO: allow choice of file
+
+//readFile
+//do antlr stuff
+//string that returns what antlr pops out
+//hold file name/path/address
+//read out save data arraylist of project save data - metrid id, file path
+//metric id
+//extends metrics
+//in save data, use delimiter like quotes so we can use string tokenizer
