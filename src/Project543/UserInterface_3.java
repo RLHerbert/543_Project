@@ -1,5 +1,6 @@
 package Project543;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -8,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -96,7 +98,7 @@ public class UserInterface_3 extends Stage {
         this.setScene(this.windowScene);
 
         //Set misc.
-        this.setExitWindowRequest();
+        this.setExitWindowRequest(this, this.projectData);
 
         //Show stage
         this.show();
@@ -108,6 +110,7 @@ public class UserInterface_3 extends Stage {
 
         this.projectData = projectData;
         this.setMenuBar();
+        this.setExitWindowRequest(this, this.projectData);
         this.setScene(this.windowScene);
         this.show();
     }
@@ -117,8 +120,16 @@ public class UserInterface_3 extends Stage {
 
     //SETTERS
     //
-    private void setExitWindowRequest(){
-        this.setOnCloseRequest(WindowEvent -> this.exitRequest()); //TODO: FIX
+    private void setExitWindowRequest(UserInterface_3 window, ProjectData projectData){
+        this.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                if (UserInterface_3.saveProjectQuery(projectData)) { window.close(); }
+                else {
+                    window.show();
+                }
+            }
+        }); //TODO: FIX CANCELING
     }
 
     private void setMenuBar(){
@@ -214,6 +225,7 @@ public class UserInterface_3 extends Stage {
             if (this.projectData == null){
                 this.projectData = new ProjectData(projectToCreateMetaData);
                 this.setMenuBar();
+                this.setExitWindowRequest(this, this.projectData);
             }
             else {
                 UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData(projectToCreateMetaData));
@@ -375,13 +387,7 @@ public class UserInterface_3 extends Stage {
         return null;
     }
 
-    public void exitRequest(){
-        if(saveProjectQuery()){
-            this.close();
-        }
-    }
-
-    private Boolean saveProjectQuery(){
+    public static Boolean saveProjectQuery(ProjectData projectData){
         if (projectData == null){
             return true;
         }
@@ -392,7 +398,7 @@ public class UserInterface_3 extends Stage {
 
         Dialog<Boolean> saveProjectDialog = new Dialog<Boolean>();
         saveProjectDialog.setTitle("Save Project");
-        saveProjectDialog.setHeaderText("Would you like to save \"" + this.projectData.getProjectName() + "\" before exiting?");
+        saveProjectDialog.setHeaderText("Would you like to save \"" + projectData.getProjectName() + "\" before exiting?");
 
         saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
@@ -402,7 +408,7 @@ public class UserInterface_3 extends Stage {
             //Boolean saveProject = null;
             if(dialogButton == ButtonType.YES){
                 try {
-                    this.projectData.saveProject();
+                    projectData.saveProject();
                 } catch (IOException e){
                     System.err.println("ERROR: SAVE_PROJECT_ERROR");
                 }
