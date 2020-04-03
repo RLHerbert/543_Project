@@ -4,9 +4,14 @@
 
 package Project543;
 
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ApplicationController {
@@ -23,7 +28,7 @@ public class ApplicationController {
     //Non-Constant Static Fields
     //
     public static ArrayList<ProjectData> openProjectList = new ArrayList<ProjectData>(); //TODO: Private
-    public static ArrayList<UserInterface_3> openProjectWindows;
+    public static ArrayList<UserInterface_3> openProjectWindows = new ArrayList<UserInterface_3>();
 
     //Non-Static Member Variables
     //
@@ -71,6 +76,48 @@ public class ApplicationController {
 
     //Open and Save methods
     //
+    public static boolean exitProgramRequest(){
+        Boolean[] exitAndSave;
+
+        Dialog<Boolean[]> saveAllProjects = new Dialog<Boolean[]>();
+        saveAllProjects.setTitle("Save Projects");
+        saveAllProjects.setHeaderText("Would you like to save your open projects?");
+        saveAllProjects.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.YES, ButtonType.NO);
+
+        saveAllProjects.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.CANCEL){
+                return new Boolean[] {false, null};
+            }
+            else if (dialogButton == ButtonType.YES){
+                return new Boolean[] {true, true};
+            }
+            else if (dialogButton == ButtonType.NO){
+                return new Boolean[] {true, false};
+            }
+
+            return new Boolean[] {null, null};
+        });
+
+        Optional<Boolean[]> result = saveAllProjects.showAndWait();
+
+        if (!result.get()[0]){
+            return false;
+        }
+        else {
+            if (result.get()[1]){
+                for (UserInterface_3 window : openProjectWindows){
+                    try {
+                        window.projectData.saveProject();
+                    } catch (IOException e){
+                        System.err.println("ERROR: SAVE_PROJECT_ERROR");
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
     public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
         //Opens a project (from a .ms file) to add it to the open project list and return it
         Scanner projectScanner = new Scanner(projectToOpen);

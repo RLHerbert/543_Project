@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.io.IOException;
 
 public class UserInterface_3 extends Stage {
     //////////////////////
@@ -58,6 +57,8 @@ public class UserInterface_3 extends Stage {
     //public TreeView<> treeView; //TODO
     public Scene windowScene;
 
+    //Menu Items
+    //TODO: SMI
 
     //////////////////////
     //**MEMBER METHODS**//
@@ -94,6 +95,9 @@ public class UserInterface_3 extends Stage {
         this.borderPane.setBottom(projectContents);
         this.setScene(this.windowScene);
 
+        //Set misc.
+        this.setExitWindowRequest();
+
         //Show stage
         this.show();
     }
@@ -113,6 +117,10 @@ public class UserInterface_3 extends Stage {
 
     //SETTERS
     //
+    private void setExitWindowRequest(){
+        this.setOnCloseRequest(WindowEvent -> this.exitRequest()); //TODO: FIX
+    }
+
     private void setMenuBar(){
         //Sets the whole menu bar
         this.menuBar = null;
@@ -234,12 +242,20 @@ public class UserInterface_3 extends Stage {
     private void fileSaveOnClick(){
         //File -> Save
         System.out.println("File -> Save Clicked");
+
+        try {
+            this.projectData.saveProject();
+        } catch (IOException e){
+            System.err.println("ERROR: SAVE_PROJECT_ERROR");
+            e.printStackTrace();
+        }
     }
 
     private void fileExitOnClick(){
         //File -> Exit
         System.out.println("File -> Exit Clicked");
-        System.exit(0); //TODO: Implement save prompting
+
+        if(ApplicationController.exitProgramRequest()) { System.exit(0); }
     }
 
     //Preferences
@@ -253,11 +269,16 @@ public class UserInterface_3 extends Stage {
     private void metricsEnterFunctionPointOnClick(){
         //Metrics -> Function Point -> Enter Function Point Data
         System.out.println("Metrics -> Function Point -> Enter Function Point Data Clicked");
+
+        this.tabPane.getTabs().add(this.projectData.getNewFunctionPoint());
     }
 
     private void metricsEnterSMIOnCLick(){
         //Metrics -> Software Maturity Index -> Enter SMI Data
         System.out.println("Metrics -> SMI -> Enter SMI Data Clicked");
+
+        this.tabPane.getTabs().add(this.projectData.getNewSoftwareMaturityIndex());
+        //TODO: Disable when SMI added, enable if removed
     }
 
     //Project Code
@@ -270,6 +291,8 @@ public class UserInterface_3 extends Stage {
         // -> Project Code Statistics
         System.out.println("Project Code -> Project Code Statistics Clicked");
     }
+
+    //Other On Clicks
 
     //Saving and opening files
     private String[] createNewProjectDialog(){
@@ -350,5 +373,53 @@ public class UserInterface_3 extends Stage {
         }
 
         return null;
+    }
+
+    public void exitRequest(){
+        if(saveProjectQuery()){
+            this.close();
+        }
+    }
+
+    private Boolean saveProjectQuery(){
+        if (projectData == null){
+            return true;
+        }
+
+        if (!projectData.hasChanged()){
+            return true;
+        }
+
+        Dialog<Boolean> saveProjectDialog = new Dialog<Boolean>();
+        saveProjectDialog.setTitle("Save Project");
+        saveProjectDialog.setHeaderText("Would you like to save \"" + this.projectData.getProjectName() + "\" before exiting?");
+
+        saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+
+
+
+        saveProjectDialog.setResultConverter(dialogButton -> {
+            //Boolean saveProject = null;
+            if(dialogButton == ButtonType.YES){
+                try {
+                    this.projectData.saveProject();
+                } catch (IOException e){
+                    System.err.println("ERROR: SAVE_PROJECT_ERROR");
+                }
+                return true;
+            }
+            else if (dialogButton == ButtonType.NO){
+                return true;
+            }
+            else if (dialogButton == ButtonType.CANCEL){
+                return false;
+            }
+
+            return null;
+        });
+
+        //Optional<Boolean> result = saveProjectDialog.showAndWait();
+
+        return saveProjectDialog.showAndWait().get();
     }
 }
