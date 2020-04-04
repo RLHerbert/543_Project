@@ -14,6 +14,7 @@ import javafx.stage.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 //TODO: CONSUME CLOSE REQUEST
 
@@ -56,6 +57,7 @@ public class UserInterface_3 extends Stage {
     public BorderPane borderPane;
     //VBox menuBarContents; //TODO
     public MenuBar menuBar;
+    private MenuItem enterSMIData;
     //HBox projectWindowContents; //Holds the TabPane and the TreeView //TODO
     public TabPane tabPane;
     //public TreeView<> treeView; //TODO
@@ -69,7 +71,7 @@ public class UserInterface_3 extends Stage {
     //
     //CONSTRUCTOR(S)
     //
-    public UserInterface_3(){
+    public UserInterface_3() {
         //Default constructor
 
         //Initialize fields
@@ -95,6 +97,13 @@ public class UserInterface_3 extends Stage {
         this.setTitle(DEFAULT_STAGE_NAME);
         this.setWidth(MAX_WIDTH);
         this.setHeight(MAX_HEIGHT);
+
+        //Move into a function
+        tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.8));
+        treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.2));
+        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
+        treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
+
         //this.borderPane.setTop(menuContents);
         this.borderPane.setBottom(projectContents);
         this.setScene(this.windowScene);
@@ -107,13 +116,12 @@ public class UserInterface_3 extends Stage {
         this.show();
     }
 
-    public UserInterface_3(ProjectData projectData){
+    public UserInterface_3(ProjectData projectData) {
         //New project constructor
         this();
 
         this.projectData = projectData;
         this.setMenuBar();
-        //this.setExitWindowRequest(this, this.projectData);
         this.setScene(this.windowScene);
 
         this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
@@ -126,26 +134,15 @@ public class UserInterface_3 extends Stage {
 
     //SETTERS
     //
-    private void setExitWindowRequest(UserInterface_3 window, ProjectData projectData){
-        this.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                if (UserInterface_3.saveProjectQuery(projectData)) { window.close(); }
-                else {
-                    window.show();
-                }
-            }
-        }); //TODO: FIX CANCELING
-    }
 
-    private void setMenuBar(){
+    private void setMenuBar() {
         //Sets the whole menu bar
         this.menuBar = null;
         this.menuBar = new MenuBar(); //Create new MenuBar
 
         //Set the main menu items
         Menu[] mainMenuItems = new Menu[MAIN_MENU.length];
-        for (int i = 0; i < MAIN_MENU.length; i++){
+        for (int i = 0; i < MAIN_MENU.length; i++) {
             mainMenuItems[i] = new Menu(MAIN_MENU[i]);
         }
 
@@ -153,7 +150,7 @@ public class UserInterface_3 extends Stage {
 
         //File
         MenuItem[] fileMenu = new MenuItem[FILE_MENU.length];
-        for (int i = 0; i < FILE_MENU.length; i++){
+        for (int i = 0; i < FILE_MENU.length; i++) {
             fileMenu[i] = new MenuItem(FILE_MENU[i]);
         }
         fileMenu[0].setOnAction(actionEvent -> fileNewOnClick());
@@ -167,7 +164,7 @@ public class UserInterface_3 extends Stage {
 
         //Preferences
         MenuItem[] preferencesMenu = new MenuItem[PREFERENCES_MENU.length];
-        for (int i = 0; i < PREFERENCES_MENU.length; i++){
+        for (int i = 0; i < PREFERENCES_MENU.length; i++) {
             preferencesMenu[i] = new MenuItem(PREFERENCES_MENU[i]);
         }
         preferencesMenu[0].setOnAction(actionEvent -> this.preferencesSelectLanguageOnClick());
@@ -176,20 +173,20 @@ public class UserInterface_3 extends Stage {
 
         //Metrics
         Menu[] metricsMenu = new Menu[METRICS_MENU.length];
-        for (int i = 0; i < METRICS_MENU.length; i++){
+        for (int i = 0; i < METRICS_MENU.length; i++) {
             metricsMenu[i] = new Menu(METRICS_MENU[i]);
         }
         MenuItem enterFunctionPointData = new MenuItem("Enter Function Point Data"); //Function Point
-        MenuItem enterSMIData = new MenuItem("Enter SMI Data"); //SMI
+        this.enterSMIData = new MenuItem("Enter SMI Data"); //SMI
         enterFunctionPointData.setOnAction(actionEvent -> this.metricsEnterFunctionPointOnClick());
-        enterSMIData.setOnAction(actionEvent -> this.metricsEnterSMIOnCLick());
+        this.enterSMIData.setOnAction(actionEvent -> this.metricsEnterSMIOnCLick());
         metricsMenu[0].getItems().add(enterFunctionPointData);
-        metricsMenu[1].getItems().add(enterSMIData);
+        metricsMenu[1].getItems().add(this.enterSMIData);
         mainMenuItems[3].getItems().addAll(metricsMenu);
 
         //Project Code
         MenuItem[] projectCodeMenu = new MenuItem[PROJECT_CODE_MENU.length];
-        for (int i = 0; i < PROJECT_CODE_MENU.length; i++){
+        for (int i = 0; i < PROJECT_CODE_MENU.length; i++) {
             projectCodeMenu[i] = new MenuItem(PROJECT_CODE_MENU[i]);
         }
         projectCodeMenu[0].setOnAction(actionEvent -> this.projectCodeAddOnClick());
@@ -200,7 +197,7 @@ public class UserInterface_3 extends Stage {
         //Help //TODO
 
         //Set (remaining) projectData dependent actionEvents
-        if (this.projectData == null){ //Ternary's need to returnary
+        if (this.projectData == null) { //Ternary's need to returnary
             //File
             fileMenu[2].setDisable(true);
 
@@ -221,91 +218,92 @@ public class UserInterface_3 extends Stage {
     //
     //On Click methods
     //File
-    private void fileNewOnClick(){
+    private void fileNewOnClick() {
         //File -> New
         System.out.println("File -> New Clicked");
 
         String[] projectToCreateMetaData = this.createNewProjectDialog();
 
-        if (projectToCreateMetaData != null){
-            if (this.projectData == null){
+        if (projectToCreateMetaData != null) {
+            if (this.projectData == null) {
                 this.projectData = new ProjectData(projectToCreateMetaData);
                 this.setMenuBar();
                 //this.setExitWindowRequest(this, this.projectData);
-            }
-            else {
+            } else {
                 UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData(projectToCreateMetaData));
             }
         }
     }
 
-    private void fileOpenOnClick(){
+    private void fileOpenOnClick() {
         //File -> Open
         System.out.println("File -> Open Clicked");
         ProjectData projectToOpen = this.openProjectDialog(); //Prompts user to open a file
 
-        if (projectToOpen != null){
+        if (projectToOpen != null) {
             //If the user has opened a file
-            if (this.projectData != null){
+            if (this.projectData != null) {
                 //If the window does not already have a project
                 this.projectData = projectToOpen;
-            }
-            else {
+            } else {
                 //The window already has a project
                 UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project
             }
         }
     }
 
-    private void fileSaveOnClick(){
+    private void fileSaveOnClick() {
         //File -> Save
         System.out.println("File -> Save Clicked");
 
         try {
             this.projectData.saveProject();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.err.println("ERROR: SAVE_PROJECT_ERROR");
             e.printStackTrace();
         }
     }
 
-    private void fileExitOnClick(){
+    private void fileExitOnClick() {
         //File -> Exit
         System.out.println("File -> Exit Clicked");
 
-        if(ApplicationController.exitProgramRequest()) { System.exit(0); }
+        if (ApplicationController.exitProgramRequest()) {
+            System.exit(0);
+        }
     }
 
     //Preferences
-    private void preferencesSelectLanguageOnClick(){
+    private void preferencesSelectLanguageOnClick() {
         //Preferences -> Select Language
         System.out.println("Preferences -> Select Language Clicked");
         this.defaultProjectLanguage = Language.openLanguageSelectWindow();
     }
 
     //Metrics
-    private void metricsEnterFunctionPointOnClick(){
+    private void metricsEnterFunctionPointOnClick() {
         //Metrics -> Function Point -> Enter Function Point Data
         System.out.println("Metrics -> Function Point -> Enter Function Point Data Clicked");
 
         this.tabPane.getTabs().add(this.projectData.getNewFunctionPoint());
     }
 
-    private void metricsEnterSMIOnCLick(){
+    private void metricsEnterSMIOnCLick() {
         //Metrics -> Software Maturity Index -> Enter SMI Data
         System.out.println("Metrics -> SMI -> Enter SMI Data Clicked");
 
+        this.enterSMIData.setDisable(true); //TODO: Get window from SMI tab and setDisable false on close using event handler (I THINK)
         this.tabPane.getTabs().add(this.projectData.getNewSoftwareMaturityIndex());
         //TODO: Disable when SMI added, enable if removed
     }
 
     //Project Code
-    private void projectCodeAddOnClick(){
+    private void projectCodeAddOnClick() {
         // -> Add Code
         System.out.println("Project Code -> Add Code Clicked");
     }
 
-    private void projectCodeStatisticsOnClick(){
+    private void projectCodeStatisticsOnClick() {
         // -> Project Code Statistics
         System.out.println("Project Code -> Project Code Statistics Clicked");
     }
@@ -313,14 +311,13 @@ public class UserInterface_3 extends Stage {
     //Other On Clicks
 
     //Saving and opening files
-    private String[] createNewProjectDialog(){
+    private String[] createNewProjectDialog() {
         //Opens the new project dialog and returns the metadata entered by the user
         //TODO: Cleanup and comments, refactor and allow for cancelling
         String[] newProjectMetaData;
 
         Dialog<String[]> dialog = new Dialog<>();
 
-        //Dialog<ArrayList<String>> dialog = new Dialog<ArrayList<String>>();
         dialog.setTitle("New Project");
         dialog.setHeaderText("Enter project information.");
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -358,8 +355,7 @@ public class UserInterface_3 extends Stage {
                 dialogInfoEntered[2] = author.getText();
                 dialogInfoEntered[3] = comments.getText();
                 return dialogInfoEntered;
-            }
-            else if (dialogButton == ButtonType.CANCEL) {
+            } else if (dialogButton == ButtonType.CANCEL) {
                 return new String[]{""};
             }
             return null;
@@ -370,21 +366,23 @@ public class UserInterface_3 extends Stage {
         newProjectMetaData = dialog.showAndWait().get();
 
         //Open the dialog
-        if (newProjectMetaData.length == 1){return null;}
+        if (newProjectMetaData.length == 1) {
+            return null;
+        }
 
         return newProjectMetaData;
     }
 
-    private ProjectData openProjectDialog(){
+    private ProjectData openProjectDialog() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
         File savedProject = fileChooser.showOpenDialog(this);
 
-        if (savedProject != null){
+        if (savedProject != null) {
             //Open the project
             try {
                 return ApplicationController.openProject(savedProject);
-            } catch (FileNotFoundException f){
+            } catch (FileNotFoundException f) {
                 System.err.println("ERROR: FILE_NOT_FOUND");
                 f.printStackTrace();
             }
@@ -393,102 +391,49 @@ public class UserInterface_3 extends Stage {
         return null;
     }
 
-    public static Boolean saveProjectQuery(ProjectData projectData){
-        if (projectData == null){
-            return true;
+    public void closeWindowEvent(WindowEvent windowEvent) {
+        if (!this.saveProjectQuery()) {
+            windowEvent.consume();
         }
-
-        if (!projectData.hasChanged()){
-            return true;
-        }
-
-        Dialog<Boolean> saveProjectDialog = new Dialog<Boolean>();
-        saveProjectDialog.setTitle("Save Project");
-        saveProjectDialog.setHeaderText("Would you like to save \"" + projectData.getProjectName() + "\" before exiting?");
-
-        saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-
-
-
-        saveProjectDialog.setResultConverter(dialogButton -> {
-            //Boolean saveProject = null;
-            if(dialogButton == ButtonType.YES){
-                try {
-                    projectData.saveProject();
-                } catch (IOException e){
-                    System.err.println("ERROR: SAVE_PROJECT_ERROR");
-                }
-                return true;
-            }
-            else if (dialogButton == ButtonType.NO){
-                return true;
-            }
-            else if (dialogButton == ButtonType.CANCEL){
-                return false;
-            }
-
-            return null;
-        });
-
-        //Optional<Boolean> result = saveProjectDialog.showAndWait();
-
-        return saveProjectDialog.showAndWait().get();
     }
 
-    public void closeWindowEvent(WindowEvent windowEvent){
-        if (!this.saveProjectQuery()) {windowEvent.consume();}
-    }
-
-    public Boolean saveProjectQuery(){
-        if (this.projectData == null){
+    public Boolean saveProjectQuery() {
+        if (this.projectData == null) {
             return true;
         }
 
-        if (!this.projectData.hasChanged()){
+        if (!this.projectData.hasChanged()) {
             return true;
         }
 
-        Dialog<Boolean> saveProjectDialog = new Dialog<Boolean>();
+        //Create the save query dialog
+        Dialog<ButtonType> saveProjectDialog = new Dialog<>();
         saveProjectDialog.setTitle("Save Project");
         saveProjectDialog.setHeaderText("Would you like to save \"" + this.projectData.getProjectName() + "\" before exiting?");
-
         saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
-
-
         saveProjectDialog.setResultConverter(dialogButton -> {
-            //Boolean saveProject = null;
-            if(dialogButton == ButtonType.YES){
+            return dialogButton;
+        });
+
+        Optional<ButtonType> saveDialogChoice = saveProjectDialog.showAndWait();
+
+        if (saveDialogChoice.isPresent()) {
+            if (saveDialogChoice.get() == ButtonType.YES) {
+                //If yes, save and exit the window
                 try {
                     this.projectData.saveProject();
-                } catch (IOException e){
+                } catch (IOException e) {
                     System.err.println("ERROR: SAVE_PROJECT_ERROR");
                 }
                 return true;
-            }
-            else if (dialogButton == ButtonType.NO){
+            } else if (saveDialogChoice.get() == ButtonType.NO) { //Probably coerced to int != 0
                 return true;
             }
-            else if (dialogButton == ButtonType.CANCEL){
-                return false;
-            }
+        }
 
-            return null;
-        });
-
-        //Optional<Boolean> result = saveProjectDialog.showAndWait();
-
-        return saveProjectDialog.showAndWait().get();
+        return false;
     }
 
     //Overrides
-
-    /*
-    @Override
-    public void close(){
-        if (this.saveProjectQuery()){
-            super.close();
-        }
-    }
-     */
 }
