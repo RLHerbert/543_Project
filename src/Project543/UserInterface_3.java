@@ -16,8 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
-//TODO: CONSUME CLOSE REQUEST
-
 public class UserInterface_3 extends Stage {
     //////////////////////
     //**MEMBER FIELDS**//
@@ -109,7 +107,6 @@ public class UserInterface_3 extends Stage {
         this.setScene(this.windowScene);
 
         //Set misc.
-        //this.setExitWindowRequest(this, this.projectData);
         this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
 
         //Show stage
@@ -124,7 +121,7 @@ public class UserInterface_3 extends Stage {
         this.setMenuBar();
         this.setScene(this.windowScene);
 
-        this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+        this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent); //TODO: Remove, should be unnecessary
 
         this.show();
     }
