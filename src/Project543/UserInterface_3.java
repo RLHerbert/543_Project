@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+//TODO: CONSUME CLOSE REQUEST
+
 public class UserInterface_3 extends Stage {
     //////////////////////
     //**MEMBER FIELDS**//
@@ -98,7 +100,8 @@ public class UserInterface_3 extends Stage {
         this.setScene(this.windowScene);
 
         //Set misc.
-        this.setExitWindowRequest(this, this.projectData);
+        //this.setExitWindowRequest(this, this.projectData);
+        this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
 
         //Show stage
         this.show();
@@ -110,8 +113,11 @@ public class UserInterface_3 extends Stage {
 
         this.projectData = projectData;
         this.setMenuBar();
-        this.setExitWindowRequest(this, this.projectData);
+        //this.setExitWindowRequest(this, this.projectData);
         this.setScene(this.windowScene);
+
+        this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+
         this.show();
     }
 
@@ -225,7 +231,7 @@ public class UserInterface_3 extends Stage {
             if (this.projectData == null){
                 this.projectData = new ProjectData(projectToCreateMetaData);
                 this.setMenuBar();
-                this.setExitWindowRequest(this, this.projectData);
+                //this.setExitWindowRequest(this, this.projectData);
             }
             else {
                 UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData(projectToCreateMetaData));
@@ -428,4 +434,61 @@ public class UserInterface_3 extends Stage {
 
         return saveProjectDialog.showAndWait().get();
     }
+
+    public void closeWindowEvent(WindowEvent windowEvent){
+        if (!this.saveProjectQuery()) {windowEvent.consume();}
+    }
+
+    public Boolean saveProjectQuery(){
+        if (this.projectData == null){
+            return true;
+        }
+
+        if (!this.projectData.hasChanged()){
+            return true;
+        }
+
+        Dialog<Boolean> saveProjectDialog = new Dialog<Boolean>();
+        saveProjectDialog.setTitle("Save Project");
+        saveProjectDialog.setHeaderText("Would you like to save \"" + this.projectData.getProjectName() + "\" before exiting?");
+
+        saveProjectDialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+
+
+
+        saveProjectDialog.setResultConverter(dialogButton -> {
+            //Boolean saveProject = null;
+            if(dialogButton == ButtonType.YES){
+                try {
+                    this.projectData.saveProject();
+                } catch (IOException e){
+                    System.err.println("ERROR: SAVE_PROJECT_ERROR");
+                }
+                return true;
+            }
+            else if (dialogButton == ButtonType.NO){
+                return true;
+            }
+            else if (dialogButton == ButtonType.CANCEL){
+                return false;
+            }
+
+            return null;
+        });
+
+        //Optional<Boolean> result = saveProjectDialog.showAndWait();
+
+        return saveProjectDialog.showAndWait().get();
+    }
+
+    //Overrides
+
+    /*
+    @Override
+    public void close(){
+        if (this.saveProjectQuery()){
+            super.close();
+        }
+    }
+     */
 }
