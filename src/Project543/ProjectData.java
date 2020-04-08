@@ -26,7 +26,6 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     //
     //Constant Static Fields
     //
-    private static final String DEFAULT_TAB_TITLE = "Metric Tab";
 
     //Non-Constant Static Fields
     //
@@ -39,6 +38,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     //Non-Constant Member Fields
     //
     public ArrayList<MetricsTab> metricsTabs;
+    private boolean hasSMI;
 
     //Member Methods
     //
@@ -50,6 +50,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         //Call FunctionPoint default constructor
 
         this.metricsTabs = new ArrayList<MetricsTab>();
+        this.hasSMI = false;
         //this.metricsData = new ArrayList<Metrics>();
     }
 
@@ -60,6 +61,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
         //Initialize member fields
         this.metricsTabs = new ArrayList<MetricsTab>();
+        this.hasSMI = false;
     }
 
     public ProjectData(Scanner savedFile, String fileName){
@@ -126,6 +128,16 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return false;
     }
 
+    public boolean hasSMITab(){
+        return this.hasSMI;
+    }
+
+    public void removeMetricsTab(MetricsTab metricsTabToRemove){
+        if (metricsTabToRemove.getMetricID() == SoftwareMaturityIndex.METRIC_ID){this.hasSMI = false;}
+
+        this.metricsTabs.remove(metricsTabToRemove);
+    }
+
     public MetricsTab openMetricsTabFromSavedFile(String metricSaveData){
         //Adds all the saved metrics and their tab forms to the project
         metricSaveData = metricSaveData.substring(1, metricSaveData.length()-1);
@@ -136,7 +148,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
             return new FunctionPointTab("Function Point", metricSaveData);
         }
         else if (metricID == SoftwareMaturityIndex.METRIC_ID){
-            //Not yet implemented
+            this.hasSMI = true;
             return new SoftwareMaturityIndexTab("SMI", metricSaveData);
         }
         else {

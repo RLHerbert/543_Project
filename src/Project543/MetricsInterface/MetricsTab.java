@@ -43,6 +43,7 @@ public class MetricsTab extends Tab implements SaveInterface {
 
     //Getters
     //
+    public int getMetricID(){return 0;}
 
     //Setters
     //

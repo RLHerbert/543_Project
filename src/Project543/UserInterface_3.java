@@ -76,35 +76,9 @@ public class UserInterface_3 extends Stage {
         this.projectData = null;
         this.defaultProjectLanguage = Language.NONE;
 
-        //BorderPane
-        this.borderPane = new BorderPane();
+        this.setWindow();
 
-        //Menu
-        //menuBar = new MenuBar();
-        this.setMenuBar();
-        //VBox menuContents = new VBox(menuBar);
-
-        //Window body
-        this.tabPane = new TabPane();
-        VBox tabContents = new VBox(tabPane);
-        VBox treeContents = new VBox();
-        HBox projectContents = new HBox(treeContents, tabContents);
-        this.windowScene = new Scene(borderPane);
-
-        //Configure
-        this.setTitle(DEFAULT_STAGE_NAME);
-        this.setWidth(MAX_WIDTH);
-        this.setHeight(MAX_HEIGHT);
-
-        //Move into a function
-        tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.8));
-        treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.2));
-        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
-        treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
-
-        //this.borderPane.setTop(menuContents);
-        this.borderPane.setBottom(projectContents);
-        this.setScene(this.windowScene);
+        //this.setScene(this.windowScene);
 
         //Set misc.
         this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
@@ -118,8 +92,8 @@ public class UserInterface_3 extends Stage {
         this();
 
         this.projectData = projectData;
-        this.setMenuBar();
-        this.setScene(this.windowScene);
+        this.setWindow();
+        //this.setScene(this.windowScene);
 
         this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent); //TODO: Remove, should be unnecessary
 
@@ -200,17 +174,57 @@ public class UserInterface_3 extends Stage {
 
             //Metrics
             enterFunctionPointData.setDisable(true);
-            enterSMIData.setDisable(true);
+            this.enterSMIData.setDisable(true);
 
             //Project Code
             projectCodeMenu[0].setDisable(true);
             projectCodeMenu[1].setDisable(true);
+        }
+        else {
+            this.enterSMIData.setDisable(this.projectData.hasSMITab());
         }
 
         VBox menuContents = new VBox(menuBar);
         this.borderPane.setTop(menuContents);
     }
 
+    private void setWindow(){
+        //BorderPane
+        this.borderPane = new BorderPane();
+
+        //Menu
+        //menuBar = new MenuBar();
+        this.setMenuBar();
+        //VBox menuContents = new VBox(menuBar);
+
+        //Window body
+        this.tabPane = new TabPane();
+        VBox tabContents = new VBox(tabPane);
+        VBox treeContents = new VBox();
+        HBox projectContents = new HBox(treeContents, tabContents);
+
+        this.windowScene = new Scene(borderPane);
+
+        //Configure
+        this.setTitle(DEFAULT_STAGE_NAME);
+        this.setWidth(MAX_WIDTH);
+        this.setHeight(MAX_HEIGHT);
+
+        //Move into a function
+        tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.8));
+        treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.2));
+        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
+        treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
+
+        //this.borderPane.setTop(menuContents);
+        this.borderPane.setBottom(projectContents);
+
+        if (projectData != null){
+            this.tabPane.getTabs().addAll(this.projectData.metricsTabs);
+        }
+
+        this.setScene(this.windowScene);
+    }
     //MISC. MEMBER METHODS
     //
     //On Click methods
@@ -239,12 +253,15 @@ public class UserInterface_3 extends Stage {
 
         if (projectToOpen != null) {
             //If the user has opened a file
-            if (this.projectData != null) {
+            if (this.projectData == null) {
                 //If the window does not already have a project
+                System.out.println("Opening project in same window.");
                 this.projectData = projectToOpen;
+                this.setWindow();
             } else {
                 //The window already has a project
-                UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project
+                System.out.println("Opening project in new window.");
+                UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project window
             }
         }
     }
