@@ -11,6 +11,7 @@ public class Dialogs {
         TextInputDialog functionPointDialog = new TextInputDialog(tabName);
         functionPointDialog.setTitle("New Function Point");
         functionPointDialog.setHeaderText(null);
+        functionPointDialog.setGraphic(null);
         functionPointDialog.setContentText("Enter a name for the function point:");
 
         Optional<String> result = functionPointDialog.showAndWait();
