@@ -64,7 +64,7 @@ public class ProjectCode extends Metrics {
         //Default constructor
         //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
-        filePath = "/Users/melissahazlewood/Desktop/cecs543/543_Project/src/Project543/Metrics/FunctionPoint.java";
+        filePath = "/Metrics/FunctionPoint.java";
 
         JavaJavaLexer lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
         CommonTokenStream tokens = new CommonTokenStream(lexer);

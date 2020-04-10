@@ -11,10 +11,10 @@ public class Main extends Application {
 //        UI mainUI = new UI();
 //        Controller projectController = new Controller();
 
-//        ApplicationController test = new ApplicationController();
-//
-//        TestBench testBench = new TestBench();
-        TestBench testBench1 = new TestBench("Melissa");
+        ApplicationController test = new ApplicationController();
+
+        TestBench testBench = new TestBench();
+//        TestBench testBench1 = new TestBench("Melissa");
     }
 
 
