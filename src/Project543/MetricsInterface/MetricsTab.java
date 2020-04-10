@@ -43,6 +43,7 @@ public class MetricsTab extends Tab implements SaveInterface {
 
     //Getters
     //
+    public int getMetricID(){return 0;}
 
     //Setters
     //
@@ -52,6 +53,10 @@ public class MetricsTab extends Tab implements SaveInterface {
 
     public void setTabTitle() {
         //Virtual
+    }
+
+    public void setTabTitle(String titleToSet){
+        this.setText(titleToSet);
     }
 
     //Misc. Member Methods

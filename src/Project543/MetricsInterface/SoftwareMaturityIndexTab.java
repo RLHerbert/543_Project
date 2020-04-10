@@ -1,5 +1,6 @@
 package Project543.MetricsInterface;
 
+import Project543.Metrics.ProjectCode;
 import Project543.Metrics.SoftwareMaturityIndex;
 import Project543.SaveInterface;
 import javafx.collections.FXCollections;
@@ -112,6 +113,11 @@ public class SoftwareMaturityIndexTab extends MetricsTab implements SaveInterfac
 
     //Getters
     //
+    @Override
+    public int getMetricID(){
+        return SoftwareMaturityIndex.METRIC_ID;
+    }
+
     public int getModulesAddedFromLastRow(){
         //TODO: use?
         System.out.println("Modules Added in last row: " + table.getItems().get(table.getItems().size()-1).modulesAdded);

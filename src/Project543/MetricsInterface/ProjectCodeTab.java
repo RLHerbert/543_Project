@@ -69,6 +69,10 @@ public class ProjectCodeTab extends MetricsTab {
 
     //GETTERS
     //
+    @Override
+    public int getMetricID(){
+        return ProjectCode.METRIC_ID;
+    }
 
     //SETTERS
     //
