@@ -71,6 +71,7 @@ public class ProjectCode extends Metrics {
         JavaJavaParser parser = new JavaJavaParser(tokens);
 
         this.parseFile();
+//        System.out.print(outputString());
     }
 
     public ProjectCode(String javaFile) throws IOException, RecognitionException {
@@ -117,19 +118,32 @@ public class ProjectCode extends Metrics {
         byte[] fileBytes = file.getBytes();
 
         return "File name: " + filename +
-                "File length in bytes: " + "not sure yet" + //TODO
-                "File white space: " + lexer.ws + //TODO: double-check
-                "File comment space in bytes: " + lexer.ws; //TODO: double check
+                "\nFile length in bytes: " + "not sure yet" + //TODO
+                "\nFile white space: " + lexer.ws + //TODO: double-check
+                "\nFile comment space in bytes: " + lexer.commentcount + //TODO: double check
+                "\nComment percentage of file: " + "not sure yet"; //TODO
     }
 
     public String outputHalsteadData() {
         //TODO
-        return "";
+        return "\nHalstead metrics:" +
+                "\n\tUnique operators: " +
+                "\n\tUnique operands: " +
+                "\n\tTotal operators: " +
+                "\n\tTotal operands: " +
+                "\n\tProgram length (N) = " +
+                "\n\tProgram vocabulary (n) = " +
+                "\n\tVolume = " +
+                "\n\tDifficulty = " +
+                "\n\tEffort = " +
+                "\tTime = " +
+                "\n\tBugs expected = ";
     }
 
-    public String outputMccabeData() {
+    public String outputMccabeData() { 
         //TODO
-        return "";
+        return "\n\nMcCabe's Cyclomatic Complexity:" +
+                mccabeValues.toString();
     }
 
     public String outputString() {

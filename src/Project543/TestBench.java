@@ -7,6 +7,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.antlr.runtime.RecognitionException;
+
+import java.io.IOException;
 
 public class TestBench {
     //To test code
@@ -51,7 +54,7 @@ public class TestBench {
         System.out.println("Constructed TestBench");
     }
 
-    TestBench(String name) {
+    TestBench(String name) throws IOException, RecognitionException {
         if (name.equalsIgnoreCase("melissa"))
         {
             //melissa's code to test
