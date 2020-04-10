@@ -164,7 +164,6 @@ public class ProjectCode extends Metrics {
     }
 }
 
-//TODO: figure out what Symbol class is (should be? if I have to create it)
 //TODO: do what he did for keywords for identifiers, IDSyms?, constants, specials??
 //TODO: mccabe stuff
 //TODO: calculations of indirect values

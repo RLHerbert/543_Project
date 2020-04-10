@@ -495,7 +495,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         //updates languageOutput
         setLanguageOutput();
         //updates tab title
-        setTabTitle();
+//        setTabTitle();
     }
 
     public int[] openValueAdjustmentsWindow(){
