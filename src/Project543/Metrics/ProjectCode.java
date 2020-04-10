@@ -142,7 +142,7 @@ public class ProjectCode extends Metrics {
 
     public String outputMccabeData() { 
         //TODO
-        return "\n\nMcCabe's Cyclomatic Complexity:" +
+        return "\n\nMcCabe's Cyclomatic Complexity:\n" +
                 mccabeValues.toString();
     }
 
