@@ -1,5 +1,6 @@
 package Project543;
 
+import Project543.Interface.Dialogs;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -299,7 +300,11 @@ public class UserInterface_3 extends Stage {
         //Metrics -> Function Point -> Enter Function Point Data
         System.out.println("Metrics -> Function Point -> Enter Function Point Data Clicked");
 
-        this.tabPane.getTabs().add(this.projectData.getNewFunctionPoint());
+        String tabName = Dialogs.createFunctionPointDialog();
+
+        if (tabName != null) {
+            this.tabPane.getTabs().add(this.projectData.getNewFunctionPoint(tabName));
+        }
     }
 
     private void metricsEnterSMIOnCLick() {

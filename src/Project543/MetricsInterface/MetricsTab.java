@@ -55,6 +55,10 @@ public class MetricsTab extends Tab implements SaveInterface {
         //Virtual
     }
 
+    public void setTabTitle(String titleToSet){
+        this.setText(titleToSet);
+    }
+
     //Misc. Member Methods
     //
     //Save and open methods

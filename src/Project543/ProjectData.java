@@ -86,6 +86,12 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return this.metricsTabs.get(this.metricsTabs.size()-1);
     }
 
+    public Tab getNewFunctionPoint(String tabName){
+        this.createNewFunctionPoint();
+        this.metricsTabs.get(this.metricsTabs.size()-1).setTabTitle(tabName);
+        return this.metricsTabs.get(this.metricsTabs.size()-1);
+    }
+
     public Tab getNewSoftwareMaturityIndex(){
         //Creates a new SoftwareMaturityIndexTab, adds it to metricsTabs, and returns it
         this.createNewSoftwareMaturityIndex();
