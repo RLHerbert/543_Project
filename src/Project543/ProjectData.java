@@ -1,6 +1,7 @@
 package Project543;
 
 import Project543.Metrics.FunctionPoint;
+import Project543.Metrics.ProjectCode;
 import Project543.Metrics.SoftwareMaturityIndex;
 import Project543.MetricsInterface.FunctionPointTab;
 import Project543.MetricsInterface.MetricsTab;
@@ -180,10 +181,17 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         fileWriter.write(super.toString());
 
         //Write the metrics data to the file
-        for (MetricsTab metricsTab : this.metricsTabs){
-            metricsTab.setMetric();
-            metricsTab.metric.setSaveData();
-            fileWriter.write("\n" + metricsTab.metric.writeSaveDataString());
+        for (MetricsTab metricTab : this.metricsTabs){
+            metricTab.setMetric();
+            metricTab.metric.setSaveData();
+            fileWriter.write("\n" + metricTab.metric.writeSaveDataString());
+
+            if (metricTab.getMetricID() == FunctionPoint.METRIC_ID) {
+                fileWriter.write( " \"" + metricTab.getText() + "\"");
+            }
+            else if (metricTab.getMetricID() == ProjectCode.METRIC_ID) {
+                fileWriter.write("\"" + metricTab.getExtraData() + "\""); //TODO: TEMP
+            }
         }
 
         fileWriter.close();

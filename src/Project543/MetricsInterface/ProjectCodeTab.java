@@ -70,8 +70,13 @@ public class ProjectCodeTab extends MetricsTab {
     //GETTERS
     //
     @Override
-    public int getMetricID(){
+    public int getMetricID() {
         return ProjectCode.METRIC_ID;
+    }
+
+    @Override
+    public String getExtraData() {
+        return this.projectCode.filePath;
     }
 
     //SETTERS
