@@ -25,11 +25,11 @@ public class TestBench {
     }
 
     TestBench(String name) throws IOException, RecognitionException {
-        if (name.equalsIgnoreCase("melissa"))
+        if (name.equalsIgnoreCase("Melissa"))
         {
             //melissa's code to test
             ProjectCode proj = new ProjectCode();
-        } else if (name.equalsIgnoreCase("rowan")) {
+        } else if (name.equalsIgnoreCase("Rowan")) {
             //rowan test code
         } else {
             //whatever else

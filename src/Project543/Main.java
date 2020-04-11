@@ -13,10 +13,10 @@ public class Main extends Application {
 
         //ApplicationController test = new ApplicationController();
 
-        System.out.println("Is shit broken?");
-
-        TestBench testBench = new TestBench();
-//        TestBench testBench1 = new TestBench("Melissa");
+//        System.out.println("Is shit broken?");
+//
+//        TestBench testBench = new TestBench();
+        TestBench testBench1 = new TestBench("Melissa");
     }
 
 

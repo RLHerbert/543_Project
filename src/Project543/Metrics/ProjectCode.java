@@ -64,14 +64,14 @@ public class ProjectCode extends Metrics {
         //Default constructor
         //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
-        filePath = "/Metrics/FunctionPoint.java";
+        filePath = "src/Project543/Metrics/FunctionPoint.java";
 
-        JavaJavaLexer lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        JavaJavaParser parser = new JavaJavaParser(tokens);
+        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
+        tokens = new CommonTokenStream(lexer);
+        parser = new JavaJavaParser(tokens);
 
         this.parseFile();
-//        System.out.print(outputString());
+        System.out.print(outputString());
     }
 
     public ProjectCode(String javaFile) throws IOException, RecognitionException {
@@ -127,13 +127,13 @@ public class ProjectCode extends Metrics {
     public String outputHalsteadData() {
         //TODO
         return "\nHalstead metrics:" +
-                "\n\tUnique operators: " +
-                "\n\tUnique operands: " +
-                "\n\tTotal operators: " +
-                "\n\tTotal operands: " +
-                "\n\tProgram length (N) = " +
-                "\n\tProgram vocabulary (n) = " +
-                "\n\tVolume = " +
+                "\n\tUnique operators: " + (this.uniqueKeywords.size() + this.uniqueSpecial.size()) +
+                "\n\tUnique operands: " + (this.uniqueIdentifiers.size() + this.uIDSym.size() + this.uniqueConstants.size()) +
+                "\n\tTotal operators: " + (parser.keywordCount + parser.specialcount) +
+                "\n\tTotal operands: " + (parser.identcount + this.uIDSym.size() + lexer.constantcount) +
+                "\n\tProgram length (N) = " + (parser.keywordCount + parser.specialcount + parser.identcount + this.uIDSym.size() + lexer.constantcount) +
+                "\n\tProgram vocabulary (n) = " + (this.uniqueKeywords.size() + this.uniqueSpecial.size() + this.uniqueIdentifiers.size() + this.uIDSym.size() + this.uniqueConstants.size()) +
+                "\n\tVolume = " + //TODO: make fxns instead of just how I'm doing it above
                 "\n\tDifficulty = " +
                 "\n\tEffort = " +
                 "\tTime = " +
