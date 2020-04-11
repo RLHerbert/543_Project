@@ -93,7 +93,7 @@ public class ProjectCode extends Metrics {
     //TODO: constructor with saveData as input?
     public ProjectCode(String saveData) throws IOException, RecognitionException {
         //Constructor that takes in saveData and sets variables accordingly
-        this();
+        super(saveData);
         filePath = this.extraData;
         file = new File(filePath);
 
