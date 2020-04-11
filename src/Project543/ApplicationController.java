@@ -31,7 +31,7 @@ public class ApplicationController {
     //Non-Constant Static Fields
     //
     public static ArrayList<ProjectData> openProjectList = new ArrayList<ProjectData>(); //TODO: Private
-    public static ArrayList<UserInterface_3> openProjectWindows = new ArrayList<UserInterface_3>();
+    public static ArrayList<UserInterface_3> openProjectWindows;
 
     //Non-Static Member Variables
     //
@@ -49,8 +49,10 @@ public class ApplicationController {
         //Default constructor
 
         //Initialize member fields
-        userInterface = new UserInterface();
-        openProjectList = new ArrayList<ProjectData>();
+        //userInterface = new UserInterface();
+        //openProjectList = new ArrayList<ProjectData>();
+        ApplicationController.openProjectWindows = new ArrayList<UserInterface_3>();
+        ApplicationController.openProjectWindows.add(new UserInterface_3());
     }
 
     //Getters
@@ -145,8 +147,12 @@ public class ApplicationController {
     public static boolean projectIsOpen(String fileNameToCheck){
         //Checks if a project with a given file name is already open
 
-        for (ProjectData projectData : openProjectList){
-            if (projectData.getFileName().equals(fileNameToCheck)){
+        if (ApplicationController.openProjectWindows.size() == 0) { return false; }
+
+        for (UserInterface_3 window : ApplicationController.openProjectWindows){
+            if (window.projectData == null) { return false; }
+
+            if (window.projectData.getFileName().equals(fileNameToCheck)){
                 return true;
             }
         }

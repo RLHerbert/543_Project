@@ -262,7 +262,7 @@ public class UserInterface_3 extends Stage {
         System.out.println("File -> Open Clicked");
         ProjectData projectToOpen = this.openProjectDialog(); //Prompts user to open a file
 
-        if (projectToOpen != null) {
+        if ((projectToOpen != null) &&  (!ApplicationController.projectIsOpen(projectToOpen.getFileName()))) {
             //If the user has opened a file
             if (this.projectData == null) {
                 //If the window does not already have a project
@@ -273,6 +273,7 @@ public class UserInterface_3 extends Stage {
                 //The window already has a project
                 System.out.println("Opening project in new window.");
                 UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project window
+                ApplicationController.openProjectWindows.add(windowToOpen);
             }
         }
     }

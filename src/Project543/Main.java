@@ -9,7 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        TestBench testBench = new TestBench();
+        ApplicationController applicationController = new ApplicationController();
 //        TestBench testBenchMelissa = new TestBench("Melissa");
     }
 
