@@ -43,7 +43,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     //
     public ArrayList<MetricsTab> metricsTabs;
     private boolean hasSMI;
-    public List<File> fileList;
+    public ArrayList<File> fileList;
 
     //Member Methods
     //
@@ -56,6 +56,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
         this.metricsTabs = new ArrayList<MetricsTab>();
         this.hasSMI = false;
+        this.fileList = new ArrayList<File>();
         //this.metricsData = new ArrayList<Metrics>();
     }
 
@@ -67,6 +68,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         //Initialize member fields
         this.metricsTabs = new ArrayList<MetricsTab>();
         this.hasSMI = false;
+        this.fileList = new ArrayList<File>();
     }
 
     public ProjectData(Scanner savedFile, String fileName){
@@ -76,11 +78,16 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
         //Initialize member fields
         this.metricsTabs = new ArrayList<MetricsTab>();
+        this.hasSMI = false;
+        this.fileList = new ArrayList<File>();
 
         //Populate metricsTabs
         while (savedFile.hasNextLine()){
             metricsTabs.add(openMetricsTabFromSavedFile(savedFile.nextLine()));
         }
+
+        //Populate fileList
+        //TODO: this^^
     }
 
     //Getters

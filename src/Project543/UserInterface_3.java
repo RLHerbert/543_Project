@@ -16,6 +16,7 @@ import org.antlr.runtime.RecognitionException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserInterface_3 extends Stage {
@@ -329,8 +330,11 @@ public class UserInterface_3 extends Stage {
         System.out.println("Project Code -> Add Code Clicked");
 
         //opens fileChooser
-        this.projectData.fileList.addAll(Dialogs.createAddCodeDialog(this));
-        this.tabPane.getTabs().add(this.projectData.getNewProjectCode());
+        List<File> fileList = Dialogs.createAddCodeDialog(this);
+        if (fileList.size() == 0) {
+            this.projectData.fileList.addAll(fileList);
+            this.tabPane.getTabs().add(this.projectData.getNewProjectCode());
+        }
         //if no file is chosen, does nothing (cancels)
         //otherwise, add chosen files to tree view and opens project code tabs without anything in them
 

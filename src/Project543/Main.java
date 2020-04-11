@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         TestBench testBench = new TestBench();
-        TestBench testBenchMelissa = new TestBench("Melissa");
+//        TestBench testBenchMelissa = new TestBench("Melissa");
     }
 
 
