@@ -184,7 +184,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     public MetricsTab openMetricsTabFromSavedFile(String metricSaveData) throws IOException, RecognitionException {
         //Adds all the saved metrics and their tab forms to the project
         metricSaveData = metricSaveData.substring(1, metricSaveData.length());
-        StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
+        StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",]");
         int metricID = Integer.parseInt(lineTokenizer.nextToken());
 
         if (metricID == FunctionPoint.METRIC_ID){
