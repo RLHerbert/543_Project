@@ -161,6 +161,8 @@ public class ProjectCode extends Metrics {
         //Initialize new saveData
         ArrayList<Integer> tempSaveData = new ArrayList<Integer>();
         tempSaveData.add(ProjectCode.METRIC_ID);
+
+        this.saveData = tempSaveData;
     }
 
     @Override
