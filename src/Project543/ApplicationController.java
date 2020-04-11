@@ -79,45 +79,56 @@ public class ApplicationController {
     //Open and Save methods
     //
     public static boolean exitProgramRequest(){
-        Boolean[] exitAndSave;
+        boolean windowHasChanged = false;
 
-        Dialog<Boolean[]> saveAllProjects = new Dialog<Boolean[]>();
-        saveAllProjects.setTitle("Save Projects");
-        saveAllProjects.setHeaderText("Would you like to save your open projects?");
-        saveAllProjects.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.YES, ButtonType.NO);
-
-        saveAllProjects.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.CANCEL){
-                return new Boolean[] {false, null};
+        for (UserInterface_3 window : ApplicationController.openProjectWindows) {
+            if (window.projectData.hasChanged()) {
+                windowHasChanged = true;
+                break;
             }
-            else if (dialogButton == ButtonType.YES){
-                return new Boolean[] {true, true};
-            }
-            else if (dialogButton == ButtonType.NO){
-                return new Boolean[] {true, false};
-            }
-
-            return new Boolean[] {null, null};
-        });
-
-        Optional<Boolean[]> result = saveAllProjects.showAndWait();
-
-        if (!result.get()[0]){
-            return false;
         }
-        else {
-            if (result.get()[1]){
-                for (UserInterface_3 window : openProjectWindows){
-                    try {
-                        window.projectData.saveProject();
-                    } catch (IOException e){
-                        System.err.println("ERROR: SAVE_PROJECT_ERROR");
-                        e.printStackTrace();
+
+        if (windowHasChanged) {
+
+            Boolean[] exitAndSave;
+
+            Dialog<Boolean[]> saveAllProjects = new Dialog<Boolean[]>();
+            saveAllProjects.setTitle("Save Projects");
+            saveAllProjects.setHeaderText("Would you like to save your open projects?");
+            saveAllProjects.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.YES, ButtonType.NO);
+
+            saveAllProjects.setResultConverter(dialogButton -> {
+                if (dialogButton == ButtonType.CANCEL) {
+                    return new Boolean[]{false, null};
+                } else if (dialogButton == ButtonType.YES) {
+                    return new Boolean[]{true, true};
+                } else if (dialogButton == ButtonType.NO) {
+                    return new Boolean[]{true, false};
+                }
+
+                return new Boolean[]{null, null};
+            });
+
+            Optional<Boolean[]> result = saveAllProjects.showAndWait();
+
+            if (!result.get()[0]) {
+                return false;
+            } else {
+                if (result.get()[1]) {
+                    for (UserInterface_3 window : openProjectWindows) {
+                        try {
+                            window.projectData.saveProject();
+                        } catch (IOException e) {
+                            System.err.println("ERROR: SAVE_PROJECT_ERROR");
+                            e.printStackTrace();
+                        }
                     }
                 }
+                return true;
             }
-            return true;
         }
+
+        return true;
     }
 
     public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
