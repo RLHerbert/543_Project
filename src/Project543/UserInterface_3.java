@@ -95,6 +95,7 @@ public class UserInterface_3 extends Stage {
         this();
 
         this.projectData = projectData;
+        this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
         this.setWindow();
         //this.setScene(this.windowScene);
 
@@ -247,6 +248,7 @@ public class UserInterface_3 extends Stage {
         if (projectToCreateMetaData != null) {
             if (this.projectData == null) {
                 this.projectData = new ProjectData(projectToCreateMetaData);
+                this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
                 this.setMenuBar();
                 //this.setExitWindowRequest(this, this.projectData);
             } else {
