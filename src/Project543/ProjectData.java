@@ -147,7 +147,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
     public MetricsTab openMetricsTabFromSavedFile(String metricSaveData){
         //Adds all the saved metrics and their tab forms to the project
-        metricSaveData = metricSaveData.substring(1, metricSaveData.length()-1);
+        metricSaveData = metricSaveData.substring(1, metricSaveData.length());
         StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
         int metricID = Integer.parseInt(lineTokenizer.nextToken());
 
@@ -187,10 +187,10 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
             fileWriter.write("\n" + metricTab.metric.writeSaveDataString());
 
             if (metricTab.getMetricID() == FunctionPoint.METRIC_ID) {
-                fileWriter.write( " \"" + metricTab.getText() + "\"");
+                fileWriter.write( " #" + metricTab.getText());
             }
             else if (metricTab.getMetricID() == ProjectCode.METRIC_ID) {
-                fileWriter.write("\"" + metricTab.getExtraData() + "\""); //TODO: TEMP
+                fileWriter.write(" #" + metricTab.getExtraData()); //TODO: TEMP
             }
         }
 

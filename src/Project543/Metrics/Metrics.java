@@ -25,6 +25,7 @@ public abstract class Metrics {
     //Non-Constant Member Fields
     //
     protected ArrayList<Integer> saveData;
+    public String extraData;
 
     //Member Methods
     //
@@ -66,13 +67,24 @@ public abstract class Metrics {
         while (lineTokenizer.hasMoreTokens())
         {
             String dataToRead = lineTokenizer.nextToken();
+            System.out.println(dataToRead);
 
             if (dataToRead.charAt(0) == ' '){
+                //What case was this for?
                 dataToRead = dataToRead.substring(1, dataToRead.length());
+            }
+            if ((dataToRead.indexOf('#') >=0) || ((dataToRead.indexOf(']') >=0))) {
+                dataToRead = dataToRead.substring(0,dataToRead.indexOf("]"));
             }
 
             int dataToAdd = Integer.parseInt(dataToRead);
             saveData.add(dataToAdd);
+        }
+
+        lineTokenizer = new StringTokenizer(data, "#");
+
+        while (lineTokenizer.hasMoreTokens()){
+            this.extraData = lineTokenizer.nextToken();
         }
     }
 }

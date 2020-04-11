@@ -56,7 +56,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         //Initialize member fields
         this.functionPoint = new FunctionPoint();
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
         this.setGridPane();
     }
 
@@ -68,7 +68,7 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         //Initialize member fields
         this.functionPoint = functionPoint;
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
         this.setGridPane();
     }
 
@@ -80,7 +80,8 @@ public class FunctionPointTab extends MetricsTab implements SaveInterface {
         //Initialize member fields
         this.functionPoint = new FunctionPoint(saveDataString); //Initialize functionPoint from save data
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
+        this.setText(this.functionPoint.extraData);
         this.setGridPane();
     }
 
