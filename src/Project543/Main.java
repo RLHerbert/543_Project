@@ -8,14 +8,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-//        UI mainUI = new UI();
-//        Controller projectController = new Controller();
 
-        //ApplicationController test = new ApplicationController();
-
-//        System.out.println("Is shit broken?");
-//
-//        TestBench testBench = new TestBench();
         TestBench testBench = new TestBench();
         TestBench testBenchMelissa = new TestBench("Melissa");
     }

@@ -8,6 +8,7 @@ import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -47,6 +48,7 @@ public class ProjectCode extends Metrics {
 
     //Non-Constant Member Fields
     //
+    public ArrayList<Integer> saveData;
     public String filePath;
 
     JavaJavaLexer lexer;
@@ -155,7 +157,12 @@ public class ProjectCode extends Metrics {
 
     @Override
     public void setSaveData() {
+        //Saves METRIC_ID and file path
+        //Initialize new saveData
+        ArrayList<Integer> tempSaveData = new ArrayList<Integer>();
+        tempSaveData.add(ProjectCode.METRIC_ID);
 
+        this.saveData = tempSaveData;
     }
 
     @Override
