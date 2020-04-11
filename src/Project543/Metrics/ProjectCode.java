@@ -1,5 +1,6 @@
 package Project543.Metrics;
 
+import java.io.File;
 import java.io.IOException;
 import Project543.JavaJavaLexer;
 import Project543.JavaJavaParser;
@@ -46,7 +47,8 @@ public class ProjectCode extends Metrics {
 
     //Non-Constant Member Fields
     //
-    public String filePath;
+    public String filePath; //TODO: reassess... needed?
+    public File file;
 
     JavaJavaLexer lexer;
     CommonTokenStream tokens;
@@ -64,6 +66,7 @@ public class ProjectCode extends Metrics {
         //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
         filePath = "src/Project543/Metrics/FunctionPoint.java";
+        file = new File(filePath);
 
         lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
         tokens = new CommonTokenStream(lexer);
@@ -73,10 +76,11 @@ public class ProjectCode extends Metrics {
         System.out.print(outputString());
     }
 
-    public ProjectCode(String javaFile) throws IOException, RecognitionException {
+    public ProjectCode(File javaFile) throws IOException, RecognitionException {
         //Constructor that takes in a java file for parsing
         this();
-        filePath = javaFile;
+        filePath = javaFile.getPath();
+        file = javaFile;
     }
 
     //TODO: constructor with saveData as input?
@@ -158,12 +162,10 @@ public class ProjectCode extends Metrics {
 
     public String outputMetaData() {
         //TODO
-        String filename = filePath.substring(filePath.lastIndexOf('/') + 1);
-        String file = "";
-        byte[] fileBytes = file.getBytes();
+//        byte[] fileBytes = file.getBytes();
 
-        return "File name: " + filename +
-                "\nFile length in bytes: " + "not sure yet" + //TODO
+        return "File name: " + file.getName() +
+                "\nFile length in bytes: " + file.getTotalSpace() + //TODO: double-check
                 "\nFile white space: " + lexer.ws + //TODO: double-check
                 "\nFile comment space in bytes: " + lexer.commentcount + //TODO: double check
                 "\nComment percentage of file: " + "not sure yet"; //TODO

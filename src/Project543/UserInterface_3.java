@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.antlr.runtime.RecognitionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -161,7 +162,13 @@ public class UserInterface_3 extends Stage {
         for (int i = 0; i < PROJECT_CODE_MENU.length; i++) {
             projectCodeMenu[i] = new MenuItem(PROJECT_CODE_MENU[i]);
         }
-        projectCodeMenu[0].setOnAction(actionEvent -> this.projectCodeAddOnClick());
+        projectCodeMenu[0].setOnAction(actionEvent -> {
+            try {
+                this.projectCodeAddOnClick();
+            } catch (IOException | RecognitionException e) {
+                e.printStackTrace();
+            }
+        });
         projectCodeMenu[1].setOnAction(actionEvent -> this.projectCodeStatisticsOnClick());
         mainMenuItems[4].getItems().addAll(projectCodeMenu);
 
@@ -317,14 +324,23 @@ public class UserInterface_3 extends Stage {
     }
 
     //Project Code
-    private void projectCodeAddOnClick() {
+    private void projectCodeAddOnClick() throws IOException, RecognitionException {
         // -> Add Code
         System.out.println("Project Code -> Add Code Clicked");
+
+        //opens fileChooser
+        this.projectData.fileList.addAll(Dialogs.createAddCodeDialog(this));
+        this.tabPane.getTabs().add(this.projectData.getNewProjectCode());
+        //if no file is chosen, does nothing (cancels)
+        //otherwise, add chosen files to tree view and opens project code tabs without anything in them
+
     }
 
     private void projectCodeStatisticsOnClick() {
         // -> Project Code Statistics
         System.out.println("Project Code -> Project Code Statistics Clicked");
+
+        //computes the metric data and displays
     }
 
     //Other On Clicks

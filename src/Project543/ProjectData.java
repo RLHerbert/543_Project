@@ -5,13 +5,16 @@ import Project543.Metrics.ProjectCode;
 import Project543.Metrics.SoftwareMaturityIndex;
 import Project543.MetricsInterface.FunctionPointTab;
 import Project543.MetricsInterface.MetricsTab;
+import Project543.MetricsInterface.ProjectCodeTab;
 import Project543.MetricsInterface.SoftwareMaturityIndexTab;
 import javafx.scene.control.Tab;
+import org.antlr.runtime.RecognitionException;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -40,6 +43,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     //
     public ArrayList<MetricsTab> metricsTabs;
     private boolean hasSMI;
+    public List<File> fileList;
 
     //Member Methods
     //
@@ -99,6 +103,12 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return this.metricsTabs.get(this.metricsTabs.size()-1);
     }
 
+    public Tab getNewProjectCode() throws IOException, RecognitionException {
+        //Creates a new ProjectCodeTab, adds it to metricsTabs, and returns it
+        this.createNewProjectCode();
+        return this.metricsTabs.get(this.metricsTabs.size()-1);
+    }
+
     //Setters
     //
 
@@ -121,6 +131,16 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         SoftwareMaturityIndexTab softwareMaturityIndexTab = new SoftwareMaturityIndexTab("SMI");
 
         this.metricsTabs.add(softwareMaturityIndexTab);
+    }
+
+    public void createNewProjectCode() throws IOException, RecognitionException {
+        //Creates a new ProjectCodeTab and adds it to metricsTabs
+        File fileToAdd = fileList.get(fileList.size()-1);
+
+        ProjectCode projectCode = new ProjectCode(fileToAdd); //TODO: needed?
+        ProjectCodeTab projectCodeTab = new ProjectCodeTab(fileToAdd);
+
+        this.metricsTabs.add(projectCodeTab);
     }
 
     //Save and open methods
