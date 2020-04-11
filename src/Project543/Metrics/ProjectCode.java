@@ -225,8 +225,6 @@ public class ProjectCode extends Metrics {
         tempSaveData.add(ProjectCode.METRIC_ID);
 
         this.saveData = tempSaveData;
-
-
         this.extraData = file.getAbsolutePath();
     }
 

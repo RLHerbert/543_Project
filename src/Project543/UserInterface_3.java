@@ -425,6 +425,8 @@ public class UserInterface_3 extends Stage {
             } catch (FileNotFoundException f) {
                 System.err.println("ERROR: FILE_NOT_FOUND");
                 f.printStackTrace();
+            } catch (RecognitionException | IOException e) {
+                e.printStackTrace();
             }
         }
 

@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.antlr.runtime.RecognitionException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -560,6 +562,8 @@ public class UserInterface {
                     } catch (FileNotFoundException f) {
                         System.err.println("ERROR: FILE_NOT_FOUND");
                         f.printStackTrace();
+                    } catch (RecognitionException | IOException e) {
+                        e.printStackTrace();
                     }
                 }
                 else {
@@ -568,6 +572,8 @@ public class UserInterface {
                     } catch (FileNotFoundException f){
                         System.err.println("ERROR: FILE_NOT_FOUND");
                         f.printStackTrace();
+                    } catch (RecognitionException | IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }

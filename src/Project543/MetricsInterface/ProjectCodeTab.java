@@ -1,5 +1,6 @@
 package Project543.MetricsInterface;
 
+import Project543.Metrics.FunctionPoint;
 import Project543.Metrics.ProjectCode;
 import Project543.UserInterface;
 import javafx.scene.control.TextArea;
@@ -69,6 +70,15 @@ public class ProjectCodeTab extends MetricsTab {
         this.projectCode = new ProjectCode(javaInFile); //TODO
     }
 
+    public ProjectCodeTab(String title, String saveDataString) throws IOException, RecognitionException {
+        //Save data constructor
+        //call super constructor
+        this(title);
+
+        //Initialize member fields
+        this.projectCode = new ProjectCode(saveDataString); //Initialize projectCode from save data
+    }
+
     //GETTERS
     //
     @Override
@@ -89,6 +99,11 @@ public class ProjectCodeTab extends MetricsTab {
 
     public void setMetricsTextField(){
         this.setMetricsTextField(this.projectCode.outputString()); //TODO: get text from this.projectCode
+    }
+
+    @Override
+    public void setMetric() {
+        this.metric = this.projectCode;
     }
 
     //MISC. MEMBER METHODS

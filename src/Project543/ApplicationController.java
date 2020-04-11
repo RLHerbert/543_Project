@@ -6,6 +6,7 @@ package Project543;
 
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import org.antlr.runtime.RecognitionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -131,7 +132,7 @@ public class ApplicationController {
         return true;
     }
 
-    public static ProjectData openProject(File projectToOpen) throws FileNotFoundException {
+    public static ProjectData openProject(File projectToOpen) throws IOException, RecognitionException {
         //Opens a project (from a .ms file) to add it to the open project list and return it
         Scanner projectScanner = new Scanner(projectToOpen);
 

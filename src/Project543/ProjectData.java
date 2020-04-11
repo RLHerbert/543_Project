@@ -70,7 +70,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.fileList = new ArrayList<File>();
     }
 
-    public ProjectData(Scanner savedFile, String fileName){
+    public ProjectData(Scanner savedFile, String fileName) throws IOException, RecognitionException {
         //Save file constructor
         //Call super constructor
         super(savedFile, fileName);
@@ -181,7 +181,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.metricsTabs.remove(metricsTabToRemove);
     }
 
-    public MetricsTab openMetricsTabFromSavedFile(String metricSaveData){
+    public MetricsTab openMetricsTabFromSavedFile(String metricSaveData) throws IOException, RecognitionException {
         //Adds all the saved metrics and their tab forms to the project
         metricSaveData = metricSaveData.substring(1, metricSaveData.length());
         StringTokenizer lineTokenizer = new StringTokenizer(metricSaveData, ",");
@@ -196,7 +196,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         }
         else if (metricID == ProjectCode.METRIC_ID) {
             //TODO
-            return new MetricsTab();
+            return new ProjectCodeTab("Project Code", metricSaveData);
         }
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");
