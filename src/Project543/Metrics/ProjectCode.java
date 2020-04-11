@@ -8,10 +8,8 @@ import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.lang.Math;
 
 public class ProjectCode extends Metrics {
     //**MEMBER FIELDS**//
@@ -24,7 +22,7 @@ public class ProjectCode extends Metrics {
     //Constant Static Fields
     //
     public static final int METRIC_ID = ((int) ('P' + 'C'));
-    //Save data format: [METRIC_ID, "filePath"]
+    //Save data format: [METRIC_ID] "filePath"
 
     //Non-Constant Static Fields
     //
@@ -48,7 +46,6 @@ public class ProjectCode extends Metrics {
 
     //Non-Constant Member Fields
     //
-    public ArrayList<Integer> saveData;
     public String filePath;
 
     JavaJavaLexer lexer;
@@ -83,9 +80,55 @@ public class ProjectCode extends Metrics {
     }
 
     //TODO: constructor with saveData as input?
+    public ProjectCode(String something, int somethingElse) throws IOException, RecognitionException {
+
+    }
 
     //GETTERS
     //
+    public int getUniqueOperators() {
+        return uniqueKeywords.size() + uniqueSpecial.size();
+    }
+
+    public int getUniqueOperands() {
+        return uniqueIdentifiers.size() + uIDSym.size() + uniqueConstants.size();
+    }
+
+    public int getTotalOperators() {
+        return parser.keywordCount + parser.specialcount;
+    }
+
+    public int getTotalOperands() {
+        return parser.identcount + uIDSym.size() + lexer.constantcount;
+    }
+
+    public int getProgramLength() {
+        return getTotalOperators() + getTotalOperands();
+    }
+
+    public int getProgramVocabulary() {
+        return getUniqueOperators() + getUniqueOperands();
+    }
+
+    public double getVolume() {
+        return getProgramLength() * Math.log(getProgramVocabulary());
+    }
+
+    public double getDifficulty() {
+        return getUniqueOperators()/2.0 + ((double) getTotalOperands())/getUniqueOperands();
+    }
+
+    public double getEffort() {
+        return  getDifficulty() * getVolume();
+    }
+
+    public double getTime() {
+        return getEffort()/18;
+    }
+
+    public double getNumberOfBugs() {
+        return getVolume()/3000;
+    }
 
     //SETTERS
     //
@@ -129,17 +172,17 @@ public class ProjectCode extends Metrics {
     public String outputHalsteadData() {
         //TODO
         return "\nHalstead metrics:" +
-                "\n\tUnique operators: " + (this.uniqueKeywords.size() + this.uniqueSpecial.size()) +
-                "\n\tUnique operands: " + (this.uniqueIdentifiers.size() + this.uIDSym.size() + this.uniqueConstants.size()) +
-                "\n\tTotal operators: " + (parser.keywordCount + parser.specialcount) +
-                "\n\tTotal operands: " + (parser.identcount + this.uIDSym.size() + lexer.constantcount) +
-                "\n\tProgram length (N) = " + (parser.keywordCount + parser.specialcount + parser.identcount + this.uIDSym.size() + lexer.constantcount) +
-                "\n\tProgram vocabulary (n) = " + (this.uniqueKeywords.size() + this.uniqueSpecial.size() + this.uniqueIdentifiers.size() + this.uIDSym.size() + this.uniqueConstants.size()) +
-                "\n\tVolume = " + //TODO: make fxns instead of just how I'm doing it above
-                "\n\tDifficulty = " +
-                "\n\tEffort = " +
-                "\tTime = " +
-                "\n\tBugs expected = ";
+                "\n\tUnique operators: " + getUniqueOperators() +
+                "\n\tUnique operands: " + getUniqueOperands() +
+                "\n\tTotal operators: " + getTotalOperators() +
+                "\n\tTotal operands: " + getTotalOperands() +
+                "\n\tProgram length (N) = " + getProgramLength() +
+                "\n\tProgram vocabulary (n) = " + getProgramVocabulary() +
+                "\n\tVolume = " + getVolume() +
+                "\n\tDifficulty = " + getDifficulty() +
+                "\n\tEffort = " + getEffort() +
+                "\tTime = " + getTime() +
+                "\n\tBugs expected = " + getNumberOfBugs();
     }
 
     public String outputMccabeData() { 
@@ -165,6 +208,10 @@ public class ProjectCode extends Metrics {
         this.saveData = tempSaveData;
     }
 
+    public void setFromSavedData() {
+        //Sets variable values based on integer(s) and file path string in saveData
+    }
+
     @Override
     public boolean hasChanged() {
         return false;
@@ -173,16 +220,11 @@ public class ProjectCode extends Metrics {
 
 //TODO: do what he did for keywords for identifiers, IDSyms?, constants, specials??
 //TODO: mccabe stuff
-//TODO: calculations of indirect values
 //TODO: make everything static I think
 //TODO: make Symbol class a part of this one instead of separate?
 //TODO: allow choice of file
 
 //readFile
-//do antlr stuff
-//string that returns what antlr pops out
 //hold file name/path/address
 //read out save data arraylist of project save data - metrid id, file path
-//metric id
-//extends metrics
 //in save data, use delimiter like quotes so we can use string tokenizer
