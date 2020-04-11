@@ -331,7 +331,7 @@ public class UserInterface_3 extends Stage {
 
         //opens fileChooser
         List<File> fileList = Dialogs.createAddCodeDialog(this);
-        if (fileList.size() == 0) {
+        if (fileList.size() != 0) {
             this.projectData.fileList.addAll(fileList);
             this.tabPane.getTabs().add(this.projectData.getNewProjectCode());
         }
