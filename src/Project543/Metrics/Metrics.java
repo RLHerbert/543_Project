@@ -67,7 +67,7 @@ public abstract class Metrics {
         while (lineTokenizer.hasMoreTokens())
         {
             String dataToRead = lineTokenizer.nextToken();
-            System.out.println(dataToRead);
+            //System.out.println(dataToRead);
 
             if (dataToRead.charAt(0) == ' '){
                 //What case was this for?
