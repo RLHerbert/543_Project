@@ -82,9 +82,11 @@ public abstract class Metrics {
         }
 
         lineTokenizer = new StringTokenizer(data, "#");
+        lineTokenizer.nextToken();
 
         while (lineTokenizer.hasMoreTokens()){
-            this.extraData = lineTokenizer.nextToken();
+            String tempExtraData = lineTokenizer.nextToken();
+            this.extraData = tempExtraData;
         }
     }
 }
