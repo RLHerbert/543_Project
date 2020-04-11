@@ -221,8 +221,11 @@ public class ProjectCode extends Metrics {
     public void setSaveData() {
         //Saves METRIC_ID and file path
         //Initialize new saveData
-        this.saveData = new ArrayList<Integer>();
-        this.saveData.add(ProjectCode.METRIC_ID);
+        ArrayList<Integer> tempSaveData = new ArrayList<>();
+        tempSaveData.add(ProjectCode.METRIC_ID);
+
+        this.saveData = tempSaveData;
+
 
         this.extraData = file.getAbsolutePath();
     }
