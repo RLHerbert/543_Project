@@ -115,6 +115,16 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return this.metricsTabs.get(this.metricsTabs.size()-1);
     }
 
+    public ArrayList<Tab> getNewProjectCodes() throws IOException, RecognitionException {
+        //Creates new ProjectCodeTabs, adds them to metricsTabs, and returns them as an array list
+        ArrayList<Tab> projectCodeTabs = new ArrayList<>();
+        for (int i = 0; i < this.fileList.size(); i++)
+        {
+            projectCodeTabs.add(getNewProjectCode());
+        }
+        return projectCodeTabs;
+    }
+
     //Setters
     //
 

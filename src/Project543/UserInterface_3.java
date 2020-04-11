@@ -332,8 +332,9 @@ public class UserInterface_3 extends Stage {
         //opens fileChooser
         List<File> fileList = Dialogs.createAddCodeDialog(this);
         if (fileList.size() != 0) {
+            this.projectData.fileList.clear();
             this.projectData.fileList.addAll(fileList);
-            this.tabPane.getTabs().add(this.projectData.getNewProjectCode());
+            this.tabPane.getTabs().addAll(this.projectData.getNewProjectCodes());
         }
         //if no file is chosen, does nothing (cancels)
         //otherwise, add chosen files to tree view and opens project code tabs without anything in them

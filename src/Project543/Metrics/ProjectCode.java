@@ -65,8 +65,22 @@ public class ProjectCode extends Metrics {
         //Default constructor
         //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
-        filePath = "src/Project543/Metrics/FunctionPoint.java";
-        file = new File(filePath);
+//        filePath = "src/Project543/Metrics/FunctionPoint.java";
+//        file = new File(filePath);
+//
+//        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
+//        tokens = new CommonTokenStream(lexer);
+//        parser = new JavaJavaParser(tokens);
+//
+//        this.parseFile();
+//        System.out.print(outputString());
+    }
+
+    public ProjectCode(File javaFile) throws IOException, RecognitionException {
+        //Constructor that takes in a java file for parsing
+        this();
+        filePath = javaFile.getAbsolutePath();
+        file = javaFile;
 
         lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
         tokens = new CommonTokenStream(lexer);
@@ -76,16 +90,19 @@ public class ProjectCode extends Metrics {
         System.out.print(outputString());
     }
 
-    public ProjectCode(File javaFile) throws IOException, RecognitionException {
-        //Constructor that takes in a java file for parsing
-        this();
-        filePath = javaFile.getPath();
-        file = javaFile;
-    }
-
     //TODO: constructor with saveData as input?
-    public ProjectCode(String something, int somethingElse) throws IOException, RecognitionException {
+    public ProjectCode(String saveData) throws IOException, RecognitionException {
+        //Constructor that takes in saveData and sets variables accordingly
+        this();
+        filePath = this.extraData;
+        file = new File(filePath);
 
+        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
+        tokens = new CommonTokenStream(lexer);
+        parser = new JavaJavaParser(tokens);
+
+        this.parseFile();
+        System.out.print(outputString());
     }
 
     //GETTERS
