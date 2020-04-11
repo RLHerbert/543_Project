@@ -5,8 +5,10 @@ import Project543.UserInterface;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import org.antlr.runtime.RecognitionException;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ProjectCodeTab extends MetricsTab {
     //**MEMBER FIELDS**//
@@ -59,12 +61,12 @@ public class ProjectCodeTab extends MetricsTab {
         this.setContent(contentsBox);
     }
 
-    public ProjectCodeTab(File javaInFile){
+    public ProjectCodeTab(File javaInFile) throws IOException, RecognitionException {
         //From file constructor
         this(javaInFile.getName());
 
         //Initialize member fields
-        //this.projectCode = new projectCode(); //TODO
+        this.projectCode = new ProjectCode(javaInFile); //TODO
     }
 
     //GETTERS
