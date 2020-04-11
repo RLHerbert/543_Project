@@ -185,6 +185,10 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
             this.hasSMI = true;
             return new SoftwareMaturityIndexTab("SMI", metricSaveData);
         }
+        else if (metricID == ProjectCode.METRIC_ID) {
+            //TODO
+            return new MetricsTab();
+        }
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");
             return new MetricsTab();
