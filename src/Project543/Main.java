@@ -15,8 +15,8 @@ public class Main extends Application {
 
 //        System.out.println("Is shit broken?");
 //
-//        TestBench testBench = new TestBench();
-        TestBench testBench1 = new TestBench("Melissa");
+        TestBench testBench = new TestBench();
+//        TestBench testBench1 = new TestBench("Melissa");
     }
 
 
