@@ -216,6 +216,8 @@ public class ProjectCode extends Metrics {
         outputMccabeData();
     }
 
+//    public void clearStaticData
+
 
     @Override
     public void setSaveData() {
