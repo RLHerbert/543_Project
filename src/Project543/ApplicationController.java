@@ -38,7 +38,6 @@ public class ApplicationController {
     //
 
     //Non-Constant Member Fields
-    UserInterface userInterface;
 
     //Member Methods
     //
@@ -157,21 +156,5 @@ public class ApplicationController {
         }
 
         return false;
-    }
-
-    public static void saveAllProjects(){
-        //Saves all currently open projects
-        for (ProjectData openProject : ApplicationController.openProjectList){
-            UserInterface.exitProjectQuery(openProject);
-            //TODO
-            /*
-            try {
-                openProject.saveProject();
-            } catch (IOException e){
-                System.err.println("ERROR: PROJECT_SAVE_ERROR");
-                e.printStackTrace();
-            }
-             */
-        }
     }
 }
