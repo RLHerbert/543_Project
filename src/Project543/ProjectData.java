@@ -155,7 +155,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.metricsTabs.add(softwareMaturityIndexTab);
     }
 
-    public void createNewProjectCode() throws IOException, RecognitionException {
+    public void createNewProjectCode(int i) throws IOException, RecognitionException {
         //Creates a new ProjectCodeTab and adds it to metricsTabs
         File fileToAdd = fileList.get(i);
 
