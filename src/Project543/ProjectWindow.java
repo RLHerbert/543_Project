@@ -261,7 +261,7 @@ public class ProjectWindow extends Stage {
         System.out.println("File -> Open Clicked");
         ProjectData projectToOpen = this.openProjectDialog(); //Prompts user to open a file
 
-        if ((projectToOpen != null) &&  (!ApplicationController.projectIsOpen(projectToOpen.getFileName()))) {
+        if ((projectToOpen != null) && (!ApplicationController.projectIsOpen(projectToOpen.getFileName()))) {
             //If the user has opened a file
             if (this.projectData == null) {
                 //If the window does not already have a project
@@ -421,7 +421,6 @@ public class ProjectWindow extends Stage {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
         File savedProject = fileChooser.showOpenDialog(this);
-//        File savedProject = new File("melissa1000.ms");
 
         if (savedProject != null) {
             //Open the project
