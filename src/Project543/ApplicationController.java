@@ -9,7 +9,6 @@ import javafx.scene.control.Dialog;
 import org.antlr.runtime.RecognitionException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class ApplicationController {
     //Non-Constant Static Fields
     //
     public static ArrayList<ProjectData> openProjectList = new ArrayList<ProjectData>(); //TODO: Private
-    public static ArrayList<UserInterface_3> openProjectWindows;
+    public static ArrayList<ProjectWindow> openProjectWindows;
 
     //Non-Static Member Variables
     //
@@ -51,8 +50,8 @@ public class ApplicationController {
         //Initialize member fields
         //userInterface = new UserInterface();
         //openProjectList = new ArrayList<ProjectData>();
-        ApplicationController.openProjectWindows = new ArrayList<UserInterface_3>();
-        ApplicationController.openProjectWindows.add(new UserInterface_3());
+        ApplicationController.openProjectWindows = new ArrayList<ProjectWindow>();
+        ApplicationController.openProjectWindows.add(new ProjectWindow());
     }
 
     //Getters
@@ -84,7 +83,7 @@ public class ApplicationController {
     public static boolean exitProgramRequest(){
         boolean windowHasChanged = false;
 
-        for (UserInterface_3 window : ApplicationController.openProjectWindows) {
+        for (ProjectWindow window : ApplicationController.openProjectWindows) {
             if (window.projectData.hasChanged()) {
                 windowHasChanged = true;
                 break;
@@ -118,7 +117,7 @@ public class ApplicationController {
                 return false;
             } else {
                 if (result.get()[1]) {
-                    for (UserInterface_3 window : openProjectWindows) {
+                    for (ProjectWindow window : openProjectWindows) {
                         try {
                             window.projectData.saveProject();
                         } catch (IOException e) {
@@ -149,7 +148,7 @@ public class ApplicationController {
 
         if (ApplicationController.openProjectWindows.size() == 0) { return false; }
 
-        for (UserInterface_3 window : ApplicationController.openProjectWindows){
+        for (ProjectWindow window : ApplicationController.openProjectWindows){
             if (window.projectData == null) { return false; }
 
             if (window.projectData.getFileName().equals(fileNameToCheck)){

@@ -1,7 +1,6 @@
 package Project543;
 
 import Project543.Interface.Dialogs;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class UserInterface_3 extends Stage {
+public class ProjectWindow extends Stage {
     //////////////////////
     //**MEMBER FIELDS**//
     //
@@ -72,7 +71,7 @@ public class UserInterface_3 extends Stage {
     //
     //CONSTRUCTOR(S)
     //
-    public UserInterface_3() {
+    public ProjectWindow() {
         //Default constructor
 
         //Initialize fields
@@ -90,7 +89,7 @@ public class UserInterface_3 extends Stage {
         this.show();
     }
 
-    public UserInterface_3(ProjectData projectData) {
+    public ProjectWindow(ProjectData projectData) {
         //New project constructor
         this();
 
@@ -252,7 +251,7 @@ public class UserInterface_3 extends Stage {
                 this.setMenuBar();
                 //this.setExitWindowRequest(this, this.projectData);
             } else {
-                UserInterface_3 openNewWindow = new UserInterface_3(new ProjectData(projectToCreateMetaData));
+                ProjectWindow openNewWindow = new ProjectWindow(new ProjectData(projectToCreateMetaData));
             }
         }
     }
@@ -272,7 +271,7 @@ public class UserInterface_3 extends Stage {
             } else {
                 //The window already has a project
                 System.out.println("Opening project in new window.");
-                UserInterface_3 windowToOpen = new UserInterface_3(projectToOpen); //Open a new project window
+                ProjectWindow windowToOpen = new ProjectWindow(projectToOpen); //Open a new project window
                 ApplicationController.openProjectWindows.add(windowToOpen);
             }
         }

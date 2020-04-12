@@ -1,6 +1,5 @@
 package Project543.Interface;
 
-import Project543.UserInterface_3;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
