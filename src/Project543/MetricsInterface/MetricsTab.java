@@ -28,6 +28,7 @@ public class MetricsTab extends Tab implements SaveInterface {
     //Non-Constant Member Fields
     //
     public Metrics metric;
+    public boolean hasChanged;
 
     //Member Methods
     //
@@ -69,7 +70,7 @@ public class MetricsTab extends Tab implements SaveInterface {
     //
     public void calculateMetric(){} //Virtual
 
-    public boolean hasChanged(){
+    public boolean hasChanged() {
         return true;
     }
 

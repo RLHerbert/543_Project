@@ -56,6 +56,7 @@ public class ProjectCodeTab extends MetricsTab {
         this.metricsTextField = new TextArea();
         this.metricsTextField.setEditable(false);
         this.metricsTextField.setPrefSize(5000.0, 5000.0);
+        this.hasChanged = true;
 
         //Create VBox and set its contents to be the text area
         this.contentsBox = new VBox(metricsTextField);
@@ -77,6 +78,8 @@ public class ProjectCodeTab extends MetricsTab {
 
         //Initialize member fields
         this.projectCode = new ProjectCode(saveDataString); //Initialize projectCode from save data
+        this.hasChanged = false;
+        this.setText(this.projectCode.file.getName());
     }
 
     //GETTERS
@@ -111,5 +114,10 @@ public class ProjectCodeTab extends MetricsTab {
     @Override
     public void calculateMetric() {
         this.setMetricsTextField();
+    }
+
+    @Override
+    public boolean hasChanged() {
+        return this.hasChanged;
     }
 }

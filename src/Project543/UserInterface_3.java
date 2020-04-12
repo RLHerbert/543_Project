@@ -444,6 +444,7 @@ public class UserInterface_3 extends Stage {
     }
 
     public Boolean saveProjectQuery() {
+        //Returns true if no changes have been made to the project
         if (this.projectData == null) {
             return true;
         }
@@ -452,6 +453,7 @@ public class UserInterface_3 extends Stage {
             return true;
         }
 
+        //Otherwise, it prompts the user to save.
         //Create the save query dialog
         Dialog<ButtonType> saveProjectDialog = new Dialog<>();
         saveProjectDialog.setTitle("Save Project");

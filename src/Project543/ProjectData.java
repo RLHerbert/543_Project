@@ -168,10 +168,14 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     //Save and open methods
     //
 
-    public boolean hasChanged(){
+    @Override
+    public boolean hasChanged() {
         //Returns true if any metric has unsaved changes (edits since most recent save)
-        for (MetricsTab openTabs : this.metricsTabs){
-            if (openTabs.hasChanged()) return true;
+        for (MetricsTab tab : this.metricsTabs){
+            boolean tabHasChanged = tab.hasChanged();
+            if (tabHasChanged){
+                return true;
+            }
         }
 
         return false;
@@ -228,6 +232,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
         //Write the metrics data to the file
         for (MetricsTab metricTab : this.metricsTabs){
+            metricTab.hasChanged = false;
             metricTab.setMetric();
             metricTab.metric.setSaveData();
             fileWriter.write("\n" + metricTab.metric.writeSaveDataString());
