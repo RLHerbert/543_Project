@@ -333,10 +333,10 @@ public class UserInterface_3 extends Stage {
         System.out.println("Project Code -> Add Code Clicked");
 
         //opens fileChooser
-        List<File> fileList = Dialogs.createAddCodeDialog(this);
-        if (fileList.size() != 0) {
+        List<File> selectedFileList = Dialogs.createAddCodeDialog(this);
+        if (selectedFileList.size() != 0) {
             this.projectData.fileList.clear();
-            this.projectData.fileList.addAll(fileList);
+            this.projectData.fileList.addAll(selectedFileList);
             this.tabPane.getTabs().addAll(this.projectData.getNewProjectCodes());
         }
         //if no file is chosen, does nothing (cancels)
@@ -420,6 +420,7 @@ public class UserInterface_3 extends Stage {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
         File savedProject = fileChooser.showOpenDialog(this);
+//        File savedProject = new File("melissa1000.ms");
 
         if (savedProject != null) {
             //Open the project

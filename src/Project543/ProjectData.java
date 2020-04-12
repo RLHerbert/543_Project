@@ -109,7 +109,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return this.metricsTabs.get(this.metricsTabs.size()-1);
     }
 
-    public Tab getNewProjectCode() throws IOException, RecognitionException {
+    public Tab getNewProjectCode(int i) throws IOException, RecognitionException {
         //Creates a new ProjectCodeTab, adds it to metricsTabs, and returns it
         this.createNewProjectCode();
         return this.metricsTabs.get(this.metricsTabs.size()-1);
@@ -120,7 +120,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         ArrayList<Tab> projectCodeTabs = new ArrayList<>();
         for (int i = 0; i < this.fileList.size(); i++)
         {
-            projectCodeTabs.add(getNewProjectCode());
+            projectCodeTabs.add(getNewProjectCode(i));
         }
         return projectCodeTabs;
     }
@@ -151,7 +151,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
     public void createNewProjectCode() throws IOException, RecognitionException {
         //Creates a new ProjectCodeTab and adds it to metricsTabs
-        File fileToAdd = fileList.get(fileList.size()-1);
+        File fileToAdd = fileList.get(i);
 
         ProjectCode projectCode = new ProjectCode(fileToAdd); //TODO: needed?
         ProjectCodeTab projectCodeTab = new ProjectCodeTab(fileToAdd);
