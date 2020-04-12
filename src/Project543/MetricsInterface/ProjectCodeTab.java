@@ -79,6 +79,7 @@ public class ProjectCodeTab extends MetricsTab {
         this.projectCode = new ProjectCode(saveDataString); //Initialize projectCode from save data
         this.hasChanged = false;
         this.setText(this.projectCode.file.getName());
+        this.setMetricsTextField();
     }
 
     //GETTERS
