@@ -419,7 +419,7 @@ public class UserInterface_3 extends Stage {
 
     private ProjectData openProjectDialog() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
+        //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Metric Suite Files", "*.ms"));
         File savedProject = fileChooser.showOpenDialog(this);
 //        File savedProject = new File("melissa1000.ms");
 
