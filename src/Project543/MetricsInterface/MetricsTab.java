@@ -67,6 +67,8 @@ public class MetricsTab extends Tab implements SaveInterface {
     //
     //Save and open methods
     //
+    public void calculateMetric(){} //Virtual
+
     public boolean hasChanged(){
         return true;
     }

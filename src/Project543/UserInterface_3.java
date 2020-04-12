@@ -349,6 +349,7 @@ public class UserInterface_3 extends Stage {
         System.out.println("Project Code -> Project Code Statistics Clicked");
 
         //computes the metric data and displays
+        this.projectData.calculateMetrics();
     }
 
     //Other On Clicks
