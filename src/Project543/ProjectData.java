@@ -130,6 +130,12 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
     //Misc. Member Methods
     //
+    public void calculateMetrics(){
+        for (MetricsTab metric : this.metricsTabs){
+            metric.calculateMetric();
+        }
+    }
+
     //Metric tab creation
     //
     public void createNewFunctionPoint(){

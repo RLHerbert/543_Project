@@ -108,4 +108,8 @@ public class ProjectCodeTab extends MetricsTab {
 
     //MISC. MEMBER METHODS
     //
+    @Override
+    public void calculateMetric() {
+        this.setMetricsTextField();
+    }
 }
