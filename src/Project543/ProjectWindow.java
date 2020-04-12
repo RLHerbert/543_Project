@@ -303,6 +303,10 @@ public class ProjectWindow extends Stage {
         //Preferences -> Select Language
         System.out.println("Preferences -> Select Language Clicked");
         this.defaultProjectLanguage = Language.openLanguageSelectWindow();
+
+        if (this.projectData != null) {
+            this.projectData.defaultProjectLanguage = this.defaultProjectLanguage;
+        }
     }
 
     //Metrics
