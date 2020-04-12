@@ -229,6 +229,9 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
         //Write the metadata to the file
         fileWriter.write(super.toString());
+        if (this.metricsTabs.size() == 0) {
+            fileWriter.write("\n");
+        }
 
         //Write the metrics data to the file
         for (MetricsTab metricTab : this.metricsTabs){

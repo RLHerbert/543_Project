@@ -229,6 +229,7 @@ public class ProjectWindow extends Stage {
         this.borderPane.setBottom(projectContents);
 
         if (projectData != null){
+            this.setTitle(ProjectWindow.DEFAULT_STAGE_NAME + " - " + projectData.getProjectName());
             this.tabPane.getTabs().addAll(this.projectData.metricsTabs);
         }
 
@@ -248,7 +249,7 @@ public class ProjectWindow extends Stage {
             if (this.projectData == null) {
                 this.projectData = new ProjectData(projectToCreateMetaData);
                 this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
-                this.setMenuBar();
+                this.setWindow();
                 //this.setExitWindowRequest(this, this.projectData);
             } else {
                 ProjectWindow openNewWindow = new ProjectWindow(new ProjectData(projectToCreateMetaData));
@@ -303,6 +304,10 @@ public class ProjectWindow extends Stage {
         //Preferences -> Select Language
         System.out.println("Preferences -> Select Language Clicked");
         this.defaultProjectLanguage = Language.openLanguageSelectWindow();
+
+        if (this.projectData != null) {
+            this.projectData.defaultProjectLanguage = this.defaultProjectLanguage;
+        }
     }
 
     //Metrics
@@ -446,10 +451,12 @@ public class ProjectWindow extends Stage {
     public Boolean saveProjectQuery() {
         //Returns true if no changes have been made to the project
         if (this.projectData == null) {
+            ApplicationController.openProjectWindows.remove(this);
             return true;
         }
 
         if (!this.projectData.hasChanged()) {
+            ApplicationController.openProjectWindows.remove(this);
             return true;
         }
 
@@ -474,8 +481,10 @@ public class ProjectWindow extends Stage {
                 } catch (IOException e) {
                     System.err.println("ERROR: SAVE_PROJECT_ERROR");
                 }
+                ApplicationController.openProjectWindows.remove(this);
                 return true;
             } else if (saveDialogChoice.get() == ButtonType.NO) { //Probably coerced to int != 0
+                ApplicationController.openProjectWindows.remove(this);
                 return true;
             }
         }
