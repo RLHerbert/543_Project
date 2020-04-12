@@ -208,11 +208,12 @@ public class ProjectCode extends Metrics {
 
     public String outputMccabeData() { 
         //TODO
-        ArrayList<String> mccabes = new ArrayList<>(mccabeValues);
+        String mccabeString = "";
+//        List<String> mccabeValueList = new ArrayList<String>(mccabeValues.toArray());
 
-        String mccabeString = mccabes.get(0);
-        for (String mccabe : mccabes)
-            mccabeString.concat(" " + mccabe);
+        String[] mccabeArray = mccabeValues.toArray(new String[0]);
+        for (String mccabeValue : mccabeArray)
+            mccabeString += mccabeValue + "\n";
 
         return "\n\nMcCabe's Cyclomatic Complexity:\n" +
                 mccabeString;
