@@ -25,11 +25,9 @@ public class Dialogs {
 
     public static List<File> createAddCodeDialog(Stage stage) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*", "*.java"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Java Files", "*.java"));
 
-        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
-
-        return selectedFiles;
+        return fileChooser.showOpenMultipleDialog(stage);
     }
 }

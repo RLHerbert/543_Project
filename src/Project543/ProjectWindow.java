@@ -220,10 +220,10 @@ public class ProjectWindow extends Stage {
         this.setHeight(MAX_HEIGHT);
 
         //Move into a function
-        tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.8));
-        treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.2));
-        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
-        treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1.0));
+        tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.85));
+        treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.15));
+        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1));
+        treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1));
 
         //this.borderPane.setTop(menuContents);
         this.borderPane.setBottom(projectContents);
