@@ -9,6 +9,7 @@ import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.lang.Math;
 
@@ -24,6 +25,7 @@ public class ProjectCode extends Metrics {
     //
     public static final int METRIC_ID = ((int) ('P' + 'C'));
     //Save data format: [METRIC_ID] "filePath"
+    private static final DecimalFormat percentage = new DecimalFormat("#.##");
 
     //Non-Constant Static Fields
     //
@@ -109,6 +111,22 @@ public class ProjectCode extends Metrics {
 
     //GETTERS
     //
+    public double getFileLengthInBytes() {
+        return file.length();
+    }
+
+    public int getWhiteSpace() {
+        return lexer.ws;
+    }
+
+    public int getCommentSpaceInBytes() {
+        return lexer.commentcount; //TODO: fix value
+    }
+
+    public double getCommentPercentage() {
+        return getCommentSpaceInBytes()/getFileLengthInBytes()*100;
+    }
+
     public int getUniqueOperators() {
         return uniqueKeywords.size() + uniqueSpecial.size();
     }
@@ -181,13 +199,12 @@ public class ProjectCode extends Metrics {
 
     public String outputMetaData() {
         //TODO
-//        byte[] fileBytes = file.getBytes();
 
         return "File name: " + file.getName() +
-                "\nFile length in bytes: " + file.getTotalSpace() + //TODO: double-check
-                "\nFile white space: " + lexer.ws + //TODO: double-check
-                "\nFile comment space in bytes: " + lexer.commentcount + //TODO: double check
-                "\nComment percentage of file: " + "not sure yet"; //TODO
+                "\nFile length in bytes: " + getFileLengthInBytes() +
+                "\nFile white space: " + getWhiteSpace() +
+                "\nFile comment space in bytes: " + getCommentSpaceInBytes() +
+                "\nComment percentage of file: " + percentage.format(getCommentPercentage()) + "%"; //TODO
     }
 
     public String outputHalsteadData() {

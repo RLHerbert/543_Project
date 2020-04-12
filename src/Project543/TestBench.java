@@ -4,6 +4,7 @@ import Project543.Metrics.ProjectCode;
 import javafx.stage.Stage;
 import org.antlr.runtime.RecognitionException;
 
+import java.io.File;
 import java.io.IOException;
 
 public class TestBench {
@@ -22,7 +23,7 @@ public class TestBench {
         if (name.equalsIgnoreCase("Melissa"))
         {
             //melissa's code to test
-            ProjectCode proj = new ProjectCode();
+            ProjectCode proj = new ProjectCode(new File("xxx.java"));
         } else if (name.equalsIgnoreCase("Rowan")) {
             //rowan test code
         } else {
