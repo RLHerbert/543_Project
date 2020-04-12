@@ -333,7 +333,8 @@ public class ProjectWindow extends Stage {
 
         //opens fileChooser
         List<File> selectedFileList = Dialogs.createAddCodeDialog(this);
-        if (selectedFileList.size() != 0) {
+
+        if (selectedFileList != null) {
             this.projectData.fileList.clear();
             this.projectData.fileList.addAll(selectedFileList);
             this.tabPane.getTabs().addAll(this.projectData.getNewProjectCodes());
