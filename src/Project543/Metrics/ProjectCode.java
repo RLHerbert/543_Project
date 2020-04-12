@@ -25,7 +25,9 @@ public class ProjectCode extends Metrics {
     //
     public static final int METRIC_ID = ((int) ('P' + 'C'));
     //Save data format: [METRIC_ID] "filePath"
-    private static final DecimalFormat percentage = new DecimalFormat("#.##");
+    private static final DecimalFormat two_dec = new DecimalFormat("#.##");
+    private static final DecimalFormat one_dec = new DecimalFormat("#.#");
+    private static final DecimalFormat sci_not = new DecimalFormat("0.########E0");
 
     //Non-Constant Static Fields
     //
@@ -132,7 +134,7 @@ public class ProjectCode extends Metrics {
     }
 
     public int getUniqueOperands() {
-        return uniqueIdentifiers.size() + uIDSym.size() + uniqueConstants.size();
+        return uniqueIdentifiers.size() + uniqueConstants.size();
     }
 
     public int getTotalOperators() {
@@ -140,7 +142,7 @@ public class ProjectCode extends Metrics {
     }
 
     public int getTotalOperands() {
-        return parser.identcount + uIDSym.size() + lexer.constantcount;
+        return parser.identcount + lexer.constantcount;
     }
 
     public int getProgramLength() {
@@ -152,15 +154,18 @@ public class ProjectCode extends Metrics {
     }
 
     public double getVolume() {
-        return getProgramLength() * Math.log(getProgramVocabulary());
+//        System.out.println("GET VOLUME PROGRAM LEN: " + getProgramLength());
+//        System.out.println("GET VOLUME PROGRAM VOCAB: " + getProgramVocabulary());
+//        System.out.println("GET VOLUME PROGRAM LOG(VOCAB): " + Math.log(getProgramVocabulary())/Math.log(2));
+        return getProgramLength() * Math.log(getProgramVocabulary())/Math.log(2); //TODO: wrong value.. figure out why and fix
     }
 
     public double getDifficulty() {
-        return getUniqueOperators()/2.0 + ((double) getTotalOperands())/getUniqueOperands();
+        return getUniqueOperators()/2.0 * ((double) getTotalOperands())/getUniqueOperands(); //TODO: wrong value.. figure out why and fix
     }
 
     public double getEffort() {
-        return  getDifficulty() * getVolume();
+        return getDifficulty() * getVolume();
     }
 
     public double getTime() {
@@ -201,10 +206,10 @@ public class ProjectCode extends Metrics {
         //TODO
 
         return "File name: " + file.getName() +
-                "\nFile length in bytes: " + getFileLengthInBytes() +
+                "\nFile length in bytes: " + ((int) getFileLengthInBytes()) +
                 "\nFile white space: " + getWhiteSpace() +
                 "\nFile comment space in bytes: " + getCommentSpaceInBytes() +
-                "\nComment percentage of file: " + percentage.format(getCommentPercentage()) + "%"; //TODO
+                "\nComment percentage of file: " + two_dec.format(getCommentPercentage()) + "%"; //TODO
     }
 
     public String outputHalsteadData() {
@@ -216,11 +221,18 @@ public class ProjectCode extends Metrics {
                 "\n\tTotal operands: " + getTotalOperands() +
                 "\n\tProgram length (N) = " + getProgramLength() +
                 "\n\tProgram vocabulary (n) = " + getProgramVocabulary() +
-                "\n\tVolume = " + getVolume() +
-                "\n\tDifficulty = " + getDifficulty() +
-                "\n\tEffort = " + getEffort() +
-                "\tTime = " + getTime() +
-                "\n\tBugs expected = " + getNumberOfBugs();
+                "\n\tVolume = " + one_dec.format(getVolume()) +
+                "\n\tDifficulty = " + one_dec.format(getDifficulty()) +
+                "\n\tEffort = " + sci_not.format(getEffort()) +
+                "\tTime = " + one_dec.format(getTime()) +
+                "\n\tBugs expected = " + one_dec.format(getNumberOfBugs());
+    }
+
+    public String minutesHoursMonthsString(double timeInSec) {
+        double timeInMin = timeInSec / 60;
+        double timeInHours = timeInMin / 60;
+        double timeInMonths = timeInHours / 24 / 30;
+        return "";
     }
 
     public String outputMccabeData() { 
