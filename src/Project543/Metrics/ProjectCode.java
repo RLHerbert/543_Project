@@ -86,6 +86,7 @@ public class ProjectCode extends Metrics {
         tokens = new CommonTokenStream(lexer);
         parser = new JavaJavaParser(tokens);
 
+        clearStaticData();
         this.parseFile();
         System.out.print(outputString());
     }
@@ -101,6 +102,7 @@ public class ProjectCode extends Metrics {
         tokens = new CommonTokenStream(lexer);
         parser = new JavaJavaParser(tokens);
 
+        clearStaticData();
         this.parseFile();
         System.out.print(outputString());
     }
@@ -216,7 +218,14 @@ public class ProjectCode extends Metrics {
         outputMccabeData();
     }
 
-//    public void clearStaticData
+    public void clearStaticData() {
+        uniqueKeywords.clear();
+        uniqueSpecial.clear();
+        uniqueIdentifiers.clear();
+        uIDSym.clear();
+        uniqueConstants.clear();
+        mccabeValues.clear();
+    }
 
 
     @Override
