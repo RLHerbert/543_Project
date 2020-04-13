@@ -210,7 +210,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         }
         else {
             System.err.println("ERROR: METRIC_ID MISMATCH");
-            return new MetricsTab();
+            return null;
         }
     }
 
