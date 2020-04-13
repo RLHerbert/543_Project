@@ -205,7 +205,7 @@ public class ProjectCode extends Metrics {
         double timeInMonths = timeInHours / 8 / 5 / 4;
         double timeInHoffmanMonths = timeInHours / 7 / 5 / 4;
         return three_dec_commas.format(timeInSec) + " seconds (" + three_dec_commas.format(timeInMin) + " minutes or " +
-                three_dec_commas.format(timeInHours) + " hours or, \nassuming 40-hour work weeks and 4-week months, " +
+                three_dec_commas.format(timeInHours) + " hours or, \n\tassuming 40-hour work weeks and 4-week months, " +
                 three_dec_commas.format(timeInMonths) + " person months or, excluding lunch breaks, " +
                 three_dec_commas.format(timeInHoffmanMonths) + " person months";
     }
