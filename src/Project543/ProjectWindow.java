@@ -1,6 +1,7 @@
 package Project543;
 
 import Project543.Interface.Dialogs;
+import Project543.Interface.MetricTree;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -60,7 +61,7 @@ public class ProjectWindow extends Stage {
     private MenuItem enterSMIData;
     //HBox projectWindowContents; //Holds the TabPane and the TreeView //TODO
     public TabPane tabPane;
-    //public TreeView<> treeView; //TODO
+    public MetricTree treePanel; //TODO
     public Scene windowScene;
 
     //Menu Items
@@ -75,6 +76,7 @@ public class ProjectWindow extends Stage {
 
         //Initialize fields
         this.projectData = null;
+        this.treePanel = null;
         this.defaultProjectLanguage = Language.NONE;
 
         this.setWindow();
@@ -94,6 +96,8 @@ public class ProjectWindow extends Stage {
 
         this.projectData = projectData;
         this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
+        this.treePanel = new MetricTree(this.projectData);
+
         this.setWindow();
         //this.setScene(this.windowScene);
 
@@ -208,7 +212,7 @@ public class ProjectWindow extends Stage {
         //Window body
         this.tabPane = new TabPane();
         VBox tabContents = new VBox(tabPane);
-        VBox treeContents = new VBox();
+        VBox treeContents = new VBox(treePanel);
         HBox projectContents = new HBox(treeContents, tabContents);
 
         this.windowScene = new Scene(borderPane);
@@ -247,6 +251,7 @@ public class ProjectWindow extends Stage {
         if (projectToCreateMetaData != null) {
             if (this.projectData == null) {
                 this.projectData = new ProjectData(projectToCreateMetaData);
+                this.treePanel = new MetricTree(this.projectData);
                 this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
                 this.setWindow();
                 //this.setExitWindowRequest(this, this.projectData);
@@ -267,6 +272,7 @@ public class ProjectWindow extends Stage {
                 //If the window does not already have a project
                 System.out.println("Opening project in same window.");
                 this.projectData = projectToOpen;
+                this.treePanel = new MetricTree(this.projectData);
                 this.setWindow();
             } else {
                 //The window already has a project
