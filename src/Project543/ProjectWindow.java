@@ -96,7 +96,7 @@ public class ProjectWindow extends Stage {
 
         this.projectData = projectData;
         this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
-        this.treePanel = new MetricTree(this.projectData);
+        this.treePanel = new MetricTree(this);
 
         this.setWindow();
         //this.setScene(this.windowScene);
@@ -252,7 +252,7 @@ public class ProjectWindow extends Stage {
         if (projectToCreateMetaData != null) {
             if (this.projectData == null) {
                 this.projectData = new ProjectData(projectToCreateMetaData);
-                this.treePanel = new MetricTree(this.projectData);
+                this.treePanel = new MetricTree(this);
                 this.projectData.setDefaultProjectLanguage(this.defaultProjectLanguage);
                 this.setWindow();
                 //this.setExitWindowRequest(this, this.projectData);
@@ -273,7 +273,7 @@ public class ProjectWindow extends Stage {
                 //If the window does not already have a project
                 System.out.println("Opening project in same window.");
                 this.projectData = projectToOpen;
-                this.treePanel = new MetricTree(this.projectData);
+                this.treePanel = new MetricTree(this);
                 this.setWindow();
             } else {
                 //The window already has a project

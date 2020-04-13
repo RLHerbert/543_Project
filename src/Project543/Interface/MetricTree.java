@@ -2,6 +2,7 @@ package Project543.Interface;
 
 import Project543.MetricsInterface.MetricsTab;
 import Project543.ProjectData;
+import Project543.ProjectWindow;
 import javafx.scene.Node;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
@@ -37,7 +38,7 @@ public class MetricTree extends TreeView<String> {
 
     //Non-Constant Member Fields
     //
-    ProjectData projectData; //Links to the represented project
+    ProjectWindow project; //Links to the represented project
     TreeItem<String> root; //The root of our tree
 
     //////////////////////
@@ -49,23 +50,23 @@ public class MetricTree extends TreeView<String> {
     public MetricTree(){
         super();
 
-        this.projectData = null;
+        this.project = null;
         this.root = null;
         this.setEditable(false);
     }
 
-    public MetricTree(ProjectData projectData){
+    public MetricTree(ProjectWindow project){
         //Call default constructor
         this();
 
         //Initialize member fields
-        this.projectData = projectData;
-        this.root = new TreeItem<String>(projectData.getProjectName(), rootIcon);
+        this.project = project;
+        this.root = new TreeItem<String>(project.projectData.getProjectName(), rootIcon);
 
         this.setRoot(this.root);
         this.root.setExpanded(true);
 
-        for (MetricsTab metricsTab : this.projectData.metricsTabs){
+        for (MetricsTab metricsTab : this.project.projectData.metricsTabs){
             //Add the tabs
             TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
             this.root.getChildren().add(metricTabLeaf);
