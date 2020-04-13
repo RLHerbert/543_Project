@@ -42,7 +42,7 @@ public class MetricTreeCell<String> extends TreeCell<String> {
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
 
-        if (getTreeItem().isLeaf() && getTreeItem().getParent() != null) {
+        if (this.getTreeItem().isLeaf() && this.getTreeItem().getParent() != null) {
             setContextMenu(menu);
         }
     }
