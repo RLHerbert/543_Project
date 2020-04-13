@@ -8,7 +8,7 @@ import javafx.scene.control.TreeView;
 
 import java.util.ArrayList;
 
-public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
+public class MetricTree extends TreeView<MetricsTab> {
     //////////////////////
     //**MEMBER FIELDS**//
     //
@@ -32,9 +32,7 @@ public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
     //
 
     ProjectData projectData; //Links to the represented project
-    TreeItem<String> root; //The root of our tree
-    ArrayList<MetricsTab> tabs;
-    TreeCell<MetricsTab> leafs;
+    TreeCell<MetricsTab> root; //The root of our tree
 
     //////////////////////
     //**MEMBER METHODS**//
@@ -45,9 +43,9 @@ public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
     public MetricTree(){
         super();
 
+        this.projectData = null;
         this.root = null;
-        this.tabs = null;
-        this.leafs = new TreeCell<>();
+        this.setEditable(false);
     }
 
     public MetricTree(ProjectData projectData){
@@ -55,13 +53,11 @@ public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
         this();
 
         //Initialize member fields
-        this.root = new TreeItem<>(projectData.getProjectName());
-        this.tabs = projectData.metricsTabs;
+        this.projectData = projectData;
+        this.root = new TreeCell<MetricsTab>();
 
-
-        for (MetricsTab metricsTab : tabs){
+        for (MetricsTab metricsTab : this.projectData.metricsTabs){
             //Add the tabs
-
         }
     }
 
