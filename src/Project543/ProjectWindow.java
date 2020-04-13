@@ -64,7 +64,6 @@ public class ProjectWindow extends Stage {
     public Scene windowScene;
 
     //Menu Items
-    //TODO: SMI
 
     //////////////////////
     //**MEMBER METHODS**//
