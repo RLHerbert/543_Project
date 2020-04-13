@@ -15,12 +15,15 @@ public class MetricTree extends TreeView<String> {
     //**MEMBER FIELDS**//
     //
     //MEMBER ENUMS AND CLASSES
-    //
+    //gi
 
     //STATIC MEMBER FIELDS
     //
     //Constant Static Fields
     //
+    private static final Node rootIcon = new ImageView(
+            new Image("https://pngimage.net/wp-content/uploads/2018/06/flat-folder-icon-png-6.png")
+    );
 
     //Non-Constant Static Fields
     //
@@ -29,9 +32,6 @@ public class MetricTree extends TreeView<String> {
     //
     //Constant Member Fields
     //
-    private final Node rootIcon = new ImageView(
-            new Image(getClass().getResourceAsStream("folderIcon.png"))
-    );
 
     //Non-Constant Member Fields
     //
