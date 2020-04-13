@@ -1,8 +1,14 @@
 package Project543.Interface;
 
+import Project543.MetricsInterface.MetricsTab;
+import Project543.ProjectData;
+import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
-public class MetricTree extends TreeView {
+import java.util.ArrayList;
+
+public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
     //////////////////////
     //**MEMBER FIELDS**//
     //
@@ -25,6 +31,11 @@ public class MetricTree extends TreeView {
     //Non-Constant Member Fields
     //
 
+    ProjectData projectData; //Links to the represented project
+    TreeItem<String> root; //The root of our tree
+    ArrayList<MetricsTab> tabs;
+    TreeCell<MetricsTab> leafs;
+
     //////////////////////
     //**MEMBER METHODS**//
     //
@@ -33,6 +44,25 @@ public class MetricTree extends TreeView {
 
     public MetricTree(){
         super();
+
+        this.root = null;
+        this.tabs = null;
+        this.leafs = new TreeCell<>();
+    }
+
+    public MetricTree(ProjectData projectData){
+        //Call default constructor
+        this();
+
+        //Initialize member fields
+        this.root = new TreeItem<>(projectData.getProjectName());
+        this.tabs = projectData.metricsTabs;
+
+
+        for (MetricsTab metricsTab : tabs){
+            //Add the tabs
+
+        }
     }
 
     //GETTERS
