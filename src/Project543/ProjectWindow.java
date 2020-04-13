@@ -212,7 +212,7 @@ public class ProjectWindow extends Stage {
         //Window body
         this.tabPane = new TabPane();
         VBox tabContents = new VBox(tabPane);
-        VBox treeContents = new VBox(treePanel);
+        VBox treeContents = (treePanel !=null) ? new VBox(treePanel) : new VBox();
         HBox projectContents = new HBox(treeContents, tabContents);
 
         this.windowScene = new Scene(borderPane);
