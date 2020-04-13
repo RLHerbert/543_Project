@@ -11,6 +11,7 @@ public class MetricTreeCell<String> extends TreeCell<String> {
     public MetricsTab tab;
 
     public MetricTreeCell() {
+        super();
         MenuItem openMenuItem = new MenuItem("Open");
         MenuItem closeMenuItem = new MenuItem("Close");
         MenuItem deleteMenuItem = new MenuItem("Delete");
