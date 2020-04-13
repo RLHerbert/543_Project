@@ -62,6 +62,12 @@ public class MetricTree extends TreeView<String> {
         //Initialize member fields
         this.project = project;
         this.root = new TreeItem<String>(project.projectData.getProjectName(), rootIcon);
+        this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+            @Override
+            public TreeCell<String> call(TreeView<String> stringTreeView) {
+                return new MetricTreeCell();
+            }
+        });
 
         this.setRoot(this.root);
         this.root.setExpanded(true);
