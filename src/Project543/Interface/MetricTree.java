@@ -85,6 +85,12 @@ public class MetricTree extends TreeView<String> {
     //SETTERS
     //
 
+    public void updateChildren() {
+        this.root.getChildren().clear();
+
+        //Add the tabs
+    }
+
     //MISC. MEMBER METHODS
     //
 

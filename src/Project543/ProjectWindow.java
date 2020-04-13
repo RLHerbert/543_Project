@@ -325,6 +325,7 @@ public class ProjectWindow extends Stage {
 
         if (tabName != null) {
             this.tabPane.getTabs().add(this.projectData.getNewFunctionPoint(tabName));
+            this.treePanel.updateChildren();
         }
     }
 
@@ -334,6 +335,7 @@ public class ProjectWindow extends Stage {
 
         this.enterSMIData.setDisable(true); //TODO: Get window from SMI tab and setDisable false on close using event handler (I THINK)
         this.tabPane.getTabs().add(this.projectData.getNewSoftwareMaturityIndex());
+        this.treePanel.updateChildren();
         //TODO: Disable when SMI added, enable if removed
     }
 
@@ -349,6 +351,7 @@ public class ProjectWindow extends Stage {
             this.projectData.fileList.clear();
             this.projectData.fileList.addAll(selectedFileList);
             this.tabPane.getTabs().addAll(this.projectData.getNewProjectCodes());
+            this.treePanel.updateChildren();
         }
         //if no file is chosen, does nothing (cancels)
         //otherwise, add chosen files to tree view and opens project code tabs without anything in them
