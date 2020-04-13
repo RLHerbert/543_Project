@@ -6,7 +6,7 @@ import javafx.scene.control.Tab;
 
 //Base class for all Metrics Tabs
 //Cannot currently be made abstract without big refactors
-public class MetricsTab extends Tab implements SaveInterface {
+public abstract class MetricsTab extends Tab implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
