@@ -22,7 +22,7 @@ public class MetricTree extends TreeView<String> {
     //Constant Static Fields
     //
     private static final Node rootIcon = new ImageView(
-            new Image("https://pngimage.net/wp-content/uploads/2018/06/flat-folder-icon-png-6.png")
+            new Image("https://pngimage.net/wp-content/uploads/2018/06/flat-folder-icon-png-6.png", 16, 16, true, true)
     );
 
     //Non-Constant Static Fields
