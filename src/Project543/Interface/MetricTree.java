@@ -55,7 +55,7 @@ public class MetricTree extends TreeView<String> {
         this.setEditable(false);
     }
 
-    public MetricTree(ProjectWindow project){
+    public MetricTree(ProjectWindow project) {
         //Call default constructor
         this();
 
@@ -66,17 +66,19 @@ public class MetricTree extends TreeView<String> {
         this.setRoot(this.root);
         this.root.setExpanded(true);
 
-        for (MetricsTab metricsTab : this.project.projectData.metricsTabs){
-            //Add the tabs
-            TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
-            this.root.getChildren().add(metricTabLeaf);
+        if (this.project.projectData.metricsTabs.size() > 0) {
+            for (MetricsTab metricsTab : this.project.projectData.metricsTabs) {
+                //Add the tabs
+                TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
+                this.root.getChildren().add(metricTabLeaf);
 
-            this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
-                @Override
-                public TreeCell<String> call(TreeView<String> stringTreeView) {
-                    return new MetricTreeCell(metricsTab);
-                }
-            });
+                this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+                    @Override
+                    public TreeCell<String> call(TreeView<String> stringTreeView) {
+                        return new MetricTreeCell(metricsTab);
+                    }
+                });
+            }
         }
     }
 
