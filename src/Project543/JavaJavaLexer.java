@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-12 13:42:01
+// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-13 12:22:49
 
 package Project543;
 
@@ -3422,8 +3422,8 @@ public class JavaJavaLexer extends Lexer {
 				}
 			}
 
-			commentcount+= 60;/*INSERT COUNT*/
-			// /Users/melissahazlewood/Downloads/JavaJava.g:942:67: ( '\\r' )?
+			commentcount++;/*INSERT COUNT*/
+			// /Users/melissahazlewood/Downloads/JavaJava.g:942:64: ( '\\r' )?
 			int alt29=2;
 			int LA29_0 = input.LA(1);
 			if ( (LA29_0=='\r') ) {
@@ -3431,7 +3431,7 @@ public class JavaJavaLexer extends Lexer {
 			}
 			switch (alt29) {
 				case 1 :
-					// /Users/melissahazlewood/Downloads/JavaJava.g:942:67: '\\r'
+					// /Users/melissahazlewood/Downloads/JavaJava.g:942:64: '\\r'
 					{
 					match('\r'); 
 					}
