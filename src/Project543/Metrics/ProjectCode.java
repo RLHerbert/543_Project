@@ -25,9 +25,9 @@ public class ProjectCode extends Metrics {
     //
     public static final int METRIC_ID = ((int) ('P' + 'C'));
     //Save data format: [METRIC_ID] "filePath"
-    private static final DecimalFormat two_dec = new DecimalFormat("#.##");
     private static final DecimalFormat one_dec = new DecimalFormat("#.#");
     private static final DecimalFormat sci_not = new DecimalFormat("0.########E0");
+    private static final DecimalFormat three_dec_commas = new DecimalFormat("#,###.###");
 
     //Non-Constant Static Fields
     //
@@ -67,17 +67,7 @@ public class ProjectCode extends Metrics {
     //
     public ProjectCode() throws IOException, RecognitionException {
         //Default constructor
-        //TODO: how should default work? should there even be a default? give an error if filepath not defined?
         super();
-//        filePath = "src/Project543/Metrics/FunctionPoint.java";
-//        file = new File(filePath);
-//
-//        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-//        tokens = new CommonTokenStream(lexer);
-//        parser = new JavaJavaParser(tokens);
-//
-//        this.parseFile();
-//        System.out.print(outputString());
     }
 
     public ProjectCode(File javaFile) throws IOException, RecognitionException {
@@ -95,7 +85,6 @@ public class ProjectCode extends Metrics {
         System.out.print(outputString());
     }
 
-    //TODO: constructor with saveData as input?
     public ProjectCode(String saveData) throws IOException, RecognitionException {
         //Constructor that takes in saveData and sets variables accordingly
         super(saveData);
@@ -126,7 +115,7 @@ public class ProjectCode extends Metrics {
     }
 
     public double getCommentPercentage() {
-        return getCommentSpaceInBytes()/getFileLengthInBytes()*100;
+        return getCommentSpaceInBytes()/getFileLengthInBytes()*100; //TODO: once comment space in bytes is fixed, double-check this value
     }
 
     public int getUniqueOperators() {
@@ -183,23 +172,6 @@ public class ProjectCode extends Metrics {
     //
     public void parseFile () throws RecognitionException {
         parser.compilationUnit();
-
-        System.out.println("\nParser keyword count: " + parser.keywordCount);
-        System.out.println("Parser import keyword count: " + parser.importKWCount);
-        System.out.println("Unique keywords set (size = " + this.uniqueKeywords.size() + "): " + this.uniqueKeywords);
-
-        System.out.println("\nParser identifier count: " + parser.identcount);
-        System.out.println("Parser import identifier count: " + parser.importIDCount);
-        System.out.println("Unique identifiers set (size = " + this.uniqueIdentifiers.size() + "): " + this.uniqueIdentifiers);
-
-        System.out.println("\nuIDSym set (size = " + this.uIDSym.size() + "): " + this.uIDSym);
-
-        System.out.println("\nLexer constant count: " + lexer.constantcount);
-        System.out.println("Unique constants set (size = " + this.uniqueConstants.size() + "): " + this.uniqueConstants);
-        System.out.println("Parser special count: " + parser.specialcount);
-        System.out.println("Unique specials set (size = " + this.uniqueSpecial.size() + "): " + this.uniqueSpecial);
-
-        System.out.println("\nMccabe values set (size = " + this.mccabeValues.size() + "): " + this.mccabeValues);
     }
 
     public String outputMetaData() {
@@ -209,11 +181,10 @@ public class ProjectCode extends Metrics {
                 "\nFile length in bytes: " + ((int) getFileLengthInBytes()) +
                 "\nFile white space: " + getWhiteSpace() +
                 "\nFile comment space in bytes: " + getCommentSpaceInBytes() +
-                "\nComment percentage of file: " + two_dec.format(getCommentPercentage()) + "%"; //TODO
+                "\nComment percentage of file: " + three_dec_commas.format(getCommentPercentage()) + "%";
     }
 
     public String outputHalsteadData() {
-        //TODO
         return "\nHalstead metrics:" +
                 "\n\tUnique operators: " + getUniqueOperators() +
                 "\n\tUnique operands: " + getUniqueOperands() +
@@ -224,25 +195,27 @@ public class ProjectCode extends Metrics {
                 "\n\tVolume = " + one_dec.format(getVolume()) +
                 "\n\tDifficulty = " + one_dec.format(getDifficulty()) +
                 "\n\tEffort = " + sci_not.format(getEffort()) +
-                "\tTime = " + one_dec.format(getTime()) +
-                "\n\tBugs expected = " + one_dec.format(getNumberOfBugs());
+                "\tTime = " + minutesHoursMonthsString(getTime()) +
+                "\n\tBugs expected = " + three_dec_commas.format(getNumberOfBugs());
     }
 
     public String minutesHoursMonthsString(double timeInSec) {
         double timeInMin = timeInSec / 60;
         double timeInHours = timeInMin / 60;
-        double timeInMonths = timeInHours / 24 / 30;
-        return "";
+        double timeInMonths = timeInHours / 8 / 5 / 4;
+        double timeInHoffmanMonths = timeInHours / 7 / 5 / 4;
+        return three_dec_commas.format(timeInSec) + " seconds (" + three_dec_commas.format(timeInMin) + " minutes or " +
+                three_dec_commas.format(timeInHours) + " hours or, \nassuming 40-hour work weeks and 4-week months, " +
+                three_dec_commas.format(timeInMonths) + " person months or, excluding lunch breaks, " +
+                three_dec_commas.format(timeInHoffmanMonths) + " person months";
     }
 
-    public String outputMccabeData() { 
-        //TODO
+    public String outputMccabeData() {
         String mccabeString = "";
-//        List<String> mccabeValueList = new ArrayList<String>(mccabeValues.toArray());
 
         String[] mccabeArray = mccabeValues.toArray(new String[0]);
         for (String mccabeValue : mccabeArray)
-            mccabeString += mccabeValue + "\n";
+            mccabeString += "\t" +mccabeValue + "\n";
 
         return "\n\nMcCabe's Cyclomatic Complexity:\n" +
                 mccabeString;
@@ -275,24 +248,11 @@ public class ProjectCode extends Metrics {
         this.extraData = file.getAbsolutePath();
     }
 
-    public void setFromSavedData() {
-        //Sets variable values based on integer(s) and file path string in saveData
-        //TODO: do we need?
-    }
-
     @Override
     public boolean hasChanged() {
         return false;
     }
 }
 
-//TODO: do what he did for keywords for identifiers, IDSyms?, constants, specials??
-//TODO: mccabe stuff
 //TODO: make everything static I think
 //TODO: make Symbol class a part of this one instead of separate?
-//TODO: allow choice of file
-
-//readFile
-//hold file name/path/address
-//read out save data arraylist of project save data - metrid id, file path
-//in save data, use delimiter like quotes so we can use string tokenizer
