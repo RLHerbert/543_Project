@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
 
 public class MetricTreeCell<String> extends TreeCell<String> {
     public ContextMenu menu = new ContextMenu();
@@ -43,8 +44,12 @@ public class MetricTreeCell<String> extends TreeCell<String> {
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
 
-        if (this.getTreeItem().isLeaf() && this.getTreeItem().getParent() != null) {
-            setContextMenu(menu);
-        }
+        TreeItem<String> tempItem = this.getTreeItem();
+
+        if (tempItem != null) {
+            if (tempItem.isLeaf() && tempItem.getParent() != null) {
+                setContextMenu(menu);
+            }
+    }
     }
 }
