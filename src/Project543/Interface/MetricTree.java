@@ -72,12 +72,7 @@ public class MetricTree extends TreeView<String> {
                 TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
                 this.root.getChildren().add(metricTabLeaf);
 
-                this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
-                    @Override
-                    public TreeCell<String> call(TreeView<String> stringTreeView) {
-                        return new MetricTreeCell(metricsTab);
-                    }
-                });
+                this.setCellFactory(stringTreeView -> new MetricTreeCell(metricsTab));
             }
         }
     }
