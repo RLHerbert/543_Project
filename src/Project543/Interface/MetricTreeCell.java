@@ -32,6 +32,12 @@ public class MetricTreeCell extends TreeCell<String> {
         });
     }
 
+    public MetricTreeCell(MetricsTab tab) {
+        this();
+
+        this.tab = tab;
+    }
+
     @Override
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);

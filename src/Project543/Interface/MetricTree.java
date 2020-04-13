@@ -3,10 +3,12 @@ package Project543.Interface;
 import Project543.MetricsInterface.MetricsTab;
 import Project543.ProjectData;
 import javafx.scene.Node;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 
@@ -61,10 +63,20 @@ public class MetricTree extends TreeView<String> {
         this.root = new TreeItem<String>(projectData.getProjectName(), rootIcon);
 
         this.setRoot(this.root);
+        this.root.setExpanded(true);
 
         for (MetricsTab metricsTab : this.projectData.metricsTabs){
             //Add the tabs
+            TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
+            this.root.getChildren().add(metricTabLeaf);
         }
+
+        this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+            @Override
+            public TreeCell<String> call(TreeView<String> stringTreeView) {
+                return new MetricTreeCell();
+            }
+        });
     }
 
     //GETTERS
