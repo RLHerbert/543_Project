@@ -70,14 +70,14 @@ public class MetricTree extends TreeView<String> {
             //Add the tabs
             TreeItem<String> metricTabLeaf = new TreeItem<>(metricsTab.getText());
             this.root.getChildren().add(metricTabLeaf);
-        }
 
-        this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
-            @Override
-            public MetricTreeCell<String> call(TreeView<String> stringTreeView) {
-                return new MetricTreeCell();
-            }
-        });
+            this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+                @Override
+                public TreeCell<String> call(TreeView<String> stringTreeView) {
+                    return new MetricTreeCell(metricsTab);
+                }
+            });
+        }
     }
 
     //GETTERS
