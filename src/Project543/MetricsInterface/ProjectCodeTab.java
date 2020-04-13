@@ -2,6 +2,7 @@ package Project543.MetricsInterface;
 
 import Project543.Metrics.FunctionPoint;
 import Project543.Metrics.ProjectCode;
+import Project543.ProjectWindow;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -50,11 +51,13 @@ public class ProjectCodeTab extends MetricsTab {
         //Tab constructor
         super(title);
 
+        double height = ProjectWindow.MAX_HEIGHT - 25.0 - 50.0;
+
         //Initialize members
         //Create the text area
         this.metricsTextField = new TextArea();
         this.metricsTextField.setEditable(false);
-        this.metricsTextField.setPrefSize(5000.0, 5000.0);
+        this.metricsTextField.setPrefSize(5000.0, 1200.00);
         this.hasChanged = true;
 
         //Create VBox and set its contents to be the text area
