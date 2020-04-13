@@ -73,7 +73,7 @@ public class MetricTree extends TreeView<String> {
 
         this.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
-            public TreeCell<String> call(TreeView<String> stringTreeView) {
+            public MetricTreeCell<String> call(TreeView<String> stringTreeView) {
                 return new MetricTreeCell();
             }
         });
