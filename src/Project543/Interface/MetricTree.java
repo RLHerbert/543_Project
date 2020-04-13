@@ -8,7 +8,7 @@ import javafx.scene.control.TreeView;
 
 import java.util.ArrayList;
 
-public class  MetricTree <G extends MetricsTab> extends TreeView<G> {
+public class  MetricTree <G extends MetricsTab> extends TreeView<MetricsTab> {
     //////////////////////
     //**MEMBER FIELDS**//
     //

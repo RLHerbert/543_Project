@@ -1,5 +1,6 @@
-package Project543.MetricsInterface;
+package Project543.Interface;
 
+import Project543.MetricsInterface.MetricsTab;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
