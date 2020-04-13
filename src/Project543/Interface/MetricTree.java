@@ -60,6 +60,8 @@ public class MetricTree extends TreeView<String> {
         this.projectData = projectData;
         this.root = new TreeItem<String>(projectData.getProjectName(), rootIcon);
 
+        this.setRoot(this.root);
+
         for (MetricsTab metricsTab : this.projectData.metricsTabs){
             //Add the tabs
         }

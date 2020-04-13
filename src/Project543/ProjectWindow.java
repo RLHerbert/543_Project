@@ -225,7 +225,8 @@ public class ProjectWindow extends Stage {
         //Move into a function
         tabContents.prefWidthProperty().bind(this.widthProperty().multiply(0.85));
         treeContents.prefWidthProperty().bind(this.widthProperty().multiply(0.15));
-        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(1));
+        if (this.treePanel != null) {this.treePanel.prefHeightProperty().bind(this.heightProperty().multiply(0.9));}
+        tabContents.prefHeightProperty().bind(this.heightProperty().multiply(.9));
         treeContents.prefHeightProperty().bind(this.heightProperty().multiply(1));
 
         //this.borderPane.setTop(menuContents);
