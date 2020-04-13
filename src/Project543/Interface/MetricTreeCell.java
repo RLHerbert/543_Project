@@ -6,8 +6,9 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeCell;
 
-public class MetricTreeCell extends TreeCell<MetricsTab> {
+public class MetricTreeCell extends TreeCell<String> {
     public ContextMenu menu = new ContextMenu();
+    public MetricsTab tab;
 
     public MetricTreeCell() {
         MenuItem openMenuItem = new MenuItem("Open");
@@ -32,7 +33,7 @@ public class MetricTreeCell extends TreeCell<MetricsTab> {
     }
 
     @Override
-    protected void updateItem(MetricsTab item, boolean empty) {
+    protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
 
         if (getTreeItem().isLeaf() && getTreeItem().getParent()!= null) {
