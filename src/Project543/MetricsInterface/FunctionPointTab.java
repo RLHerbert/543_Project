@@ -1,5 +1,11 @@
-package Project543;
+package Project543.MetricsInterface;
 
+import Project543.Metrics.InformationDomainValue;
+import Project543.Language;
+import Project543.Metrics.FunctionPoint;
+import Project543.Metrics.ProjectCode;
+import Project543.Metrics.ValueAdjustmentFactor;
+import Project543.SaveInterface;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -9,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.converter.NumberStringConverter;
 
-public class FunctionPointTab extends MetricsTab {
+public class FunctionPointTab extends MetricsTab implements SaveInterface {
     //Member Fields
     //
     //Member Enums and Classes
@@ -20,6 +26,7 @@ public class FunctionPointTab extends MetricsTab {
     //Constant Static Fields
     //
     public static final String TAB_TITLE = "Function Points";
+    private static int DEFAULT_FIELD_WIDTH = 100; //TODO: make sizing based on constants/screen size
 
     //Non-Constant Static Fields
     //
@@ -41,7 +48,6 @@ public class FunctionPointTab extends MetricsTab {
     //
     //Constructor(s)
     //
-    //TODO: Remove title
     public FunctionPointTab(String tabTitle){
         //Default constructor
         //Call super constructor
@@ -50,7 +56,7 @@ public class FunctionPointTab extends MetricsTab {
         //Initialize member fields
         this.functionPoint = new FunctionPoint();
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
         this.setGridPane();
     }
 
@@ -62,7 +68,7 @@ public class FunctionPointTab extends MetricsTab {
         //Initialize member fields
         this.functionPoint = functionPoint;
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
         this.setGridPane();
     }
 
@@ -74,12 +80,18 @@ public class FunctionPointTab extends MetricsTab {
         //Initialize member fields
         this.functionPoint = new FunctionPoint(saveDataString); //Initialize functionPoint from save data
         initializeMembers();
-        setTabTitle();
+        //setTabTitle();
+        this.setText(this.functionPoint.extraData);
         this.setGridPane();
     }
 
     //Getters
     //
+    @Override
+    public int getMetricID(){
+        return FunctionPoint.METRIC_ID;
+    }
+
     //IDV Inputs from user inputs getters
     //
     public int getExternalInputsFromInput(){
@@ -191,10 +203,9 @@ public class FunctionPointTab extends MetricsTab {
             gridPane.add(inputsArray[i], 1, i+2);
 
         //Complexity Radio Button Stuff
-        //TODO: REDO
         setComplexityRadios();
         for (int i = 0; i < 5; i++){
-            HBox complexitiesBox = new HBox(40); //TODO: spacing based on constants/screen size?
+            HBox complexitiesBox = new HBox(40);
             for (int j = 0; j < 3; j++){
                 complexitiesBox.getChildren().add(this.complexityRadios[i][j]);
             }
@@ -326,7 +337,7 @@ public class FunctionPointTab extends MetricsTab {
         for (int i = 0; i < 5; i++) { //initializes elements of input array
             this.inputsArray[i] = new TextField();
             inputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-            inputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+            inputsArray[i].setMaxWidth(DEFAULT_FIELD_WIDTH);
         }
     }
 
@@ -337,7 +348,7 @@ public class FunctionPointTab extends MetricsTab {
             this.outputsArray[i].setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
             this.outputsArray[i].setEditable(false);
             this.outputsArray[i].setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-            this.outputsArray[i].setMaxWidth(100); //TODO: make sizing based on constants/screen size
+            this.outputsArray[i].setMaxWidth(DEFAULT_FIELD_WIDTH);
         }
     }
 
@@ -346,7 +357,7 @@ public class FunctionPointTab extends MetricsTab {
         this.totalCountOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.totalCountOutput.setEditable(false);
         this.totalCountOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.totalCountOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.totalCountOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeFunctionPointOutput(){
@@ -354,7 +365,7 @@ public class FunctionPointTab extends MetricsTab {
         this.functionPointOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.functionPointOutput.setEditable(false);
         this.functionPointOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.functionPointOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+        this.functionPointOutput.setMaxWidth(DEFAULT_FIELD_WIDTH*3/2);
     }
 
     private void initializeValueAdjustmentOutput(){
@@ -362,7 +373,7 @@ public class FunctionPointTab extends MetricsTab {
         this.valueAdjustmentOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.valueAdjustmentOutput.setEditable(false);
         this.valueAdjustmentOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.valueAdjustmentOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.valueAdjustmentOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeCodeSizeOutput(){
@@ -370,14 +381,14 @@ public class FunctionPointTab extends MetricsTab {
         this.codeSizeOutput.setTextFormatter(new TextFormatter<>(new NumberStringConverter())); //makes it numeric format
         this.codeSizeOutput.setEditable(false);
         this.codeSizeOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.codeSizeOutput.setMaxWidth(150); //TODO: make sizing based on constants/screen size
+        this.codeSizeOutput.setMaxWidth(DEFAULT_FIELD_WIDTH*3/2);
     }
 
     private void initializeLanguageOutput(){
         this.languageOutput = new TextField();
         this.languageOutput.setEditable(false);
         this.languageOutput.setStyle("-fx-control-inner-background: #D3D3D3"); //gray out box to show you can't type in it
-        this.languageOutput.setMaxWidth(100); //TODO: make sizing based on constants/screen size
+        this.languageOutput.setMaxWidth(DEFAULT_FIELD_WIDTH);
     }
 
     private void initializeComplexities(){
@@ -445,7 +456,7 @@ public class FunctionPointTab extends MetricsTab {
 
     public void valueAdjustmentsClick(){
         //opens VAF window, gets user inputs, moves user inputs into functionPoint
-        this.functionPoint.setValueAdjustmentFactorsFromArray(openValueAdjustmentsWindow()); //TODO: update IDV outputs and total count
+        this.functionPoint.setValueAdjustmentFactorsFromArray(openValueAdjustmentsWindow());
         //sets valueAdjustmentOutput
         setValueAdjustmentOutput();
         setFunctionPointOutput();
@@ -466,7 +477,6 @@ public class FunctionPointTab extends MetricsTab {
 
         updateFunctionPoint();
         //update output fields too
-        //TODO: output field updates are very similar to totalCountClick and computeFPClick...refactor somehow?
         setOutputsArray();
         setTotalCountOutput();
         setFunctionPointOutput();
@@ -485,17 +495,17 @@ public class FunctionPointTab extends MetricsTab {
     }
 
     //Helper Methods
+    //
     public void changeLanguage(){
         //changes language in functionPoint
         setFunctionPointLanguage();
         //updates languageOutput
         setLanguageOutput();
         //updates tab title
-        setTabTitle();
+//        setTabTitle();
     }
 
     public int[] openValueAdjustmentsWindow(){
-        //TODO: refactor
         Dialog dialog = new Dialog();
         dialog.setTitle("Value Adjustments Factors");
         dialog.setHeaderText("Pick values from 0 to 5");
@@ -508,7 +518,8 @@ public class FunctionPointTab extends MetricsTab {
 
         for (int i = 0; i < ValueAdjustmentFactor.descriptionText.length; i++) {
             ChoiceBox vafChoices = new ChoiceBox();
-            vafChoices.getItems().addAll(new String[] {"0", "1", "2", "3", "4", "5"});
+            String[] vafStringChoices = new String[] {"0", "1", "2", "3", "4", "5"}; //TODO: This should be static final somewhere
+            vafChoices.getItems().addAll((java.lang.Object[])vafStringChoices); //Suppressed a warning with the cast to Object[]
             grid.add(new Label(ValueAdjustmentFactor.descriptionText[i]), 0, i);
             grid.add(vafChoices, 1, i);
             vafChoices.setValue(Integer.toString(functionPoint.getValueAdjustmentFactor(i)));
@@ -532,5 +543,11 @@ public class FunctionPointTab extends MetricsTab {
             }
         }
         return null;
+    }
+
+    //Open and Save Methods
+    //
+    public boolean hasChanged(){
+        return this.functionPoint.hasChanged();
     }
 }

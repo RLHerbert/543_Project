@@ -1,9 +1,9 @@
-package Project543;
+package Project543.Metrics;
 
-import java.util.Scanner;
+import Project543.Metrics.Metrics;
 
 //A class which holds an Information Domain Value (IDV) and relevant methods
-public class InformationDomainValue extends Metrics {
+public abstract class InformationDomainValue extends Metrics {
     //Member Fields
     //
     //Member Enums and Classes
@@ -102,7 +102,6 @@ public class InformationDomainValue extends Metrics {
     }
 
     //Getters
-    //TODO: More getters for new Input(?)
     public int getTotalCount(){
         //Returns the most recent total count value
         this.updateTotalCount();

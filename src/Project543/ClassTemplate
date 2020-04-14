@@ -1,9 +1,10 @@
-    //Member Fields
+    //////////////////////
+    //**MEMBER FIELDS**//
     //
-    //Member Enums and Classes
+    //MEMBER ENUMS AND CLASSES
     //
 
-    //Static Member Fields
+    //STATIC MEMBER FIELDS
     //
     //Constant Static Fields
     //
@@ -11,7 +12,7 @@
     //Non-Constant Static Fields
     //
 
-    //Non-Static Member Fields
+    //NON-STATIC MEMBER FIELDS
     //
     //Constant Member Fields
     //
@@ -19,16 +20,17 @@
     //Non-Constant Member Fields
     //
 
-    //Member Methods
+    //////////////////////
+    //**MEMBER METHODS**//
     //
-    //Constructor(s)
-    //
-
-    //Getters
+    //CONSTRUCTOR(S)
     //
 
-    //Setters
+    //GETTERS
     //
 
-    //Misc. Member Methods
+    //SETTERS
+    //
+
+    //MISC. MEMBER METHODS
     //

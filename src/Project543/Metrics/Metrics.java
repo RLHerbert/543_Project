@@ -1,9 +1,9 @@
-package Project543;
+package Project543.Metrics;
 
 import java.util.*;
 import javafx.scene.control.*;
 
-public class Metrics {
+public abstract class Metrics {
     //Member Fields
     //
     //Member Enums and Classes
@@ -25,6 +25,7 @@ public class Metrics {
     //Non-Constant Member Fields
     //
     protected ArrayList<Integer> saveData;
+    public String extraData;
 
     //Member Methods
     //
@@ -44,10 +45,15 @@ public class Metrics {
 
     //Setters
     //
-    public void setSaveData() {} //Virtual
+    public abstract void setSaveData(); //Virtual
 
     //Misc. Member Methods
     //
+
+    //Save and open
+    //
+    public abstract boolean hasChanged();
+
     public String writeSaveDataString()
     {
         return saveData.toString();
@@ -61,18 +67,26 @@ public class Metrics {
         while (lineTokenizer.hasMoreTokens())
         {
             String dataToRead = lineTokenizer.nextToken();
+            //System.out.println(dataToRead);
 
             if (dataToRead.charAt(0) == ' '){
+                //What case was this for?
                 dataToRead = dataToRead.substring(1, dataToRead.length());
+            }
+            if ((dataToRead.indexOf('#') >=0) || ((dataToRead.indexOf(']') >=0))) {
+                dataToRead = dataToRead.substring(0,dataToRead.indexOf("]"));
             }
 
             int dataToAdd = Integer.parseInt(dataToRead);
             saveData.add(dataToAdd);
         }
-    }
 
-    public Tab toTab()
-    {
-        return new Tab();
-    } //Not implemented?
+        lineTokenizer = new StringTokenizer(data, "#");
+        lineTokenizer.nextToken();
+
+        while (lineTokenizer.hasMoreTokens()){
+            String tempExtraData = lineTokenizer.nextToken();
+            this.extraData = tempExtraData;
+        }
+    }
 }
