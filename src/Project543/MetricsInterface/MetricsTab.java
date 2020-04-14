@@ -2,6 +2,8 @@ package Project543.MetricsInterface;
 
 import Project543.Metrics.Metrics;
 import Project543.SaveInterface;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
 
 //Base class for all Metrics Tabs
@@ -40,6 +42,7 @@ public abstract class MetricsTab extends Tab implements SaveInterface {
 
     public MetricsTab(String title){
         super(title);
+        //this.setClosable(false);
     }
 
     //Getters

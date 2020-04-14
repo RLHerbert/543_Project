@@ -43,6 +43,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     public ArrayList<MetricsTab> metricsTabs;
     private boolean hasSMI;
     public ArrayList<File> fileList;
+    public boolean hasChanged;
 
     //Member Methods
     //
@@ -56,6 +57,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.metricsTabs = new ArrayList<MetricsTab>();
         this.hasSMI = false;
         this.fileList = new ArrayList<File>();
+        hasChanged = true;
         //this.metricsData = new ArrayList<Metrics>();
     }
 
@@ -68,6 +70,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.metricsTabs = new ArrayList<MetricsTab>();
         this.hasSMI = false;
         this.fileList = new ArrayList<File>();
+        this.hasChanged = true;
     }
 
     public ProjectData(Scanner savedFile, String fileName) throws IOException, RecognitionException {
@@ -79,6 +82,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         this.metricsTabs = new ArrayList<MetricsTab>();
         this.hasSMI = false;
         this.fileList = new ArrayList<File>();
+        this.hasChanged = false;
 
         //Populate metricsTabs
         while (savedFile.hasNextLine()){
@@ -171,6 +175,8 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
     @Override
     public boolean hasChanged() {
         //Returns true if any metric has unsaved changes (edits since most recent save)
+        if (this.hasChanged) {return true;}
+
         for (MetricsTab tab : this.metricsTabs){
             boolean tabHasChanged = tab.hasChanged();
             if (tabHasChanged){
@@ -216,6 +222,7 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
 
     public void saveProject() throws IOException {
         //Write all data to file
+        this.hasChanged = false;
         File projectFile = new File(this.getFileName());
         this.saveProject(projectFile);
     }

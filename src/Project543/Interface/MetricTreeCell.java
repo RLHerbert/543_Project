@@ -1,5 +1,6 @@
 package Project543.Interface;
 
+import Project543.Metrics.SoftwareMaturityIndex;
 import Project543.MetricsInterface.MetricsTab;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
@@ -7,30 +8,28 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 
-public class MetricTreeCell<String> extends TreeCell<String> {
+public class MetricTreeCell extends TreeCell<String> {
     public ContextMenu menu = new ContextMenu();
     public MetricsTab tab;
 
     public MetricTreeCell() {
         super();
+        this.tab = null;
         MenuItem openMenuItem = new MenuItem("Open");
         MenuItem closeMenuItem = new MenuItem("Close");
         MenuItem deleteMenuItem = new MenuItem("Delete");
         menu.getItems().addAll(openMenuItem, closeMenuItem, deleteMenuItem);
 
         openMenuItem.setOnAction((EventHandler<javafx.event.ActionEvent>) event -> {
-            System.out.println("Tree View Context Menu -> Open Clicked");
-            //TODO
+            this.openOnClick();
         });
 
         closeMenuItem.setOnAction((EventHandler<javafx.event.ActionEvent>) event -> {
-            System.out.println("Tree View Context Menu -> Close Clicked");
-            //TODO
+            this.closeOnClick();
         });
 
         deleteMenuItem.setOnAction((EventHandler<javafx.event.ActionEvent>) event -> {
-            System.out.println("Tree View Context Menu -> Delete Clicked");
-            //TODO
+            this.deleteOnClick();
         });
     }
 
@@ -38,18 +37,63 @@ public class MetricTreeCell<String> extends TreeCell<String> {
         this();
 
         this.tab = tab;
+        System.out.println("Created TreeCell with tab: " + this.tab.getText());
     }
 
     @Override
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
 
-        TreeItem<String> tempItem = this.getTreeItem();
 
-        if (tempItem != null) {
-            if (tempItem.isLeaf() && tempItem.getParent() != null) {
+        if (empty) {this.setText(null); this.setGraphic(null);}
+        else {
+            this.setText(this.getString());
+            this.setGraphic(this.getGraphic());
+
+            if (this.getTreeItem().isLeaf() && this.getTreeItem().getParent() != null) {
                 setContextMenu(menu);
             }
+        }
     }
+
+    private String getString() {
+        return this.getItem() == null ? "" : this.getItem().toString();
+    }
+
+    private void openOnClick() {
+        //Opens the tab if it not already open
+        System.out.println("Tree View Context Menu -> Open Clicked");
+
+        MetricTree tree = (MetricTree) this.getTreeView();
+
+        if (!tree.project.tabPane.getTabs().contains(this.tab)) {
+            tree.project.tabPane.getTabs().add(this.tab);
+        }
+    }
+
+    private void closeOnClick() {
+        //Closes the tab if it is open
+        System.out.println("Tree View Context Menu -> Close Clicked");
+
+        MetricTree tree = (MetricTree) this.getTreeView();
+
+        if (tree.project.tabPane.getTabs().contains(this.tab)) {
+            tree.project.tabPane.getTabs().remove(this.tab);
+        }
+    }
+
+    private void deleteOnClick() {
+        //Deletes an tab if it is closed
+        System.out.println("Tree View Context Menu -> Delete Clicked");
+
+        MetricTree tree = (MetricTree) this.getTreeView();
+
+        if (!tree.project.tabPane.getTabs().contains(this.tab)) {
+            if (this.tab.getMetricID() == SoftwareMaturityIndex.METRIC_ID) {tree.project.enterSMIData.setDisable(false);}
+
+            tree.project.projectData.removeMetricsTab(this.tab);
+            tree.root.getChildren().remove(this);
+            tree.project.projectData.hasChanged = true;
+        }
     }
 }

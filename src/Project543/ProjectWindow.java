@@ -58,7 +58,7 @@ public class ProjectWindow extends Stage {
     public BorderPane borderPane;
     //VBox menuBarContents; //TODO
     public MenuBar menuBar;
-    private MenuItem enterSMIData;
+    public MenuItem enterSMIData;
     //HBox projectWindowContents; //Holds the TabPane and the TreeView //TODO
     public TabPane tabPane;
     public MetricTree treePanel; //TODO
