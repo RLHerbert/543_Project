@@ -37,7 +37,6 @@ public class MetricTreeCell extends TreeCell<String> {
         this();
 
         this.tab = tab;
-        System.out.println("Created TreeCell with tab: " + this.tab.getText());
     }
 
     @Override
@@ -64,10 +63,14 @@ public class MetricTreeCell extends TreeCell<String> {
         //Opens the tab if it not already open
         System.out.println("Tree View Context Menu -> Open Clicked");
 
-        MetricTree tree = (MetricTree) this.getTreeView();
+        MetricTree tree = (MetricTree) this.getTreeView(); //For convenience
+
+        this.tab = tree.project.projectData.getTabFromName(this.getItem());
+
 
         if (!tree.project.tabPane.getTabs().contains(this.tab)) {
-            tree.project.tabPane.getTabs().add(this.tab);
+            //If the tab is not open
+            tree.project.tabPane.getTabs().add(this.tab); //Open it
         }
     }
 
@@ -77,9 +80,9 @@ public class MetricTreeCell extends TreeCell<String> {
 
         MetricTree tree = (MetricTree) this.getTreeView();
 
-        if (tree.project.tabPane.getTabs().contains(this.tab)) {
-            tree.project.tabPane.getTabs().remove(this.tab);
-        }
+        this.tab = tree.project.projectData.getTabFromName(this.getItem());
+
+        tree.project.tabPane.getTabs().remove(this.tab);
     }
 
     private void deleteOnClick() {
@@ -88,11 +91,13 @@ public class MetricTreeCell extends TreeCell<String> {
 
         MetricTree tree = (MetricTree) this.getTreeView();
 
+        this.tab = tree.project.projectData.getTabFromName(this.getItem());
+
         if (!tree.project.tabPane.getTabs().contains(this.tab)) {
             if (this.tab.getMetricID() == SoftwareMaturityIndex.METRIC_ID) {tree.project.enterSMIData.setDisable(false);}
 
             tree.project.projectData.removeMetricsTab(this.tab);
-            tree.root.getChildren().remove(this);
+            tree.root.getChildren().remove(this.getTreeItem()); //Remove the tree item associated with the tab
             tree.project.projectData.hasChanged = true;
         }
     }

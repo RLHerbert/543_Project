@@ -129,6 +129,16 @@ public class ProjectData extends ProjectMetaData implements SaveInterface {
         return projectCodeTabs;
     }
 
+    public MetricsTab getTabFromName(String name) {
+        if (this.metricsTabs.size() > 0) {
+            for (MetricsTab tab : this.metricsTabs) {
+                if (tab.getText().equals(name)) {return tab;}
+            }
+        }
+
+        return null;
+    }
+
     //Setters
     //
 
