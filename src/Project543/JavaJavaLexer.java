@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-13 12:22:49
+// $ANTLR 3.5.1 /Users/melissahazlewood/Downloads/JavaJava.g 2020-04-16 00:23:20
 
 package Project543;
 
@@ -3371,7 +3371,7 @@ public class JavaJavaLexer extends Lexer {
 
 			match("*/"); 
 
-			_channel=HIDDEN;
+			_channel=1;
 			}
 
 			state.type = _type;
@@ -3440,7 +3440,7 @@ public class JavaJavaLexer extends Lexer {
 			}
 
 			match('\n'); 
-			_channel=HIDDEN;
+			_channel=1;
 			}
 
 			state.type = _type;

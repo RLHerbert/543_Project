@@ -23,7 +23,7 @@ public class TestBench {
         if (name.equalsIgnoreCase("Melissa"))
         {
             //melissa's code to test
-            ProjectCode proj = new ProjectCode(new File("empty.java"));
+            ProjectCode proj = new ProjectCode(new File("xxx.java"));
         } else if (name.equalsIgnoreCase("Rowan")) {
             //rowan test code
         } else {

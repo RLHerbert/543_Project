@@ -5,9 +5,7 @@ import java.io.IOException;
 import Project543.JavaJavaLexer;
 import Project543.JavaJavaParser;
 import Project543.Symbol;
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.*;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -57,8 +55,6 @@ public class ProjectCode extends Metrics {
     JavaJavaLexer lexer;
     CommonTokenStream tokens;
     JavaJavaParser parser;
-    int operators;
-    int operands;
 
 
     //**MEMBER METHODS**//
@@ -111,11 +107,22 @@ public class ProjectCode extends Metrics {
     }
 
     public int getCommentSpaceInBytes() {
-        return lexer.commentcount; //TODO: fix value
+        List<Token> allTokens = tokens.getTokens();
+        int commentBytes = 0;
+        int numComments = 0; //because the newline chars (1 per comment apparently) are making the number higher than it should be
+
+        for (Token token : allTokens) {
+            if (token.getChannel() == 1) {
+                commentBytes += token.getText().getBytes().length;  //.length()*8;
+                numComments++;
+            }
+        }
+
+        return commentBytes - 4*numComments;
     }
 
     public double getCommentPercentage() {
-        return getCommentSpaceInBytes()/getFileLengthInBytes()*100; //TODO: once comment space in bytes is fixed, double-check this value
+        return getCommentSpaceInBytes()/getFileLengthInBytes()*100;
     }
 
     public int getUniqueOperators() {
@@ -146,11 +153,11 @@ public class ProjectCode extends Metrics {
 //        System.out.println("GET VOLUME PROGRAM LEN: " + getProgramLength());
 //        System.out.println("GET VOLUME PROGRAM VOCAB: " + getProgramVocabulary());
 //        System.out.println("GET VOLUME PROGRAM LOG(VOCAB): " + Math.log(getProgramVocabulary())/Math.log(2));
-        return getProgramLength() * Math.log(getProgramVocabulary())/Math.log(2); //TODO: wrong value.. figure out why and fix
+        return getProgramLength() * Math.log(getProgramVocabulary())/Math.log(2);
     }
 
     public double getDifficulty() {
-        return getUniqueOperators()/2.0 * ((double) getTotalOperands())/getUniqueOperands(); //TODO: wrong value.. figure out why and fix
+        return getUniqueOperators()/2.0 * ((double) getTotalOperands())/getUniqueOperands();
     }
 
     public double getEffort() {
