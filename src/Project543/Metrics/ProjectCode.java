@@ -178,16 +178,6 @@ public class ProjectCode extends Metrics {
 
     //MISC. MEMBER METHODS
     //
-    public void calculateMetric() throws IOException, RecognitionException {
-        clearStaticData();
-        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-        tokens = new CommonTokenStream(lexer);
-        parser = new JavaJavaParser(tokens);
-
-        this.parseFile();
-        System.out.print(outputString());
-    }
-
     public void parseFile () throws RecognitionException {
         parser.compilationUnit();
     }
@@ -239,7 +229,14 @@ public class ProjectCode extends Metrics {
                 mccabeString;
     }
 
-    public String outputString() {
+    public String outputString() throws IOException, RecognitionException {clearStaticData();
+        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
+        tokens = new CommonTokenStream(lexer);
+        parser = new JavaJavaParser(tokens);
+
+        this.parseFile();
+        System.out.print(outputString());
+
         return outputMetaData() +
         outputHalsteadData() +
         outputMccabeData();
