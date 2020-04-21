@@ -64,6 +64,7 @@ public class ProjectCode extends Metrics {
     public ProjectCode() throws IOException, RecognitionException {
         //Default constructor
         super();
+        clearStaticData();
     }
 
     public ProjectCode(File javaFile) throws IOException, RecognitionException {
