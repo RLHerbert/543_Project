@@ -94,7 +94,7 @@ public class ProjectCodeTab extends MetricsTab {
 
     @Override
     public String getExtraData() {
-        return this.projectCode.filePath;
+        return this.projectCode.file.getAbsolutePath();
     }
 
     //SETTERS
@@ -103,8 +103,8 @@ public class ProjectCodeTab extends MetricsTab {
         this.metricsTextField.setText(textToSet);
     }
 
-    public void setMetricsTextField(){
-        this.setMetricsTextField(this.projectCode.outputString()); //TODO: get text from this.projectCode
+    public void setMetricsTextField() throws IOException, RecognitionException {
+        this.setMetricsTextField(this.projectCode.outputString());
     }
 
     @Override
@@ -116,7 +116,13 @@ public class ProjectCodeTab extends MetricsTab {
     //
     @Override
     public void calculateMetric() {
-        this.setMetricsTextField();
+        try {
+            this.setMetricsTextField();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (RecognitionException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

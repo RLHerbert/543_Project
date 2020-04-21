@@ -49,7 +49,7 @@ public class ProjectCode extends Metrics {
 
     //Non-Constant Member Fields
     //
-    public String filePath; //TODO: reassess... needed?
+//    public String filePath; //TODO: delete if no errors
     public File file;
 
     JavaJavaLexer lexer;
@@ -61,40 +61,29 @@ public class ProjectCode extends Metrics {
     //
     //CONSTRUCTOR(S)
     //
-    public ProjectCode() throws IOException, RecognitionException {
+    public ProjectCode() {
         //Default constructor
         super();
-        clearStaticData();
     }
 
     public ProjectCode(File javaFile) throws IOException, RecognitionException {
         //Constructor that takes in a java file for parsing
         this();
-        filePath = javaFile.getAbsolutePath();
+//        filePath = javaFile.getAbsolutePath(); //TODO: delete if no errors
         file = javaFile;
 
-        clearStaticData();
-        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-        tokens = new CommonTokenStream(lexer);
-        parser = new JavaJavaParser(tokens);
-
-        this.parseFile();
-        System.out.print(outputString());
+        //Initialize nonstatic members, clear static data (if needed), and (re)initialize static data
+        initializeMembers();
     }
 
     public ProjectCode(String saveData) throws IOException, RecognitionException {
         //Constructor that takes in saveData and sets variables accordingly
         super(saveData);
-        filePath = this.extraData;
+        String filePath = this.extraData;
         file = new File(filePath);
 
-        clearStaticData();
-        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-        tokens = new CommonTokenStream(lexer);
-        parser = new JavaJavaParser(tokens);
-
-        this.parseFile();
-        System.out.print(outputString());
+        //Initialize nonstatic members, clear static data (if needed), and (re)initialize static data
+        initializeMembers();
     }
 
     //GETTERS
@@ -175,6 +164,21 @@ public class ProjectCode extends Metrics {
 
     //SETTERS
     //
+    public void initializeMembers() throws IOException, RecognitionException {
+        //Non-static data
+        lexer = new JavaJavaLexer(new ANTLRFileStream(file.getAbsolutePath()));
+        tokens = new CommonTokenStream(lexer);
+        parser = new JavaJavaParser(tokens);
+
+        //Static data
+        setStaticMembers();
+        System.out.print(outputString());
+    }
+
+    public void setStaticMembers() throws RecognitionException {
+        clearStaticData();
+        this.parseFile(); //sets the static members in the grammar
+    }
 
     //MISC. MEMBER METHODS
     //
@@ -182,9 +186,8 @@ public class ProjectCode extends Metrics {
         parser.compilationUnit();
     }
 
+    //Output Methods
     public String outputMetaData() {
-        //TODO
-
         return "File name: " + file.getName() +
                 "\nFile length in bytes: " + ((int) getFileLengthInBytes()) +
                 "\nFile white space: " + getWhiteSpace() +
@@ -203,11 +206,11 @@ public class ProjectCode extends Metrics {
                 "\n\tVolume = " + one_dec.format(getVolume()) +
                 "\n\tDifficulty = " + one_dec.format(getDifficulty()) +
                 "\n\tEffort = " + sci_not.format(getEffort()) +
-                "\tTime = " + minutesHoursMonthsString(getTime()) +
+                "\tTime = " + outputMinutesHoursMonthsString(getTime()) +
                 "\n\tBugs expected = " + three_dec_commas.format(getNumberOfBugs());
     }
 
-    public String minutesHoursMonthsString(double timeInSec) {
+    public String outputMinutesHoursMonthsString(double timeInSec) {
         double timeInMin = timeInSec / 60;
         double timeInHours = timeInMin / 60;
         double timeInMonths = timeInHours / 8 / 5 / 4;
@@ -229,13 +232,9 @@ public class ProjectCode extends Metrics {
                 mccabeString;
     }
 
-    public String outputString() throws IOException, RecognitionException {clearStaticData();
-        lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
-        tokens = new CommonTokenStream(lexer);
-        parser = new JavaJavaParser(tokens);
-
-        this.parseFile();
-        System.out.print(outputString());
+    public String outputString() throws RecognitionException {
+        //resets static members if there are changes before doing calculations in the output methods
+        setStaticMembers();
 
         return outputMetaData() +
         outputHalsteadData() +
