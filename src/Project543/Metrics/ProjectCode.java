@@ -72,11 +72,11 @@ public class ProjectCode extends Metrics {
         filePath = javaFile.getAbsolutePath();
         file = javaFile;
 
+        clearStaticData();
         lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
         tokens = new CommonTokenStream(lexer);
         parser = new JavaJavaParser(tokens);
 
-        clearStaticData();
         this.parseFile();
         System.out.print(outputString());
     }
@@ -87,11 +87,11 @@ public class ProjectCode extends Metrics {
         filePath = this.extraData;
         file = new File(filePath);
 
+        clearStaticData();
         lexer = new JavaJavaLexer(new ANTLRFileStream(filePath));
         tokens = new CommonTokenStream(lexer);
         parser = new JavaJavaParser(tokens);
 
-        clearStaticData();
         this.parseFile();
         System.out.print(outputString());
     }
